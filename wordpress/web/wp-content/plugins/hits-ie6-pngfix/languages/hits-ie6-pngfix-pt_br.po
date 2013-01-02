@@ -1,0 +1,130 @@
+# Translation of the WordPress plugin Hits-ie6-pngfix by Gervásio Antônio.
+# Copyright (C) 2010
+# This file is distributed under the same license as the package.
+# Gervásio Antônio <gdsa32-translation@yahoo.com.br>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Hits-ie6-pngfix-fr\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/hits-ie6-pngfix\n"
+"POT-Creation-Date: 2009-10-21 00:00+0000\n"
+"PO-Revision-Date: 2010-07-18 22:22-0300\n"
+"Last-Translator: Gervásio Antônio <gdsa32-translation@yahoo.com.br>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: hits-pngfix.php:283
+msgid "Settings"
+msgstr "Configurações"
+
+#: hits-pngfix.php:294
+msgid "Whoops! There was a problem with the data you posted. Please go back and try again."
+msgstr "Ops! Houve um problema com os dados que você inseriu. Por favor, volte e tente novamente."
+
+#: hits-pngfix.php:299
+msgid "Success! Your changes were sucessfully saved!"
+msgstr "Sucesso! Suas alterações foram salvas com sucesso!"
+
+#: hits-pngfix.php:306
+msgid "This plugin brought to you for free by "
+msgstr "Este plugin é fornecido gratuitamente a você por "
+
+#: hits-pngfix.php:307
+msgid "I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin."
+msgstr "O crédito pelo grande esforço empregado em cada um dos métodos para obter compatibilidade com PNG no IE6 deve ser dado aos seus autores originais. Eu só tive o trabalho de juntá-los todos em um único plugin para o Wordpress."
+
+#: hits-pngfix.php:310
+msgid "PNG Fix Method:"
+msgstr "Método de correção do PNG:"
+
+#: hits-pngfix.php:313
+msgid "Twin Helix v1.0"
+msgstr "Twin Helix v1.0"
+
+#: hits-pngfix.php:314
+msgid "Twin Helix v2.0"
+msgstr "Twin Helix v2.0"
+
+#: hits-pngfix.php:315
+msgid "Unit PNG Fix"
+msgstr "Unit PNG Fix"
+
+#: hits-pngfix.php:316
+msgid "SuperSleight"
+msgstr "SuperSleight"
+
+#: hits-pngfix.php:317
+msgid "DD_belatedPNG"
+msgstr "DD_belatedPNG"
+
+#: hits-pngfix.php:323
+msgid "CSS Selector:"
+msgstr "Seletor CSS:"
+
+#: hits-pngfix.php:324
+msgid "Note: CSS Selector is not used for Unit PNG Fix and SuperSleight."
+msgstr "Nota: Seletor CSS não é usado pelos métodos Unit PNG Fix e SuperSleight."
+
+#: hits-pngfix.php:331
+msgid "Feedback and requests are always welcome. "
+msgstr "Sugestões e pedidos são sempre bem vindos. "
+
+#: hits-pngfix.php:331
+msgid "Visit the plugin website"
+msgstr "Visite o site do plugin"
+
+#: hits-pngfix.php:331
+msgid "to leave any feedback, translations, comments or donations. All donations will go towards micro loans through"
+msgstr "para enviar quaisquer sugestões, traduções, comentários ou doações. Todas as doações são feitas por"
+
+#: hits-pngfix.php:332
+msgid "PNG Fix Credits"
+msgstr "Créditos do PNG Fix"
+
+#: hits-pngfix.php:333
+msgid "The Twin Helix approaches were taken from"
+msgstr "As abordagens Twin Helix foram retiradas de"
+
+#: hits-pngfix.php:334
+msgid "The UnitInteractive approach was taken from"
+msgstr "A abordagem UnitInteractive foi retirada de"
+
+#: hits-pngfix.php:335
+msgid "The SuperSleight apprach was taken from"
+msgstr "A abordagem SuperSleight foi retirada de"
+
+#: hits-pngfix.php:336
+msgid "The DD_belatedPNG approach was taken from"
+msgstr "A abordagem DD_belatedPNG foi retirada de"
+
+msgid "Where detection should occur:"
+msgstr "Como efetuar a detecção:"
+
+msgid "Pages are not cached (default)"
+msgstr "Não é feito cache das páginas (padrão)"
+
+msgid "Pages are cached"
+msgstr "É feito cache das páginas"
+
+msgid "Note: Pages being cached rely on browser conditional comments, and can interfere with your theme."
+msgstr "Nota: Páginas em que é feito cache dependem de comentários condicionais do browser e podem interferir em seu tema."
+
+msgid "Plugin Debug Mode:"
+msgstr "Plugin em modo de depuração:"
+
+msgid "False"
+msgstr "Falso"
+
+msgid "True"
+msgstr "Verdadeiro"
+
+msgid "Note: Please set this to true if you are having difficulties with this plugin."
+msgstr "Nota: Defina esta opção para verdadeiro, caso tenha dificuldades com este plugin."
+
+msgid "Save"
+msgstr "Salvar"
+

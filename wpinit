@@ -1,0 +1,369 @@
+#!/bin/sh
+#
+# Script to setup local directories, databases and server for new site development
+#
+
+## SETTINGS ============================================================================================================ #
+
+# First, set up config for local host domain
+LOCAL_HOST=stupid.local #your main local virtual host base
+
+SECRET_CODE=Yellowberri420! #secret code for use in encoding some strings
+STAGING_HOST=ybdevel.com
+
+# Git server credentials
+GITUSER=yellowberri
+GITPASS=Yellowberri420!
+
+# Local database credentials
+LOCAL_DB_USER=root
+LOCAL_DB_PASS=root
+
+# Now, let's set some directory variables
+SITES_DIR="$HOME/Sites" # Main working directory for all sites
+WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
+
+# Location of MySQL database files
+DB_DIR="/Applications/MAMP/db/mysql"
+
+# Location of MySQL bin files
+MYSQL_BIN="/Applications/MAMP/Library/bin"
+
+# Location of vhosts dir
+VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
+
+# Location of Apache bin
+APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
+
+
+## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ============================================================================ #
+
+##
+
+# Here's some helper functions
+pause() {
+	read -p "$*"
+}
+
+continueprompt() {
+	read ifcontinue
+	
+	case $ifcontinue in
+		[nN] | [n|N][O|o] )
+			clear
+			echo "---------------------------------------------------------------------------"
+			pause "Oh, well... I didn't want to play anyway. Press [Enter] to exit."
+			clear
+			exit
+			;;
+		[yY] | [yY][Ee][Ss] )
+			# Just continue script if user chooses "yes"
+			;;
+		* ) 
+			echo "\n---------------------------------------------------------------------------"
+			echo "Huh?"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+			;;
+	esac
+}
+
+purposeprompt() {
+	echo "A) I need to initialize a new Wordpress project."
+	echo "B) I'm collaborating on this project and I just need to clone it to use on my local machine."
+	echo "C) Nevermind, get me out of here so I can start over.\n"
+	
+	read purpose_opt
+	
+	case $purpose_opt in
+		a|A )
+			purpose="startclean"
+			;;
+		b|B )
+			purpose="collab"
+			;;
+		c|C )
+			echo "\n---------------------------------------------------------------------------"
+			echo "Goodbye."			
+			echo "---------------------------------------------------------------------------\n"
+			exit
+			;;
+		* ) 
+			echo "\n---------------------------------------------------------------------------"
+			echo "I didn't understand that. Do what now?" 
+			echo "---------------------------------------------------------------------------\n"
+			purposeprompt
+			;;
+	esac
+}
+
+checkprojectexists () {
+	# Check project_id value against existing directories
+	if [ -d $SITES_DIR/$project_id ]; then #check if project directory already exists
+		if [ -d $SITES_DIR/$project_id/web/wp-content ]; then #check if project exists as a wordpress install
+			echo "\n---------------------------------------------------------------------------"
+			echo "A Wordpress installation for \"$project_id\" already exists!"
+			echo "---------------------------------------------------------------------------\n"
+			EMPTY_DIR=false
+		else
+			echo "\n---------------------------------------------------------------------------"
+			echo "This directory already exists...but it doesn't have a site started yet!"
+			echo "---------------------------------------------------------------------------\n"
+			pause "Press [Enter] to copy site files over."
+			EMPTY_DIR=true
+		fi
+		
+		NEW_PROJECT=false
+	else
+		NEW_PROJECT=true #if project directory doesn't exist, continue site init as new project
+	fi # end check if project directory already exists
+}
+
+preinit () {
+	# Now we need to decide which type of project this is going to be?	
+	clear
+
+	checkprojectexists
+		
+	if $NEW_PROJECT ; then
+		echo "\n---------------------------------------------------------------------------"
+		echo "A new project called '$project_id' is about to be created and initialized."
+		echo "Continue? [y/N]"
+		echo "---------------------------------------------------------------------------\n"
+		continueprompt
+	else
+		if [ $EMPTY_DIR == false ] ; then
+			echo "\n---------------------------------------------------------------------------"
+			echo "Do you want to delete the current site files and start from scratch?"
+			echo "WARNING: This will delete any database associated with this site! [y/N]"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+			echo "\n---------------------------------------------------------------------------"
+			echo "Are you sure??!? [y/N]"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+			echo "\n---------------------------------------------------------------------------"
+			echo "REALLY?? [y/N]"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+			echo "\n---------------------------------------------------------------------------"
+			pause "Oh well, suit yourself... press [Enter] to delete the files & directories (and database, if applicable)."
+			rm -rf $SITES_DIR/$project_id/web
+			
+			clear
+			$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS drop $project_id
+		fi
+	fi
+}
+
+copyfiles () {
+	if [ $purpose == "startclean" ] ; then
+		# Create the empty project directory
+		mkdir $SITES_DIR/$project_id
+		echo "\nNew project directory created...copying files\n"
+		
+		# Tell bash to skip the .git folder when copying from template directory	
+		rsync -a --exclude='.git' $WPINIT_DIR/wordpress/ $SITES_DIR/$project_id/
+		shopt -s dotglob
+		
+		# create wireframes dir and copy files to it
+		mkdir $SITES_DIR/$project_id/web/wireframes
+		cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
+		
+		# create style prototype dir and copy files to it
+		mkdir $SITES_DIR/$project_id/web/style-prototype
+		cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+	elif [ $purpose == "collab" ] ; then
+		# Clone the files from the repository
+		echo "\nCloning project files from repository...\n"
+		
+		# Create the empty project directory, if it doesn't already exist
+		if [ ! -d $SITES_DIR/$project_id ] ; then
+			mkdir $SITES_DIR/$project_id
+		fi
+
+		# Clone the files...
+		git clone https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id $SITES_DIR/$project_id
+	fi
+}
+
+setup_db () {
+	if [ $purpose == "startclean" ] ; then
+		if [ -d "$DB_DIR/$project_id" ]; then
+			echo "\n---------------------------------------------------------------------------"
+			echo "Database \"$project_id\" already exists!"
+			echo "---------------------------------------------------------------------------\n"
+			exit
+		else
+			# Create the empty database
+			$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS create $project_id
+			# Go ahead and dump the database to a SQL file so we can push it to the git repo, just in case.
+			mkdir $SITES_DIR/$project_id/db
+			$MYSQL_BIN/mysqldump -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id > $SITES_DIR/$project_id/db/${project_id}_db.sql
+		fi
+	elif [ $purpose == "collab" ] ; then
+		if [ -d "$DB_DIR/$project_id" ]; then
+			$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS drop $project_id
+		fi
+		
+		# Create the empty database
+		$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS create $project_id			
+		# Import the saved sql file to the database
+		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
+		# Update the database with localhost information, if the proper tables exist (if wordpress is installed already)
+		SECRET_CODE_HASH="$(echo -n "$SECRET_CODE" | md5 )"
+		if [ $(mysql -N -s -u root -proot -e "select count(*) from information_schema.tables where table_schema='$project_id' and table_name='${project_id}${SECRET_CODE_HASH}_options';") -eq 1 ]; then
+			
+			$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
+				use $project_id;
+				UPDATE ${project_id}${SECRET_CODE_HASH}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
+			EOF
+		fi
+	fi	
+}
+
+getsalts () {
+	curl -s https://api.wordpress.org/secret-key/1.1/salt | awk -f $WPINIT_DIR/salt_replacer.awk - $CONFIGFILE > $OUTPUTCONFIGFILE
+}
+
+configwp () {	
+	CONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php
+	OUTPUTCONFIGFILE=$SITES_DIR/$project_id/web/wp-config2.php
+	
+	if [ $purpose == "startclean" ] ; then
+		sed -i.bak "s/\$project_name = '.*';/\$project_name = '$project_id';/" $CONFIGFILE
+		
+		SECRET_CODE_HASH="$(echo -n "$SECRET_CODE" | md5 )"
+		
+		sed -i.bak "s/\$secret_code = '.*';/\$secret_code = '$SECRET_CODE_HASH';/" $CONFIGFILE
+		sed -i.bak "s/\$staging_host_base = '.*';/\$staging_host_base = '$STAGING_HOST';/" $CONFIGFILE
+	fi
+	
+	sed -i.bak "s/\$local_host_base = '.*';/\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
+	
+	getsalts
+	mv $OUTPUTCONFIGFILE $CONFIGFILE	
+}
+
+gitsetup () {
+	if [ $purpose == "startclean" ] ; then
+		#set up git on remote server
+		if [ $1 == "bitbucket" ] ; then
+			echo "---------------------------------------------------------------------------"
+			echo "Setting up remote repository...Please enter a short description for this repository."
+			echo "---------------------------------------------------------------------------\n"
+			read repo_desc
+			
+			#script for bitbucket repo initialization
+			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
+		fi
+		
+		# Initialize local Git repository and push it to the remote repo
+		git init $SITES_DIR/$project_id
+		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id add .
+		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id commit -am 'Initial Commit'
+
+		if [ $1 == "bitbucket" ] ; then
+			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master 
+		fi
+	fi
+	
+	# Creates the pre-commit .git hook
+	cat > $SITES_DIR/$project_id/.git/hooks/pre-commit <<- EOF
+		#!/bin/sh
+		# dumps the db into an .sql file before adding it to the repo
+		$MYSQL_BIN/mysqldump -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id > $SITES_DIR/$project_id/db/${project_id}_db.sql
+		# change to the project directory
+		cd $SITES_DIR/$project_id
+		# add the db file to the repo
+		git add db/${project_id}_db.sql
+	EOF
+	# Make executable
+	chmod +x $SITES_DIR/$project_id/.git/hooks/pre-commit
+	
+	# Creates the post-merge .git hook
+	cat > $SITES_DIR/$project_id/.git/hooks/post-merge <<- EOF0
+		#!/bin/sh
+		# get the db .sql file from the cloned repo and imports it to the server
+		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
+		# updates the db on the local machine with the proper local host information
+		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
+			use $project_id;
+			UPDATE ${project_id}${SECRET_CODE_HASH}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
+		EOF
+		# update the wp-config file
+		sed -i.bak "s/\\\$local_host_base = '.*';/\\\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
+	EOF0
+	# Make executable
+	chmod +x $SITES_DIR/$project_id/.git/hooks/post-merge
+
+}
+
+writevhost () {
+	echo "Writing Virtual Host..."
+
+	cat > $VHOSTS_DIR/$project_id.conf <<- EOF 
+	<VirtualHost *:80>
+	DocumentRoot "$SITES_DIR/$project_id/web"
+	ServerName $project_id.$LOCAL_HOST
+	ErrorLog "logs/localhost-error.log"
+	CustomLog "logs/localhost-access.log" common
+	<Directory "$SITES_DIR/$project_id/web">
+	Order allow,deny
+	Allow from all
+	</Directory>
+	</VirtualHost>
+	EOF
+}
+
+restartapache () {
+	echo "Restarting Apache!"
+	sudo $APACHE_DIR/apachectl -k restart
+}
+
+siteinit () {	
+	# Test for project existence, start from scratch if necessary, and define type of project
+	preinit
+	
+	# Go ahead and copy relevant files to the project directory.		
+	copyfiles
+	
+	# Use the config info to alter the wp-config file.
+	configwp
+	
+	# Now, we need to create the local database (if it doesn't already exist)
+	setup_db
+		
+	# configure project version control
+	gitsetup "bitbucket"
+
+	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line)
+	#echo "\n127.0.0.1\t$project_id.$LOCAL_HOST\n" >> /etc/hosts
+	
+	# Write new virtual host file for the new site
+	writevhost
+	
+	# Finally, restart apache!
+	restartapache
+	clear
+	echo "---------------------------------------------------------------------------"
+	echo "...done! Your site is now ready to work on."
+	echo "---------------------------------------------------------------------------\n"
+}
+
+# Let's get started.
+# Check whether or not a project ID was supplied
+if [[ $1 && ${1} ]] ; then
+	project_id=$1
+
+	clear
+	echo "---------------------------------------------------------------------------"
+	echo "What is the purpose of this initialization?"
+	echo "---------------------------------------------------------------------------\n"
+	purposeprompt
+	
+	siteinit
+else
+	echo "Project ID not set! Stop wasting my time."
+	exit	
+fi

@@ -1,0 +1,276 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+ 
+ 
+@import "compass/layout";
+@import "compass/utilities";
+@import "compass/typography";
+@import "compass/css3";
+@import "base";
+
+@charset "utf-8";
+	
+
+///* ==== custom site colors ==== */
+
+///* ==== main palette colors ==== */
+$palette1: #fff;
+$palette2: #eee;
+$palette3: #ddd;
+$palette4: #ccc;
+$palette5: #bbb;
+
+$mainBG: $black;
+$wrapperBG: $light-grey;
+
+/* === breakpoints ==== */
+
+@mixin breakpoint($point) {
+	@if $point == narrowColumn {
+		@media screen and (max-width: 33em) { @content }
+	}
+	@if $point == multiColumn {
+		@media screen and (min-width: 65.618em){ @content }
+	}
+}
+
+/* ==== custom site styles ==== */
+html {
+	background: $mainBG;
+}
+
+body {
+	color: $off-black;
+	@include sans-serif;
+}
+
+#wrapper {
+	position: relative;
+}
+
+#container {
+	position: relative;
+	width: 90%;
+	padding: 0 5%;
+	margin: auto;
+	@include clearfix();
+	@include breakpoint(multiColumn) {
+		width: 60.618em;
+	}
+}
+
+/*==== header styles ====*/
+header {
+	width: 100%;
+	background: $light-grey;
+	margin-bottom: 40px;
+	@include breakpoint(multiColumn) {
+		margin-bottom: 50px;
+	}
+	@include breakpoint(narrowColumn) {
+		margin-bottom: 30px;
+	}
+	#header-inner {
+		width: 95%;
+		padding: 20px 1.618em;
+		margin: auto;
+		@include clearfix();
+		@include breakpoint(multiColumn) {
+			width: 60.618em;
+		}
+		@include breakpoint(narrowColumn) {
+			width: 90%;
+			padding: 5%;
+		}
+	}
+}
+
+#site-title {
+	img {
+			
+	}
+}
+
+/*nav.main {
+	ul {
+		li {
+			a {
+				&:hover {
+				}
+			}
+		}
+	}
+}*/
+// end header styles
+
+/*==== main prototype styles ====*/
+h2 {
+	color: $white;
+}
+
+h3 {
+	color: $white;
+}
+
+p {
+	font-size: 14px;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+}
+a:hover, a:active {
+	
+}
+
+#content {
+	float: left;
+	width: 40%;
+	margin-right: 5%;
+	margin-bottom: 30px;
+	@include breakpoint(multiColumn) {
+		width: 30%;
+	}
+	@include breakpoint(narrowColumn) {
+		width: 90%;
+		margin-right: 0;
+	}
+	p {
+		margin-bottom: 0;
+	}
+}
+
+.content-box {
+	background: $white;
+	padding: 5%;
+	@include breakpoint(multiColumn) {
+		padding: 3%;
+	}
+	h2 {
+		color: $off-black;
+	}
+	h3 {
+		color: $off-black;
+	}
+}
+
+.modular-box {
+	background: $white;
+	padding: 5%;
+	@include breakpoint(multiColumn) {
+		padding: 3%;
+	}
+	h3 {
+		color: $off-black;
+	}
+	ul.form-fields {
+		list-style: none;
+		margin-left: 0;
+		margin-bottom: 0;
+		li {
+			list-style: none;
+			label {
+				display: block;
+				font-weight: bold;
+				font-size: 12px;
+				line-height: 12px;
+				margin-bottom: 5px;
+			}
+			input {
+				&[type=text] {
+					margin-bottom: 20px;
+				}
+				&[type=submit] {
+					padding: 5px 10px;
+					font-size: 16px;
+				}
+			}
+			textarea {
+				width: 100%;
+				height: 100px;
+			}
+		}
+	}
+}
+
+form#modular-form {
+	float: left;
+	margin-bottom: 30px;
+	width: 35%;
+	@include breakpoint(narrowColumn) {
+		width: 90%;
+	}
+}
+
+ul#color-palette {
+	list-style: none;
+	float: left;
+	margin-left: 0;
+	width: 45%;
+	@include breakpoint(multiColumn) {
+		width: 8%;
+		margin-right: 5%;
+	}
+	@include breakpoint(narrowColumn) {
+		width: 100%;
+	}
+	li {
+		position: relative;
+		display: block;
+		list-style: none;
+		width: 16%;
+		height: 60px;
+		margin-right: 5%;
+		margin-bottom: 30px;
+		float: left;
+		&:last-of-type {
+			margin-right: 0;
+		}
+		@include breakpoint(multiColumn) {
+			width: 100%;
+			height: 80px;
+			float: none;
+		}
+		@include breakpoint(narrowColumn) {
+			height: 60px;
+		}
+		&.color-1 {
+			background: $palette1;
+		}
+		&.color-2 {
+			background: $palette2;
+		}
+		&.color-3 {
+			background: $palette3;
+		}
+		&.color-4 {
+			background: $palette4;
+		}
+		&.color-5 {
+			background: $palette5;
+		}
+		span {
+			font-weight: bold;
+			font-size: 10px;
+			position: absolute;
+			top: 55px;
+			color: $white;
+			@include breakpoint(multiColumn) {
+				top: 80px;
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+#other-styles {
+	
+}
+
+.texture-box {
+	
+}
+
+// end main prototype styles

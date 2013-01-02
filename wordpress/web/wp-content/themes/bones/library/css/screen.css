@@ -1,0 +1,450 @@
+@charset "utf-8";
+/*   
+Theme Name: YBBones
+Theme URI: 
+Description: Use this theme to start your yb wordpress theme -- based on the "Bones" theme.
+Author: Yellowberri
+Author URI: http://yellowberri.com/
+Template: ybbones
+Version: 1.0
+Tags: YBBones
+.
+YBBase is © Shelby Smith http://yellowberri.com/
+.
+*/
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* RESET
+----------------------------------------------------------------------------------------*/
+/* line 107, ../scss/_base.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 118, ../scss/_base.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 123, ../scss/_base.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 129, ../scss/_base.scss */
+q, blockquote {
+  quotes: none;
+}
+
+/* line 132, ../scss/_base.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 137, ../scss/_base.scss */
+a img {
+  border: none;
+}
+
+/* line 141, ../scss/_base.scss */
+img, object {
+  outline: none;
+}
+
+/* line 143, ../scss/_base.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* ==== global settings ==== */
+/* line 150, ../scss/_base.scss */
+html {
+  overflow-y: scroll;
+}
+
+/* line 154, ../scss/_base.scss */
+img, embed, object, video {
+  max-width: 100%;
+}
+
+/* line 155, ../scss/_base.scss */
+.ie6 img.full, .ie6 object.full, .ie6 embed, .ie6 video {
+  width: 100%;
+}
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+/* line 159, ../scss/_base.scss */
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CORE TYPOGRAPHY
+----------------------------------------------------------------------------------------*/
+/* line 164, ../scss/_base.scss */
+body {
+  font-size: 1em;
+  line-height: 1.618em;
+}
+
+/* line 169, ../scss/_base.scss */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.809em;
+  font-weight: bold;
+}
+
+/* line 174, ../scss/_base.scss */
+h1 {
+  font-size: 1.5em;
+  /* 24px --> 24 ÷ 16 = 1.5 */
+  line-height: 1em;
+  /* 24px --> 24 ÷ 24 = 1 */
+}
+
+/* line 179, ../scss/_base.scss */
+h2 {
+  font-size: 1.375em;
+  /* 22px --> 22 ÷ 16 = 1.375 */
+  line-height: 1.0909em;
+  /* 24px --> 24 ÷ 22 = 1.090909(09) */
+}
+
+/* line 184, ../scss/_base.scss */
+h3 {
+  font-size: 1.25em;
+  /* 20px --> 20 ÷ 16 = 1.25 */
+  line-height: 1.2em;
+  /* 24px --> 24 ÷ 20 = 1.2 */
+}
+
+/* line 189, ../scss/_base.scss */
+h4 {
+  font-size: 1.125em;
+  /* 18px --> 18 ÷ 16 = 1.125 */
+  line-height: 1.333em;
+  /* 24px --> 24 ÷ 18 = 1.3333333(3) */
+}
+
+/* line 194, ../scss/_base.scss */
+h5, h6 {
+  font-size: 1em;
+  /* 16px --> 16 ÷ 16 = 1 */
+  line-height: 1.5em;
+  /* 24px --> 24 ÷ 16 = 1.5 */
+}
+
+/* line 199, ../scss/_base.scss */
+p, ul, ol, dl, blockquote {
+  font-size: 1em;
+  line-height: 1.618em;
+  margin-bottom: 1.618em;
+}
+
+/* line 205, ../scss/_base.scss */
+ul {
+  list-style-type: disc;
+  margin-left: 1.618em;
+}
+
+/* line 206, ../scss/_base.scss */
+ol {
+  list-style-type: decimal;
+  margin-left: 1.618em;
+}
+
+/* line 207, ../scss/_base.scss */
+nav ul, nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 209, ../scss/_base.scss */
+b, strong {
+  font-weight: bold;
+}
+
+/* line 210, ../scss/_base.scss */
+i, em {
+  font-style: italic;
+}
+
+/* line 211, ../scss/_base.scss */
+small {
+  font-size: 80%;
+}
+
+/* LINKS
+----------------------------------------------------------------------------------------*/
+/* line 215, ../scss/_base.scss */
+a, a:visited {
+  outline: none;
+  color: #439BBD;
+  text-decoration: underline;
+}
+
+/* line 216, ../scss/_base.scss */
+a:hover {
+  outline: none;
+  text-decoration: none;
+}
+
+/* line 217, ../scss/_base.scss */
+a:active, a:focus {
+  outline: none;
+}
+
+/* BROWSER AND NON-SEMANTIC STYLING
+----------------------------------------------------------------------------------------*/
+/* line 221, ../scss/_base.scss */
+.cf:before, .cf:after {
+  content: "";
+  display: block;
+}
+
+/* line 222, ../scss/_base.scss */
+.cf:after {
+  clear: both;
+}
+
+/* line 223, ../scss/_base.scss */
+.ie6 .cf {
+  zoom: 1;
+}
+
+/* align checkboxes, radios, text inputs with their label */
+/* line 226, ../scss/_base.scss */
+input[type="radio"] {
+  vertical-align: text-bottom;
+}
+
+/* line 227, ../scss/_base.scss */
+input[type="checkbox"] {
+  vertical-align: bottom;
+  *vertical-align: baseline;
+}
+
+/* line 228, ../scss/_base.scss */
+.ie6 input {
+  vertical-align: text-bottom;
+}
+
+/* hand cursor on clickable input elements */
+/* line 231, ../scss/_base.scss */
+label, input[type=button], input[type=submit], button {
+  cursor: pointer;
+}
+
+/* bicubic resizing for non-native sized IMG:
+code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+/* line 235, ../scss/_base.scss */
+.ie7 img {
+  -ms-interpolation-mode: bicubic;
+}
+
+/* ==== common classes ==== */
+/* line 239, ../scss/_base.scss */
+.clear {
+  clear: both;
+}
+
+/* line 243, ../scss/_base.scss */
+.iepie {
+  behavior: url(/wp-content/themes/ybbase/PIE.htc);
+}
+
+/* Hide for both screenreaders and browsers: h5bp.com/m */
+/* line 248, ../scss/_base.scss */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/*  Hide only visually, but have it available for screenreaders: h5bp.com/v */
+/* line 251, ../scss/_base.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+/* line 254, ../scss/_base.scss */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+/* line 257, ../scss/_base.scss */
+.invisible {
+  visibility: hidden;
+}
+
+/* line 259, ../scss/_base.scss */
+.fltlft {
+  display: inline;
+  float: left;
+  margin-right: 1.618em;
+  margin-bottom: 1.618em;
+}
+
+/* line 265, ../scss/_base.scss */
+.fltrt {
+  display: inline;
+  float: right;
+  margin-left: 1.618em;
+  margin-bottom: 1.618em;
+}
+
+/* line 271, ../scss/_base.scss */
+.hasPlaceholder {
+  color: #777;
+}
+
+/* line 275, ../scss/_base.scss */
+li.dropMenu {
+  position: relative;
+}
+/* line 277, ../scss/_base.scss */
+li.dropMenu ul {
+  position: absolute;
+}
+
+/* line 282, ../scss/_base.scss */
+.empty {
+  color: #aaa;
+}
+
+/* line 284, ../scss/_base.scss */
+.placeholder {
+  color: #aaa;
+}
+
+/* line 288, ../scss/_base.scss */
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/*
+* print styles
+* inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/
+*/
+@media print {
+  /* line 297, ../scss/_base.scss */
+  * {
+    background: transparent !important;
+    color: #444 !important;
+    text-shadow: none;
+  }
+
+  /* line 298, ../scss/_base.scss */
+  a, a:visited {
+    color: #444 !important;
+    text-decoration: underline;
+  }
+
+  /* Don't show links for images */
+  /* line 300, ../scss/_base.scss */
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  /* line 301, ../scss/_base.scss */
+  img {
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 0.5cm;
+}
+
+  /* line 303, ../scss/_base.scss */
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* line 304, ../scss/_base.scss */
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}
+/* === breakpoints ==== */
+/* ==== custom site styles ==== */
+/* line 49, ../scss/screen.scss */
+html {
+  background: white;
+}
+/* line 51, ../scss/screen.scss */
+html body {
+  background: #dddddd;
+  color: #222222;
+  font-family: Verdana, sans-serif;
+  width: 33em;
+  padding: 0.806em 1.618em;
+  margin: auto;
+  overflow: hidden;
+  *zoom: 1;
+}
+@media screen and (min-width: 58.618em) {
+  /* line 51, ../scss/screen.scss */
+  html body {
+    width: 50.618em;
+  }
+}
+@media screen and (max-width: 33em) {
+  /* line 51, ../scss/screen.scss */
+  html body {
+    width: 90%;
+    padding: 0.806em 5%;
+  }
+}
+/* line 66, ../scss/screen.scss */
+html body #wrapper {
+  position: relative;
+}
+/* line 89, ../scss/screen.scss */
+html body #wrapper #main {
+  position: relative;
+  clear: both;
+}
+/* line 99, ../scss/screen.scss */
+html body #wrapper footer #footer-inner .copyright {
+  float: right;
+}

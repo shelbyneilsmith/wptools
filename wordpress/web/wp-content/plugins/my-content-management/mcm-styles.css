@@ -1,0 +1,10 @@
+#support { background:#fff; padding: 15px 15px 5px; margin: 10px; border-radius: 10px; float: right; border: 1px solid #bbb; box-shadow: 1px 1px 6px #aaa; text-align: center }
+.mcm-settings { margin-right: 250px; }
+.mcm-settings legend { font-weight: 700; font-size: 1.1em;}
+.wrappers { width: 16em; float: left; padding-top: 1em; }
+.wrappers label { display: block; float: left; width: 7em; padding: 5px 0 0;}
+.mcm-template-guide{ width: 230px; float: right;}
+.extra_fields{ float: right; padding: 10px; width: 200px; }
+.mcm_edit_post_type { -moz-column-count: 2; -webkit-column-count: 2; column-count: 2; background: #fefefe; padding: 15px; border: 1px solid #ddd; -moz-border-radius: 5px; height: 22em;}
+.mcm_edit_post_type p { line-height: 1.2; margin: 4px 0!important;}
+.buy a { padding: 10px; -moz-box-shadow: 1px 1px 2px #333; -webkit-box-shadow: 1px 1px 2px #333; box-shadow: 1px 1px 2px #333; font-weight: 700; display: block; background: #fefdaa; font-size: 1.1em;  }

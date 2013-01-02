@@ -1,0 +1,4 @@
+# ignore Mac OS X Desktop Services Store
+.DS_Store
+# ignore assets folder and all subdirectories
+assets/

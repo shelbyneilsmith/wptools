@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-06-28 19:49+0900\n"
+"PO-Revision-Date: 2011-06-28 19:50+0900\n"
+"Last-Translator: Hiroshi Hoaki <rewish.org@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/option.php:12
+msgid "Variables"
+msgstr "変数"
+
+#: ../view/option.php:16
+msgid "lang"
+msgstr ""
+
+#: ../view/option.php:20
+msgid "charset"
+msgstr ""
+
+#: ../view/option.php:24
+msgid "Indent character"
+msgstr "インデント文字"
+
+#: ../view/option.php:28
+msgid "Use \"Horizontal tab\""
+msgstr "水平タブを使う"
+
+#: ../view/option.php:46
+msgid "Options"
+msgstr "オプション"
+
+#: ../view/option.php:50
+msgid "Profile"
+msgstr ""
+
+#: ../view/option.php:60
+msgid "Insert horizontal tab by TAB key"
+msgstr "タブキーで水平タブを挿入"
+
+#: ../view/option.php:64
+#: ../view/option.php:72
+msgid "Use"
+msgstr "使用する"
+
+#: ../view/option.php:68
+msgid "Auto indent by Line break"
+msgstr "改行時に自動でインデント"
+
+#: ../view/option.php:79
+msgid "Expand Abbreviation"
+msgstr "省略コードの展開"
+
+#: ../view/option.php:80
+msgid "Balance Tag Outward"
+msgstr "外側のタグを選択"
+
+#: ../view/option.php:81
+msgid "Balance Tag inward"
+msgstr "内側のタグを選択"
+
+#: ../view/option.php:82
+msgid "Wrap with Abbreviation"
+msgstr "省略コードで包括"
+
+#: ../view/option.php:83
+msgid "Next Edit Point"
+msgstr "次の編集箇所へ"
+
+#: ../view/option.php:84
+msgid "Previous Edit Point"
+msgstr "前の編集箇所へ"
+
+#: ../view/option.php:85
+msgid "Select Line"
+msgstr "現在の行を選択"
+
+#: ../view/option.php:86
+msgid "Merge Lines"
+msgstr "現在の要素を1行にする"
+
+#: ../view/option.php:87
+msgid "Toggle Comment"
+msgstr "コメントアウトの実行/解除"
+
+#: ../view/option.php:88
+msgid "Split/Join Tag"
+msgstr "タグの結合/分解"
+
+#: ../view/option.php:89
+msgid "Remove Tag"
+msgstr "タグの削除"
+
+#: ../view/option.php:90
+msgid "Evaluate Math Expression"
+msgstr "数式を評価する"
+
+#: ../view/option.php:91
+msgid "Increment number by 1"
+msgstr "数値を1ずつ増やす"
+
+#: ../view/option.php:92
+msgid "Decrement number by 1"
+msgstr "数値を1ずつ減らす"
+
+#: ../view/option.php:93
+msgid "Increment number by 0.1"
+msgstr "数値を0.1ずつ増やす"
+
+#: ../view/option.php:94
+msgid "Decrement number by 0.1"
+msgstr "数値を0.1ずつ減らす"
+
+#: ../view/option.php:95
+msgid "Increment number by 10"
+msgstr "数値を10ずつ増やす"
+
+#: ../view/option.php:96
+msgid "Decrement number by 10"
+msgstr "数値を10ずつ減らす"
+
+#: ../view/option.php:97
+msgid "Select Next Item"
+msgstr "次の項目へ移動"
+
+#: ../view/option.php:98
+msgid "Select Previous Item"
+msgstr "前の項目へ移動"
+
+#: ../view/option.php:100
+msgid "Shortcut"
+msgstr "ショートカット"
+
+#: ../view/option.php:123
+msgid "Save option"
+msgstr "オプションを保存"
+
+#: ../view/option.php:128
+msgid "Test"
+msgstr "テスト"
+
+#: ../view/option.php:129
+msgid "You can test &quot;Zen Coding&quot;."
+msgstr "Zen Codingのテストを行うことが出来ます。"
+
+#~ msgid "Format Line Break"
+#~ msgstr "改行"

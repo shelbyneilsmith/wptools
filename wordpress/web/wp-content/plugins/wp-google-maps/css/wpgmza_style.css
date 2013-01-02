@@ -1,0 +1,58 @@
+.wpgmza_map {
+    border:0;
+    margin:5px !important;
+}
+#wpgmza_map img {
+    border: none !important;
+    background-color:transparent !important;
+}
+.wpgmza_map img {
+    border: none !important;
+    background-color:transparent !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+#wpgmaps_directions_edit {
+    padding-top:20px;
+}
+.wpgmza_markerbox {
+    color:#000 !important;
+}
+.wpgmza_markerbox a {
+    color:#1982D1 !important;
+}
+.wpgmaps_mlist_table {
+    width:42px;
+}
+
+.wpgmaps_mlist_marker {
+    width:32px;
+    height:32px;
+    vertical-align:top;
+    padding:0 !important;
+}
+
+.wpgmaps_mlist_info {
+    text-align:left;
+    padding:0 !important;
+    
+}
+.wpgmaps_mlist_row {
+    cursor:pointer;
+}
+.wpgmaps_mlist_row:hover {
+    background-color: #EEEEEE;
+    
+}
+.wpgmaps_directions_outer_div {
+    padding-top:30px;
+    padding-bottom:5px;
+}
+
+.wpgmaps_directions_outer_div table, wpgmza_marker_list_class {
+    margin-bottom:0px !important;
+}
+
+.wpgmza_map h2 { clear:both; }
+
+.wpgmaps_user_form { clear: both; }
