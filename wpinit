@@ -15,6 +15,10 @@ STAGING_HOST=ybdevel.com
 GITUSER=yellowberri
 GITPASS=Yellowberri420!
 
+# Variables for staging server configuration
+##STAGING_IP=0.0.0.0 # Staging server IP address
+##scipt_loc=users/sites # Staging script location on staging server
+
 # Local database credentials
 LOCAL_DB_USER=root
 LOCAL_DB_PASS=root
@@ -256,6 +260,9 @@ gitsetup () {
 			
 			#script for bitbucket repo initialization
 			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
+			
+			# Setting up the service hook on bitbucket end for pushing to staging server
+			##curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories/$GITUSER/$project_id/services/" -d "repo_slug=$project_id" -d "type=POST" -d "URL=http://$STAGING_IP/$scipt_loc/staging-script.php?repo_name=$project_id"
 		fi
 		
 		# Initialize local Git repository and push it to the remote repo
@@ -296,6 +303,7 @@ gitsetup () {
 	EOF0
 	# Make executable
 	chmod +x $SITES_DIR/$project_id/.git/hooks/post-merge
+
 
 }
 
