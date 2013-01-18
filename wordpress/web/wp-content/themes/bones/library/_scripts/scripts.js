@@ -1,3 +1,5 @@
+$('html').removeClass('no-js').addClass('js');
+
 (function($){
 		
 	$.getScript("/wp-content/themes/bones/library/_scripts/libs/yb_library.js", function() {
