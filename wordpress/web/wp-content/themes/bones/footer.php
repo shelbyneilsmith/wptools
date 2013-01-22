@@ -5,7 +5,7 @@
 		
 			<div id="footer-inner" class="wrap clearfix">
 				
-				<nav role="navigation" class="footer-nav">
+				<nav id="footer-navigation" role="navigation" class="footer-nav">
 					<?php bones_footer_links(); ?>
                 </nav>
              					

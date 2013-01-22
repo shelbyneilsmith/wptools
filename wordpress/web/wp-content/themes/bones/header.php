@@ -48,7 +48,7 @@
 			    	<<?php echo $heading_tag; ?> id="site-title"><a href="<?php bloginfo('url') ?>/" title="<?php bloginfo('name') ?>" rel="home"><img src="/wp-content/themes/bones/library/_images/mainLogo.png" alt="<?php bloginfo('name') ?>" /></a></<?php echo $heading_tag; ?>>
 						<!-- if you'd like to use the site description you can un-comment it below -->
 						<?php // bloginfo('description'); ?>
-		            <nav role="navigation" class="main">
+		            <nav id="main-navigation" role="navigation" class="main">
 								<?php //bones_main_nav(); ?>
 		                <ul class="nav">
 		                    <?php wp_list_pages('title_li=&depth=0&sort_column=menu_order'); ?>
