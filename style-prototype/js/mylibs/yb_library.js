@@ -18,6 +18,8 @@
 		
 		//* function inputMask(element, maskPattern, placeHolder);
 		
+		//* function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBreak);
+		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 ////////enables placeholder text on specified input fields for non-html5.////////
@@ -213,6 +215,103 @@ function inputMask(element, maskPattern, placeHolder) {
 	placeHolder = typeof placeHolder !== 'undefined' ? placeHolder : "_";
 	$(element).mask(maskPattern, {placeholder: placeHolder});
 }
+
+function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBreak) {
+	$(window).load(function() {
+		var menuObj = $(menuID);
+		var initBool = true;
+		var menuOffset;
+
+		$('<a class="menuLink" href="#"><span></span>Menu</a>').appendTo(menuObj).hide().click(menuClick);
+		
+		if ((menuDirection == "top") || (menuDirection == "bottom")) {
+			menuOffset = menuObj.outerHeight();
+		} else if ((menuDirection == "left") || (menuDirection == "right")) {
+			menuOffset = menuObj.outerWidth();
+		}
+
+		function initMenu(menuState) {
+
+			var menuPosNeg = "";			
+			
+			if(menuState == "on") {
+			
+				menuObj.children('a.menuLink').show();
+								
+				var menuOnCSS = { 
+					'position' : 'absolute', 
+					'z-index' : '9999'
+				};
+				menuObj.prependTo('body').css(menuOnCSS).css(menuDirection, "-" + menuOffset + "px");
+				$("<div id='dark-overlay'></div>").appendTo('body').css({
+					position: "absolute",
+					display: "none",
+					top: "0px",
+					left: "0px",
+					width: "100%",
+					height: "100%",
+					background: "rgba(0,0,0,.75)"
+				});
+				
+				initBool = false;
+			} else if (menuState == "off") {
+			
+				var menuOffCSS = { 
+					'position' : 'relative'
+				};
+				menuObj.insertAfter(returnAfter).css(menuOffCSS).css(menuDirection, 0);
+				$("#dark-overlay").remove();
+				menuObj.children('a.menuLink').hide();
+				
+				initBool = true;
+			}
+			
+		}
+		
+		function menuClick() {
+			var menuAnim = parseInt(menuObj.css(menuDirection),10) == 0 ? -menuOffset : 0;
+						
+			var anim = {opacity: 1};
+
+			anim[menuDirection] = menuAnim;
+			menuObj.animate(anim, 400);
+			$('#dark-overlay').fadeToggle();
+
+		    return false;
+		}
+
+		if (mobileBool) {
+		
+			initBool = false;
+			
+			if ($(window).width() < mobileBreak) {
+				initBool = true;
+			}
+			
+			$(window).resize(function() {
+				if ((menuDirection == "top") || (menuDirection == "bottom")) {
+					menuOffset = menuObj.outerHeight();
+				} else if ((menuDirection == "left") || (menuDirection == "right")) {
+					menuOffset = menuObj.outerWidth();
+				}
+				
+				if ($(window).width() < mobileBreak) {
+					if (initBool) {
+						initMenu("on");
+					}
+				} else if ($(window).width() >= mobileBreak)	{
+					initMenu("off");
+				}
+				
+			});
+		}
+		
+		if (initBool) {
+			initMenu("on");
+		}
+	});
+}
+
 // usage: log('inside coolFunc', this, arguments);
 // paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
 window.log = function(){
