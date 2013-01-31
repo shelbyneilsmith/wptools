@@ -139,6 +139,7 @@ function bones_scripts_and_styles() {
     }
 
     //adding scripts file in the footer
+    wp_register_script( 'retina-js', get_stylesheet_directory_uri() . '/library/_scripts/retina.js', array( 'jquery' ), '', true );
     wp_register_script( 'bones-js', get_stylesheet_directory_uri() . '/library/_scripts/scripts.js', array( 'jquery' ), '', true );
 
     // enqueue styles and scripts
@@ -150,6 +151,8 @@ function bones_scripts_and_styles() {
     using the google cdn. That way it stays cached
     and your site will load faster.
     */
+    
+    wp_enqueue_script( 'retina-js' );
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'bones-js' );
 
