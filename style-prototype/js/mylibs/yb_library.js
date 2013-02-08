@@ -221,8 +221,6 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 		var menuObj = $(menuID);
 		var initBool = true;
 		var menuOffset;
-
-		$('<a class="menuLink" href="#"><span></span>Menu</a>').appendTo(menuObj).hide().click(menuClick);
 		
 		if ((menuDirection == "top") || (menuDirection == "bottom")) {
 			menuOffset = menuObj.outerHeight();
@@ -239,12 +237,16 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 				menuObj.children('a.menuLink').show();
 								
 				var menuOnCSS = { 
-					'position' : 'absolute', 
-					'z-index' : '9999'
+					position: 'absolute', 
+					zIndex: '9999'
 				};
-				menuObj.prependTo('body').css(menuOnCSS).css(menuDirection, "-" + menuOffset + "px");
+				menuObj.prependTo('body').wrap('<div id="menuWrap" />');
+				$('#menuWrap').css(menuOnCSS).css(menuDirection, 0);
+
+				$('<a class="menuLink" href="#"><span></span>Menu</a>').appendTo('#menuWrap').click(menuClick);
+		
 				$("<div id='dark-overlay'></div>").appendTo('body').css({
-					position: "absolute",
+					position: "fixed",
 					display: "none",
 					top: "0px",
 					left: "0px",
@@ -254,14 +256,17 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 				});
 				
 				initBool = false;
+				
+				menuObj.hide();
 			} else if (menuState == "off") {
 			
 				var menuOffCSS = { 
-					'position' : 'relative'
+					position: 'relative'
 				};
-				menuObj.insertAfter(returnAfter).css(menuOffCSS).css(menuDirection, 0);
+				menuObj.insertAfter(returnAfter).show();
+				
+				$('#menuWrap').remove();
 				$("#dark-overlay").remove();
-				menuObj.children('a.menuLink').hide();
 				
 				initBool = true;
 			}
@@ -269,12 +274,23 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 		}
 		
 		function menuClick() {
-			var menuAnim = parseInt(menuObj.css(menuDirection),10) == 0 ? -menuOffset : 0;
+			if (menuObj.css('display') == 'none') {
+				menuObj.show();
+				var newMenuOffset = "-" + menuOffset + "px";;
+
+				$('#menuWrap').css(menuDirection, newMenuOffset).css('position', 'fixed');
+			}
+			var menuAnim = parseInt($('#menuWrap').css(menuDirection),10) == 0 ? -menuOffset : 0;
 						
 			var anim = {opacity: 1};
 
 			anim[menuDirection] = menuAnim;
-			menuObj.animate(anim, 400);
+			$('#menuWrap').animate(anim, 400, function() {
+				if (!parseInt($('#menuWrap').css(menuDirection),10) == 0) {
+					menuObj.hide();
+					$('#menuWrap').css(menuDirection, 0).css('position', 'absolute');
+				}
+			});
 			$('#dark-overlay').fadeToggle();
 
 		    return false;
@@ -289,12 +305,6 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 			}
 			
 			$(window).resize(function() {
-				if ((menuDirection == "top") || (menuDirection == "bottom")) {
-					menuOffset = menuObj.outerHeight();
-				} else if ((menuDirection == "left") || (menuDirection == "right")) {
-					menuOffset = menuObj.outerWidth();
-				}
-				
 				if ($(window).width() < mobileBreak) {
 					if (initBool) {
 						initMenu("on");
