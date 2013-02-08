@@ -162,21 +162,30 @@ preinit () {
 
 copyfiles () {
 	if [ $purpose == "startclean" ] ; then
-		# Create the empty project directory
-		mkdir $SITES_DIR/$project_id
-		echo "\nNew project directory created...copying files\n"
-		
-		# Tell bash to skip the .git folder when copying from template directory	
-		rsync -a --exclude='.git' $WPINIT_DIR/wordpress/ $SITES_DIR/$project_id/
-		shopt -s dotglob
-		
-		# create wireframes dir and copy files to it
-		mkdir $SITES_DIR/$project_id/web/wireframes
-		cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
-		
-		# create style prototype dir and copy files to it
-		mkdir $SITES_DIR/$project_id/web/style-prototype
-		cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+		if git ls-remote -h https://${GITUSER}:${GITPASS}@bitbucket.org/$GITUSER/${project_id}.git; then
+			clear
+			echo "\n---------------------------------------------------------------------------"
+			echo "Oh, wait. A repository for \"$project_id\" already exists. Get outta here!"
+			echo "---------------------------------------------------------------------------\n"
+			exit
+		else
+			clear
+			# Create the empty project directory
+			mkdir $SITES_DIR/$project_id
+			echo "\nNew project directory created...copying files\n"
+			
+			# Tell bash to skip the .git folder when copying from template directory	
+			rsync -a --exclude='.git' $WPINIT_DIR/wordpress/ $SITES_DIR/$project_id/
+			shopt -s dotglob
+			
+			# create wireframes dir and copy files to it
+			mkdir $SITES_DIR/$project_id/web/wireframes
+			cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
+			
+			# create style prototype dir and copy files to it
+			mkdir $SITES_DIR/$project_id/web/style-prototype
+			cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+		fi
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
 		echo "\nCloning project files from repository...\n"
@@ -353,7 +362,7 @@ siteinit () {
 	
 	# Finally, restart apache!
 	restartapache
-	clear
+	#clear
 	echo "---------------------------------------------------------------------------"
 	echo "...done! Your site is now ready to work on."
 	echo "---------------------------------------------------------------------------\n"
