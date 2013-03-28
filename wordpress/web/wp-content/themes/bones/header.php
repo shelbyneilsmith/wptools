@@ -8,7 +8,7 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title><?php wp_title(''); ?></title>
+		<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
 		
 		<!-- Google Chrome Frame for IE -->
 		<meta http-equiv="cleartype" content="on">
