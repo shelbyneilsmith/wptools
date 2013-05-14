@@ -500,18 +500,25 @@ Options -Indexes
 #RewriteCond %{THE_REQUEST} ^[A-Z]+\ /([^/]+/)*[^.#?\ ]+\.php([#?][^\ ]*)?\ HTTP/
 #RewriteRule ^(([^/]+/)*[^.]+)\.php $1 [R=301,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-
-
 # ----------------------------------------------------------------------
 #specific page redirects for SEO
 # ----------------------------------------------------------------------
 
 #redirect old to new
 #Redirect 301 /old.php http://www.yourdomain.com/new.php
+#RedirectMatch 301 ^/old-dir/ http://yourdomain.com/
+
 
 # BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^.*\.(jpg|jpeg|gif|png|bmp) /wp-content/plugins/wp-retina-2x/wr2x_image.php [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+</IfModule>
 
 # END WordPress
