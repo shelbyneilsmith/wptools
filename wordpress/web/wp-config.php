@@ -119,6 +119,8 @@ define('WPLANG', '');
  */
 define('WP_DEBUG', false);
 
+define('DISALLOW_FILE_EDIT', true);
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
