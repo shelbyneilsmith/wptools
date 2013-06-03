@@ -16,7 +16,8 @@ right up top and clean.
 add_action('after_setup_theme','yb_ahoy', 15);
 
 function yb_ahoy() {
-
+	//if ( ! isset( $content_width ) ) $content_width = 900;
+	
     // launching operation cleanup
     add_action('init', 'yb_head_cleanup');
     // remove WP version from RSS
@@ -105,26 +106,23 @@ function yb_scripts_and_styles() {
     // ie-only style sheet
     wp_register_style( 'yb-ie-only', get_stylesheet_directory_uri() . '/library/css/ie.css', array(), '' );
 
-    // comment reply script for threaded comments
-    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
-      wp_enqueue_script( 'comment-reply' );
-    }
 
     //adding scripts file in the footer
     wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/library/_scripts/scripts.js', array( 'jquery' ), '', true );
+    
+    add_action('wp_enqueue_scripts', 'yb_scripts');
+    function yb_scripts() {
+	    // comment reply script for threaded comments
+	    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
+	      wp_enqueue_script( 'comment-reply' );
+	    }
+	    
+	    wp_enqueue_script( 'jquery' );
+	    wp_enqueue_script( 'yb-js' );
 
-    // enqueue styles and scripts
-    wp_enqueue_style( 'yb-stylesheet' );
-    wp_enqueue_style('yb-ie-only');
-    
-    /*
-    I recommend using a plugin to call jQuery
-    using the google cdn. That way it stays cached
-    and your site will load faster.
-    */
-    
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'yb-js' );
+	    wp_enqueue_style( 'yb-stylesheet' );
+	    wp_enqueue_style('yb-ie-only');
+    }
 
   }
 }

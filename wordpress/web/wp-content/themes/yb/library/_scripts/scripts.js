@@ -2,7 +2,7 @@ jQuery('html').removeClass('no-js').addClass('js');
 
 (function($){
 		
-	$.getScript("/wp-content/themes/bones/library/_scripts/libs/yb_library.js", function() {
+	$.getScript("/wp-content/themes/yb/library/_scripts/libs/yb_library.js", function() {
 		//do yb library function calls here!
 		//////available functions:////////
 				

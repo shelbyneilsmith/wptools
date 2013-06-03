@@ -84,7 +84,7 @@ function yb_register_sidebars() {
 
 function remove_menus () {
 global $menu;
-	$restricted = array(__('Posts'), __('Links'), __('Media'));
+	$restricted = array(__('Posts', 'yb'), __('Links', 'yb'), __('Media', 'yb'));
 	end ($menu);
 	while (prev($menu)){
 		$value = explode(' ',$menu[key($menu)][0]);
@@ -123,7 +123,7 @@ function custom_menu_order($menu_ord) {
 function edit_admin_menus() {  
     global $menu;  
     //var_dump($menu);
-    $menu[5][0] = 'Recipes'; // Change Posts to Recipes  
+    $menu[5][0] = __('Recipes', 'yb'); // Change Posts to Recipes  
 }  
 //add_action( 'admin_menu', 'edit_admin_menus' ); 
 

@@ -17,7 +17,10 @@ Digging into WP - http://digwp.com/2010/10/customize-wordpress-dashboard/
 
 // enqueue admin scripts
 if(is_admin()){
-    wp_enqueue_script('custom_admin_script',  get_stylesheet_directory_uri() . '/library/_scripts/admin_scripts.js', array('jquery'));
+	add_action('admin_enqueue_scripts', 'yb_admin_scripts');
+	function yb_admin_scripts() {
+    	wp_enqueue_script('yb_admin_script',  get_stylesheet_directory_uri() . '/library/_scripts/admin_scripts.js', array('jquery'));
+    }
 }
 
 /************* DASHBOARD WIDGETS *****************/
@@ -125,7 +128,7 @@ you like.
 
 // Custom Backend Footer
 function bones_custom_admin_footer() {
-	echo '<span id="footer-thankyou">Developed by <a href="http://yoursite.com" target="_blank">Your Site Name</a></span>. Built using <a href="http://themble.com/bones" target="_blank">Bones</a>.';
+	echo '<span id="footer-thankyou">Developed by <a href="http://yellowberri.com" target="_blank">Yellowberri</a></span>.';
 }
 
 // adding it to the admin area

@@ -51,7 +51,7 @@
 			    	<!-- be sure to change the img src to actual path of logo image -->
 			    	<<?php echo $heading_tag; ?> id="site-title">
 			    		<a href="<?php bloginfo('url') ?>/" title="<?php bloginfo('name') ?>" rel="home">
-			    			<img src="/wp-content/themes/bones/library/_images/mainLogo.png" alt="<?php bloginfo('name') ?>" />
+			    			<img src="/wp-content/themes/yb/library/_images/mainLogo.png" alt="<?php bloginfo('name') ?>" />
 			    		</a>
 			    	</<?php echo $heading_tag; ?>>
 			    				    	
