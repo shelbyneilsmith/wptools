@@ -16,8 +16,11 @@
 
 $project_name = '';
 $secret_code = '';
+
 $local_host_base = '';
 $staging_host_base = '';
+
+$prod_domain = ""; //production domain name
 
 /**
  * Dev Variables
@@ -35,28 +38,32 @@ $prod_user_name = '';
 $prod_password = '';
 $prod_hostname = '';
 
-$local_host = $local_host_base; //localhost
-$dev_host = $staging_host_base; //dev host
-$prod_host = ""; //production host
-
 /**
  * Check for the current environment
  */
-if ($_SERVER["HTTP_HOST"] === $project_name.".".$local_host) {
+$server_var  = preg_replace('/:.*/','', $_SERVER['HTTP_HOST']);
+
+if ($server_var === $project_name.".".$local_host_base) {
 	$db_name = $project_name;
 	$user_name = 'root';
 	$password = 'root';
 	$hostname = 'localhost';
-} else if ($_SERVER["HTTP_HOST"] === $project_name.".".$dev_host) {
+	
+	$wp_env = 'development';
+} else if ($server_var === $project_name.".".$staging_host_base) {
 	$db_name = $dev_db_name;
 	$user_name = $dev_user_name;
 	$password = $dev_password;
 	$hostname = $dev_hostname;
-} else if ($_SERVER["HTTP_HOST"] === $prod_host) {
+	
+	$wp_env = 'staging';
+} else if ($server_var === $prod_domain) {
 	$db_name = $prod_db_name;
 	$user_name = $prod_user_name;
 	$password = $prod_password;
 	$hostname = $prod_hostname;
+	
+	$wp_env = 'production';
 }
 
 // ** MySQL settings - You can get this info from your web host ** //
@@ -77,6 +84,9 @@ define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
+
+/** Tell wordpress the working environment **/
+define('WP_ENV', $wp_env);
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -110,15 +120,21 @@ $table_prefix  = $project_name.$secret_code.'_';
  */
 define('WPLANG', '');
 
-/**
- * For developers: WordPress debugging mode.
- *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
- */
-define('WP_DEBUG', false);
 
+/* Checks the WP_ENV define and sets up Wordpress depending on the environment */
+if ((WP_ENV == 'development') || (WP_ENV == 'staging')) {
+	
+	$wp_debug = true;
+	
+	define('WP_POST_REVISIONS', false);
+
+	define('WP_SITEURL', "http://$server_var");
+	define('WP_HOME', "http://$server_var");
+} else {
+	$wp_debug = false;
+}
+
+define('WP_DEBUG', $wp_debug);
 define('DISALLOW_FILE_EDIT', true);
 
 /* That's all, stop editing! Happy blogging. */
