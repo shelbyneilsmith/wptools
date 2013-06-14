@@ -20,6 +20,7 @@ function yb_ahoy() {
 	
     // launching operation cleanup
     add_action('init', 'yb_head_cleanup');
+    add_action('init', 'yb_menus');
     // remove WP version from RSS
     add_filter('the_generator', 'yb_rss_version');
     // clean up gallery output in wp
@@ -70,9 +71,9 @@ function yb_head_cleanup() {
 	// WP version
 	remove_action( 'wp_head', 'wp_generator' );
   // remove WP version from css
-  add_filter( 'style_loader_src', 'yb_remove_wp_ver_css_js', 9999 );
+  //add_filter( 'style_loader_src', 'yb_remove_wp_ver_css_js', 9999 );
   // remove Wp version from scripts
-  add_filter( 'script_loader_src', 'yb_remove_wp_ver_css_js', 9999 );
+  //add_filter( 'script_loader_src', 'yb_remove_wp_ver_css_js', 9999 );
 
 } /* end yb head cleanup */
 
@@ -135,6 +136,20 @@ function yb_ie_conditional( $tag, $handle ) {
 	return $tag;
 }
 
+/* Register the theme menus */
+function yb_menus() {
+	// wp menus
+	add_theme_support( 'menus' );
+
+	// registering wp3+ menus
+	register_nav_menus(
+		array(
+			'main-nav' => 'Main Navigation',   // main nav in header
+			'footer-nav' => 'Footer Navigation' // secondary nav in footer
+		)
+	);
+}
+
 /*********************
 THEME SUPPORT
 *********************/
@@ -148,16 +163,6 @@ function yb_theme_support() {
 	// default thumb size
 	set_post_thumbnail_size(125, 125, true);
 
-	// wp menus
-	add_theme_support( 'menus' );
-
-	// registering wp3+ menus
-	register_nav_menus(
-		array(
-			'main-nav' => 'Main Navigation',   // main nav in header
-			'footer-nav' => 'Footer Navigation' // secondary nav in footer
-		)
-	);
 
 	// wp custom background (thx to @bransonwerner for update)
 /*

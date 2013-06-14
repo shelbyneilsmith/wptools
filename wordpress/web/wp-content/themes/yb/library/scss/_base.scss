@@ -10,7 +10,7 @@ $dark-grey: #555;
 ///* ==== mixins ==== */
 
 @mixin iepie {
-	behavior: url(/wp-content/themes/bones/PIE.htc);
+	behavior: url(/wp-content/themes/yb/PIE.htc);
 }
 
 @mixin serif {
@@ -25,12 +25,12 @@ $dark-grey: #555;
 @mixin fontFace ($font-name, $file-name, $weight: "normal") {
 	@font-face {
 		font-family: '#{$font-name}';
-		src: url('/wp-content/themes/bones/library/_fonts/#{$file-name}.eot'); /* IE9 Compat Modes */
+		src: url('/wp-content/themes/yb/library/_fonts/#{$file-name}.eot'); /* IE9 Compat Modes */
 		src: local('☺'),
-			 url('/wp-content/themes/bones/library/_fonts/#{$file-name}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-			 url('/wp-content/themes/bones/library/_fonts/#{$file-name}.woff') format('woff'), /* Modern Browsers */
-			 url('/wp-content/themes/bones/library/_fonts/#{$file-name}.ttf')  format('truetype'), /* Safari, Android, iOS */
-			 url('/wp-content/themes/bones/library/_fonts/#{$file-name}.svg#svgFontName') format('svg'); /* Legacy iOS */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.woff') format('woff'), /* Modern Browsers */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.ttf')  format('truetype'), /* Safari, Android, iOS */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.svg#svgFontName') format('svg'); /* Legacy iOS */
 		@if ($weight == "normal") {
 			font-weight: normal;
 			font-style: normal;
@@ -115,8 +115,8 @@ $dark-grey: #555;
 */
 
 // Define the sprites here. Notice that I've added an optional spacing.
-$sprites: sprite-map("sprites/*.png", $spacing: 0px);
-$sprites2x: sprite-map("sprites2x/*.png", $spacing: 0px);
+//$sprites: sprite-map("sprites/*.png", $spacing: 0px);
+//$sprites2x: sprite-map("sprites2x/*.png", $spacing: 0px);
 
 // Now let's define the sprite mixin.
 // This delegates to the reusable retina-sprite mixin.

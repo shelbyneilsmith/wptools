@@ -45,35 +45,6 @@ $wrapperBG: $light-grey;
 	}
 }
 
-/* === high ppi === */
-
-@mixin high-ppi($image, $width, $height) {
-	// Tested in Safari for iOS. Does not work in Chrome for iOS.
-	@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-		background-image: url($image);
-    background-size: $width $height;
-	}
-}
-
-// -webkit-image-set support
-
-@mixin png-image-set($image){
- @include image-set($image, "png");
-}
-
-@mixin jpg-image-set($image){
- @include image-set($image, "jpg");
-}
-
-@mixin gif-image-set($image){
- @include image-set($image, "gif");
-}
-
-@mixin image-set($name,$extension){
-  background-image: image_url("#{$name}.#{$extension}");
-  background-image: -webkit-image-set(image_url("#{$name}.#{$extension}") 1x, image_url("#{$name}@2x.#{$extension}") 2x);
-}
-
 /* ==== custom site styles ==== */
 html {
 	background: $mainBG;
