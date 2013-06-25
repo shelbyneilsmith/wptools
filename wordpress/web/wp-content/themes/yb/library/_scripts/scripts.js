@@ -51,12 +51,14 @@ jQuery('html').removeClass('no-js').addClass('js');
 	
 })( jQuery );
 
-(function () {
+////
+/* (function () { */
 
       /*
           1. Inject CSS which makes iframe invisible
       */
 
+/*
     var div = document.createElement('div'),
         ref = document.getElementsByTagName('base')[0] ||
               document.getElementsByTagName('script')[0];
@@ -64,17 +66,21 @@ jQuery('html').removeClass('no-js').addClass('js');
     div.innerHTML = '&shy;<style> iframe { visibility: hidden; } </style>';
 
     ref.parentNode.insertBefore(div, ref);
+*/
 
     /*
         2. When window loads, remove that CSS,
            making iframe visible again
     */
 
+/*
     window.onload = function() {
         div.parentNode.removeChild(div);
     }
 
 })();
+*/
+////
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.

@@ -111,8 +111,8 @@ function yb_scripts_and_styles() {
     //adding scripts file in the footer
     wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/library/_scripts/scripts.js', array( 'jquery' ), '', true );
     
-    add_action('wp_enqueue_scripts', 'yb_scripts');
-    function yb_scripts() {
+    //add_action('wp_enqueue_scripts', 'yb_scripts');
+    //function yb_scripts() {
 	    // comment reply script for threaded comments
 	    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
 	      wp_enqueue_script( 'comment-reply' );
@@ -123,7 +123,7 @@ function yb_scripts_and_styles() {
 
 	    wp_enqueue_style( 'yb-stylesheet' );
 	    wp_enqueue_style('yb-ie-only');
-    }
+    //}
 
   }
 }
