@@ -2,4 +2,4 @@
 .DS_Store
 # ignore assets folder and all subdirectories
 assets/
-web/wp-content/uploads/
+web/wp-content/themes/yb/.sass-cache/
