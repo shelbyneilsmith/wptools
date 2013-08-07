@@ -3,12 +3,12 @@
 # Script to setup local directories, databases and server for new site development
 #
 
-## SETTINGS ============================================================================================================ #
+## SETTINGS ================================================================================== #
 
 # First, set up config for local host domain
 LOCAL_HOST=stupid.local #your main local virtual host base
 
-SECRET_CODE=Yellowberri420! #secret code for use in encoding some strings
+SECRET_CODE=yb420! #secret code for use in encoding some strings
 STAGING_HOST=ybdevel.com
 
 # Git server credentials
@@ -40,7 +40,7 @@ VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
 APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
 
 
-## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ============================================================================ #
+## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ====================================================== #
 
 ##
 
@@ -354,8 +354,8 @@ siteinit () {
 	# configure project version control
 	gitsetup "bitbucket"
 
-	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line)
-	#echo "\n127.0.0.1\t$project_id.$LOCAL_HOST\n" >> /etc/hosts
+	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
+	echo "\n127.0.0.1\t$project_id.$LOCAL_HOST\n" >> /etc/hosts
 	
 	# Write new virtual host file for the new site
 	writevhost
