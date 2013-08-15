@@ -8,7 +8,7 @@
 # First, set up config for local host domain
 LOCAL_HOST=stupid.local #your main local virtual host base
 
-SECRET_CODE=yb420! #secret code for use in encoding some strings
+SECRET_CODE=4d6c024 #secret code for use in encoding some strings
 STAGING_HOST=ybdevel.com
 
 # Git server credentials
@@ -36,6 +36,9 @@ MYSQL_BIN="/Applications/MAMP/Library/bin"
 # Location of vhosts dir
 VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
 
+# Location of sublime text projects dir
+SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
+
 # Location of Apache bin
 APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
 
@@ -51,7 +54,7 @@ pause() {
 
 continueprompt() {
 	read ifcontinue
-	
+
 	case $ifcontinue in
 		[nN] | [n|N][O|o] )
 			clear
@@ -63,7 +66,7 @@ continueprompt() {
 		[yY] | [yY][Ee][Ss] )
 			# Just continue script if user chooses "yes"
 			;;
-		* ) 
+		* )
 			echo "\n---------------------------------------------------------------------------"
 			echo "Huh?"
 			echo "---------------------------------------------------------------------------\n"
@@ -76,9 +79,9 @@ purposeprompt() {
 	echo "A) I need to initialize a new Wordpress project."
 	echo "B) I'm collaborating on this project and I just need to clone it to use on my local machine."
 	echo "C) Nevermind, get me out of here so I can start over.\n"
-	
+
 	read purpose_opt
-	
+
 	case $purpose_opt in
 		a|A )
 			purpose="startclean"
@@ -88,13 +91,13 @@ purposeprompt() {
 			;;
 		c|C )
 			echo "\n---------------------------------------------------------------------------"
-			echo "Goodbye."			
+			echo "Goodbye."
 			echo "---------------------------------------------------------------------------\n"
 			exit
 			;;
-		* ) 
+		* )
 			echo "\n---------------------------------------------------------------------------"
-			echo "I didn't understand that. Do what now?" 
+			echo "I didn't understand that. Do what now?"
 			echo "---------------------------------------------------------------------------\n"
 			purposeprompt
 			;;
@@ -116,7 +119,7 @@ checkprojectexists () {
 			pause "Press [Enter] to copy site files over."
 			EMPTY_DIR=true
 		fi
-		
+
 		NEW_PROJECT=false
 	else
 		NEW_PROJECT=true #if project directory doesn't exist, continue site init as new project
@@ -124,11 +127,11 @@ checkprojectexists () {
 }
 
 preinit () {
-	# Now we need to decide which type of project this is going to be?	
+	# Now we need to decide which type of project this is going to be?
 	clear
 
 	checkprojectexists
-		
+
 	if $NEW_PROJECT ; then
 		echo "\n---------------------------------------------------------------------------"
 		echo "A new project called '$project_id' is about to be created and initialized."
@@ -153,7 +156,7 @@ preinit () {
 			echo "\n---------------------------------------------------------------------------"
 			pause "Oh well, suit yourself... press [Enter] to delete the files & directories (and database, if applicable)."
 			rm -rf $SITES_DIR/$project_id/web
-			
+
 			clear
 			$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS drop $project_id
 		fi
@@ -170,26 +173,37 @@ copyfiles () {
 			exit
 		else
 			clear
-			# Create the empty project directory
-			mkdir $SITES_DIR/$project_id
-			echo "\nNew project directory created...copying files\n"
-			
-			# Tell bash to skip the .git folder when copying from template directory	
-			rsync -a --exclude='.git' $WPINIT_DIR/wordpress/ $SITES_DIR/$project_id/
-			shopt -s dotglob
-			
-			# create wireframes dir and copy files to it
-			mkdir $SITES_DIR/$project_id/web/wireframes
+			# Tell the user that the proper files are being copied over
+			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
+
+			# create the wordpress directory structure
+			mkdir -p $SITES_DIR/$project_id/{web/{wireframes,style-prototype},assets/{docs,working_images}}
+
+			# copy wireframes and style-prototype files over
 			cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
-			
-			# create style prototype dir and copy files to it
-			mkdir $SITES_DIR/$project_id/web/style-prototype
 			cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+
+			# get latest version of Wordpress and extract files to project directory
+			curl -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
+			tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
+			# delete the temporary Wordpress zip file
+			rm $SITES_DIR/$project_id/wp.temp.tar.gz
+			# move the Wordpress files from the "wordpress" default directory up into the "web" folder and then delete the "wordpress" folder
+			mv $SITES_DIR/$project_id/web/wordpress/* $SITES_DIR/$project_id/web
+			rm -R $SITES_DIR/$project_id/web/wordpress
+
+			# move the theme, wp-config, .htaccess, .gitignore & plugins over
+			cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+			cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
+			cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
+			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
+			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
+			cp -r $WPINIT_DIR/wordpress/plugins/* $SITES_DIR/$project_id/web/wp-content/plugins
 		fi
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
 		echo "\nCloning project files from repository...\n"
-		
+
 		# Create the empty project directory, if it doesn't already exist
 		if [ ! -d $SITES_DIR/$project_id ] ; then
 			mkdir $SITES_DIR/$project_id
@@ -218,44 +232,41 @@ setup_db () {
 		if [ -d "$DB_DIR/$project_id" ]; then
 			$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS drop $project_id
 		fi
-		
+
 		# Create the empty database
-		$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS create $project_id			
+		$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS create $project_id
 		# Import the saved sql file to the database
 		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
 		# Update the database with localhost information, if the proper tables exist (if wordpress is installed already)
-		SECRET_CODE_HASH="$(echo -n "$SECRET_CODE" | md5 )"
-		if [ $(mysql -N -s -u root -proot -e "select count(*) from information_schema.tables where table_schema='$project_id' and table_name='${project_id}${SECRET_CODE_HASH}_options';") -eq 1 ]; then
-			
+		if [ $(mysql -N -s -u root -proot -e "select count(*) from information_schema.tables where table_schema='$project_id' and table_name='${project_id}${SECRET_CODE}_options';") -eq 1 ]; then
+
 			$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
 				use $project_id;
-				UPDATE ${project_id}${SECRET_CODE_HASH}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
+				UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
 			EOF
 		fi
-	fi	
+	fi
 }
 
 getsalts () {
 	curl -s https://api.wordpress.org/secret-key/1.1/salt | awk -f $WPINIT_DIR/salt_replacer.awk - $CONFIGFILE > $OUTPUTCONFIGFILE
 }
 
-configwp () {	
+configwp () {
 	CONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php
 	OUTPUTCONFIGFILE=$SITES_DIR/$project_id/web/wp-config2.php
-	
+
 	if [ $purpose == "startclean" ] ; then
 		sed -i.bak "s/\$project_name = '.*';/\$project_name = '$project_id';/" $CONFIGFILE
-		
-		SECRET_CODE_HASH="$(echo -n "$SECRET_CODE" | md5 )"
-		
-		sed -i.bak "s/\$secret_code = '.*';/\$secret_code = '$SECRET_CODE_HASH';/" $CONFIGFILE
+
+		sed -i.bak "s/\$secret_code = '.*';/\$secret_code = '$SECRET_CODE';/" $CONFIGFILE
 		sed -i.bak "s/\$staging_host_base = '.*';/\$staging_host_base = '$STAGING_HOST';/" $CONFIGFILE
 	fi
-	
+
 	sed -i.bak "s/\$local_host_base = '.*';/\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
-	
+
 	getsalts
-	mv $OUTPUTCONFIGFILE $CONFIGFILE	
+	mv $OUTPUTCONFIGFILE $CONFIGFILE
 }
 
 gitsetup () {
@@ -266,24 +277,24 @@ gitsetup () {
 			echo "Setting up remote repository...Please enter a short description for this repository."
 			echo "---------------------------------------------------------------------------\n"
 			read repo_desc
-			
+
 			#script for bitbucket repo initialization
 			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
-			
+
 			# Setting up the service hook on bitbucket end for pushing to staging server
 			##curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories/$GITUSER/$project_id/services/" -d "repo_slug=$project_id" -d "type=POST" -d "URL=http://$STAGING_IP/$scipt_loc/staging-script.php?repo_name=$project_id"
 		fi
-		
+
 		# Initialize local Git repository and push it to the remote repo
 		git init $SITES_DIR/$project_id
 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id add .
 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id commit -am 'Initial Commit'
 
 		if [ $1 == "bitbucket" ] ; then
-			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master 
+			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master
 		fi
 	fi
-	
+
 	# Creates the pre-commit .git hook
 	cat > $SITES_DIR/$project_id/.git/hooks/pre-commit <<- EOF
 		#!/bin/sh
@@ -296,7 +307,7 @@ gitsetup () {
 	EOF
 	# Make executable
 	chmod +x $SITES_DIR/$project_id/.git/hooks/pre-commit
-	
+
 	# Creates the post-merge .git hook
 	cat > $SITES_DIR/$project_id/.git/hooks/post-merge <<- EOF0
 		#!/bin/sh
@@ -305,7 +316,7 @@ gitsetup () {
 		# updates the db on the local machine with the proper local host information
 		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
 			use $project_id;
-			UPDATE ${project_id}${SECRET_CODE_HASH}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
+			UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
 		EOF
 		# update the wp-config file
 		sed -i.bak "s/\\\$local_host_base = '.*';/\\\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
@@ -319,7 +330,7 @@ gitsetup () {
 writevhost () {
 	echo "Writing Virtual Host..."
 
-	cat > $VHOSTS_DIR/$project_id.conf <<- EOF 
+	cat > $VHOSTS_DIR/$project_id.conf <<- EOF
 	<VirtualHost *:80>
 	DocumentRoot "$SITES_DIR/$project_id/web"
 	ServerName $project_id.$LOCAL_HOST
@@ -333,33 +344,67 @@ writevhost () {
 	EOF
 }
 
+writesublimeproject () {
+	# Write the project file for sublime text
+	cat > $SUBLIMETEXTPROJECTS_DIR/$project_id.sublime-project <<- EOF
+	{
+		"folders":
+		[
+			{
+				"name": "$project_id Root",
+				"path": "$SITES_DIR/$project_id"
+			},
+			{
+				"name": "Style Prototype",
+				"path": "$SITES_DIR/$project_id/web/style-prototype"
+			},
+			{
+				"name": "Wireframes",
+				"path": "$SITES_DIR/$project_id/web/wireframes"
+			},
+			{
+				"name":"Site Plugins",
+				"path": "$SITES_DIR/$project_id/web/wp-content/plugins"
+			},
+			{
+				"name": "YB Theme Files",
+				"path": "$SITES_DIR/$project_id/web/wp-content/themes/yb"
+			}
+		]
+	}
+	EOF
+}
+
 restartapache () {
-	echo "Restarting Apache!"
+	echo "\nRestarting Apache!"
 	sudo $APACHE_DIR/apachectl -k restart
 }
 
-siteinit () {	
+siteinit () {
 	# Test for project existence, start from scratch if necessary, and define type of project
 	preinit
-	
-	# Go ahead and copy relevant files to the project directory.		
+
+	# Go ahead and copy relevant files to the project directory.
 	copyfiles
-	
+
 	# Use the config info to alter the wp-config file.
 	configwp
-	
+
 	# Now, we need to create the local database (if it doesn't already exist)
 	setup_db
-		
+
 	# configure project version control
 	gitsetup "bitbucket"
 
 	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
-	echo "\n127.0.0.1\t$project_id.$LOCAL_HOST\n" >> /etc/hosts
-	
+	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_HOST' >> /private/etc/hosts"
+
 	# Write new virtual host file for the new site
 	writevhost
-	
+
+	# Write the sublime text project file
+	writesublimeproject
+
 	# Finally, restart apache!
 	restartapache
 	#clear
@@ -378,9 +423,9 @@ if [[ $1 && ${1} ]] ; then
 	echo "What is the purpose of this initialization?"
 	echo "---------------------------------------------------------------------------\n"
 	purposeprompt
-	
+
 	siteinit
 else
 	echo "Project ID not set! Stop wasting my time."
-	exit	
+	exit
 fi
