@@ -1,5 +1,8 @@
 # ignore Mac OS X Desktop Services Store
 .DS_Store
+.scssc
 # ignore assets folder and all subdirectories
 assets/
+web/wireframes/.sass-cache/
+web/style-prototype/.sass-cache/
 web/wp-content/themes/yb/.sass-cache/
