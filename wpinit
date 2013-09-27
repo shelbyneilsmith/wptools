@@ -199,6 +199,10 @@ copyfiles () {
 			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/plugins/* $SITES_DIR/$project_id/web/wp-content/plugins
+
+			# move sublime project files, change project variables, and rename file
+			sed "s/###/$project_id/g" "$WPINIT_DIR/wpinit.sublime-project.txt" > "$SITES_DIR/$project_id/web/wp-content/themes/yb/$project_id.sublime-project"
+
 		fi
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository

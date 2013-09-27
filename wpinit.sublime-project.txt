@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/yellowberri_admin/Sites/###"
+		},
+		{
+			"path": "/Users/yellowberri_admin/Sites/###/web/style-prototype"
+		},
+		{
+			"path": "/Users/yellowberri_admin/Sites/###/web/wireframes"
+		},
+		{
+			"path": "/Users/yellowberri_admin/Sites/###/web/wp-content/themes/yb"
+		}
+	]
+}
