@@ -1,8 +1,13 @@
 # ignore Mac OS X Desktop Services Store
 .DS_Store
+
+# ignore sass caching
 .scssc
+.sass-cache
+
+# ignore Sublime Text project files
+.sublime-workspace
+.sublime-project
+
 # ignore assets folder and all subdirectories
 assets/
-web/wireframes/.sass-cache/
-web/style-prototype/.sass-cache/
-web/wp-content/themes/yb/.sass-cache/
