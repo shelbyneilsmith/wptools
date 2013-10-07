@@ -1,0 +1,5 @@
+#your main local virtual host base
+LOCAL_HOST=ybdev.local
+
+# Location of sublime text projects dir
+SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/$project_id/web/wp-content/themes/yb"
