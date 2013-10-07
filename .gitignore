@@ -2,4 +2,4 @@
 .DS_Store
 .submlime-project
 .sublime-workspace
-.config
+*.config
