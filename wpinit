@@ -6,40 +6,7 @@
 ## SETTINGS ================================================================================== #
 
 # First, set up config for local host domain
-
-SECRET_CODE=4d6c024 #secret code for use in encoding some strings
-STAGING_HOST=ybdevel.com
-
-# Git server credentials
-GITUSER=yellowberri
-GITPASS=Yellowberri420!
-
-# Variables for staging server configuration
-##STAGING_IP=0.0.0.0 # Staging server IP address
-##scipt_loc=users/sites # Staging script location on staging server
-
-# Local database credentials
-LOCAL_DB_USER=root
-LOCAL_DB_PASS=root
-
-# Now, let's set some directory variables
-SITES_DIR="$HOME/Sites" # Main working directory for all sites
-WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
-
-# Location of MySQL database files
-DB_DIR="/Applications/MAMP/db/mysql"
-
-# Location of MySQL bin files
-MYSQL_BIN="/Applications/MAMP/Library/bin"
-
-# Location of vhosts dir
-VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
-
-
-
-# Location of Apache bin
-APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
-
+# Wait where are the settings?! There are in wpinit.config
 
 ## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ====================================================== #
 
@@ -418,7 +385,8 @@ if [[ $1 && ${1} ]] ; then
 	project_id=$1
 
 	# load config file
-	. $WPINIT_DIR/wpinit.config
+	# . wpinit.config
+	source ${BASH_SOURCE[0]/%wpinit/wpinit.config}
 	# LOCAL_HOST =  localhost
 	# SUBLIMETEXTPROJECTS_DIR
 
