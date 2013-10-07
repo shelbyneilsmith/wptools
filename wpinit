@@ -6,7 +6,6 @@
 ## SETTINGS ================================================================================== #
 
 # First, set up config for local host domain
-LOCAL_HOST=stupid.local #your main local virtual host base
 
 SECRET_CODE=4d6c024 #secret code for use in encoding some strings
 STAGING_HOST=ybdevel.com
@@ -36,8 +35,7 @@ MYSQL_BIN="/Applications/MAMP/Library/bin"
 # Location of vhosts dir
 VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
 
-# Location of sublime text projects dir
-SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
+
 
 # Location of Apache bin
 APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
@@ -199,9 +197,6 @@ copyfiles () {
 			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/plugins/* $SITES_DIR/$project_id/web/wp-content/plugins
-
-			# move sublime project files, change project variables, and rename file
-			sed "s/###/$project_id/g" "$WPINIT_DIR/wpinit.sublime-project.txt" > "$SITES_DIR/$project_id/web/wp-content/themes/yb/$project_id.sublime-project"
 
 		fi
 	elif [ $purpose == "collab" ] ; then
@@ -421,6 +416,11 @@ siteinit () {
 # Check whether or not a project ID was supplied
 if [[ $1 && ${1} ]] ; then
 	project_id=$1
+
+	# load config file
+	. $WPINIT_DIR/wpinit.config
+	# LOCAL_HOST =  localhost
+	# SUBLIMETEXTPROJECTS_DIR
 
 	clear
 	echo "---------------------------------------------------------------------------"
