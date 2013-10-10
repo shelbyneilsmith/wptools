@@ -142,11 +142,10 @@ copyfiles () {
 			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
 			# create the wordpress directory structure
-			mkdir -p $SITES_DIR/$project_id/{web/{wireframes,style-prototype},assets/{docs,working_images}}
+			mkdir -p $SITES_DIR/$project_id/{web/design,assets/{docs,working_images}}
 
-			# copy wireframes and style-prototype files over
-			cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
-			cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+			# copy wireframes and styletile files over
+			cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
 
 			# get latest version of Wordpress and extract files to project directory
 			curl -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
