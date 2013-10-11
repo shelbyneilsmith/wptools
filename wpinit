@@ -6,42 +6,7 @@
 ## SETTINGS ================================================================================== #
 
 # First, set up config for local host domain
-LOCAL_HOST=stupid.local #your main local virtual host base
-
-SECRET_CODE=4d6c024 #secret code for use in encoding some strings
-STAGING_HOST=ybdevel.com
-
-# Git server credentials
-GITUSER=yellowberri
-GITPASS=Yellowberri420!
-
-# Variables for staging server configuration
-##STAGING_IP=0.0.0.0 # Staging server IP address
-##scipt_loc=users/sites # Staging script location on staging server
-
-# Local database credentials
-LOCAL_DB_USER=root
-LOCAL_DB_PASS=root
-
-# Now, let's set some directory variables
-SITES_DIR="$HOME/Sites" # Main working directory for all sites
-WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
-
-# Location of MySQL database files
-DB_DIR="/Applications/MAMP/db/mysql"
-
-# Location of MySQL bin files
-MYSQL_BIN="/Applications/MAMP/Library/bin"
-
-# Location of vhosts dir
-VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
-
-# Location of sublime text projects dir
-SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
-
-# Location of Apache bin
-APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
-
+# Wait where are the settings?! There are in wpinit.config
 
 ## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ====================================================== #
 
@@ -177,11 +142,10 @@ copyfiles () {
 			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
 			# create the wordpress directory structure
-			mkdir -p $SITES_DIR/$project_id/{web/{wireframes,style-prototype},assets/{docs,working_images}}
+			mkdir -p $SITES_DIR/$project_id/{web/design,assets/{docs,working_images}}
 
-			# copy wireframes and style-prototype files over
-			cp -r $WPINIT_DIR/wireframes/* $SITES_DIR/$project_id/web/wireframes
-			cp -r $WPINIT_DIR/style-prototype/* $SITES_DIR/$project_id/web/style-prototype
+			# copy wireframes and styletile files over
+			cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
 
 			# get latest version of Wordpress and extract files to project directory
 			curl -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
@@ -199,9 +163,6 @@ copyfiles () {
 			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/plugins/* $SITES_DIR/$project_id/web/wp-content/plugins
-
-			# move sublime project files, change project variables, and rename file
-			sed "s/###/$project_id/g" "$WPINIT_DIR/wpinit.sublime-project.txt" > "$SITES_DIR/$project_id/web/wp-content/themes/yb/$project_id.sublime-project"
 
 		fi
 	elif [ $purpose == "collab" ] ; then
@@ -421,6 +382,12 @@ siteinit () {
 # Check whether or not a project ID was supplied
 if [[ $1 && ${1} ]] ; then
 	project_id=$1
+
+	# load config file
+	# . wpinit.config
+	source ${BASH_SOURCE[0]/%wpinit/wpinit.config}
+	# LOCAL_HOST =  localhost
+	# SUBLIMETEXTPROJECTS_DIR
 
 	clear
 	echo "---------------------------------------------------------------------------"

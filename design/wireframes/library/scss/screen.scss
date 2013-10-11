@@ -1,0 +1,112 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/layout";
+@import "compass/utilities";
+@import "compass/typography";
+@import "compass/css3";
+@import "base";
+
+@charset "utf-8";
+
+
+///* ==== other settings ==== */
+$sticky_footer: false;
+$sticky_footer_height: 54px;
+
+///* ==== custom site colors ==== */
+$mainBG: $white;
+$wrapperBG: $light-grey;
+
+/* === breakpoints ==== */
+
+@mixin breakpoint($point) {
+	@if $point == narrowColumn {
+		@media screen and (max-width: 33em) { @content }
+	}
+	@if $point == multiColumn {
+		@media screen and (min-width: 58.618em){ @content }
+	}
+}
+
+/* ==== custom site styles ==== */
+
+body {
+	background: $mainBG;
+}
+
+#wrapper {
+	position: relative;
+	color: $off-black;
+	@include sans-serif;
+	width: 33em;
+	padding: 0.806em 1.618em;
+	margin: auto;
+	@include clearfix();
+	@include breakpoint(multiColumn) {
+		width: 50.618em;
+	}
+	@include breakpoint(narrowColumn) {
+		width: 90%;
+		padding: 0.806em 5%;
+	}
+}
+
+#main {
+	position: relative;
+	clear: both;
+}
+
+#container {
+}
+
+#content {
+}
+
+
+/*==== header styles ====*/
+header {
+	#header-inner {
+	}
+}
+
+#site-title {
+	a {
+		img {
+
+		}
+	}
+}
+
+nav.main {
+	ul {
+		li {
+			a {
+				&:hover {
+				}
+			}
+		}
+	}
+}
+// end header styles
+
+/*==== home page styles ====*/
+// end home page styles
+
+/*==== footer styles ====*/
+footer {
+	#footer-inner {
+		.copyright {
+			float: right;
+		}
+	}
+}
+// end footer styles
+
+@if($sticky_footer) {
+	@include sticky-footer($sticky_footer, "#wrapper", "#layout-footer", "footer");
+}
+
+
