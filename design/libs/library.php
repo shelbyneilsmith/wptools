@@ -11,6 +11,22 @@
 	//* cleanLinks($string); - clean up any string to make it SEO-friendly url
 	//* breadcrumbs($separator = ' &raquo; ', $home = 'Home');
 
+$alphas = range('a', 'z');
+
+// turn a list of filenames into links with a prefix
+function styleTileLinks($options = 1, $numbers) {
+	$output = "<ul class='style-tile-links'>";
+	$i = 0;
+
+	while ($i < $options) {
+		$output .= "<li><a href='/design/styletiles/option-" . $numbers[$i] . "'>Option " . strtoupper($numbers[$i]) . "</a></li>";
+		$i++;
+	}
+
+	$output .= "</ul>";
+	return $output;
+}
+
 //embed vimeo video
 function vimeoVid($vidID, $width, $height) {
 	echo '<iframe src="http://player.vimeo.com/video/'.$vidID.'?title=0&amp;byline=0&amp;portrait=0" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
@@ -201,7 +217,7 @@ function linkOutput($value, $top, $isFirst, $isLast) {
 		echo "$liopen><a id='$socialid' class='social' href='$sociallink' title='$socialtitle' target='_blank'>$socialtitle</a></li>";
 	} else {
 		if(strtolower($value) == "home") {
-			$link = "./";
+			$link = "/design/wireframes/";
 		}
 		 else {
 			$link = cleanLinks($value);
