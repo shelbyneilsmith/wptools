@@ -120,6 +120,7 @@
 			$('body').css('backgroundColor', '#231d1e');
 			$('body').children().not('.rw-controls, style, script').remove();
 		} else {
+			$('head').prepend('<base target="_parent" />');
 			$('body').css('backgroundColor', origBodyBG);
 			$('.rw-controls').remove();
 		}
