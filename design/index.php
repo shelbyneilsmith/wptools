@@ -31,6 +31,8 @@ $styleTiles = 3;
 
 				<div id="styletile-links">
 					<h3>Style Tiles</h3>
+					<a class="style-viewer-link" href="/design/styletiles/">View All</a>
+					<br><br>
 					<?php echo styleTileLinks($styleTiles, $alphas); ?>
 				</div>
 			</div>

@@ -1,276 +1,290 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
- 
- 
+// YB STYLE TILE TEMPLATE
+@charset "utf-8";
+
+// IMPORTS
 @import "compass/layout";
 @import "compass/utilities";
 @import "compass/typography";
 @import "compass/css3";
 @import "base";
 
-@charset "utf-8";
-	
-
-///* ==== custom site colors ==== */
-
-///* ==== main palette colors ==== */
-$palette1: #fff;
-$palette2: #eee;
-$palette3: #ddd;
-$palette4: #ccc;
-$palette5: #bbb;
-
+// GLOBAL COLORS
 $mainBG: $black;
 $wrapperBG: $light-grey;
+$ph-grey: #ddd;
+$yb-black: #231d1e;
+$yb-yellow: #ffcd00;
 
-/* === breakpoints ==== */
+// TILE IMPORTS
+@import "option-a";
+@import "option-b";
+@import "option-c";
 
-@mixin breakpoint($point) {
-	@if $point == narrowColumn {
-		@media screen and (max-width: 33em) { @content }
+// FONTS
+@include fontFace ("Klinic Slab Bold", "klinic-slab/klinicslabbold-webfont", "bold");
+@include fontFace ("Klinic Slab Medium", "klinic-slab/klinicslabmedium-webfont", "bold");
+@include fontFace ("Klinic Slab Book", "klinic-slab/klinicslabbook-webfont", "bold");
+
+@include fontFace ("News Cycle Bold", "news-cycle/newscycle-bold-webfont", "bold");
+@include fontFace ("News Cycle Regular", "news-cycle/newscycle-regular-webfont", "bold");
+
+@include fontFace ("Varela Round", "varela-round/varelaround-regular-webfont", "bold");
+
+// DEFAULT COLORS
+.wrapper { background-color: $ph-grey; }
+.style-tile { background-color: white; }
+.masthead { background-color: darken($ph-grey, 5%); }
+.logo { background-color: darken($ph-grey, 10%); }
+.color { background-color: $ph-grey; }
+.texture { background-color: $ph-grey; }
+
+// INFRASTRUCTURE
+#top-bar {
+	position:fixed;
+	@include box-sizing(border-box);
+	width:100%;
+	height:8%;
+	padding:1em;
+	background-color:$yb-black;
+	clear:both;
+
+	span {
+		display:inline-block;
+		color:$white;
+		font-family: Trebuchet MS, sans-serif;
 	}
-	@if $point == multiColumn {
-		@media screen and (min-width: 65.618em){ @content }
+
+	.company-name {
+		opacity: .6;
 	}
-}
 
-/* ==== custom site styles ==== */
-html {
-	background: $mainBG;
-}
-
-body {
-	color: $off-black;
-	@include sans-serif;
-}
-
-#wrapper {
-	position: relative;
-}
-
-#container {
-	position: relative;
-	width: 90%;
-	padding: 0 5%;
-	margin: auto;
-	@include clearfix();
-	@include breakpoint(multiColumn) {
-		width: 60.618em;
-	}
-}
-
-/*==== header styles ====*/
-header {
-	width: 100%;
-	background: $light-grey;
-	margin-bottom: 40px;
-	@include breakpoint(multiColumn) {
-		margin-bottom: 50px;
-	}
-	@include breakpoint(narrowColumn) {
-		margin-bottom: 30px;
-	}
-	#header-inner {
-		width: 95%;
-		padding: 20px 1.618em;
-		margin: auto;
-		@include clearfix();
-		@include breakpoint(multiColumn) {
-			width: 60.618em;
-		}
-		@include breakpoint(narrowColumn) {
-			width: 90%;
-			padding: 5%;
-		}
+	.option-name {
+		@include transition(transform 300ms linear);
 	}
 }
 
-#site-title {
-	img {
-			
+a#back-to-project {
+	position:absolute;
+	display:block;
+	top:50%;
+	right:2em;
+	height: 30px;
+	margin-top: -15px;
+	border:3px solid transparent;
+	color:white;
+	@include transition(border 300ms linear);
+	text-decoration:none;
+
+	font-family: Trebuchet MS;
+	font-size: 13px;
+
+	&:hover {
+		border-bottom: 3px solid $yb-yellow;
 	}
 }
 
-/*nav.main {
-	ul {
-		li {
-			a {
-				&:hover {
-				}
-			}
-		}
-	}
-}*/
-// end header styles
-
-/*==== main prototype styles ====*/
-h2 {
-	color: $white;
+.option-anim-hidden {
+	@include transform(scaleX(2) rotateY(-90deg));
+	perspective: 500px;
 }
 
-h3 {
-	color: $white;
-}
+.side-controls {
+	position:fixed;
+	top:50%;
+	width:60px;
+	height:300px;
+	margin-top:-150px;
+	background-color: $yb-black;
+	background-repeat: no-repeat;
+	background-position:center center;
+	opacity:.4;
+	@include transition(opacity 230ms ease);
+	z-index: 10;
 
-p {
-	font-size: 14px;
-}
-
-a:link, a:visited {
-	text-decoration: none;
-}
-a:hover, a:active {
-	
-}
-
-#content {
-	float: left;
-	width: 40%;
-	margin-right: 5%;
-	margin-bottom: 30px;
-	@include breakpoint(multiColumn) {
-		width: 30%;
-	}
-	@include breakpoint(narrowColumn) {
-		width: 90%;
-		margin-right: 0;
-	}
-	p {
-		margin-bottom: 0;
+	&:hover {
+		opacity:.8;
 	}
 }
 
-.content-box {
-	background: $white;
-	padding: 5%;
-	@include breakpoint(multiColumn) {
-		padding: 3%;
+#prev-button {
+	left:0;
+	background-image: url('../images/button-prev.png');
+}
+
+#next-button {
+	right:0;
+	background-image: url('../images/button-next.png');
+}
+
+span.label {
+	display:block;
+}
+
+
+#style-viewer {
+	position:fixed;
+	top:8%;
+	left:0;
+	width:100%;
+	height:92%;
+	@include transition(left 1s ease-in-out);
+}
+
+iframe {
+	width:100%;
+	height:100%;
+	z-index: 1;
+}
+
+iframe {
+	position:absolute;
+	top:0;
+	left:0;
+
+	&:nth-of-type(2) {
+		left:100%;
 	}
-	h2 {
-		color: $off-black;
+
+	&:nth-of-type(3) {
+		left:200%;
 	}
-	h3 {
-		color: $off-black;
+
+	&:nth-of-type(4) {
+		left:300%;
+	}
+
+	&:nth-of-type(5) {
+		left:400%;
+	}
+
+	&:nth-of-type(6) {
+		left:500%;
+	}
+
+	&:nth-of-type(7) {
+		left:600%;
+	}
+
+	&:nth-of-type(8) {
+		left:700%;
+	}
+
+	&:nth-of-type(9) {
+		left:800%;
 	}
 }
 
-.modular-box {
-	background: $white;
-	padding: 5%;
-	@include breakpoint(multiColumn) {
-		padding: 3%;
-	}
-	h3 {
-		color: $off-black;
-	}
-	ul.form-fields {
-		list-style: none;
-		margin-left: 0;
-		margin-bottom: 0;
-		li {
-			list-style: none;
-			label {
-				display: block;
-				font-weight: bold;
-				font-size: 12px;
-				line-height: 12px;
-				margin-bottom: 5px;
-			}
-			input {
-				&[type=text] {
-					margin-bottom: 20px;
-				}
-				&[type=submit] {
-					padding: 5px 10px;
-					font-size: 16px;
-				}
-			}
-			textarea {
-				width: 100%;
-				height: 100px;
-			}
-		}
+.wrapper {
+	padding:60px 0;
+	background-position: center;
+}
+
+.style-tile {
+	width:800px;
+	margin: 0 auto;
+}
+
+.masthead {
+	position:relative;
+	width:100%;
+	margin:0 0 1em 0;
+	padding:0 2em 2em 2em;
+	@include box-sizing(border-box);
+
+	.logo {
+		position:relative;
+		float:left;
+		width:200px;
+		height:200px;
+		margin-bottom:2em;
+		background-position: center center;
+		background-repeat: no-repeat;
 	}
 }
 
-form#modular-form {
-	float: left;
-	margin-bottom: 30px;
-	width: 35%;
-	@include breakpoint(narrowColumn) {
-		width: 90%;
-	}
-}
-
-ul#color-palette {
+.navigation {
+	clear:both;
+	width:100%;
+	margin:4em 0;
 	list-style: none;
-	float: left;
-	margin-left: 0;
-	width: 45%;
-	@include breakpoint(multiColumn) {
-		width: 8%;
-		margin-right: 5%;
-	}
-	@include breakpoint(narrowColumn) {
-		width: 100%;
-	}
+
 	li {
-		position: relative;
-		display: block;
-		list-style: none;
-		width: 16%;
-		height: 60px;
-		margin-right: 5%;
-		margin-bottom: 30px;
-		float: left;
-		&:last-of-type {
-			margin-right: 0;
-		}
-		@include breakpoint(multiColumn) {
-			width: 100%;
-			height: 80px;
-			float: none;
-		}
-		@include breakpoint(narrowColumn) {
-			height: 60px;
-		}
-		&.color-1 {
-			background: $palette1;
-		}
-		&.color-2 {
-			background: $palette2;
-		}
-		&.color-3 {
-			background: $palette3;
-		}
-		&.color-4 {
-			background: $palette4;
-		}
-		&.color-5 {
-			background: $palette5;
-		}
-		span {
-			font-weight: bold;
-			font-size: 10px;
-			position: absolute;
-			top: 55px;
-			color: $white;
-			@include breakpoint(multiColumn) {
-				top: 80px;
-				font-size: 12px;
-			}
-		}
+		float:left;
+		margin-right:1.5em;
+		cursor:pointer;
 	}
 }
 
-#other-styles {
-	
+.padded-area {
+	padding:2em;
+	@include clearfix;
 }
 
-.texture-box {
-	
+.typography {
+	float:left;
+	width:70%;
+
+	h1 {
+		margin-bottom:0;
+	}
+
+	.font-info {
+		display:block;
+		margin-bottom:.8em;
+		font-size: .8em;
+		opacity: .6;
+	}
+}
+
+.color-palette {
+	float:right;
+	width:20%;
+	margin-right:1em;
+	padding:10px;
+	@include clearfix;
+
+	.color {
+		width:90%;
+		height:50px;
+		margin:0 1px 1em 1px;
+		border:.5em solid white;
+		outline:1px solid lighten(gray, 40%);
+	}
+}
+
+.texture-palette {
+	clear:both;
+	width:100%;
+	padding:2px 0;
+	@include clearfix;
+
+	.texture {
+		float:left;
+		width:150px;
+		height:150px;
+		margin:0 1em 0 1px;
+		border:.5em solid white;
+		outline:1px solid $ph-grey;
+	}
+}
+
+.brand-attributes {
+	clear:both;
+	margin-top:2em;
+	padding-bottom:1em;
+	@include clearfix;
+
+	ul {
+		margin:0;
+		list-style: none;
+
+		li {
+			float:left;
+			margin-right:1em;
+			font-size: 2em;
+			color:$ph-grey;
+		}
+	}
 }
 
 // end main prototype styles

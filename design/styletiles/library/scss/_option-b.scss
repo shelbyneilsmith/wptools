@@ -1,0 +1,107 @@
+$palette3-1: #c50c12;
+$palette3-2: #621d16;
+$palette3-3: #eee;
+$palette3-4: #6e8479;
+$palette3-5: darken(#252525,5%);
+
+.option-b {
+	// background-color: $palette3-5;
+	// background-image: url('../images/blur-bg.png');
+
+	::selection {
+		// color: red;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: helvetica;
+		color:$palette3-5;
+		font-weight: bold;
+	}
+
+	h1 {
+		font-size: 40px;
+	}
+
+	h2 {
+		font-size:21px;
+	}
+
+	.font-info {
+		font-family: helvetica;
+		color: green;
+	}
+
+	p {
+		font-family: helvetica;
+		color: $palette3-5;
+	}
+
+	a {
+		// color: transparent;
+		font-weight: bold;
+
+		&:visited {
+			// color: transparent;
+		}
+	}
+
+	.navigation li {
+		font-family: Trebuchet MS;
+		text-transform: uppercase;
+		// color: transparent;
+	}
+
+	span.label {
+		text-transform: uppercase;
+		font-family: helvetica;
+		font-size: 11px;
+	}
+
+	.brand-attributes ul li {
+		font-family: "Varela Round";
+		color: transparent;
+	}
+
+	.masthead {
+		// background-color: transparent;
+		background-image: none;
+	}
+
+	.logo {
+		// background-color: transparent;
+		background-image: url('../images/logo.png') !important;
+	}
+
+	.color-one {
+		// background-color: $palette3-1;
+	}
+
+	.color-two {
+		// background-color: $palette3-2;
+	}
+
+	.color-three {
+		// background-color: $palette3-3;
+	}
+
+	.color-four {
+		// background-color: $palette3-4;
+	}
+
+	.color-five {
+		// background-color: $palette3-5;
+	}
+
+	.texture-one {
+		// background-image: url('../images/');
+	}
+
+	.texture-two {
+		// background-image: url('../images/');
+	}
+
+	.texture-three {
+		// background-image: url('../images/');
+	}
+
+}

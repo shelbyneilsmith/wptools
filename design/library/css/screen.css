@@ -461,55 +461,60 @@ li.dropMenu ul {
 
 /* ==== custom site styles ==== */
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000373}}
+h1.page-title, div.contact h2 {
+  font-size: 32px;
+  font-family: "Aller Display";
+  display: inline-block;
+  padding: 12px 20px 8px 10px;
+  background-color: #ffcd00;
+  text-transform: uppercase;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000382}}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Aller Regular";
   color: #231d1e;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000387}}
 li, p {
   font-family: Trebuchet MS;
   color: #231d1e;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000392}}
 a {
   font-family: "Aller Regular";
   color: #439bbd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000396}}
 a:visited {
   color: #285d72;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\0000392}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003101}}
 h1.page-title {
   font-size: 32px;
-  font-family: "Aller Display";
-  display: inline-block;
-  padding: 12px 10px 8px 10px;
-  background-color: #ffcd00;
-  text-transform: uppercase;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003101}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003106}}
 ul {
   margin: 0;
   list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003105}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003110}}
 ul li {
   margin-bottom: .2em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003110}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003115}}
 li.dropMenu ul {
   position: static !important;
   margin: 0;
   margin-left: 1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003121}}
 #design-directory {
   overflow: hidden;
   *zoom: 1;
@@ -518,14 +523,14 @@ li.dropMenu ul {
   margin: 0 auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003123}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003128}}
 .logo {
   width: 100%;
   clear: both;
   background-color: #231d1e;
   background-image: url("../images/yb-pattern.png");
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003129}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003134}}
 .logo img {
   display: block;
   max-width: 80px;
@@ -534,67 +539,65 @@ li.dropMenu ul {
   margin: 0 auto 1em auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003143}}
+.style-viewer-link {
+  display: inline-block;
+  background-color: #e6e6e6;
+  padding: 10px 16px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003149}}
 .links {
   overflow: hidden;
   *zoom: 1;
   margin: 2em 0;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003149}}
   .links {
     margin: 0 auto 1em auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003157}}
 .links #wireframe-links {
   width: 50%;
   float: left;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003157}}
   .links #wireframe-links {
     float: none;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003155}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003166}}
 .links #styletile-links {
   width: 50%;
   float: left;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003155}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003166}}
   .links #styletile-links {
     float: none;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003164}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003175}}
 .links h3 {
   margin-bottom: .8em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003169}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003180}}
 #wireframe-links {
   margin-bottom: 1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003173}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003184}}
 #process-info ul {
   margin: 20px;
   list-style: disc;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003178}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003189}}
 div.contact {
   margin-top: 4em;
   margin-bottom: 200px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/glasgowfmr\/web\/design\/library\/scss\/screen\.scss}line{font-family:\00003182}}
-div.contact h2 {
-  font-size: 32px;
-  font-family: "Aller Display";
-  display: inline-block;
-  padding: 12px 10px 8px 10px;
-  background-color: #ffcd00;
-  text-transform: uppercase;
 }

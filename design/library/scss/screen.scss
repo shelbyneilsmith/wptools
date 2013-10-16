@@ -70,6 +70,15 @@ $yb-black: #231d1e;
 
 /* ==== custom site styles ==== */
 
+%highlighter-banner {
+	font-size:32px;
+	font-family: "Aller Display";
+	display:inline-block;
+	padding:12px 20px 8px 10px;
+	background-color: $yb-yellow;
+	text-transform: uppercase;
+}
+
 h1,h2,h3,h4,h5,h6 {
 	font-family: "Aller Regular";
 	color: $yb-black;
@@ -91,11 +100,7 @@ a {
 
 h1.page-title {
 	font-size:32px;
-	font-family: "Aller Display";
-	display:inline-block;
-	padding:12px 10px 8px 10px;
-	background-color: $yb-yellow;
-	text-transform: uppercase;
+	@extend %highlighter-banner;
 }
 
 ul {
@@ -133,6 +138,12 @@ li.dropMenu ul {
 		height:auto;
 		margin:0 auto 1em auto;
 	}
+}
+
+.style-viewer-link {
+	display:inline-block;
+	background-color:lighten($ph-grey,10%);
+	padding:10px 16px;
 }
 
 .links {
@@ -180,11 +191,6 @@ div.contact {
 	margin-bottom:200px;
 
 	h2 {
-		font-size:32px;
-		font-family: "Aller Display";
-		display:inline-block;
-		padding:12px 10px 8px 10px;
-		background-color: $yb-yellow;
-		text-transform: uppercase;
+		@extend %highlighter-banner;
 	}
 }

@@ -91,8 +91,8 @@ $dark-grey: #555;
 */
 
 // Define the sprites here. Notice that I've added an optional spacing.
-$sprites: sprite-map("sprites/*.png", $spacing: 0px);
-$sprites2x: sprite-map("sprites2x/*.png", $spacing: 0px);
+// $sprites: sprite-map("sprites/*.png", $spacing: 0px);
+// $sprites2x: sprite-map("sprites2x/*.png", $spacing: 0px);
 
 // Now let's define the sprite mixin.
 // This delegates to the reusable retina-sprite mixin.
@@ -245,7 +245,7 @@ h5, h6 {
 p, ul, ol, dl, blockquote {
     font-size: 1em;
     line-height: 1.618em;
-    margin-bottom: 1.618em; 
+    margin-bottom: 1.618em;
 }
 
 ul { list-style-type: disc; margin-left: 1.618em; }
@@ -258,8 +258,8 @@ small { font-size: 80%; }
 
 /* LINKS
 ----------------------------------------------------------------------------------------*/
-a, a:visited { outline: none; color: #439BBD; text-decoration: underline; }  
-a:hover { outline: none; text-decoration:none; }  
+a, a:visited { outline: none; color: #439BBD; text-decoration: underline; }
+a:hover { outline: none; text-decoration:none; }
 a:active, a:focus { outline: none; }
 
 /* BROWSER AND NON-SEMANTIC STYLING
@@ -292,7 +292,7 @@ code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-imag
 
 /* Hide for both screenreaders and browsers: h5bp.com/m */
 .hidden { display: none !important; visibility: hidden; }
- 
+
 /*  Hide only visually, but have it available for screenreaders: h5bp.com/v */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 

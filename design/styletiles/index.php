@@ -1,58 +1,59 @@
-<?php include('header.php'); ?>
-	<div id="wrapper" class="hfeed clearfix">
-		<header>
-			<div id="header-inner" class="clearfix">
-				<!-- be sure to change the img src to actual path of logo image -->
-				<h1 id="site-title"><a href="/" title="<?php echo $company_name; ?>" rel="home"><img src="images/mainLogo.png" alt="<?php echo $company_name; ?>" /></a></h1>
-				<!--<nav class="main">
-				</nav>-->
-			</div>
-		</header><!-- #header-->
+<?php
+require_once("../settings.php");
+require_once("../libs/library.php");
+?>
 
-		<div id="content" class="content-box">
-			<h2>Page Header</h2>
-			<h3>Subheader</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu mi sapien. Nunc nec enim eu odio ornare volutpat consequat ut arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut vulputate euismod justo, sagittis blandit urna gravida quis. In hac habitasse platea dictumst. Proin pharetra condimentum ipsum vel luctus. Quisque eget mauris nec odio bibendum fermentum sed ut nunc.</p>
-			<p><a href="#">Sample link text &raquo;</a></p>
+<?php
+
+function iframeTiles($tiles) {
+	foreach ($tiles as $tile) {
+		echo '<iframe class="style-tile-iframe" src="' . $tile . '" frameborder="0"></iframe>';
+	}
+}
+
+$tiles = glob('option-*.php');
+
+?>
+
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title><?php echo $company_name; ?></title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="library/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+		<!--[if IE]>
+		<link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<![endif]-->
+
+	</head>
+
+	<body>
+		<div id="top-bar">
+			<span class="company-name"><?php echo $company_name; ?> Style Tiles</span><br>
+			<span class="option-name">Option <span class="option-letter">A</span></span>
+			<a href="/design/" id="back-to-project">Back to Project Links</a>
 		</div>
 
-		<ul id="color-palette">
-			<h3>Color Palette</h3>
-			<li class="color-1"><span>#ffffff</span></li>
-			<li class="color-2"><span>#eeeeee</span></li>
-			<li class="color-3"><span>#dddddd</span></li>
-			<li class="color-4"><span>#cccccc</span></li>
-			<li class="color-5"><span>#bbbbbb</span></li>
-		</ul>
+		<div id="prev-button" class="side-controls"></div>
+		<div id="next-button" class="side-controls"></div>
 
-		<form id="modular-form" class="modular-box">
-			<h3>Modular/Form Box</h3>
-			<ul class="form-fields">
-				<li>
-					<label for="name">Name:</label>
-					<input type="text" name="name" />
-				</li>
-				<li>
-					<label for="email">Email:</label>
-					<input type="text" name="email" />
-				</li>
-				<li>
-					<label for="message">Message:</label>
-					<textarea type="text" name="messsage"></textarea>
-				</li>
-				<li>
-					<input type="submit" class="submit-btn" value="Submit" />
-				</li>
-			</ul>
-		</form>
+		<div id="style-viewer" class="tile-1">
+			<?php iframeTiles($tiles); ?>
+		</div> <!-- end #wrapper -->
 
-		<div id="other-styles">
-			<div class="texture-box">
-			</div>
-			<div class="texture-box">
-			</div>
-			<div class="texture-box">
-			</div>
-		</div>
-	</div> <!-- end #wrapper -->
-<?php include('footer.php'); ?>
+	<script src="../libs/jquery-1.10.2.min.js"></script>
+	<script src="library/js/scripts.js"></script>
+	<!-- Prompt IE 6 users to install Chrome Frame. -->
+	<!--[if lt IE 7 ]>
+	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+	<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+	<![endif]-->
+	</body>
+</html>

@@ -12,10 +12,15 @@ require_once("../libs/library.php");
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><?php echo $company_name; ?></title>
 
-		<link rel="stylesheet" href="library/css/screen.css">
-		<!--[if lte IE 8]>
-			<link href="library/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="library/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+		<!--[if IE]>
+		<link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
 		<![endif]-->
+
 	</head>
 
 	<body>
+		<div id="wrapper" class="hfeed clearfix">
