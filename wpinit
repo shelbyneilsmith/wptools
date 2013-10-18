@@ -320,12 +320,16 @@ writesublimeproject () {
 				"path": "$SITES_DIR/$project_id"
 			},
 			{
-				"name": "Style Prototype",
-				"path": "$SITES_DIR/$project_id/web/style-prototype"
+				"name": "Design",
+				"path": "$SITES_DIR/$project_id/web/design"
 			},
 			{
 				"name": "Wireframes",
-				"path": "$SITES_DIR/$project_id/web/wireframes"
+				"path": "$SITES_DIR/$project_id/web/design/wireframes"
+			},
+			{
+				"name": "Style Tiles",
+				"path": "$SITES_DIR/$project_id/web/design/styletiles"
 			},
 			{
 				"name":"Site Plugins",
