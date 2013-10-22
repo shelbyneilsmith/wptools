@@ -1,29 +1,27 @@
-			</div><!-- #main -->
-			<footer class="footer" role="contentinfo">
+				</div><!-- #main -->
+				</div> <!-- end #wrapper -->
 
-				<div id="footer-inner" class="wrap clearfix">
+			<footer class="footer">
 
-					<nav role="navigation" class="footer-nav">
-						<?php createNav($footer_nav, false, true); ?>
+				<div id="footer-inner">
+
+					<nav id="footer-nav">
+						<?php //createNav($main_nav, true, false); ?>
 					</nav>
 
-					<div class="copyright">Copyright &copy; <?php echo date('Y'); ?> <?php echo $company_name; ?></div>
-
+					<div class="footer-info">
+						<span class="copy">&copy; <?php echo $company_name; ?></span>
+					</div>
 				</div> <!-- end #inner-footer -->
 
 			</footer> <!-- end footer -->
-		</div> <!-- end #wrapper -->
+		</div> <!-- end #container -->
 
-		<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-
-		<script src="//code.jquery.com/jquery-latest.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../libs/jquery-1.10.2.min.js">\x3C/script>')</script>
+		<script type="text/javascript" src="../libs/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="../libs/yb_library.js"></script>
 		<script type="text/javascript" src="library/js/scripts.js"></script>
-
 		<?php include("rw_controls.php"); ?>
+
 
 		<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
 		chromium.org/developers/how-tos/chrome-frame-getting-started -->
@@ -31,5 +29,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
 		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 		<![endif]-->
+
 	</body>
 </html>

@@ -1,18 +1,14 @@
 <?php include('settings.php'); ?>
 <?php include('libs/library.php'); ?>
 
-<?php
-
-$wireframes = array('Home', array('Program Info', 'Curriculum', 'Area information'), array('Facilities', 'University of Louisville'), 'Residents', 'Contact Us');
-$styleTiles = 3;
-
-?>
-
 <!doctype html>
 	<html>
 		<head>
 			<title><?php echo $company_name ?> Project Links</title>
 			<link rel="stylesheet" href="library/css/screen.css">
+
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0" />
 		</head>
 
 		<div class="logo">

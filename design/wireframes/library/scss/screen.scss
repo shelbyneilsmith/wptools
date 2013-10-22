@@ -1,7 +1,7 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+// Welcome to Compass.
+// In this file you should write your main styles. (or centralize your imports)
+// Import this file using the following HTML or equivalent:
+// <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
 @import "compass/layout";
 @import "compass/utilities";
@@ -11,102 +11,172 @@
 
 @charset "utf-8";
 
-
 ///* ==== other settings ==== */
 $sticky_footer: false;
 $sticky_footer_height: 54px;
+
+$trans-speed: 200ms;
+$trans-ease: ease;
 
 ///* ==== custom site colors ==== */
 $mainBG: $white;
 $wrapperBG: $light-grey;
 
+$ph-grey: #cccccc;
+$ph-blue: #439bbd;
+
+$narrowColumn: 33em;
+$multiColumn: 56.618em;
+
 /* === breakpoints ==== */
 
 @mixin breakpoint($point) {
 	@if $point == narrowColumn {
-		@media screen and (max-width: 33em) { @content }
+		@media screen and (max-width: $narrowColumn) { @content }
 	}
 	@if $point == multiColumn {
-		@media screen and (min-width: 58.618em){ @content }
+		@media screen and (min-width: $multiColumn){ @content }
 	}
 }
 
-/* ==== custom site styles ==== */
+#media-query {
+	position:fixed;
+	top:5px;
+	left:5px;
+	height:10px;
+	width:10px;
+	@include border-radius(50%);
+	z-index:999;
 
-body {
-	background: $mainBG;
+	background-color:blue;
+
+	@include breakpoint(multiColumn) {
+		background-color: green;
+	}
+
+	@include breakpoint(narrowColumn) {
+		background-color:red;
+	}
+}
+
+%inner-col {
+	position: relative;
+	margin:0 auto;
+	width: 500px;
+
+	@include breakpoint(multiColumn) {
+		width:800px;
+	}
+
+	@include breakpoint(narrowColumn) {
+		width:95%;
+	}
+}
+
+html {
+	position:relative;
+	width:100%;
+	font-size:16px;
 }
 
 #wrapper {
-	position: relative;
-	color: $off-black;
-	@include sans-serif;
-	width: 33em;
-	padding: 0.806em 1.618em;
-	margin: auto;
-	@include clearfix();
-	@include breakpoint(multiColumn) {
-		width: 50.618em;
-	}
-	@include breakpoint(narrowColumn) {
-		width: 90%;
-		padding: 0.806em 5%;
-	}
+	@extend %inner-col;
+}
+
+#footer-inner {
+	@extend %inner-col;
 }
 
 #main {
 	position: relative;
-	clear: both;
 }
 
 #container {
+	position:relative;
+	width:100%;
+	background-color:white;
 }
 
-#content {
-}
+div#site-title, h1#site-title {
+	display:block;
+	float:left;
+	width:200px;
+	margin-bottom: 40px;
 
-
-/*==== header styles ====*/
-header {
-	#header-inner {
-	}
-}
-
-#site-title {
 	a {
-		img {
-
-		}
+		text-align: center;
+		text-decoration: none;
 	}
 }
 
 nav.main {
+	margin-bottom:4em;
+	clear:both;
+
 	ul {
+		@include clearfix();
+
 		li {
+			float:left;
+			margin-right: 40px;
+
+			&:last-of-type {
+				margin-right:0;
+			}
+
 			a {
+				font-weight: bold;
+				font-style: italic;
+				text-decoration: none;
+				border-bottom:3px solid transparent;
+
 				&:hover {
+					border-bottom:3px solid $ph-blue;
 				}
 			}
 		}
 	}
 }
-// end header styles
 
-/*==== home page styles ====*/
-// end home page styles
+li.dropMenu:hover {
+}
 
-/*==== footer styles ====*/
+.ph-text {
+	position:relative;
+	background-color:$ph-grey;
+
+	span {
+		position:absolute;
+		bottom:1em;
+		left:1em;
+		color:white;
+		font-weight: bold;
+	}
+}
+
 footer {
-	#footer-inner {
-		.copyright {
-			float: right;
+	background-color: $ph-grey;
+}
+
+#footer-inner {
+	padding:3em 0;
+}
+
+.footer-info {
+	width:100%;
+	color:white;
+
+	span.copy {
+		float:left;
+
+		@include breakpoint(narrowColumn) {
+			float:none;
 		}
 	}
 }
+
 // end footer styles
 
 @if($sticky_footer) {
 	@include sticky-footer($sticky_footer, "#wrapper", "#layout-footer", "footer");
 }
-
-

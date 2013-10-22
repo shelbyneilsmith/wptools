@@ -11,4 +11,9 @@
 	$footer_sections = 0;
 
 	$DEBUG = 0;
+
+	// Design Directory Links
+	$wireframes = array('home', array('bio', 'history', 'bleh'), 'contact');
+
+	$styleTiles = 3;
 ?>

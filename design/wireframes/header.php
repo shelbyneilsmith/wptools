@@ -19,46 +19,42 @@ else {
 	$headingTag = 'div';
 }
 
-// Format the page title for use as class
-$pageClass = formatString($page_title);
-
 ?>
 
 <!doctype html>
-	<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8">
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
 
-		<title>
-			<?php echo $pageTitle; ?>
-		</title>
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		<?php echo $pageTitle; ?>
+	</title>
 
-		<link rel="stylesheet" href="library/css/screen.css">
-		<!--[if lte IE 8]>
-			<link href="library/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
-		<![endif]-->
-	</head>
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0" />
 
-	<body class="<?php echo $pageClass; ?>">
-		<div id="media-query"> </div>
-		<div id="wrapper" class="hfeed clearfix">
+	<link rel="stylesheet" href="library/css/screen.css">
+</head>
 
-			<header>
-				<div id="header-inner" class="clearfix">
-					<?php echo "<" . $headingTag . " id='site-title'>" ?>
-						<a href="./" title="<?php echo $company_name; ?>" rel="home">
-							<?php echo $company_name; ?>
-						</a>
-					<?php echo "</" . $headingTag . ">" ?>
+<body>
+	<div id="container">
 
-					<nav class="main">
-						<?php createNav($main_nav, true, false); ?>
-					</nav>
-				</div>
-			</header><!-- #header-->
+	<div id="wrapper">
 
-			<div id="main" class="clearfix">
+		<header>
+			<div id="header-inner">
+				<?php echo "<" . $headingTag . " id='site-title'>" ?>
+					<a href="./" title="<?php echo $company_name; ?>" rel="home">
+						<?php echo $company_name; ?>
+					</a>
+				<?php echo "</" . $headingTag . ">" ?>
+
+				<nav class="main">
+					<?php createNav($main_nav, true, false); ?>
+				</nav>
+			</div>
+		</header><!-- #header-->
+
+		<div id="main" class="clearfix">
