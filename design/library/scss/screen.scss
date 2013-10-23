@@ -71,12 +71,23 @@ $yb-black: #231d1e;
 /* ==== custom site styles ==== */
 
 %highlighter-banner {
+	display:inline;
 	font-size:32px;
+	line-height:1.3em;
+	padding:.2em 0;
 	font-family: "Aller Display";
-	display:inline-block;
-	padding:12px 20px 8px 10px;
 	background-color: $yb-yellow;
 	text-transform: uppercase;
+	box-shadow: 0.5em 0 0 $yb-yellow,-0.2em 0 0 $yb-yellow;
+}
+
+.banner {
+	display:block;
+	margin-bottom: 2em;
+
+	h1 {
+		@extend %highlighter-banner;
+	}
 }
 
 h1,h2,h3,h4,h5,h6 {

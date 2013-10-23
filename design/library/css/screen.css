@@ -461,60 +461,68 @@ li.dropMenu ul {
 
 /* ==== custom site styles ==== */
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000373}}
-h1.page-title, div.contact h2 {
+.banner h1, h1.page-title, div.contact h2 {
+  display: inline;
   font-size: 32px;
+  line-height: 1.3em;
+  padding: .2em 0;
   font-family: "Aller Display";
-  display: inline-block;
-  padding: 12px 20px 8px 10px;
   background-color: #ffcd00;
   text-transform: uppercase;
+  box-shadow: 0.5em 0 0 #ffcd00, -0.2em 0 0 #ffcd00;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000384}}
+.banner {
+  display: block;
+  margin-bottom: 2em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000393}}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Aller Regular";
   color: #231d1e;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000398}}
 li, p {
   font-family: Trebuchet MS;
   color: #231d1e;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000392}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003103}}
 a {
   font-family: "Aller Regular";
   color: #439bbd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\0000396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003107}}
 a:visited {
   color: #285d72;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003101}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003112}}
 h1.page-title {
   font-size: 32px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003106}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003117}}
 ul {
   margin: 0;
   list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003110}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003121}}
 ul li {
   margin-bottom: .2em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003126}}
 li.dropMenu ul {
   position: static !important;
   margin: 0;
   margin-left: 1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003121}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003132}}
 #design-directory {
   overflow: hidden;
   *zoom: 1;
@@ -523,14 +531,14 @@ li.dropMenu ul {
   margin: 0 auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003128}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003139}}
 .logo {
   width: 100%;
   clear: both;
   background-color: #231d1e;
   background-image: url("../images/yb-pattern.png");
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003145}}
 .logo img {
   display: block;
   max-width: 80px;
@@ -539,13 +547,13 @@ li.dropMenu ul {
   margin: 0 auto 1em auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003143}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003154}}
 .image-container {
   width: 100%;
   background-color: red;
   margin-bottom: 2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003159}}
 .image-container img {
   display: block;
   width: 100%;
@@ -553,64 +561,64 @@ li.dropMenu ul {
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003167}}
 .style-viewer-link {
   display: inline-block;
   background-color: #e6e6e6;
   padding: 10px 16px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003173}}
 .links {
   overflow: hidden;
   *zoom: 1;
   margin: 2em 0;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003173}}
   .links {
     margin: 0 auto 1em auto;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003170}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003181}}
 .links #wireframe-links {
   width: 50%;
   float: left;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003170}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003181}}
   .links #wireframe-links {
     float: none;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003179}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003190}}
 .links #styletile-links {
   width: 50%;
   float: left;
 }
 @media screen and (max-width: 33em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003179}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003190}}
   .links #styletile-links {
     float: none;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003188}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003199}}
 .links h3 {
   margin-bottom: .8em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003193}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003204}}
 #wireframe-links {
   margin-bottom: 1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003197}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003208}}
 #process-info ul {
   margin: 20px;
   list-style: disc;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003202}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/library\/scss\/screen\.scss}line{font-family:\00003213}}
 div.contact {
   margin-top: 4em;
   margin-bottom: 200px;

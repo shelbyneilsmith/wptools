@@ -17,7 +17,9 @@
 
 		<div id="design-directory">
 
-			<h1 class="page-title"><?php echo $company_name ?> Project Links</h1>
+			<div class="banner">
+				<h1 class="page-title"><?php echo $company_name ?> Project Links</h1>
+			</div>
 
 			<div class="links">
 				<div id="wireframe-links">
