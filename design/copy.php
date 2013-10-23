@@ -2,6 +2,10 @@
 
 <p>The first deliverable in the Yellowberri process of building a website is the creation of wireframes and style tiles. These two tools, explained in further detail below, allow us to separate the logical and semantic from the creative and emotional.</p>
 
+<div class="image-container">
+	<img src="library/images/process.jpg" alt="Wireframes + Style Tiles = Full Site">
+</div>
+
 <h3>Wireframes</h3>
 
 <p>Wireframes deal with <em>structure</em>. The purpose of a wireframe is to demostrate how we think the website is best organized. Wireframes show how the user will navigate your website, how content will be ordered, what features are present, and what areas will be most prominent.</p>

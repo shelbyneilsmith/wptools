@@ -140,6 +140,19 @@ li.dropMenu ul {
 	}
 }
 
+.image-container {
+	width:100%;
+	background-color:red;
+	margin-bottom:2em;
+
+	img {
+		display:block;
+		width:100%;
+		height:auto;
+		margin:0;
+	}
+}
+
 .style-viewer-link {
 	display:inline-block;
 	background-color:lighten($ph-grey,10%);
