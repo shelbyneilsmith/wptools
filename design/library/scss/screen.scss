@@ -71,9 +71,10 @@ $yb-black: #231d1e;
 /* ==== custom site styles ==== */
 
 %highlighter-banner {
-	display:inline;
+	display:inline-block;
 	font-size:32px;
 	line-height:1.3em;
+	margin-bottom:.6em;
 	padding:.2em 0;
 	font-family: "Aller Display";
 	background-color: $yb-yellow;
@@ -87,6 +88,7 @@ $yb-black: #231d1e;
 
 	h1 {
 		@extend %highlighter-banner;
+		margin-bottom:0;
 	}
 }
 
