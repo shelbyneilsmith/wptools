@@ -141,40 +141,41 @@ iframe {
 	top:0;
 	left:0;
 
-	&:nth-of-type(2) {
+	&.tile-2 {
 		left:100%;
 	}
 
-	&:nth-of-type(3) {
+	&.tile-3 {
 		left:200%;
 	}
 
-	&:nth-of-type(4) {
+	&.tile-4 {
 		left:300%;
 	}
 
-	&:nth-of-type(5) {
+	&.tile-5 {
 		left:400%;
 	}
 
-	&:nth-of-type(6) {
+	&.tile-6 {
 		left:500%;
 	}
 
-	&:nth-of-type(7) {
+	&.tile-7 {
 		left:600%;
 	}
 
-	&:nth-of-type(8) {
+	&.tile-8 {
 		left:700%;
 	}
 
-	&:nth-of-type(9) {
+	&.tile-9 {
 		left:800%;
 	}
 }
 
 .wrapper {
+	width:100%;
 	padding:60px 0;
 	background-position: center;
 }

@@ -6,8 +6,11 @@ require_once("../libs/library.php");
 <?php
 
 function iframeTiles($tiles) {
+	$tileNumber = 1;
+
 	foreach ($tiles as $tile) {
-		echo '<iframe class="style-tile-iframe" src="' . $tile . '" frameborder="0"></iframe>';
+		echo '<iframe class="style-tile-iframe tile-' . $tileNumber . '" src="' . $tile . '" frameborder="0"></iframe>';
+		$tileNumber++;
 	}
 }
 
@@ -28,8 +31,8 @@ $tiles = glob('option-*.php');
 
 		<link href="library/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
-		<!--[if IE]>
-		<link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<!--[if lte IE 7]>
+			<link href="stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
 		<![endif]-->
 
 	</head>
@@ -44,7 +47,7 @@ $tiles = glob('option-*.php');
 		<div id="prev-button" class="side-controls"></div>
 		<div id="next-button" class="side-controls"></div>
 
-		<div id="style-viewer" class="tile-1">
+		<div id="style-viewer" class="">
 			<?php iframeTiles($tiles); ?>
 		</div> <!-- end #wrapper -->
 

@@ -18,7 +18,7 @@
 	<div class="padded-area">
 
 		<div class="typography">
-			<h1>Headline Example</h1>
+			<h1>Headline Example B</h1>
 			<span class="font-info">Display Type: REPLACE ME / Body Type: REPLACE ME / Mircocopy: REPLACE ME</span>
 
 			<p>

@@ -766,51 +766,52 @@ iframe {
   left: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003144}}
-iframe:nth-of-type(2) {
+iframe.tile-2 {
   left: 100%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003148}}
-iframe:nth-of-type(3) {
+iframe.tile-3 {
   left: 200%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003152}}
-iframe:nth-of-type(4) {
+iframe.tile-4 {
   left: 300%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003156}}
-iframe:nth-of-type(5) {
+iframe.tile-5 {
   left: 400%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003160}}
-iframe:nth-of-type(6) {
+iframe.tile-6 {
   left: 500%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003164}}
-iframe:nth-of-type(7) {
+iframe.tile-7 {
   left: 600%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003168}}
-iframe:nth-of-type(8) {
+iframe.tile-8 {
   left: 700%;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003172}}
-iframe:nth-of-type(9) {
+iframe.tile-9 {
   left: 800%;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003177}}
 .wrapper {
+  width: 100%;
   padding: 60px 0;
   background-position: center;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003182}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003183}}
 .style-tile {
   width: 800px;
   margin: 0 auto;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003187}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003188}}
 .masthead {
   position: relative;
   width: 100%;
@@ -820,7 +821,7 @@ iframe:nth-of-type(9) {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003194}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003195}}
 .masthead .logo {
   position: relative;
   float: left;
@@ -831,37 +832,37 @@ iframe:nth-of-type(9) {
   background-repeat: no-repeat;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003205}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003206}}
 .navigation {
   clear: both;
   width: 100%;
   margin: 4em 0;
   list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003211}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003212}}
 .navigation li {
   float: left;
   margin-right: 1.5em;
   cursor: pointer;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003218}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003219}}
 .padded-area {
   padding: 2em;
   overflow: hidden;
   *zoom: 1;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003223}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003224}}
 .typography {
   float: left;
   width: 70%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003227}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003228}}
 .typography h1 {
   margin-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003231}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003232}}
 .typography .font-info {
   display: block;
   margin-bottom: .8em;
@@ -869,7 +870,7 @@ iframe:nth-of-type(9) {
   opacity: .6;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003239}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003240}}
 .color-palette {
   float: right;
   width: 20%;
@@ -878,7 +879,7 @@ iframe:nth-of-type(9) {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003246}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003247}}
 .color-palette .color {
   width: 90%;
   height: 50px;
@@ -887,7 +888,7 @@ iframe:nth-of-type(9) {
   outline: 1px solid #e6e6e6;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003255}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003256}}
 .texture-palette {
   clear: both;
   width: 100%;
@@ -895,7 +896,7 @@ iframe:nth-of-type(9) {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003261}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003262}}
 .texture-palette .texture {
   float: left;
   width: 150px;
@@ -905,7 +906,7 @@ iframe:nth-of-type(9) {
   outline: 1px solid #dddddd;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003271}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003272}}
 .brand-attributes {
   clear: both;
   margin-top: 2em;
@@ -913,12 +914,12 @@ iframe:nth-of-type(9) {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003277}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003278}}
 .brand-attributes ul {
   margin: 0;
   list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003281}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/yellowberri_admin\/Sites\/wpinit\/design\/styletiles\/library\/scss\/screen\.scss}line{font-family:\00003282}}
 .brand-attributes ul li {
   float: left;
   margin-right: 1em;
