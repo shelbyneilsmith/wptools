@@ -17,7 +17,7 @@ add_action('after_setup_theme','yb_ahoy', 15);
 
 function yb_ahoy() {
 	//if ( ! isset( $content_width ) ) $content_width = 900;
-	
+
     // launching operation cleanup
     add_action('init', 'yb_head_cleanup');
     add_action('init', 'yb_menus');
@@ -102,22 +102,22 @@ function yb_scripts_and_styles() {
   if (!is_admin()) {
 
     // register main stylesheet
-    wp_register_style( 'yb-stylesheet', get_stylesheet_directory_uri() . '/library/css/screen.css', array(), '', 'all' );
+    wp_register_style( 'yb-stylesheet', get_stylesheet_directory_uri() . '/library/css/screen.css', array(), NULL, 'all' );
 
     // ie-only style sheet
     wp_register_style( 'yb-ie-only', get_stylesheet_directory_uri() . '/library/css/ie.css', array(), '' );
 
 
     //adding scripts file in the footer
-    wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/library/_scripts/scripts.js', array( 'jquery' ), '', true );
-    
+    wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/library/_scripts/scripts.js', array( 'jquery' ), NULL, true );
+
     //add_action('wp_enqueue_scripts', 'yb_scripts');
     //function yb_scripts() {
 	    // comment reply script for threaded comments
 	    if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
 	      wp_enqueue_script( 'comment-reply' );
 	    }
-	    
+
 	    wp_enqueue_script( 'jquery' );
 	    wp_enqueue_script( 'yb-js' );
 
@@ -203,16 +203,16 @@ function yb_theme_support() {
 
 
 /************* COMMENT LAYOUT *********************/
-		
+
 // Comment Layout
 function yb_comments($comment, $args, $depth) {
    $GLOBALS['comment'] = $comment; ?>
 	<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
-	    <?php 
+	    <?php
 	    /*
 	        this is the new responsive optimized comment image. It used the new HTML5 data-attribute to display comment gravatars on larger screens only. What this means is that on larger posts, mobile sites don't have a ton of requests for comment images. This makes load time incredibly fast! If you'd like to change it back, just replace it with the regular wordpress gravatar call:
 	        echo get_avatar($comment,$size='32',$default='<path_to_url>' );
-	    */ 
+	    */
 	    ?>
 	    <!-- custom gravatar call -->
 	    <?php
@@ -256,13 +256,13 @@ function yb_wpsearch($form) {
 function yb_byline($post) {
 	$author_id = $post->post_author;
 	$category = get_the_category($post->ID);
-		
+
 	if ($category) {
 		$cat_text = ' in <a href="'. esc_url( get_category_link( get_cat_ID( $category[0]->cat_name ) ) ) .'">'. $category[0]->cat_name .'</a>';
 	} else {
 		$cat_text = "";
 	}
-	
+
 	return '<p class="byline">By <span class="author"><a href="'. get_author_posts_url( get_the_author_meta( 'ID', $author_id ) ) .'">'. get_the_author_meta( 'display_name', $author_id ) .'</a></span> on <time class="updated" datetime="'. get_the_time('Y-m-j', $post->ID) .'" pubdate>'. get_the_time('F jS, Y', $post->ID) .'</time>'. $cat_text .'</p>';
 
 }
@@ -330,8 +330,8 @@ function yb_pagination($before = '', $after = '') {
 
 /*
 function post_pagination($pages = '', $range = 2)
-{  
-     $showitems = ($range * 2)+1;  
+{
+     $showitems = ($range * 2)+1;
 
      global $paged;
      if(empty($paged)) $paged = 1;
@@ -344,7 +344,7 @@ function post_pagination($pages = '', $range = 2)
          {
              $pages = 1;
          }
-     }   
+     }
 
      if(1 != $pages)
      {
@@ -362,7 +362,7 @@ function post_pagination($pages = '', $range = 2)
              }
          }
 
-         if ($paged < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a></li>";  
+         if ($paged < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a></li>";
          if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($pages)."'>&raquo;</a></li>";
          echo "</ul>\n";
      }
