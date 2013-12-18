@@ -13,7 +13,7 @@
 	$DEBUG = 0;
 
 	// Design Directory Links
-	$wireframes = array('home', array('bio', 'history', 'bleh'), 'contact');
+	$wireframes = $main_nav;
 
 	$styleTiles = 3;
 ?>
