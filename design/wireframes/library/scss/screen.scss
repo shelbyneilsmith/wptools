@@ -18,15 +18,19 @@ $sticky_footer_height: 54px;
 $trans-speed: 200ms;
 $trans-ease: ease;
 
+$narrowColumn: 33em;
+$multiColumn: 56.618em;
+
+$mainWidth: $narrowColumn;
+$multiWidth: $multiColumn;
+$narrowWidth: 95%;
+
 ///* ==== custom site colors ==== */
 $mainBG: $white;
 $wrapperBG: $light-grey;
 
 $ph-grey: #cccccc;
 $ph-blue: #439bbd;
-
-$narrowColumn: 33em;
-$multiColumn: 56.618em;
 
 /* === breakpoints ==== */
 
@@ -40,50 +44,41 @@ $multiColumn: 56.618em;
 }
 
 #media-query {
-	position:fixed;
-	top:5px;
-	left:5px;
-	height:10px;
-	width:10px;
+	position: fixed;
+	top: 5px;
+	left: 5px;
+	height: 10px;
+	width: 10px;
 	@include border-radius(50%);
-	z-index:999;
-
-	background-color:blue;
-
+	z-index: 999;
+	background-color: blue;
 	@include breakpoint(multiColumn) {
 		background-color: green;
 	}
-
 	@include breakpoint(narrowColumn) {
-		background-color:red;
+		background-color: red;
 	}
 }
 
 %inner-col {
 	position: relative;
-	margin:0 auto;
-	width: 500px;
-
+	margin: 0 auto;
+	width: $mainWidth;
 	@include breakpoint(multiColumn) {
-		width:800px;
+		width: $multiWidth;
 	}
-
 	@include breakpoint(narrowColumn) {
-		width:95%;
+		width: $narrowWidth;
 	}
 }
 
 html {
-	position:relative;
-	width:100%;
-	font-size:16px;
+	position: relative;
+	width: 100%;
+	font-size: 16px;
 }
 
 #wrapper {
-	@extend %inner-col;
-}
-
-#footer-inner {
 	@extend %inner-col;
 }
 
@@ -92,17 +87,16 @@ html {
 }
 
 #container {
-	position:relative;
-	width:100%;
-	background-color:white;
+	position: relative;
+	width: 100%;
+	background-color: white;
 }
 
-div#site-title, h1#site-title {
-	display:block;
-	float:left;
-	width:200px;
-	margin-bottom: 40px;
-
+#site-title {
+	display: block;
+	float: left;
+	width: 200px;
+	margin: 30px 0;
 	a {
 		text-align: center;
 		text-decoration: none;
@@ -110,28 +104,23 @@ div#site-title, h1#site-title {
 }
 
 nav.main {
-	margin-bottom:4em;
-	clear:both;
-
+	margin-bottom: 4em;
+	clear: both;
 	ul {
 		@include clearfix();
-
 		li {
-			float:left;
+			float: left;
 			margin-right: 40px;
-
 			&:last-of-type {
-				margin-right:0;
+				margin-right: 0;
 			}
-
 			a {
 				font-weight: bold;
 				font-style: italic;
 				text-decoration: none;
-				border-bottom:3px solid transparent;
-
+				border-bottom: 3px solid transparent;
 				&:hover {
-					border-bottom:3px solid $ph-blue;
+					border-bottom: 3px solid $ph-blue;
 				}
 			}
 		}
@@ -142,14 +131,13 @@ li.dropMenu:hover {
 }
 
 .ph-text {
-	position:relative;
-	background-color:$ph-grey;
-
+	position: relative;
+	background-color: $ph-grey;
 	span {
-		position:absolute;
-		bottom:1em;
-		left:1em;
-		color:white;
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		color: white;
 		font-weight: bold;
 	}
 }
@@ -160,15 +148,14 @@ footer {
 
 #footer-inner {
 	padding:3em 0;
+	@extend %inner-col;
 }
 
 .footer-info {
 	width:100%;
 	color:white;
-
 	span.copy {
 		float:left;
-
 		@include breakpoint(narrowColumn) {
 			float:none;
 		}
