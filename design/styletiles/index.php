@@ -3,21 +3,6 @@ require_once("../settings.php");
 require_once("../libs/library.php");
 ?>
 
-<?php
-
-function iframeTiles($tiles) {
-	$tileNumber = 1;
-
-	foreach ($tiles as $tile) {
-		echo '<iframe class="style-tile-iframe tile-' . $tileNumber . '" src="' . $tile . '" frameborder="0"></iframe>';
-		$tileNumber++;
-	}
-}
-
-$tiles = glob('option-*.php');
-
-?>
-
 <!doctype html>
 <html class="no-js" lang="en">
 	<head>
@@ -48,7 +33,7 @@ $tiles = glob('option-*.php');
 		<div id="next-button" class="side-controls"></div>
 
 		<div id="style-viewer" class="">
-			<?php iframeTiles($tiles); ?>
+			<?php echo iframeTiles($styleTiles, range('a', 'z')); ?>
 		</div> <!-- end #wrapper -->
 
 	<script src="../libs/jquery-1.10.2.min.js"></script>

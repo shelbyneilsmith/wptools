@@ -11,8 +11,6 @@
 
 		<div id="content">
 
-
-
 		</div> <!-- end #content -->
 
 	<?php require_once("footer.php"); ?>

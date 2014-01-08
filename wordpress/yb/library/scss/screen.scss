@@ -1,6 +1,6 @@
-/*   
+/*
 Theme Name: YBBones
-Theme URI: 
+Theme URI:
 Description: Use this theme to start your yb wordpress theme -- based on the "Bones" theme.
 Author: Yellowberri
 Author URI: http://yellowberri.com/
@@ -16,7 +16,7 @@ YBBase is © Shelby Smith http://yellowberri.com/
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
- 
+
 @import "compass/layout";
 @import "compass/utilities";
 @import "compass/typography";
@@ -24,28 +24,77 @@ YBBase is © Shelby Smith http://yellowberri.com/
 @import "base";
 
 @charset "utf-8";
-	
 
 ///* ==== other settings ==== */
 $sticky_footer: false;
 $sticky_footer_height: 54px;
 
+$trans-speed: 200ms;
+$trans-ease: ease;
+
+$mobileColumn: 400px;
+$narrowColumn: 45em;
+$multiColumn: 66em;
+
+$mainWidth: $narrowColumn;
+$multiWidth: $multiColumn;
+$narrowWidth: 95%;
+$mobileWidth: 90%;
+
 ///* ==== custom site colors ==== */
 $mainBG: $white;
 $wrapperBG: $light-grey;
 
+$ph-grey: #cccccc;
+$ph-blue: #439bbd;
+
 /* === breakpoints ==== */
 
 @mixin breakpoint($point) {
+	@if $point == mobile {
+		@media screen and (max-width: $mobileColumn) { @content }
+	}
 	@if $point == narrowColumn {
-		@media screen and (max-width: 33em) { @content }
+		@media screen and (max-width: $narrowColumn) { @content }
 	}
 	@if $point == multiColumn {
-		@media screen and (min-width: 58.618em){ @content }
+		@media screen and (min-width: $multiColumn){ @content }
+	}
+}
+
+#media-query {
+	position: fixed;
+	top: 5px;
+	left: 5px;
+	height: 10px;
+	width: 10px;
+	@include border-radius(50%);
+	z-index: 999;
+	background-color: blue;
+	@include breakpoint(multiColumn) {
+		background-color: green;
+	}
+	@include breakpoint(narrowColumn) {
+		background-color: red;
+	}
+	@include breakpoint(mobile) {
+		background-color: yellow;
 	}
 }
 
 /* ==== custom site styles ==== */
+%inner-col {
+	position: relative;
+	margin: 0 auto;
+	width: $mainWidth;
+	@include breakpoint(multiColumn) {
+		width: $multiWidth;
+	}
+	@include breakpoint(narrowColumn) {
+		width: $narrowWidth;
+	}
+}
+
 html {
 	background: $mainBG;
 }
@@ -91,7 +140,7 @@ header {
 #site-title {
 	a {
 		img {
-			
+
 		}
 	}
 }

@@ -18,12 +18,14 @@ $sticky_footer_height: 54px;
 $trans-speed: 200ms;
 $trans-ease: ease;
 
-$narrowColumn: 33em;
-$multiColumn: 56.618em;
+$mobileColumn: 400px;
+$narrowColumn: 45em;
+$multiColumn: 66em;
 
 $mainWidth: $narrowColumn;
 $multiWidth: $multiColumn;
 $narrowWidth: 95%;
+$mobileWidth: 90%;
 
 ///* ==== custom site colors ==== */
 $mainBG: $white;
@@ -35,6 +37,9 @@ $ph-blue: #439bbd;
 /* === breakpoints ==== */
 
 @mixin breakpoint($point) {
+	@if $point == mobile {
+		@media screen and (max-width: $mobileColumn) { @content }
+	}
 	@if $point == narrowColumn {
 		@media screen and (max-width: $narrowColumn) { @content }
 	}
@@ -58,7 +63,12 @@ $ph-blue: #439bbd;
 	@include breakpoint(narrowColumn) {
 		background-color: red;
 	}
+	@include breakpoint(mobile) {
+		background-color: yellow;
+	}
 }
+
+/* ==== custom site styles ==== */
 
 %inner-col {
 	position: relative;
@@ -141,6 +151,58 @@ li.dropMenu:hover {
 		font-weight: bold;
 	}
 }
+
+/* === home styles === */
+// end home styles
+
+//* contact styles *//
+.contact-info {
+	float: left;
+}
+.map {
+	width: 48%;
+	float: left;
+	clear: left;
+	@include breakpoint(narrowColumn) {
+		width: 100%;
+	}
+	iframe {
+		max-width: 100%;
+		height: 260px;
+	}
+}
+
+#main-contact {
+	float: right;
+	background: $light-grey;
+	padding: 3%;
+	width: 42%;
+	@include breakpoint(narrowColumn) {
+		width: 94%;
+		float: left;
+		margin-bottom: 20px;
+	}
+	input, textarea, label {
+		float: left;
+		clear: left;
+	}
+	input,textarea {
+		margin-bottom: 20px;
+		padding: 5px;
+		font-size: 1em;
+	}
+	input[type=submit] {
+		margin-bottom: 0;
+	}
+	textarea {
+		width: 90%;
+	}
+	label {
+		font-weight: bold;
+		font-size: .8em;
+	}
+}
+// end contact styles
 
 footer {
 	background-color: $ph-grey;

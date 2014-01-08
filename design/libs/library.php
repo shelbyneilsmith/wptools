@@ -11,19 +11,29 @@
 	//* cleanLinks($string); - clean up any string to make it SEO-friendly url
 	//* breadcrumbs($separator = ' &raquo; ', $home = 'Home');
 
-$alphas = range('a', 'z');
-
 // turn a list of filenames into links with a prefix
-function styleTileLinks($options = 1, $numbers) {
+function styleTileLinks($options = 1, $abc) {
 	$output = "<ul class='style-tile-links'>";
 	$i = 0;
 
 	while ($i < $options) {
-		$output .= "<li><a href='/design/styletiles/option-" . $numbers[$i] . "'>Option " . strtoupper($numbers[$i]) . "</a></li>";
+		$output .= "<li><a href='/design/styletiles/styletile.php?option=" . $abc[$i] . "'>Option " . strtoupper($abc[$i]) . "</a></li>";
 		$i++;
 	}
 
 	$output .= "</ul>";
+	return $output;
+}
+
+function iframeTiles($tiles = 1, $abc) {
+	$i = 0;
+	$output = '';
+
+	while ($i < $tiles) {
+		$output .= '<iframe class="style-tile-iframe tile-' . ($i + 1) . '" src="styletile.php?option=' . $abc[$i] . '" frameborder="0"></iframe>';
+		$i++;
+	}
+
 	return $output;
 }
 

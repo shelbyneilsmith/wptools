@@ -1,107 +1,116 @@
-$palette3-1: #c50c12;
-$palette3-2: #621d16;
-$palette3-3: #eee;
-$palette3-4: #6e8479;
-$palette3-5: darken(#252525,5%);
+$palette3-1: #000;
+$palette3-2: #555;
+$palette3-3: #aaa;
+$palette3-4: #ddd;
+$palette3-5: #fff;
 
-.option-a {
-	// background-color: $palette3-5;
-	// background-image: url('../images/blur-bg.png');
-
+.wrapper.option-a {
+	padding: 0;
+	background: $light-grey;
+	.style-tile {
+	}
 	::selection {
 		// color: red;
 	}
 
+	.logo {
+		width: 200px;
+		height: 70px;
+		background: url( '../images/logo.png' ) no-repeat #fff;
+	}
+
 	h1, h2, h3, h4, h5, h6 {
-		font-family: helvetica;
-		color:$palette3-5;
-		font-weight: bold;
+		font-family: sans-serif;
+		color: $off-black;
 	}
 
 	h1 {
-		font-size: 40px;
+		font-size: 2.2em;
 	}
 
 	h2 {
-		font-size:21px;
-	}
-
-	.font-info {
-		font-family: helvetica;
-		color: green;
+		font-size: 1.8em;
 	}
 
 	p {
-		font-family: helvetica;
-		color: $palette3-5;
+		font-family: georgia, serif;
+		color: lighten($off-black, 20%);
+		font-size: .9em;
 	}
 
 	a {
-		// color: transparent;
-		font-weight: bold;
-
-		&:visited {
-			// color: transparent;
-		}
 	}
 
 	.navigation li {
-		font-family: Trebuchet MS;
-		text-transform: uppercase;
-		// color: transparent;
-	}
-
-	span.label {
-		text-transform: uppercase;
-		font-family: helvetica;
-		font-size: 11px;
-	}
-
-	.brand-attributes ul li {
-		font-family: "Varela Round";
-		color: transparent;
+		font-family: sans-serif;
+		&:hover {
+		}
 	}
 
 	.masthead {
-		// background-color: transparent;
 		background-image: none;
 	}
 
-	.logo {
-		// background-color: transparent;
-		background-image: url('../images/logo.png') !important;
+	.buttons {
+	}
+
+	.btn {
+		color: $off-black;
+		font-family: sans-serif;
+		font-weight: bold;
+		&.btn-1 {
+			background-color: $light-grey;
+			&:hover {
+			}
+		}
+		&.btn-2 {
+			background-color: darken($light-grey, 10%);
+			&:hover {
+			}
+		}
+	}
+
+	.main-inner {
+		background: $white;
+		padding: 2%;
+		margin-bottom: 20px;
+		@include clearfix();
+	}
+
+	.pull-out {
+		p {
+			font-family: sans-serif;
+			font-size: 1.4em;
+			font-weight: bold;
+			line-height: 1.4em;
+			color: $off-black;
+		}
+	}
+
+	.brand-attributes ul li {
+		font-family: sans-serif;
+		font-weight: bold;
+		color: $off-black;
 	}
 
 	.color-one {
-		// background-color: $palette3-1;
+		background-color: $palette3-1;
 	}
 
 	.color-two {
-		// background-color: $palette3-2;
+		background-color: $palette3-2;
 	}
 
 	.color-three {
-		// background-color: $palette3-3;
+		background-color: $palette3-3;
 	}
 
 	.color-four {
-		// background-color: $palette3-4;
+		background-color: $palette3-4;
 	}
 
 	.color-five {
-		// background-color: $palette3-5;
-	}
-
-	.texture-one {
-		// background-image: url('../images/');
-	}
-
-	.texture-two {
-		// background-image: url('../images/');
-	}
-
-	.texture-three {
-		// background-image: url('../images/');
+		background-color: $palette3-5;
 	}
 
 }

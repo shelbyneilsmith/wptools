@@ -1,5 +1,5 @@
 				</div><!-- #main -->
-				</div> <!-- end #wrapper -->
+			</div> <!-- end #wrapper -->
 
 			<footer class="footer">
 

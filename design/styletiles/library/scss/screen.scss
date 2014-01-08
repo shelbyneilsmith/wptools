@@ -21,19 +21,11 @@ $yb-yellow: #ffcd00;
 @import "option-c";
 
 // FONTS
-@include fontFace ("Klinic Slab Bold", "klinic-slab/klinicslabbold-webfont", "bold");
-@include fontFace ("Klinic Slab Medium", "klinic-slab/klinicslabmedium-webfont", "bold");
-@include fontFace ("Klinic Slab Book", "klinic-slab/klinicslabbook-webfont", "bold");
-
-@include fontFace ("News Cycle Bold", "news-cycle/newscycle-bold-webfont", "bold");
-@include fontFace ("News Cycle Regular", "news-cycle/newscycle-regular-webfont", "bold");
-
-@include fontFace ("Varela Round", "varela-round/varelaround-regular-webfont", "bold");
 
 // DEFAULT COLORS
-.wrapper { background-color: $ph-grey; }
-.style-tile { background-color: white; }
-.masthead { background-color: darken($ph-grey, 5%); }
+// .wrapper { background-color: $ph-grey; }
+// .style-tile { background-color: white; }
+// .masthead { background-color: darken($ph-grey, 5%); }
 .logo { background-color: darken($ph-grey, 10%); }
 .color { background-color: $ph-grey; }
 .texture { background-color: $ph-grey; }
@@ -43,11 +35,11 @@ $yb-yellow: #ffcd00;
 	position:fixed;
 	@include box-sizing(border-box);
 	width:100%;
-	height:8%;
+	height: 80px;
 	padding:1em;
 	background-color:$yb-black;
 	clear:both;
-
+	z-index: 999;
 	span {
 		display:inline-block;
 		color:$white;
@@ -178,37 +170,40 @@ iframe {
 	width:100%;
 	padding:60px 0;
 	background-position: center;
+	min-height: 100%;
+	@include clearfix;
 }
 
-.style-tile {
-	width:800px;
+.style-tile, .masthead-inner, .padded-area-inner, .footer {
+	width: 900px;
 	margin: 0 auto;
+	@include clearfix();
 }
 
 .masthead {
 	position:relative;
 	width:100%;
-	margin:0 0 1em 0;
-	padding:0 2em 2em 2em;
+	margin: 0 0 2em 0;
 	@include box-sizing(border-box);
-
 	.logo {
 		position:relative;
 		float:left;
-		width:200px;
-		height:200px;
-		margin-bottom:2em;
+		width: 260px;
+		height: 60px;
+		margin-top: 2em;
+		margin-bottom: 2.5em;
 		background-position: center center;
 		background-repeat: no-repeat;
+		background-color: transparent;
+		background-image: url('../images/eastwood_logo.png') !important;
 	}
 }
 
 .navigation {
 	clear:both;
 	width:100%;
-	margin:4em 0;
+	margin-left: 0;
 	list-style: none;
-
 	li {
 		float:left;
 		margin-right:1.5em;
@@ -216,73 +211,79 @@ iframe {
 	}
 }
 
-.padded-area {
-	padding:2em;
+.padded-area-inner {
 	@include clearfix;
 }
 
 .typography {
 	float:left;
-	width:70%;
-
+	width: 60%;
 	h1 {
 		margin-bottom:0;
 	}
-
 	.font-info {
 		display:block;
 		margin-bottom:.8em;
-		font-size: .8em;
+		font-size: .75em;
 		opacity: .6;
+		font-family: sans-serif;
+		font-weight: bold;
+		color: lighten($off-black, 40%);
+	}
+}
+
+.mini-moodboard {
+	float: right;
+	width: 320px;
+	height: 460px;
+	// background: url('../images/mini-moodboard1.png') no-repeat;
+}
+
+.buttons {
+	clear: left;
+	width: 60%;
+	.btn {
+		float: left;
+		width: 40%;
+		margin-right: 3%;
+		background: $light-grey;
+		line-height: 40px;
+		text-align: center;
+		text-decoration: none;
 	}
 }
 
 .color-palette {
-	float:right;
-	width:20%;
-	margin-right:1em;
-	padding:10px;
-	@include clearfix;
-
+	float: right;
+	margin-top: 30px;
+	margin-right: 1px;
 	.color {
-		width:90%;
-		height:50px;
-		margin:0 1px 1em 1px;
-		border:.5em solid white;
-		outline:1px solid lighten(gray, 40%);
+		float: left;
+		width: 60px;
+		height: 60px;
+		margin: 0 0 1em 0.8em;
+		outline: 1px solid lighten(gray, 40%);
 	}
 }
 
-.texture-palette {
-	clear:both;
-	width:100%;
-	padding:2px 0;
+.pull-out {
+	float: left;
+	width: 55%;
 	@include clearfix;
-
-	.texture {
-		float:left;
-		width:150px;
-		height:150px;
-		margin:0 1em 0 1px;
-		border:.5em solid white;
-		outline:1px solid $ph-grey;
-	}
 }
 
 .brand-attributes {
-	clear:both;
-	margin-top:2em;
-	padding-bottom:1em;
 	@include clearfix;
-
+	float: right;
+	width: 40%;
 	ul {
 		margin:0;
 		list-style: none;
-
 		li {
 			float:left;
 			margin-right:1em;
-			font-size: 2em;
+			margin-bottom: 1em;
+			font-size: 1.6em;
 			color:$ph-grey;
 		}
 	}
