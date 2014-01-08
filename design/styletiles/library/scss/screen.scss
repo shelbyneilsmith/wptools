@@ -21,6 +21,7 @@ $yb-yellow: #ffcd00;
 @import "option-c";
 
 // FONTS
+// @include fontFace ('font-name', 'font_file-name');
 
 // DEFAULT COLORS
 // .wrapper { background-color: $ph-grey; }
@@ -31,6 +32,12 @@ $yb-yellow: #ffcd00;
 .texture { background-color: $ph-grey; }
 
 // INFRASTRUCTURE
+%inner-col {
+	position: relative;
+	margin: 0 auto;
+	width: 900px;
+}
+
 #top-bar {
 	position:fixed;
 	@include box-sizing(border-box);
@@ -174,29 +181,27 @@ iframe {
 	@include clearfix;
 }
 
-.style-tile, .masthead-inner, .padded-area-inner, .footer {
-	width: 900px;
-	margin: 0 auto;
-	@include clearfix();
-}
-
 .masthead {
 	position:relative;
-	width:100%;
 	margin: 0 0 2em 0;
 	@include box-sizing(border-box);
 	.logo {
 		position:relative;
 		float:left;
-		width: 260px;
-		height: 60px;
 		margin-top: 2em;
 		margin-bottom: 2.5em;
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-color: transparent;
-		background-image: url('../images/eastwood_logo.png') !important;
 	}
+}
+
+.mastheader, .main, .footer {
+	width: 100%;
+}
+
+.masthead-inner, .main-inner, .footer-inner {
+	@extend %inner-col;
 }
 
 .navigation {
