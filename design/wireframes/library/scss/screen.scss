@@ -89,7 +89,6 @@ html {
 }
 
 #wrapper {
-	@extend %inner-col;
 }
 
 #main {
@@ -100,6 +99,30 @@ html {
 	position: relative;
 	width: 100%;
 	background-color: white;
+}
+
+.masthead-inner, #content, .footer-inner {
+	@extend %inner-col;
+}
+
+.ph-text {
+	position: relative;
+	background-color: $ph-grey;
+	span {
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		color: white;
+		font-weight: bold;
+	}
+}
+
+/*=== header styles ===*/
+.site-masthead {
+
+}
+.masthead-inner {
+
 }
 
 #site-title {
@@ -139,18 +162,7 @@ nav.main {
 
 li.dropMenu:hover {
 }
-
-.ph-text {
-	position: relative;
-	background-color: $ph-grey;
-	span {
-		position: absolute;
-		bottom: 1em;
-		left: 1em;
-		color: white;
-		font-weight: bold;
-	}
-}
+// end header styles
 
 /* === home styles === */
 // end home styles
@@ -204,13 +216,12 @@ li.dropMenu:hover {
 }
 // end contact styles
 
-footer {
+.site-footer {
 	background-color: $ph-grey;
 }
 
-#footer-inner {
+.footer-inner {
 	padding:3em 0;
-	@extend %inner-col;
 }
 
 .footer-info {

@@ -1,9 +1,9 @@
 				</div><!-- #main -->
 			</div> <!-- end #wrapper -->
 
-			<footer class="footer">
+			<footer class="site-footer">
 
-				<div id="footer-inner">
+				<div class="footer-inner">
 
 					<nav id="footer-nav">
 						<?php //createNav($main_nav, true, false); ?>

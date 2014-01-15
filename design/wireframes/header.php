@@ -43,8 +43,8 @@ else {
 
 	<div id="wrapper">
 
-		<header>
-			<div id="header-inner">
+		<header class="site-masthead">
+			<div class="masthead-inner">
 				<?php echo "<" . $headingTag . " id='site-title'>" ?>
 					<a href="./" title="<?php echo $company_name; ?>" rel="home">
 						<?php echo $company_name; ?>

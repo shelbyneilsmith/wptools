@@ -31,7 +31,7 @@
 					<h3>Style Tiles</h3>
 					<a class="style-viewer-link" href="/design/styletiles/">View All</a>
 					<br><br>
-					<?php echo styleTileLinks($styleTiles, $alphas); ?>
+					<?php echo styleTileLinks($styleTiles, range('a', 'z')); ?>
 				</div>
 			</div>
 

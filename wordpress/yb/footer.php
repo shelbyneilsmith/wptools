@@ -1,17 +1,15 @@
 		    </section><!-- #main -->
 		</div> <!-- end #wrapper -->
 
-		<footer class="footer">
-
-			<div id="footer-inner">
+		<footer class="site-footer">
+			<div class="footer-inner">
 
 				<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'main-nav-footer', 'container_class' => 'main-nav' )); ?>
 
-		        <div class="copyright">Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?></div>
+				<div class="copyright">Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?></div>
 
-			</div> <!-- end #inner-footer -->
-
-		</footer> <!-- end footer -->
+			</div>
+		</footer> <!-- end site footer -->
 
 
 		<!-- all js scripts are loaded in library/yb.php -->

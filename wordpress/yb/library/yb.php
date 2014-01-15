@@ -145,7 +145,8 @@ function yb_menus() {
 	register_nav_menus(
 		array(
 			'main-nav' => 'Main Navigation',   // main nav in header
-			'footer-nav' => 'Footer Navigation' // secondary nav in footer
+			'footer-nav' => 'Footer Navigation', // secondary nav in footer
+			'aux-nav' => 'Auxiliary Navigation' // secondary nav in footer
 		)
 	);
 }

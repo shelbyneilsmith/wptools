@@ -42,9 +42,6 @@ $narrowWidth: 95%;
 $mobileWidth: 90%;
 
 ///* ==== custom site colors ==== */
-$mainBG: $white;
-$wrapperBG: $light-grey;
-
 $ph-grey: #cccccc;
 $ph-blue: #439bbd;
 
@@ -82,7 +79,6 @@ $ph-blue: #439bbd;
 	}
 }
 
-/* ==== custom site styles ==== */
 %inner-col {
 	position: relative;
 	margin: 0 auto;
@@ -95,25 +91,16 @@ $ph-blue: #439bbd;
 	}
 }
 
+/*=== template styles ===*/
+
+/* ==== custom site styles ==== */
 html {
-	background: $mainBG;
+	background: white;
 }
 
 body {
-	background: $wrapperBG;
 	color: $off-black;
 	@include sans-serif;
-	width: 33em;
-	padding: 0.806em 1.618em;
-	margin: auto;
-	@include clearfix();
-	@include breakpoint(multiColumn) {
-		width: 50.618em;
-	}
-	@include breakpoint(narrowColumn) {
-		width: 90%;
-		padding: 0.806em 5%;
-	}
 }
 
 #wrapper {
@@ -132,9 +119,10 @@ body {
 }
 
 /*==== header styles ====*/
-header {
-	#header-inner {
-	}
+.site-masthead {
+}
+
+.masthead-inner {
 }
 
 #site-title {
@@ -161,12 +149,13 @@ nav.main {
 // end home page style
 
 /*==== footer styles ====*/
-footer {
-	#footer-inner {
-		.copyright {
-			float: right;
-		}
-	}
+.site-footer {
+}
+
+.footer-inner {
+}
+
+.copyright {
 }
 // end footer styles
 

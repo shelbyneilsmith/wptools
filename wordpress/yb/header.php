@@ -43,24 +43,26 @@
 
 		<div id="wrapper">
 
-		    <header>
-		    	<div id="header-inner">
+			<header class="site-masthead">
+				<div class="masthead-inner">
 
-			    	<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
+					<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
 
-			    	<!-- be sure to change the img src to actual path of logo image -->
-			    	<<?php echo $heading_tag; ?> id="site-title">
-			    		<a href="<?php bloginfo('url') ?>/" title="<?php bloginfo('name') ?>" rel="home">
-			    			<img src="/wp-content/themes/yb/library/_images/mainLogo.png" alt="<?php bloginfo('name') ?>" />
-			    		</a>
-			    	</<?php echo $heading_tag; ?>>
+					<!-- be sure to change the img src to actual path of logo image -->
+					<<?php echo $heading_tag; ?> id="site-title">
+						<a href="<?php bloginfo('url') ?>/" title="<?php bloginfo('name') ?>" rel="home">
+							<img src="/wp-content/themes/yb/library/_images/mainLogo.png" alt="<?php bloginfo('name') ?>" />
+						</a>
+					</<?php echo $heading_tag; ?>>
 
 					<!-- if you'd like to use the site description you can un-comment it below -->
 					<?php // bloginfo('description'); ?>
 
-		            <?php wp_nav_menu( array('theme_location' => 'main-nav', 'container' => 'nav', 'container_id' => 'main-nav-header', 'container_class' => 'main-nav' )); ?>
+					<?php //wp_nav_menu( array('theme_location' => 'aux-nav', 'container' => 'nav', 'container_id' => 'aux-nav-header', 'container_class' => 'aux-nav' )); ?>
+
+					<?php wp_nav_menu( array('theme_location' => 'main-nav', 'container' => 'nav', 'container_id' => 'main-nav-header', 'container_class' => 'main-nav' )); ?>
 
 				</div>
-			</header><!-- #header-->
+			</header><!-- site masthead-->
 
 		    <section id="main">
