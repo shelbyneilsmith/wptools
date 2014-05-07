@@ -12,7 +12,7 @@ else {
 }
 
 // Determine site title element
-if ($front = 1) {
+if ($front == 1) {
 	$headingTag = 'h1';
 }
 else {

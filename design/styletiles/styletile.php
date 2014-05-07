@@ -26,7 +26,7 @@ $option = $_GET[ 'option' ];
 				</div>
 
 				<ul class="navigation">
-					<li>Home</li>
+					<li class="active">Home</li>
 					<li>Nav One</li>
 					<li>Nav Two</li>
 					<li>Nav Three</li>

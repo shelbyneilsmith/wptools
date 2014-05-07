@@ -58,7 +58,7 @@
 					<!-- if you'd like to use the site description you can un-comment it below -->
 					<?php // bloginfo('description'); ?>
 
-					<?php //wp_nav_menu( array('theme_location' => 'aux-nav', 'container' => 'nav', 'container_id' => 'aux-nav-header', 'container_class' => 'aux-nav' )); ?>
+					<?php //wp_nav_menu( array('theme_location' => 'util-nav', 'container' => 'nav', 'container_id' => 'util-nav-header', 'container_class' => 'util-nav' )); ?>
 
 					<?php wp_nav_menu( array('theme_location' => 'main-nav', 'container' => 'nav', 'container_id' => 'main-nav-header', 'container_class' => 'main-nav' )); ?>
 

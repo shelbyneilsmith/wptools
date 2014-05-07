@@ -43,7 +43,7 @@ $palette3-5: #fff;
 
 	.navigation li {
 		font-family: sans-serif;
-		&:hover {
+		&.active, &:hover {
 		}
 	}
 
@@ -75,6 +75,10 @@ $palette3-5: #fff;
 		padding: 2%;
 		margin-bottom: 20px;
 		@include clearfix();
+	}
+
+	.mini-moodboard {
+		// background-image: url('../images/mini-moodboard.png');
 	}
 
 	.pull-out {
