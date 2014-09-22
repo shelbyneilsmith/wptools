@@ -52,7 +52,7 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
 
             // Function to test the compiler hook and demo CSS output.
             // Above 10 is a priority, but 2 in necessary to include the dynamically generated CSS to be sent to the function.
-            //add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
+            add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
 
             // Change the arguments after they've been declared, but before the panel is created
             //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
@@ -77,9 +77,9 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
             //print_r($options); //Option values
             //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
 
-            /*
+
               // Demo of how to use the dynamic CSS and write your own static CSS file
-              $filename = dirname(__FILE__) . '/style' . '.css';
+              $filename = ABSPATH . '/wp-content/themes/yb/library/css/options-styles.css';
               global $wp_filesystem;
               if( empty( $wp_filesystem ) ) {
                 require_once( ABSPATH .'/wp-admin/includes/file.php' );
@@ -93,7 +93,7 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
                     FS_CHMOD_FILE // predefined mode settings for WP files
                 );
               }
-             */
+
         }
 
         /**

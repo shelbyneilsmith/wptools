@@ -69,7 +69,7 @@ function yb_styles_basic() {
 	/* ------------------------------------------------------------------------ */
 	// register main stylesheet
 	wp_register_style( 'yb-stylesheet', get_stylesheet_directory_uri() . '/library/css/screen.css', array(), '', 'all' );
-	// wp_register_style( 'yb-options-stylesheet', get_stylesheet_directory_uri() . '/library/css/options-styles.css', array(), '', 'all' );
+	wp_register_style( 'yb-options-stylesheet', get_stylesheet_directory_uri() . '/library/css/options-styles.css', array(), '', 'all' );
 
 	// ie-only style sheet
  	wp_register_style( 'yb-ie-only', get_stylesheet_directory_uri() . '/library/css/ie.css', array(), '' );
@@ -87,7 +87,7 @@ function yb_styles_basic() {
 	/* ------------------------------------------------------------------------ */
 
 	wp_enqueue_style( 'yb-stylesheet' );
-	// wp_enqueue_style( 'yb-options-stylesheet' );
+	wp_enqueue_style( 'yb-options-stylesheet' );
 	wp_enqueue_style('yb-ie-only');
 
 	// if ( $data['check_flexslider'] == true ) {
