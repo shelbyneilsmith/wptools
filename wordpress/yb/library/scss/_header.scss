@@ -1,0 +1,273 @@
+/*==== general header styles ====*/
+.site-masthead {
+	background: $light-grey;
+	& > .container {
+		padding: 30px 0;
+	}
+}
+
+.site-title {
+	font-size: 1.4em;
+	line-height: 1.2em;
+	font-weight: bold;
+	margin-bottom: 0;
+	a {
+		font-family: $display-font;
+		img {
+
+		}
+	}
+}
+
+#topbar {
+	padding: 5px 0;
+	background: darken($light-grey, 5%);
+	.callus {
+		font-size: .9em;
+	}
+	.social-icons {
+		float: right;
+		margin-left: 10px;
+		@include breakpoint(narrowColumn) {
+			float: left;
+			margin-left: 0;
+			margin-right: 10px;
+		}
+		ul {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+#navigation {
+	float: none;
+	@include breakpoint(narrowColumn) {
+		margin-top: 20px;
+	}
+	&.dropped {
+		margin-top: 0;
+		margin-bottom: 0;
+		background: #555555;
+		padding: 10px 0;
+		clear: both;
+		nav.main-nav {
+			& > ul {
+				& > li {
+					& > a {
+						color: white;
+					}
+				}
+			}
+		}
+	}
+	&.stuck {
+		@include box-shadow(0 2px 4px rgba(0, 0, 0, .1));
+	}
+}
+
+nav.main-nav {
+	& > ul {
+		list-style: none;
+		margin: 0;
+		& > li {
+			position: relative;
+			display: block;
+			float:left;
+			margin-right: 30px;
+			&:last-of-type {
+				margin-right: 0;
+			}
+			& > a {
+				font-family: $display-font;
+				text-decoration: none;
+				&:hover {
+				}
+			}
+		}
+	}
+}
+
+nav.util-nav {
+	float: right;
+	@include breakpoint(narrowColumn) {
+		float: left;
+		margin-top: 10px;
+	}
+	ul {
+		li {
+			float: left;
+			margin-left: 10px;
+			padding-left: 10px;
+			border-left: 1px solid $light-grey;
+			&:first-of-type {
+				margin-left: 0;
+				padding-left: 0;
+				border-left: 0;
+			}
+			a {
+				font-size: .9em;
+			}
+		}
+	}
+}
+
+.header-searchform {
+	float: right;
+	margin: 0px 0 0 20px;
+	input {
+		margin: 0;
+		padding: 8px 0 8px 34px;
+		width: 0px;
+		font-size: 12px;
+		line-height: 1;
+		cursor: pointer;
+		opacity: 0.5;
+		border: none;
+		@include transition(all 0.4s ease 0s);
+		@include box-shadow(none);
+		color: white;
+		&:hover{
+			opacity: 1;
+		}
+		&:focus {
+			opacity: 1;
+			font-size: 12px;
+			padding: 8px 0 8px 34px;
+			width: 115px;
+			border: none;
+			color: #555555;
+			background-color: #efefef;
+			cursor: text;
+		}
+	}
+	input[type=text] {
+		background-image: url(../_images/search.png);
+		background-repeat: no-repeat;
+		background-position: 9px 8px;
+		margin-right: 1%;
+	}
+	#header-searchsubmit { display: none; } /* Hide Search Submit button */
+	@include breakpoint(narrowColumn) {
+		float: left;
+		clear: left;
+		margin-top: 0px;
+		margin-left: 0;
+		// margin-bottom: 30px;
+		width: 100%;
+		input {
+			width: 100%;
+		}
+	}
+}
+
+@media only screen and (min-width: $narrowColumn) {
+	.stuck {
+		margin: 0 auto;
+		position: fixed !important;
+		top: 0;
+		@include box-shadow(0 2px 4px rgba(black, .3));
+		z-index: 2000;
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: $narrowColumn) {
+	.sticky-wrapper{
+		height: auto !important;
+	}
+}
+
+// end general header styles
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* 1. Header V1 */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+
+#header-v1 {
+	#navigation {
+		float: right;
+		clear: right;
+		@include breakpoint(narrowColumn) {
+			float: left;
+			clear: both;
+		}
+	}
+	nav.main-nav ul {
+    		float: right;
+		@include breakpoint(narrowColumn) {
+			float: left;
+		}
+    	}
+	.header-searchform {
+		@include breakpoint(narrowColumn) {
+			margin-bottom: 20px;
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* 2. Header V2 */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+
+#header-v2 {
+	.header-v2-container {
+	}
+	.slogan {
+		float: right;
+		@include breakpoint(narrowColumn) {
+			float: left;
+			margin-top: 10px;
+			clear: both;
+		}
+	}
+	.header-searchform {
+		margin-left: 10px;
+		@include breakpoint(narrowColumn) {
+			margin-top: 30px;
+		}
+		input {
+			border:1px solid #dddddd;
+			width: 180px;
+			cursor: text;
+			padding-left:30px;
+			&:focus {
+				background-color: white;
+				border: 1px solid #dddddd;
+				width: 180px;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* 3. Header v3 */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+
+#header-v3 {
+	.header-v3-container{
+		text-align: center;
+	}
+	#site-title {
+		margin-top: 30px;
+	}
+	.header-searchform {
+		@include breakpoint(narrowColumn) {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+	}
+	nav.main-nav {
+		& > ul {
+			text-align: center;
+		}
+	}
+}
+
+@import 'mobilemenu';

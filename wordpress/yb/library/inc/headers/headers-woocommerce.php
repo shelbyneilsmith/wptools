@@ -1,0 +1,2 @@
+<?php global $woocommerce; ?>
+<a href="<?php echo $woocommerce->cart->get_cart_url(); ?>" id="header-cart" title="<?php echo sprintf(_n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes'), $woocommerce->cart->cart_contents_count);?>">View Cart</a>

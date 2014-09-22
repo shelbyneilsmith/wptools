@@ -17,90 +17,47 @@ YBBase is © Shelby Smith http://yellowberri.com/
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+@charset "utf-8";
+
+
+@import "var/settings";
+// @import "var/lists";
+// @import "var/icons/entypo";
+
 @import "compass/layout";
 @import "compass/utilities";
 @import "compass/typography";
 @import "compass/css3";
-@import "base";
+//@import 'compass/reset';
 
-@charset "utf-8";
+@import 'reset';
 
-///* ==== other settings ==== */
-$sticky_footer: false;
-$sticky_footer_height: 54px;
+/*=== theme styles ===*/
 
-$trans-speed: 200ms;
-$trans-ease: ease;
-
-$mobileColumn: 400px;
-$narrowColumn: 45em;
-$multiColumn: 66em;
-
-$mainWidth: $narrowColumn;
-$multiWidth: $multiColumn;
-$narrowWidth: 95%;
-$mobileWidth: 90%;
-
-///* ==== custom site colors ==== */
-$ph-grey: #cccccc;
-$ph-blue: #439bbd;
-
-/* === breakpoints ==== */
-
-@mixin breakpoint($point) {
-	@if $point == mobile {
-		@media screen and (max-width: $mobileColumn) { @content }
-	}
-	@if $point == narrowColumn {
-		@media screen and (max-width: $narrowColumn) { @content }
-	}
-	@if $point == multiColumn {
-		@media screen and (min-width: $multiColumn){ @content }
-	}
-}
-
-#media-query {
-	position: fixed;
-	top: 5px;
-	left: 5px;
-	height: 10px;
-	width: 10px;
-	@include border-radius(50%);
-	z-index: 999;
-	background-color: blue;
-	@include breakpoint(multiColumn) {
-		background-color: green;
-	}
-	@include breakpoint(narrowColumn) {
-		background-color: red;
-	}
-	@include breakpoint(mobile) {
-		background-color: yellow;
-	}
-}
-
-%inner-col {
-	position: relative;
-	margin: 0 auto;
-	width: $mainWidth;
-	@include breakpoint(multiColumn) {
-		width: $multiWidth;
-	}
-	@include breakpoint(narrowColumn) {
-		width: $narrowWidth;
-	}
-}
-
-/*=== template styles ===*/
+@import 'colors';
+@import 'responsive';
+@import 'grid';
+@import 'mixins';
+@import 'fonts';
+@import 'classes';
+@import 'ui/all';
+// @import 'bootstrap';
+@import 'typography';
+@import 'socialicons';
+@import 'shortcodes';
+//@import 'widgets';
 
 /* ==== custom site styles ==== */
 html {
-	background: white;
+	height: 100%;
 }
 
 body {
-	color: $off-black;
-	@include sans-serif;
+	// color: $off-black;
+}
+
+body, .inner-wrap {
+	background-color: $main-bg-color;
 }
 
 #wrapper {
@@ -116,49 +73,53 @@ body {
 }
 
 #content {
-}
-
-/*==== header styles ====*/
-.site-masthead {
-}
-
-.masthead-inner {
-}
-
-#site-title {
-	a {
-		img {
-
-		}
+	margin-bottom: 30px;
+	&.sidebar-left {
+		float: right;
 	}
 }
 
-nav.main {
-	ul {
-		li {
-			a {
-				&:hover {
-				}
-			}
-		}
+#title {
+	padding: 30px 0;
+	border-bottom: 1px solid $light-grey;
+	h1 {
+		margin-bottom: 0;
 	}
 }
-// end header styles
 
-/*==== home page styles ====*/
-// end home page style
-
-/*==== footer styles ====*/
-.site-footer {
+.page-title {
+	margin-bottom: 0;
+	@include large;
+	font-family: $display-font;
+	margin-bottom: 0;
+	font-weight: bold;
+	text-rendering: optimizeLegibility;
 }
 
-.footer-inner {
+#page-wrap {
+	padding: 30px 0;
 }
 
-.copyright {
+#page-inner {
 }
-// end footer styles
 
-@if ($sticky_footer) {
-	@include sticky-footer($sticky_footer_height, "#wrapper", "#main", "footer");
+#breadcrumbs {
 }
+#crumbs {
+	float: right;
+	@include breakpoint(narrowColumn) {
+		float: left;
+		margin-top: 10px;
+	}
+}
+
+@import 'header';
+@import 'home';
+@import 'footer';
+@import 'blog';
+
+@import 'print';
+
+/* ------------------------------------------------------------------------ */
+/* EOF
+/* ------------------------------------------------------------------------ */

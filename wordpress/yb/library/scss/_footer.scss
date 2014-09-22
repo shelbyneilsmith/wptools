@@ -1,0 +1,151 @@
+/*==== footer styles ====*/
+.site-footer {
+	border-top: 10px solid $off-black;
+	background: #444444;
+	color: #999999;
+	a{
+		color:#999999;
+		&:hover {
+			color: white;
+		}
+	}
+	.widget {
+		margin-top: 30px;
+		margin-bottom: 30px;
+		@include breakpoint(narrowColumn) {
+			margin-bottom: 0;
+			&:last-of-type {
+				margin-bottom: 30px;
+			}
+		}
+		h3 {
+			font-size:15px;
+			color: white;
+			padding:0 0 5px 0;
+			border-bottom:1px solid $dark-grey;
+			margin: 0 0 20px 0;
+		}
+		ul {
+			margin-bottom: 0;
+		}
+		&.widget_nav_menu {
+			ul {
+				list-style: none;
+				margin-left: 0;
+				li {
+					list-style: none;
+				}
+			}
+		}
+		&.widget_portfolio .portfolio-widget-item {
+			.portfolio-pic {
+				border: 1px solid $off-black;
+				padding: 4px;
+				background: $off-black;
+				@include box-shadow(none);
+				&:hover {
+					background: $accent_color;
+					border-color: $accent_color;
+				}
+			}
+		}
+	}
+}
+
+#text-3 {
+	img {
+		@include breakpoint(narrowColumn) {
+			float: none;
+			display: block;
+			margin-bottom: 20px;
+			max-width: 300px;
+		}
+	}
+}
+
+#site-footer-nav {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	ul {
+		li {
+			float: left;
+			margin-right: 30px;
+			&:last-of-type {
+				margin-right: 0;
+			}
+			@include breakpoint(narrowColumn) {
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+#copyright {
+	padding: 5px 0;
+	background: #222222;
+	color: #777777;
+	a {
+		color: #888888;
+		&:hover { color: white; }
+	}
+	.copyright-text {
+		@include breakpoint(narrowColumn) {
+			text-align: center;
+		}
+	}
+}
+
+#back-to-top {
+	text-align: center;
+}
+
+/* Contact Widget /--------------------------------------------------------- */
+
+.widget_contact address {    font-style: normal }
+
+.widget_contact address span {    display: block }
+
+.widget_contact address span strong {
+	display: inline-block;
+	width: 30%;
+}
+
+/* ------------------------------------------------------------------------ */
+/* 24. Twitterbar
+/* ------------------------------------------------------------------------ */
+
+#twitterbar {
+	color: white;
+	background: #289dcc;
+	margin: 0;
+	padding: 15px 0;
+	.twitterpost {
+		background: url(../_images/icons/twitter.png) no-repeat -10px -49px;
+		padding: 0 0 0 30px;
+		list-style: none;
+		margin: 0;
+		.tweet_time{
+			display: none;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			color: white;
+			display: inline;
+		}
+		li {
+			margin: 0 !important;
+			padding: 0 !important;
+			display: inline;
+			b { display: none }
+		}
+	}
+}
+
+@if ($sticky_footer) {
+	@include sticky-footer($sticky_footer_height, "#wrapper", "#main", "footer");
+}
+// end footer styles

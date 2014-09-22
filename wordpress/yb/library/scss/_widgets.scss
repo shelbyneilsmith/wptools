@@ -1,0 +1,49 @@
+/* Search Widget /--------------------------------------------------------- */
+
+.widget_search input {
+    background: url(../_images/search.png) no-repeat 10px 9px;
+    padding: 8px 8px 8px 30px;
+    width: 100%;
+    color: #999999;
+    @include box-shadow(0px 1px 2px 0px rgba(180, 180, 180, 0.2));
+    border: 1px solid #dddddd;
+}
+
+.widget_search input:focus { border-color: #c0c0c0 }
+
+/* Portfolio  Widget /--------------------------------------------------------- */
+
+.widget_portfolio {
+	.portfolio-item:last-child {    margin: 0 }
+	.portfolio-widget-item {
+		float: left;
+		padding: 0 0 0px 0;
+		margin: 0 10px 10px 0;
+		&:nth-child(3n) {
+			border: none !important;
+			padding: 0;
+			margin-right: 0;
+		}
+		.portfolio-pic {
+			float: left;
+			display: block;
+			overflow: hidden;
+			width: 56px;
+			height: 56px;
+			position: relative;
+			border: 1px solid #ddd;
+			padding: 4px;
+			@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
+			@include border-radius(3px);
+			&:hover {
+				background: $accent_color;
+				border-color: $accent_color;
+			}
+			img {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+		}
+	}
+}

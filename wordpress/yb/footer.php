@@ -1,27 +1,84 @@
-		    </section><!-- #main -->
-		</div> <!-- end #wrapper -->
+		<?php global $ybwp_data; ?>
 
-		<footer class="site-footer">
-			<div class="footer-inner">
+		<?php
+			if ( !empty($ybwp_data['opt-layout']) && !empty($ybwp_data['opt-homelayout']) ) {
+				if ( ( $ybwp_data['opt-layout'] === "Full Width" ) || ( $ybwp_data['opt-homelayout'] === "Full Width" ) ) {
+					$full_width_class = "full-width";
+				} else {
+					$full_width_class = "";
+				}
+			}
+		?>
 
-				<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'main-nav-footer', 'container_class' => 'main-nav' )); ?>
-
-				<div class="copyright">Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?></div>
-
+		<?php if( !empty($ybwp_data['opt-checkbox-twitterbar'] ) ) { ?>
+			<div id="twitterbar" class="clearfix">
+				<div class="container <?php echo $full_width_class; ?>">
+					<div class="sixteen columns">
+						<div class="twitterpost"><?php _e('loading...', 'yb') ?></div>
+						<?php if(!empty($ybwp_data['opt-text-social-twitter'])) { ?>
+							<script type='text/javascript'>
+							jQuery(document).ready(function($){
+								$('.twitterpost').tweet({
+									modpath: '<?php echo get_template_directory_uri(); ?>/library/_scripts/twitter/index.php',
+									username: '<?php echo $ybwp_data['opt-text-social-twitter']; ?>',
+									count: "1"
+								});
+							});
+							</script>
+						<?php } ?>
+					</div>
+				</div>
 			</div>
-		</footer> <!-- end site footer -->
+		<?php } ?>
 
+			<footer id="footer" class="site-footer">
+				<div class="container <?php echo $full_width_class; ?>">
+					<?php if( !empty($ybwp_data['opt-checkbox-footerwidgets'] ) ) { ?>
+						<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('Footer Widgets')); ?>
+					<?php } ?>
 
-		<!-- all js scripts are loaded in library/yb.php -->
+					<?php if ( !empty($ybwp_data['opt-checkbox-footernav'] ) ) : ?>
+						<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'site-footer-nav', 'container_class' => 'footer-nav sixteen columns' )); ?>
+					<?php endif; ?>
+				</div>
+			</footer>
+
+		<div id="copyright" class="clearfix">
+			<div class="container <?php echo $full_width_class; ?>">
+
+				<div class="copyright-text eight columns">
+					<?php if( !empty($ybwp_data['opt-textarea-copyright'] )) { ?>
+						<?php echo $ybwp_data['opt-textarea-copyright']; ?>
+					<?php } else { ?>
+						Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?>
+					<?php } ?>
+				</div>
+
+				<?php if( !empty($ybwp_data['opt-checkbox-socialfooter']) && outputSocialIcons() ) { ?>
+					<div class="eight columns">
+						<div class="social-icons clearfix">
+							<ul>
+								<?php echo outputSocialIcons(); ?>
+							</ul>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if ( !empty($ybwp_data['opt-checkbox-backtotop'] ) ) : ?>
+					<div id="back-to-top" class="sixteen columns"><a href="#"><?php _e( 'Back to Top', 'yb' ) ?></a></div>
+				<?php endif; ?>
+			</div>
+		</div><!-- end copyright -->
+
+		<?php if( !empty($ybwp_data['opt-textarea-analyticscode'])) { echo $ybwp_data['opt-textarea-analyticscode']; } ?>
+
 		<?php wp_footer(); ?>
 
 		<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-	       chromium.org/developers/how-tos/chrome-frame-getting-started -->
-	    <!--[if lt IE 7 ]>
-	        <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-	        <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-	    <![endif]-->
-
+		chromium.org/developers/how-tos/chrome-frame-getting-started -->
+		<!--[if lt IE 7 ]>
+			<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+			<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<![endif]-->
+		</div> <!-- end #wrapper -->
 	</body>
-
 </html> <!-- end page. -->

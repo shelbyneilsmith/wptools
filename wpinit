@@ -130,7 +130,7 @@ preinit () {
 
 copyfiles () {
 	if [ $purpose == "startclean" ] ; then
-		if git ls-remote -h https://${GITUSER}:${GITPASS}@bitbucket.org/$GITUSER/${project_id}.git; then
+		if [ "$(git ls-remote https://${GITUSER}:${GITPASS}@bitbucket.org/$GITUSER/${project_id}.git 2> /dev/null)" ]; then
 			clear
 			echo "\n---------------------------------------------------------------------------"
 			echo "Oh, wait. A repository for \"$project_id\" already exists. Get outta here!"
@@ -142,13 +142,15 @@ copyfiles () {
 			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
 			# create the wordpress directory structure
-			mkdir -p $SITES_DIR/$project_id/{web/design,assets/{docs,working_images}}
+			#mkdir -p $SITES_DIR/$project_id/{web/design,assets/{docs,working_images}}
+
+			mkdir -p $SITES_DIR/$project_id/{web,assets/{docs,working_images}}
 
 			# copy wireframes and styletile files over
-			cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
+			#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
 
 			# get latest version of Wordpress and extract files to project directory
-			curl -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
+			curl -L -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
 			tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
 			# delete the temporary Wordpress zip file
 			rm $SITES_DIR/$project_id/wp.temp.tar.gz
@@ -158,11 +160,14 @@ copyfiles () {
 
 			# move the theme, wp-config, .htaccess, .gitignore & plugins over
 			cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+			cp $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
 			cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
 			cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
 			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
-			cp -r $WPINIT_DIR/wordpress/plugins/* $SITES_DIR/$project_id/web/wp-content/plugins
+			# delete any default plugins and install our plugins folder
+			rm -R $SITES_DIR/$project_id/web/wp-content/plugins
+			cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
 
 		fi
 	elif [ $purpose == "collab" ] ; then
@@ -318,18 +323,6 @@ writesublimeproject () {
 			{
 				"name": "$project_id Root",
 				"path": "$SITES_DIR/$project_id"
-			},
-			{
-				"name": "Design",
-				"path": "$SITES_DIR/$project_id/web/design"
-			},
-			{
-				"name": "Wireframes",
-				"path": "$SITES_DIR/$project_id/web/design/wireframes"
-			},
-			{
-				"name": "Style Tiles",
-				"path": "$SITES_DIR/$project_id/web/design/styletiles"
 			},
 			{
 				"name":"Site Plugins",

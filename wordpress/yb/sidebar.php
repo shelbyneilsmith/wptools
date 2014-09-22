@@ -1,17 +1,11 @@
-<div id="main-sidebar" class="sidebar">
-
-	<?php if ( is_active_sidebar( 'main-sidebar' ) ) : ?>
-
-		<?php dynamic_sidebar( 'main-sidebar' ); ?>
-
-	<?php else : ?>
-
-		<!-- This content shows up if there are no widgets defined in the backend. -->
-		
-		<div class="alert help">
-			<p>Please activate some Widgets.</p>
-		</div>
-
-	<?php endif; ?>
-
+<div id="main-sidebar" class="four columns">
+	<?php
+		if(is_blog()){
+			/* Blog Sidebar */
+			if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar('Blog Sidebar') );
+		} else {
+			/* Page Sidebar */
+			if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar('Main Sidebar') );
+		}
+	?>
 </div>

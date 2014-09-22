@@ -1,0 +1,21 @@
+// YB STYLE TILE TEMPLATE
+@charset "utf-8";
+
+// IMPORTS
+@import "compass/layout";
+@import "compass/utilities";
+@import "compass/typography";
+@import "compass/css3";
+@import "base";
+
+// GLOBAL COLORS
+$mainBG: $black;
+$wrapperBG: $light-grey;
+$ph-grey: #ddd;
+$yb-black: #231d1e;
+$yb-yellow: #ffcd00;
+
+// TILE IMPORTS
+@import "option-a";
+@import "option-b";
+@import "option-c";

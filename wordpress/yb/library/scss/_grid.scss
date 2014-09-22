@@ -1,0 +1,94 @@
+/* ==== grid settings defined in _global.scss ====*/
+
+%inner-col {
+	position: relative;
+	margin: 0 auto;
+	width: $mainWidth;
+	@include breakpoint(multiColumn) {
+		width: $multiWidth;
+	}
+	@include breakpoint(narrowColumn) {
+		width: $narrowWidth;
+		margin: 0 auto;
+	}
+	@include breakpoint(mobile) {
+		width: $mobileWidth;
+	}
+	&.full-width {
+		width: 100%;
+	}
+}
+
+.container {
+	@extend %inner-col;
+	/* Self Clearing Goodness */
+	&:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+}
+.column, .columns {
+	float: left;
+	margin-left: $gutter * 0.5;
+	margin-right: $gutter * 0.5;
+	@include breakpoint(narrowColumn) {
+		width: 100% !important;
+		margin: 0;
+	}
+}
+
+/* Base Grid */
+
+@mixin columnWidth($numCols) {
+	width: ($columnWidth * $numCols) + ($gutter * ($numCols - 1));
+}
+
+.container .one.column,
+.container .one.columns { @include columnWidth(1); }
+.container .two.columns { @include columnWidth(2); }
+.container .three.columns { @include columnWidth(3); }
+.container .four.columns { @include columnWidth(4); }
+.container .five.columns { @include columnWidth(5); }
+.container .six.columns { @include columnWidth(6); }
+.container .seven.columns { @include columnWidth(7); }
+.container .eight.columns { @include columnWidth(8);  }
+.container .nine.columns { @include columnWidth(9); }
+.container .ten.columns { @include columnWidth(10); }
+.container .eleven.columns { @include columnWidth(11); }
+.container .twelve.columns { @include columnWidth(12); }
+.container .thirteen.columns { @include columnWidth(13); }
+.container .fourteen.columns { @include columnWidth(14);  }
+.container .fifteen.columns { @include columnWidth(15); }
+.container .sixteen.columns, .sixteen.columns { @include columnWidth(16); }
+
+.container .one-half.columns { width: 50% - $gutter; }
+.container .one-third.columns { width: 33.3334% - $gutter; }
+.container .two-thirds.columns { width: 66.6667% - $gutter; }
+
+.container .one-fourth.columns { width: 25% - $gutter; }
+.container .one-fifth.columns { width: 20% - $gutter; }
+.container .one-sixth.columns { width: 16.6667% - $gutter; }
+.container .one-seventh.columns { width: 14.285714% - $gutter; }
+
+/* Offsets */
+@mixin columnOffset($offsetNum) {
+	margin-left: $columnWidth * $offsetNum;
+}
+.container .offset-by-one { @include columnOffset(1);  }
+.container .offset-by-two { @include columnOffset(2);  }
+.container .offset-by-three { @include columnOffset(3);  }
+.container .offset-by-four  { @include columnOffset(4);  }
+.container .offset-by-five  { @include columnOffset(5);  }
+.container .offset-by-six { @include columnOffset(6);  }
+.container .offset-by-seven  { @include columnOffset(7);  }
+.container .offset-by-eight  { @include columnOffset(8);  }
+.container .offset-by-nine { @include columnOffset(9);  }
+.container .offset-by-ten { @include columnOffset(10);  }
+.container .offset-by-eleven  { @include columnOffset(11);  }
+.container .offset-by-twelve { @include columnOffset(12);  }
+.container .offset-by-thirteen { @include columnOffset(13);  }
+.container .offset-by-fourteen { @include columnOffset(14);  }
+.container .offset-by-fifteen { @include columnOffset(15); }

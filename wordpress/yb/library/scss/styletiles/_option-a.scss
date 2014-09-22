@@ -1,0 +1,123 @@
+$palette3-1: #000;
+$palette3-2: #555;
+$palette3-3: #aaa;
+$palette3-4: #ddd;
+$palette3-5: #fff;
+
+.wrapper.option-a {
+	padding: 0;
+	background: $light-grey;
+	.style-tile {
+	}
+	::selection {
+		// color: red;
+	}
+
+	.logo {
+		width: 200px;
+		height: 70px;
+		background-image: url('../../_images/logo.png');
+		background-size: 100%;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: sans-serif;
+		color: $off-black;
+	}
+
+	h1 {
+		font-size: 2.2em;
+	}
+
+	h2 {
+		font-size: 1.8em;
+	}
+
+	p {
+		font-family: georgia, serif;
+		color: lighten($off-black, 20%);
+		font-size: 1em;
+	}
+
+	a {
+	}
+
+	.navigation {
+		li {
+			font-family: sans-serif;
+			&.active, &:hover {
+			}
+		}
+	}
+
+	.masthead {
+		background-image: none;
+	}
+
+	.buttons {
+	}
+
+	.btn {
+		color: $off-black;
+		font-family: sans-serif;
+		font-weight: bold;
+		&.btn-1 {
+			background-color: $light-grey;
+			&:hover {
+			}
+		}
+		&.btn-2 {
+			background-color: darken($light-grey, 10%);
+			&:hover {
+			}
+		}
+	}
+
+	.main-inner {
+		background: $white;
+		padding: 2%;
+		margin-bottom: 20px;
+		@include clearfix();
+	}
+
+	.mini-moodboard {
+		// background-image: url('../images/mini-moodboard.png');
+	}
+
+	.pull-out {
+		p {
+			font-family: sans-serif;
+			font-size: 1.4em;
+			font-weight: bold;
+			line-height: 1.4em;
+			color: $off-black;
+		}
+	}
+
+	.brand-attributes ul li {
+		font-family: sans-serif;
+		font-weight: bold;
+		color: $off-black;
+	}
+
+	.color-1 {
+		background-color: $palette3-1;
+	}
+
+	.color-2 {
+		background-color: $palette3-2;
+	}
+
+	.color-3 {
+		background-color: $palette3-3;
+	}
+
+	.color-4 {
+		background-color: $palette3-4;
+	}
+
+	.color-5 {
+		background-color: $palette3-5;
+	}
+
+}

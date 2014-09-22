@@ -1,49 +1,55 @@
+<?php get_header(); ?>
+
+<?php get_template_part( 'library/inc/titlebar' ); ?>
+
 <?php
-/*
-This is the custom post type post template.
-If you edit the post type name, you've got
-to change the name of this template to
-reflect that name change.
+	$page_layout = $ybwp_data['opt-layout'];
 
-i.e. if your custom post type is called
-register_post_type( 'bookmarks',
-then your single template should be
-single-bookmarks.php
-
-*/
+	if ( $page_layout === "Full Width" ) {
+		$full_width_class = "full-width";
+	} else {
+		$full_width_class = "";
+	}
 ?>
 
-<?php get_header(); ?>
-			
-	<div id="content">
+<div id="page-wrap" class="clearfix">
+	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
 
-		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-	
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-		
-				<header class="article-header">
-			
-					<h1 class="entry-title single-custom-post-type-title"><?php the_title(); ?></h1>
-			
-					<?php echo yb_byline($post); ?>
-		
-				</header> <!-- end article header -->
-	
-				<section class="entry-content">
-					<?php the_content(); ?>
-				</section> <!-- end article section -->
-		
-				<footer class="article-footer">
-					<?php the_tags('<p class="tags"> ', ', ', '</p>'); ?>
-				</footer> <!-- end article footer -->
-	
-				<?php //comments_template(); ?>
-	
-			</article> <!-- end article -->
-	
-		<?php endwhile; endif; ?>
+		<?php if ( $ybwp_data['opt-layout'] !== "1" ) {
+				$contentColumns = "twelve";
+				if ( $ybwp_data['opt-layout'] === "2" ) {
+					$sidebar_pos = 'sidebar-left';
+				} else {
+					$sidebar_pos = 'sidebar-right';
+				}
+			} else {
+				$contentColumns = "sixteen";
+				$sidebar_pos = '';
+			}
+		?>
 
-	</div> <!-- end #content -->
-	<?php get_sidebar(); ?>
+		<div id="content" class="<?php echo $sidebar_pos; ?> <?php echo $contentColumns; ?> columns">
+
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
+				<?php the_content(); ?>
+
+				<?php if( $ybwp_data['opt-checkbox-sharebox'] ) { ?>
+					<?php get_template_part( 'library/inc/sharebox' ); ?>
+				<?php } ?>
+
+				<?php //if ( !$ybwp_data['opt-checkbox-blogcomments'] ) : // change "blogcomments" to whatever applies here ?>
+					<div class="comments"><?php comments_template(); ?></div>
+				<?php //endif; ?>
+
+			<?php endwhile; endif; ?>
+
+		</div> <!-- end #content -->
+
+		<?php if ( ( $page_layout === "Centered Left Sidebar" ) || ( $page_layout === "Centered Right Sidebar" ) ) : ?>
+			<?php get_sidebar(); ?>
+		<?php endif; ?>
+	</div>
+</div>
 
 <?php get_footer(); ?>

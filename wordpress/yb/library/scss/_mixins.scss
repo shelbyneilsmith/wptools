@@ -1,0 +1,181 @@
+///* ==== mixins ==== */
+
+@mixin serif {
+	font-family: 'Cambria', Georgia, 'Times New Roman', Times, serif;
+}
+
+@mixin sans-serif {
+	font-family: Verdana, sans-serif;
+}
+
+@mixin fontFace($font-name, $file-name, $weight: "normal") {
+	@font-face {
+		font-family: '#{$font-name}';
+		src: url('/wp-content/themes/yb/library/_fonts/#{$file-name}.eot'); /* IE9 Compat Modes */
+		src: local('☺'),
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.woff') format('woff'), /* Modern Browsers */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.ttf')  format('truetype'), /* Safari, Android, iOS */
+			 url('/wp-content/themes/yb/library/_fonts/#{$file-name}.svg##{$font-name}') format('svg'); /* Legacy iOS */
+		@if ($weight == "normal") {
+			font-weight: normal;
+			font-style: normal;
+		} @else if ($weight == "bold") {
+			font-weight: bold;
+			font-style: normal;
+		} @else if ($weight == "italic") {
+			font-weight: normal;
+			font-style: italic;
+		} @else if ($weight == "boldItalic") {
+			font-weight: bold;
+			font-style: italic;
+		}
+	}
+}
+
+@mixin buttonColor($btnColor, $btnTxtColor, $btnStyle) {
+	color: $btnTxtColor;
+	@if $btnStyle == "gradient" {
+		@include background-image(linear-gradient(bottom, $btnColor 0%, lighten($btnColor, 10%) 100%));
+		border: 1px solid $btnColor;
+		@include box-shadow(inset 0 0 1px lighten($btnColor, 20%), 0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		&:hover {
+			@include background-image(linear-gradient(bottom, lighten($btnColor, 5%) 0%, lighten($btnColor, 15%) 100%));
+		}
+	}
+	@else {
+		background-color: $btnColor;
+		background-image: none;
+		border: 0;
+		@include box-shadow(none);
+		&:hover {
+			background-color: lighten($btnColor, 10%);
+			background-image: none;
+		}
+	}
+}
+
+@mixin alertColor($alertColor) {
+	background-color: $alertColor;
+	color: white;
+	a {
+		color: lighten($alertColor, 30%);
+		text-decoration: underline;
+	}
+}
+
+@mixin media-block-list($list-style: none, $spacing: 30px, $sep: 1px solid $light-grey) {
+	list-style: $list-style;
+	margin-bottom: 0;
+	@if ($list-style == none) {
+		margin-left: 0;
+	}
+	& > li {
+		list-style: $list-style;
+		margin-bottom: $spacing;
+		@if ($sep != none) {
+			padding-bottom: $spacing;
+			border-bottom: $sep;
+		}
+		&:last-of-type {
+			margin-bottom: 0;
+			@if ($sep != none) {
+				padding-bottom: 0;
+				border-bottom: 0;
+			}
+		}
+		img {
+			float: left;
+			margin-right: $spacing;
+			margin-bottom: $spacing;
+			@include breakpoint(narrowColumn) {
+				float: none;
+				margin-right: 0;
+			}
+			@include breakpoint(mobile) {
+				width: 100%;
+			}
+		}
+		ul {
+			float: left;
+			margin-left: 0;
+			padding-left: 1.618em;
+			@include clearfix();
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+@mixin sticky-footer($footer_height, $content_wrapper, $content, $footer_wrapper) {
+	html, body, #{$content_wrapper} {
+		height: 100%;
+	}
+
+	body > #{$content_wrapper} {
+		height: auto;
+		min-height: 100%;
+	}
+
+	#{$content} {
+		padding-bottom: $footer_height;
+	}
+
+	#{$footer_wrapper} {
+		position: relative;
+		margin-top: -$footer_height;
+		height: $footer_height;
+		clear: both;
+		z-index: 9998;
+	}
+}
+
+
+///////////////
+// retina sprites
+
+// Define the sprites here. Notice that I've added an optional spacing.
+//$sprites: sprite-map("sprites/*.png", $spacing: 0px);
+//$sprites2x: sprite-map("sprites2x/*.png", $spacing: 0px);
+
+// Now let's define the sprite mixin.
+// This delegates to the reusable retina-sprite mixin.
+@mixin sprite($name) {
+  @include retina-sprite($name, $sprites, $sprites2x);
+}
+
+// The general purpose retina sprite mixin.
+//
+//    @include retina-sprite(name, $spritemap1, $spritemap2)
+//    @include retina-sprite(name, $spritemap1, $spritemap2[, $dimensions: true, $pad: 0])
+//
+//    If `dimensions` is true, then width/height will also be set.
+//
+//    if `pad` is non-zero, then that's how much padding the element will have (requires
+//    $spacing on the sprite maps). Great for iPhone interfaces to make hit areas bigger.
+//
+@mixin retina-sprite($name, $sprites, $sprites2x, $dimensions: true, $pad: 0) {
+  @if ($dimensions == true) {
+    @include sprite-dimensions($sprites, $name)
+  }
+  background-image: sprite-url($sprites);
+  background-position: sprite-position($sprites, $name, -$pad, -$pad);
+  background-repeat: no-repeat;
+
+  @if ($pad > 0) {
+    padding: $pad;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5) {
+      $pos: sprite-position($sprites2x, $name, -$pad*2, -$pad*2);
+      background-image: sprite-url($sprites2x);
+      background-position: nth($pos, 1) nth($pos, 2)/2;
+      @include background-size(ceil(image-width(sprite-path($sprites2x)) / 2), auto);
+      // ^-- this is the "smarter" way to do this.
+      //     sprite-path() returns the path of the generated sprite sheet, which
+      //     image-width() calculates the width of. the ceil() is in place in case
+      //     you have sprites that have an odd-number of pixels in width (which
+      //     you shouldn't in the first place)
+   }
+}

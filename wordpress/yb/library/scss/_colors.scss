@@ -1,0 +1,25 @@
+///* ==== default colors ==== */
+$white: white;
+$black: black;
+$off-black: #222;
+$light-grey: #ddd;
+$dark-grey: #555;
+
+///* ==== site-specific colors ==== */
+
+// end site specific colors
+
+// Color Settings
+$main-bg-color: white;
+$body-font-color: #555;
+$accent_color: green;
+
+$button_color: $accent_color;
+$button_text_color: white;
+$button_alt_color: $dark-grey;
+$button_alt_text_color: white;
+
+$alertColor_info: #468bbf;
+$alertColor_warning: #efd877;
+$alertColor_success: #88b12b;
+$alertColor_error: #d25c5a;

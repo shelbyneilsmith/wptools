@@ -14,11 +14,11 @@
  * @package WordPress
  */
 
-$project_name = '';
-$secret_code = '';
+$project_name = 'ybwp2';
+$secret_code = '4d6c024';
 
-$local_host_base = '';
-$staging_host_base = '';
+$local_host_base = 'stupid.local';
+$staging_host_base = 'ybdevel.com';
 
 $prod_domain = ""; //production domain name
 
@@ -48,21 +48,21 @@ if ($server_var === $project_name.".".$local_host_base) {
 	$user_name = 'root';
 	$password = 'root';
 	$hostname = 'localhost';
-	
+
 	$wp_env = 'development';
 } else if ($server_var === $project_name.".".$staging_host_base) {
 	$db_name = $dev_db_name;
 	$user_name = $dev_user_name;
 	$password = $dev_password;
 	$hostname = $dev_hostname;
-	
+
 	$wp_env = 'staging';
 } else if ($server_var === $prod_domain) {
 	$db_name = $prod_db_name;
 	$user_name = $prod_user_name;
 	$password = $prod_password;
 	$hostname = $prod_hostname;
-	
+
 	$wp_env = 'production';
 }
 
@@ -97,8 +97,17 @@ define('WP_ENV', $wp_env);
  *
  * @since 2.6.0
  */
- 
-{{salts}}
+
+define('SECURE_AUTH_KEY',  '{[9U=2Rn(/<fF ~-!Eg>,=o4A/k96m4C*/)W]]!W*fmr1t^pRL+*|QL}--_-5T&$');
+define('AUTH_KEY',         '%AF;i2+`UQX<i1-]Mu&U*9{$+/{|cy-xCKF%>T!-am71e7KTcF~aa.<iVuUPNZgy');
+define('SECURE_AUTH_KEY',  '{[9U=2Rn(/<fF ~-!Eg>,=o4A/k96m4C*/)W]]!W*fmr1t^pRL+*|QL}--_-5T&$');
+define('LOGGED_IN_KEY',    '4tcTwPppwZge-PqjOTm8,rdJd.4E`8K_%6gJ{*Kszr,]y6CW0,O[X)m:aX5>GoA ');
+define('NONCE_KEY',        'sKhXpoUC4-?0Y[HjyP?/C;|Pgvfj$NpN?-|%CLC;4plmy]NaU.6l%M2lj,A/Wl>f');
+define('AUTH_SALT',        'gFuQ).?_Z3x{1_UqZ;&`Z)4jW<@PWV*?8-u~BVmV~Kifs7Itno.vZ~}dOX9j<*)3');
+define('SECURE_AUTH_SALT', '4U%Se??][|8%aiyo205yn^N2I9_qd9<a>U@;Q>fD^&|1hT;IeV-dwuwYmOC6@3?=');
+define('LOGGED_IN_SALT',   '|zK&}~ER,$-kKB?,NTUzOGDv+~8*3A?46>QuQ*U%+w=0O@0k8pq^Sj1?);TFmj/P');
+define('NONCE_SALT',       '6Q)&ni-.+<e!1h)Uo2S=CZC$b1F[S|Pw@=LnnP5A*W]^*9V<8XWQ~=-Tswr*?0E8');
+
 
 /**#@-*/
 
@@ -123,9 +132,8 @@ define('WPLANG', '');
 
 /* Checks the WP_ENV define and sets up Wordpress depending on the environment */
 if ((WP_ENV == 'development') || (WP_ENV == 'staging')) {
-	
 	$wp_debug = true;
-	
+
 	define('WP_POST_REVISIONS', false);
 
 	define('WP_SITEURL', "http://$server_var");
@@ -136,7 +144,7 @@ if ((WP_ENV == 'development') || (WP_ENV == 'staging')) {
 
 define('WP_DEBUG', $wp_debug);
 define('DISALLOW_FILE_EDIT', true);
-
+define( 'WP_DEFAULT_THEME', 'yb' );
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */

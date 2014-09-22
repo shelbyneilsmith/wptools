@@ -1,0 +1,37 @@
+///* ==== global settings ==== */
+$border-radius: 10px;
+
+// Typography
+$base-font-size: 16;
+$line: 24;
+
+$display-font: "Open Sans", sans-serif;
+// $copy-font: verdana, sans-serif;
+$icons: entypo;
+
+// Transition settings
+$trans-speed: 200ms;
+$trans-ease: ease;
+
+// Button style settings
+$global_btn_style: 'flat';
+$has_alt_btn_color: true;
+
+// Main layout/responsive breakpoint settings
+$mobileColumn: 400px;
+$narrowColumn: 45em;
+$multiColumn: 66em;
+
+$mainWidth: $narrowColumn;
+$multiWidth: $multiColumn;
+$narrowWidth: 95%;
+$mobileWidth: 90%;
+
+// Grid settings
+$totalCols: 16;
+$gutter: 5%;
+$columnWidth: ((100 - ($gutter * ($totalCols))) / $totalCols);
+
+// Footer style settings
+$sticky_footer: false;
+$sticky_footer_height: 54px;

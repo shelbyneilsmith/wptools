@@ -1,0 +1,110 @@
+/* CORE TYPOGRAPHY
+----------------------------------------------------------------------------------------*/
+$em: $base-font-size * 1;
+
+// include all entypo icon classes
+//@include icon(all);
+
+body {
+	/* 16px / 24px */
+	font-size: $base-font-size;
+	line-height: #{$line / $em}em;
+	font-family: verdana, sans-serif;
+}
+
+p, ul, ol, dl, blockquote {
+	margin-bottom: 1.618em;
+}
+
+@mixin small {
+	/* 13px / 18px */
+	font-size: #{($base-font-size*0.8125) / $em}em;
+	line-height: ($line*0.75) / ($font-size*0.8125) * 1em;
+}
+@mixin normal {
+	/* 16px / 24px */
+	font-size: #{$base-font-size / $em}em;
+	line-height: #{$line / $em}em; /* 24 */
+}
+
+@mixin large {
+	/* 30 / 36px */
+	font-size: #{30 / $em}em;
+	line-height: ($line*1.5) / 30 * 1em;
+}
+
+@mixin huge {
+	/* 42px / 48px */
+	font-size: #{42 / $em}em;
+	line-height: ($line*2) / 42 * 1em;
+}
+
+@mixin massive {
+	/* 68px / 72px */
+	font-size: #{68 / $em}em;
+	line-height: ($line*3) / 68 * 1em;
+}
+
+@mixin gigantic {
+	/* 110px / 120px */
+	font-size: #{110 / $em}em;
+	line-height: ($line*5) / 110 * 1em;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $display-font;
+	margin-bottom: 0.809em;
+	font-weight: bold;
+	text-rendering: optimizeLegibility;
+}
+
+h1 {
+	@include large;
+}
+
+h2 {
+	@include large;
+}
+
+h3 {
+	font-size: 1.375em; /* 22px --> 22 ÷ 16 = 1.125 */
+	line-height: 1.091em; /* 24px --> 24 ÷ 22 = 1.3333333(3) */
+}
+
+h4 {
+	font-size: 1.125em; /* 18px --> 18 ÷ 16 = 1.125 */
+	line-height: 1.333em; /* 24px --> 24 ÷ 18 = 1.3333333(3) */
+}
+
+h5, h6 {
+	font-size: 1em; /* 16px --> 16 ÷ 16 = 1 */
+	line-height: 1.5em; /* 24px --> 24 ÷ 16 = 1.5 */
+}
+
+/* LINKS
+----------------------------------------------------------------------------------------*/
+a, a:visited { outline: none; color: $accent_color; @include transition(all $trans-speed); text-decoration: underline; }
+a:hover { outline: none; text-decoration:none; }
+a:active, a:focus { outline: none; }
+
+b, strong { font-weight: bold; }
+i, em { font-style: italic; }
+small { font-size: 80%; }
+
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}

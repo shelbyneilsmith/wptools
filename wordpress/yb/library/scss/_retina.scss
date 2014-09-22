@@ -1,0 +1,198 @@
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+
+	#header-searchform input {
+		background-image: url(../_images/search@2x.png);
+		@include background-size(16px 16px);
+	}
+
+	#header-cart {
+		background-image: url(../_images/cart@2x.png);
+		@include background-size(16px 16px);
+	}
+
+	.accordion .accordion-title a{
+		background-image:url(../_images/accordion-open@2x.png);
+		@include background-size(39px 80px);
+	}
+	.accordion .accordion-title.active a{
+		background-image:url(../_images/accordion-close@2x.png);
+		@include background-size(39px 80px);
+	}
+	.toggle .toggle-title span{
+		background-image:url(../_images/accordion-open@2x.png);
+		@include background-size(39px 80px);
+	}
+	.toggle .toggle-title.active span{
+		background-image:url(../_images/accordion-close@2x.png);
+		@include background-size(39px 80px);
+	}
+	.sidenav li a, .widget_wp_nav_menu_desc li a{
+		background-image:url(../_images/arrow5@2x.png);
+		@include background-size(7px 11px);
+	}
+	.sidenav li.current_page_item a, .sidenav li.current_page_item a:hover,
+	.widget_wp_nav_menu_desc li.current_page_item a, .widget_wp_nav_menu_desc li.current_page_item a:hover{
+		background-image:url(../_images/arrow5_white@2x.png);
+		@include background-size(7px 11px);
+	}
+	#back-to-top a{
+		background-image:url(../_images/backtotop@2x.png);
+		@include background-size(15px 10px);
+	}
+	.hr2{
+		background-image:url(../_images/dotted@2x.png);
+		@include background-size(4px 1px);
+	}
+	#alt-title .grid{
+		background-image:url(../_images/grid@2x.png);
+		@include background-size(2px 2px);
+	}
+	.hr-border, .hr4, .teaserbox, .callout, .description.style-2, .title {
+		background-image:url(../_images/stripes@2x.png);
+		@include background-size(5px 5px);
+	}
+	.close-infobar:after, .close-infobar.open:after{
+		background-image:url(../_images/toggle@2x.png);
+		@include background-size(80px 40px);
+	}
+	.overlay, .single .post-image .overlay, .single .post-gallery .overlay, .portfolio-item .portfolio-pic .portfolio-overlay .overlay-lightbox, .portfolio-item-one .portfolio-pic .portfolio-overlay .overlay-lightbox {
+		background-image:url(../_images/overlay-lightbox@2x.png);
+		@include background-size(20px 20px);
+	}
+	.post-image .overlay, .post-gallery .overlay, .portfolio-item .portfolio-pic .portfolio-overlay .overlay-link, .portfolio-item-one .portfolio-pic .portfolio-overlay .overlay-link{
+		background-image:url(../_images/overlay-link@2x.png);
+		@include background-size(20px 20px);
+	}
+	.post-icon.standard{
+		background-image:url(../_images/postformat-standard@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-icon.imagegallery{
+		background-image:url(../_images/postformat-gallery@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-icon.link{
+		background-image:url(../_images/postformat-link@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-icon.quote{
+		background-image:url(../_images/postformat-quote@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-icon.video{
+		background-image:url(../_images/postformat-video@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-icon.audio{
+		background-image:url(../_images/postformat-audio@2x.png);
+		@include background-size(35px 35px);
+	}
+	.post-quote{
+		background-image:url(../_images/quote@2x.png);
+		@include background-size(21px 17px);
+	}
+	.widget_search input{
+		background-image:url(../_images/search@2x.png);
+		@include background-size(13px 13px);
+	}
+	.projects-nav .next a, .post-navigation .next a, .flex-direction-nav .flex-next {
+		background-image:url(../_images/slider-next@2x.png);
+		@include background-size(10px 15px);
+	}
+	.projects-nav .prev a, .post-navigation .prev a, .flex-direction-nav .flex-prev{
+		background-image:url(../_images/slider-prev@2x.png);
+		@include background-size(10px 15px);
+	}
+	.testimonial:after{
+		background-image:url(../_images/testimonials@2x.png);
+		@include background-size(22px 22px);
+	}
+	.widget_twitter ul li, .widget_tp_widget_recent_tweets ul li{
+		background:url(../_images/twitter@2x.png) no-repeat !important;
+		@include background-size(22px 18px !important);
+	}
+	#related-posts ul li, #sidebar .widget ul li, #footer .widget ul li, #infobar .widget ul li {
+		background-image:url(../_images/arrow4@2x.png);
+		@include background-size(5px 5px);
+	}
+	#twitterbar .twitterpost {
+		background-image: url(../_images/icons/twitter@2x.png);
+		@include background-size(40px 80px);
+	}
+
+	[class^="icon-"],
+	[class*=" icon-"] {
+		background-image: url(../_images/glyphicons-halflings@2x.png);
+		@include background-size(469px 159px);
+	}
+
+	a.button.black i,
+	a.button.alternative-1 i,
+	a.button.alternative-2 i,
+	a.button.alternative-3 i,
+	.icon-white,
+	.nav > .active > a > [class^="icon-"],
+	.nav > .active > a > [class*=" icon-"],
+	.dropdown-menu > li > a:hover > [class^="icon-"],
+	.dropdown-menu > li > a:hover > [class*=" icon-"],
+	.dropdown-menu > .active > a > [class^="icon-"],
+	.dropdown-menu > .active > a > [class*=" icon-"] {
+		background-image: url(../_images/glyphicons-halflings-white@2x.png);
+		@include background-size(469px 159px);
+	}
+
+	.social-email a { background: url(../_images/icons/email@2x.png); @include background-size(40px 80px); }
+	.social-aim a { background-image: url(../_images/icons/aim@2x.png); @include background-size(40px 80px); }
+	.social-apple a { background-image: url(../_images/icons/apple@2x.png); @include background-size(40px 80px); }
+	.social-behance a { background-image: url(../_images/icons/behance@2x.png); @include background-size(40px 80px); }
+	.social-blogger a { background-image: url(../_images/icons/blogger@2x.png); @include background-size(40px 80px); }
+	.social-cargo a { background-image: url(../_images/icons/cargo@2x.png); @include background-size(40px 80px); }
+	.social-delicious a { background-image: url(../_images/icons/delicious@2x.png); @include background-size(40px 80px); }
+	.social-deviantart a { background-image: url(../_images/icons/deviantart@2x.png); @include background-size(40px 80px); }
+	.social-digg a { background-image: url(../_images/icons/digg@2x.png); @include background-size(40px 80px); }
+	.social-dopplr a { background-image: url(../_images/icons/dopplr@2x.png); @include background-size(40px 80px); }
+	.social-dribbble a { background-image: url(../_images/icons/dribbble@2x.png); @include background-size(40px 80px); }
+	.social-ember a { background-image: url(../_images/icons/ember@2x.png); @include background-size(40px 80px); }
+	.social-evernote a { background-image: url(../_images/icons/evernote@2x.png); @include background-size(40px 80px); }
+	.social-facebook a { background-image: url(../_images/icons/facebook@2x.png); @include background-size(40px 80px); }
+	.social-flickr a { background-image: url(../_images/icons/flickr@2x.png); @include background-size(40px 80px); }
+	.social-forrst a { background-image: url(../_images/icons/forrst@2x.png); @include background-size(40px 80px); }
+	.social-github a { background-image: url(../_images/icons/github@2x.png); @include background-size(40px 80px); }
+	.social-google a { background-image: url(../_images/icons/google@2x.png); @include background-size(40px 80px); }
+	.social-googleplus a { background-image: url(../_images/icons/googleplus@2x.png); @include background-size(40px 80px); }
+	.social-gowalla a { background-image: url(../_images/icons/gowalla@2x.png); @include background-size(40px 80px); }
+	.social-grooveshark a { background-image: url(../_images/icons/grooveshark@2x.png); @include background-size(40px 80px); }
+	.social-html5 a { background-image: url(../_images/icons/html5@2x.png); @include background-size(40px 80px); }
+	.social-icloud a { background-image: url(../_images/icons/icloud@2x.png); @include background-size(40px 80px); }
+	.social-instagram a { background-image: url(../_images/icons/instagram@2x.png); @include background-size(40px 80px); }
+	.social-lastfm a { background-image: url(../_images/icons/lastfm@2x.png); @include background-size(40px 80px); }
+	.social-linkedin a { background-image: url(../_images/icons/linkedin@2x.png); @include background-size(40px 80px); }
+	.social-metacafe a { background-image: url(../_images/icons/metacafe@2x.png); @include background-size(40px 80px); }
+	.social-mixx a { background-image: url(../_images/icons/mixx@2x.png); @include background-size(40px 80px); }
+	.social-myspace a { background-image: url(../_images/icons/myspace@2x.png); @include background-size(40px 80px); }
+	.social-netvibes a { background-image: url(../_images/icons/netvibes@2x.png); @include background-size(40px 80px); }
+	.social-newsvine a { background-image: url(../_images/icons/newsvine@2x.png); @include background-size(40px 80px); }
+	.social-orkut a { background-image: url(../_images/icons/orkut@2x.png); @include background-size(40px 80px); }
+	.social-paypal a { background-image: url(../_images/icons/paypal@2x.png); @include background-size(40px 80px); }
+	.social-picasa a { background-image: url(../_images/icons/picasa@2x.png); @include background-size(40px 80px); }
+	.social-pinterest a { background-image: url(../_images/icons/pinterest@2x.png); @include background-size(40px 80px); }
+	.social-plurk a { background-image: url(../_images/icons/plurk@2x.png); @include background-size(40px 80px); }
+	.social-posterous a { background-image: url(../_images/icons/posterous@2x.png); @include background-size(40px 80px); }
+	.social-reddit a { background-image: url(../_images/icons/reddit@2x.png); @include background-size(40px 80px); }
+	.social-rss a { background-image: url(../_images/icons/rss@2x.png); @include background-size(40px 80px); }
+	.social-skype a { background-image: url(../_images/icons/skype@2x.png); @include background-size(40px 80px); }
+	.social-stumbleupon a { background-image: url(../_images/icons/stumbleupon@2x.png); @include background-size(40px 80px); }
+	.social-technorati a { background-image: url(../_images/icons/technorati@2x.png); @include background-size(40px 80px); }
+	.social-tumblr a { background-image: url(../_images/icons/tumblr@2x.png); @include background-size(40px 80px); }
+	.social-twitter a { background-image: url(../_images/icons/twitter@2x.png); @include background-size(40px 80px); }
+	.social-vimeo a { background-image: url(../_images/icons/vimeo@2x.png); @include background-size(40px 80px); }
+	.social-wordpress a { background-image: url(../_images/icons/wordpress@2x.png); @include background-size(40px 80px); }
+	.social-yahoo a { background-image: url(../_images/icons/yahoo@2x.png); @include background-size(40px 80px); }
+	.social-yelp a { background-image: url(../_images/icons/yelp@2x.png); @include background-size(40px 80px); }
+	.social-youtube a { background-image: url(../_images/icons/youtube@2x.png); @include background-size(40px 80px); }
+	.social-zerply a { background-image: url(../_images/icons/zerply@2x.png); @include background-size(40px 80px); }
+	.social-zootool a { background-image: url(../_images/icons/zootool@2x.png); @include background-size(40px 80px); }
+	.social-xing a { background-image: url(../_images/icons/xing@2x.png); @include background-size(40px 80px); }
+
+}
