@@ -7,7 +7,7 @@ $em: $base-font-size * 1;
 
 body {
 	/* 16px / 24px */
-	font-size: $base-font-size;
+	font-size: #{$base-font-size}px;
 	line-height: #{$line / $em}em;
 	font-family: verdana, sans-serif;
 }
@@ -55,7 +55,7 @@ p, ul, ol, dl, blockquote {
 h1, h2, h3, h4, h5, h6 {
 	font-family: $display-font;
 	margin-bottom: 0.809em;
-	font-weight: bold;
+	font-weight: $display-font-weight;
 	text-rendering: optimizeLegibility;
 }
 

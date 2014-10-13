@@ -4,11 +4,34 @@
 /*	Simple Div w/ Class
 /*-----------------------------------------------------------------------------------*/
 function yb_div( $atts, $content = null) {
-extract( shortcode_atts( array(
+	extract( shortcode_atts( array(
 		'class' => 'div-class'
-		), $atts ) );
-		return '<div class="clearfix '.$class. '">' . do_shortcode($content) . '</div>';
+	), $atts ) );
+	return '<div class="clearfix '.$class. '">' . do_shortcode($content) . '</div>';
 }
+
+/*-----------------------------------------------------------------------------------*/
+/*	Content Box
+/*-----------------------------------------------------------------------------------*/
+function yb_box( $atts, $content = null) {
+extract( shortcode_atts( array(
+		'style' => '1',
+		'class' => 'box-class'
+		), $atts ) );
+		return '<div class="'.$class.' clearfix style-' .$style. '">' . do_shortcode($content) . '</div>';
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Simple Div w/ Class
+/*-----------------------------------------------------------------------------------*/
+function yb_placeholder_img( $atts, $content = null) {
+	extract( shortcode_atts( array(
+		'width' => 'width',
+		'height' => 'height'
+	), $atts ) );
+	return '<img src="http://placehold.it/'.$width.'x'.$height.'" />';
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /*	Accordion
@@ -103,117 +126,20 @@ function yb_buttons( $atts, $content = null ) {
 }
 
 /*-----------------------------------------------------------------------------------*/
-/* Callouts & Teaser
-/*-----------------------------------------------------------------------------------*/
-
-function yb_teaser( $atts, $content = null) {
-extract( shortcode_atts( array(
-		'img' => '',
-		'url' => ''
-		), $atts ) );
-
-		if($url == '') {
-		$return2 = "";
-		$return3 = "";
-		} else{
-		$return2 = "<a href='".$url."'>";
-		$return3 = "</a>";
-		}
-
-		if($img == '') {
-		$return = "";
-		} else{
-		$return = "<div class='teaser-img'>".$return2."<img src='".$img."' />".$return3."</div>";
-		}
-
-		return '<div class="teaser">' .$return. '' . do_shortcode($content) . '</div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
-
-function yb_teaserbox( $atts, $content = null) {
-extract( shortcode_atts( array(
-		'title' => '',
-		'button' => '',
-		'buttonsize' => 'normal',
-		'buttontype'	=> '',
-		'buttonaltcolor'	=> 'false',
-		'link' => '',
-		'target'  => '_self'
-		), $atts ) );
-		if($buttonaltcolor == 'true') {
-			$returncolor = "alt ";
-		} else {
-			$returncolor = "";
-		}
-		return '<div class="teaserbox"><div class="border"><h2 class="highlight">' .$title. '</h2>' . do_shortcode($content) . '<br /><a class="button ' .$buttontype." ".$returncolor.$buttonsize. '" href="' .$link. '" target="' .$target. '">' .$button. '</a></div></div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
-
-function yb_callout( $atts, $content = null) {
-extract( shortcode_atts( array(
-		'title' => '',
-		'button' => '',
-		'buttonsize' => 'normal',
-		'buttontype'	=> '',
-		'buttonaltcolor'	=> 'false',
-		'link' => '',
-		'target'  => '_self',
-		'buttonmargin' => '0px'
-		), $atts ) );
-		if($buttonaltcolor == 'true') {
-			$returncolor = "alt ";
-		} else {
-			$returncolor = "";
-		}
-		return '<div class="callout"><div class="border clearfix"><div class="callout-content">
-						<h2 class="highlight">' .$title. '</h2>' . do_shortcode($content) . '
-					</div><div class="callout-button" style="margin:' .$buttonmargin. ';">
-						<a class="button ' .$buttontype." ".$returncolor.$buttonsize. '" href="' .$link. '" target="' .$target. '">' .$button. '</a>
-					</div></div></div>';
-}
-
-function yb_box( $atts, $content = null) {
-extract( shortcode_atts( array(
-		'style' => '1'
-		), $atts ) );
-		return '<div class="description clearfix style-' .$style. '">' . do_shortcode($content) . '</div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*	Google Font
-/*-----------------------------------------------------------------------------------*/
-
-function yb_googlefont( $atts, $content = null) {
-extract( shortcode_atts( array(
-			'font' => 'Swanky and Moo Moo',
-			'size' => '42px',
-			'margin' => '0px'
-		), $atts ) );
-
-		$google = preg_replace("/ /","+",$font);
-
-		return '<link href="http://fonts.googleapis.com/css?family='.$google.'&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese" rel="stylesheet" type="text/css">
-					<div class="googlefont" style="font-family:\'' .$font. '\', serif !important; font-size:' .$size. ' !important; margin: ' .$margin. ' !important;">' . do_shortcode($content) . '</div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
 /*	HR Dividers
 /*-----------------------------------------------------------------------------------*/
 function yb_hr( $atts, $content = null) {
 extract( shortcode_atts( array(
-		'style' => '1',
 		'margin' => ''
 		), $atts ) );
 
 	 if($margin == '') {
 		$return = "";
 	 } else{
-		$return = "style='margin:".$margin." !important;'";
+		$return = " style='margin:".$margin." !important;'";
 	 }
 
-	 return '<hr class="hr' .$style. '" ' .$return. '></hr>';
+	 return '<hr' .$return. '></hr>';
 }
 
 
@@ -964,28 +890,6 @@ function yb_pullquote( $atts, $content = null ) {
 }
 
 /*-----------------------------------------------------------------------------------*/
-/* Responsive Images
-/*-----------------------------------------------------------------------------------*/
-
-function yb_responsive( $atts, $content = null ) {
-	 extract(shortcode_atts(array(), $atts));
-
-	return '<span class="responsive">' . do_shortcode($content) . '</span>';
-}
-
-/*-----------------------------------------------------------------------------------*/
-/* Responsive Visibility
-/*-----------------------------------------------------------------------------------*/
-
-function yb_responsivevisibility( $atts, $content = null) {
-
-extract( shortcode_atts( array(
-		'show' => 'desktop'
-		), $atts ) );
-		return '<div class="visibility-' . $show . '">' . do_shortcode($content) . '</div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
 /* Social Icons
 /*-----------------------------------------------------------------------------------*/
 
@@ -1102,160 +1006,133 @@ function yb_toggle( $atts, $content = null){
 	return '<div class="toggle"><div class="toggle-title '.$return2.'">'.$return.''.$title.'<span></span></div><div class="toggle-inner"><p>'. do_shortcode($content) . '</p></div></div>';
 }
 
-
-/*-----------------------------------------------------------------------------------*/
-/* Tooltip */
-/*-----------------------------------------------------------------------------------*/
-
-function yb_tooltip( $atts, $content = null)
-{
-	extract(shortcode_atts(array(
-		  'text' => ''
-	 ), $atts));
-
-	return '<span class="tooltips"><a href="#" rel="tooltip" title="'.$text.'">'. do_shortcode($content) . '</a></span>';
-}
-
-/*-----------------------------------------------------------------------------------*/
-/* Separator */
-/*-----------------------------------------------------------------------------------*/
-
-function yb_separator( $atts, $content = null){
-	extract(shortcode_atts(array(
-			'headline'      => 'h3',
-			'title' => 'Title'
-	 ), $atts));
-
-	return '<'.$headline.' class="title"><span>'.$title.'</span></'.$headline.'>';
-}
-
 /*-----------------------------------------------------------------------------------*/
 /*	Latest Projects
 /*-----------------------------------------------------------------------------------*/
 
-function yb_portfolio($atts){
-	extract(shortcode_atts(array(
-			'projects'      => '4',
-			'title' => 'Portfolio',
-			'show_title' => 'yes',
-			'columns' => '4',
-			'filters' => 'all'
-	 ), $atts));
+// function yb_portfolio($atts){
+// 	extract(shortcode_atts(array(
+// 			'projects'      => '4',
+// 			'title' => 'Portfolio',
+// 			'show_title' => 'yes',
+// 			'columns' => '4',
+// 			'filters' => 'all'
+// 	 ), $atts));
 
-	global $post;
-	global $data;
+// 	global $post;
+// 	global $data;
 
-	if ( $data['check_portfoliotype'] == true ) {
+// 	if ( $data['check_portfoliotype'] == true ) {
 
-		$args = array(
-			'post_type' => 'portfolio',
-			'posts_per_page' => $projects,
-			'order'          => 'DESC',
-			'orderby'        => 'date',
-			'post_status'    => 'publish'
-		 );
+// 		$args = array(
+// 			'post_type' => 'portfolio',
+// 			'posts_per_page' => $projects,
+// 			'order'          => 'DESC',
+// 			'orderby'        => 'date',
+// 			'post_status'    => 'publish'
+// 		 );
 
-		 if($filters != 'all'){
+// 		 if($filters != 'all'){
 
-			// string to array
-			$str = $filters;
-			$arr = explode(',', $str);
-			//var_dump($arr);
+// 			// string to array
+// 			$str = $filters;
+// 			$arr = explode(',', $str);
+// 			//var_dump($arr);
 
-			$args['tax_query'][] = array(
-				'taxonomy' => 'portfolio_filter',
-				'field' 	=> 'slug',
-				'terms' 	=> $arr
-			);
-		}
-
-
-		 $randomid = rand();
-
-		 query_posts( $args );
-		 $out = '';
-
-		if( have_posts() ) :
-
-			if($show_title == 'yes'){
-				$out .= '<h3 class="title"><span>'.$title.'</span></h3>';
-			}
-
-			if($columns == '3'){
-				$return = 'one-third';
-			}
-			elseif($columns == '2'){
-				$return = 'eight';
-			}
-			else{
-				$return = 'four';
-			}
+// 			$args['tax_query'][] = array(
+// 				'taxonomy' => 'portfolio_filter',
+// 				'field' 	=> 'slug',
+// 				'terms' 	=> $arr
+// 			);
+// 		}
 
 
-			$out .= '<div class="latest-portfolio negative-wrap">';
-			while ( have_posts() ) : the_post();
+// 		 $randomid = rand();
 
-				$out .= '<div class="portfolio-item '.$return.' columns">';
+// 		 query_posts( $args );
+// 		 $out = '';
 
+// 		if( have_posts() ) :
 
-				$embedd = '';
+// 			if($show_title == 'yes'){
+// 				$out .= '<h3 class="title"><span>'.$title.'</span></h3>';
+// 			}
 
-					if( get_post_meta( get_the_ID(), 'yb_portfolio-lightbox', true ) == "true") {
-						$lightboxtype = '<span class="overlay-lightbox"></span>';
-						if( get_post_meta( get_the_ID(), 'yb_embed', true ) != "") {
-								if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'youtube' ) {
-									$link = '<a href="http://www.youtube.com/watch?v='.get_post_meta( get_the_ID(), 'yb_embed', true ).'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
-								} else if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'vimeo' ) {
-									$link = '<a href="http://vimeo.com/'. get_post_meta( get_the_ID(), 'yb_embed', true ) .'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
-								} else if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'own' ) {
-									$randomid = rand();
-									$link = '<a href="#embedd-video-'.$randomid.'" class="prettyPhoto" title="'. get_the_title() .'" rel="prettyPhoto[portfolio]">';
-									$embedd = '<div id="embedd-video-'.$randomid.'" class="embedd-video"><p>'. get_post_meta( get_the_ID(), 'yb_embed', true ) .'</p></div>';
-								}
-						} else {
-							$link = '<a href="'. wp_get_attachment_url( get_post_thumbnail_id() ) .'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
-						}
-					}
-					else{
-						$lightboxtype = '<span class="overlay-link"></span>';
-						$link = '<a href="'. get_permalink() .'" title="'. get_the_title() .'">';
-						$embedd = '';
-					}
+// 			if($columns == '3'){
+// 				$return = 'one-third';
+// 			}
+// 			elseif($columns == '2'){
+// 				$return = 'eight';
+// 			}
+// 			else{
+// 				$return = 'four';
+// 			}
 
 
-				if ( has_post_thumbnail()) {
+// 			$out .= '<div class="latest-portfolio negative-wrap">';
+// 			while ( have_posts() ) : the_post();
 
-						$portfolio_thumbnail= wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'eight-columns' );
+// 				$out .= '<div class="portfolio-item '.$return.' columns">';
 
-						if(get_post_meta( get_the_ID(), "yb_subtitle", true ) != '' ) {
-							$subtitle = get_post_meta( get_the_ID(), "yb_subtitle", true );
-						} else {
-							$subtitle = substr(get_the_excerpt(),0,25).'...';
-						}
 
-						$out .= '<div class="portfolio-it">
-							'. $link . '<span class="portfolio-pic"><img src="'.$portfolio_thumbnail[0].'" /><div class="portfolio-overlay">'. $lightboxtype .'</div></span></a>
-							<a href="'. get_permalink() .'" title="'. get_the_title() .'" class="portfolio-title"><h4>'. get_the_title() .'</h4><span>'.$subtitle.'</span></a>
-						</div>';
+// 				$embedd = '';
 
-						$out .= $embedd;
+// 					if( get_post_meta( get_the_ID(), 'yb_portfolio-lightbox', true ) == "true") {
+// 						$lightboxtype = '<span class="overlay-lightbox"></span>';
+// 						if( get_post_meta( get_the_ID(), 'yb_embed', true ) != "") {
+// 								if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'youtube' ) {
+// 									$link = '<a href="http://www.youtube.com/watch?v='.get_post_meta( get_the_ID(), 'yb_embed', true ).'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
+// 								} else if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'vimeo' ) {
+// 									$link = '<a href="http://vimeo.com/'. get_post_meta( get_the_ID(), 'yb_embed', true ) .'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
+// 								} else if ( get_post_meta( get_the_ID(), 'yb_source', true ) == 'own' ) {
+// 									$randomid = rand();
+// 									$link = '<a href="#embedd-video-'.$randomid.'" class="prettyPhoto" title="'. get_the_title() .'" rel="prettyPhoto[portfolio]">';
+// 									$embedd = '<div id="embedd-video-'.$randomid.'" class="embedd-video"><p>'. get_post_meta( get_the_ID(), 'yb_embed', true ) .'</p></div>';
+// 								}
+// 						} else {
+// 							$link = '<a href="'. wp_get_attachment_url( get_post_thumbnail_id() ) .'" class="prettyPhoto" rel="prettyPhoto[portfolio]" title="'. get_the_title() .'">';
+// 						}
+// 					}
+// 					else{
+// 						$lightboxtype = '<span class="overlay-link"></span>';
+// 						$link = '<a href="'. get_permalink() .'" title="'. get_the_title() .'">';
+// 						$embedd = '';
+// 					}
 
-				}
 
-				 $out .='</div>';
+// 				if ( has_post_thumbnail()) {
 
-			endwhile;
+// 						$portfolio_thumbnail= wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'eight-columns' );
 
-			$out .='</div><div class="clear"></div>';
+// 						if(get_post_meta( get_the_ID(), "yb_subtitle", true ) != '' ) {
+// 							$subtitle = get_post_meta( get_the_ID(), "yb_subtitle", true );
+// 						} else {
+// 							$subtitle = substr(get_the_excerpt(),0,25).'...';
+// 						}
 
-			 wp_reset_query();
+// 						$out .= '<div class="portfolio-it">
+// 							'. $link . '<span class="portfolio-pic"><img src="'.$portfolio_thumbnail[0].'" /><div class="portfolio-overlay">'. $lightboxtype .'</div></span></a>
+// 							<a href="'. get_permalink() .'" title="'. get_the_title() .'" class="portfolio-title"><h4>'. get_the_title() .'</h4><span>'.$subtitle.'</span></a>
+// 						</div>';
 
-		endif;
+// 						$out .= $embedd;
 
-		return $out;
-	}
-}
-add_shortcode('portfolio', 'yb_portfolio');
+// 				}
+
+// 				 $out .='</div>';
+
+// 			endwhile;
+
+// 			$out .='</div><div class="clear"></div>';
+
+// 			 wp_reset_query();
+
+// 		endif;
+
+// 		return $out;
+// 	}
+// }
+// add_shortcode('portfolio', 'yb_portfolio');
 
 /*-----------------------------------------------------------------------------------*/
 /*	Latest Blog
@@ -1499,21 +1376,8 @@ function pre_process_shortcode($content) {
 	 remove_all_shortcodes();
 
 	 add_shortcode('div', 'yb_div');
-	 add_shortcode('accordion', 'yb_accordion');
-	 add_shortcode('alert', 'yb_alert');
-	 add_shortcode('button', 'yb_buttons');
-
-	 add_shortcode('teaserbox', 'yb_teaserbox');
-	 add_shortcode('teaser', 'yb_teaser');
-	 add_shortcode('callout', 'yb_callout');
 	 add_shortcode('box', 'yb_box');
-
-	 add_shortcode('googlefont', 'yb_googlefont');
-
-	 add_shortcode('br', 'yb_br');
-	 add_shortcode('clear', 'yb_clear');
-	 add_shortcode('gap', 'yb_gap');
-	 add_shortcode('hr', 'yb_hr');
+	add_shortcode('section', 'yb_section');
 
 	 add_shortcode('one_third', 'yb_one_third');
 	add_shortcode('one_third_last', 'yb_one_third_last');
@@ -1537,6 +1401,19 @@ function pre_process_shortcode($content) {
 	add_shortcode('one_sixth_last', 'yb_one_sixth_last');
 	add_shortcode('five_sixth', 'yb_five_sixth');
 	add_shortcode('five_sixth_last', 'yb_five_sixth_last');
+
+	 add_shortcode('gap', 'yb_gap');
+	 add_shortcode('hr', 'yb_hr');
+	 add_shortcode('clear', 'yb_clear');
+
+	 add_shortcode('yb_button', 'yb_buttons');
+
+	 add_shortcode('placeholder_img', 'yb_placeholder_img');
+
+	 add_shortcode('accordion', 'yb_accordion');
+	 add_shortcode('alert', 'yb_alert');
+
+	 add_shortcode('br', 'yb_br');
 
 	add_shortcode('dropcap', 'yb_dropcap');
 
@@ -1562,10 +1439,6 @@ function pre_process_shortcode($content) {
 	add_shortcode('blockquote', 'yb_blockquote');
 	add_shortcode('pullquote', 'yb_pullquote');
 
-	add_shortcode('responsive', 'yb_responsive');
-	add_shortcode('visibility', 'yb_responsivevisibility');
-
-	add_shortcode('section', 'yb_section');
 	add_shortcode('videosection', 'yb_videosection');
 
 	add_shortcode('social', 'yb_social');
@@ -1576,9 +1449,7 @@ function pre_process_shortcode($content) {
 
 	add_shortcode('toggle', 'yb_toggle');
 
-	add_shortcode('tooltip', 'yb_tooltip');
 	add_shortcode('highlight', 'yb_highlight');
-	add_shortcode('separator', 'yb_separator');
 
 	add_shortcode('tagline', 'yb_tagline');
 
@@ -1613,27 +1484,36 @@ function add_button() {
 
 // Define Position of TinyMCE Icons
 function register_button_3($buttons) {
-	array_push($buttons, "yb_div", "accordion", "alert", "yb_button", "divider", "dropcap", "video", "maps", "gap", "clear", "icon", "miniicon", "iconbox", "retinaicon", "retinaiconbox", "member", "skill", "pricing", "projects", "blog", "bloglist", "testimonial");
+	array_push($buttons, "div", "box", "section", "one_half", "one_third", "two_third", "one_fourth", "three_fourth", "one_fifth", "gap", "divider", "clear", "yb_button", "placeholder_img");
 	return $buttons;
 }
 function register_button_4($buttons) {
-	array_push($buttons, "pullquote", "responsiveimage", "visibility", "socialmedia", "table", "tabs", "toggle", "yb_tooltip", "list", "separatorheadline", "googlefont", "one_half", "one_third", "two_third", "one_fourth", "three_fourth", "one_fifth", "teaser", "teaserbox", "callout", "box", "section");
+	array_push($buttons, "accordion", "alert", "dropcap", "video", "maps", "icon", "miniicon", "iconbox", "retinaicon", "retinaiconbox", "member", "skill", "pricing", "projects", "blog", "bloglist", "testimonial", "pullquote", "socialmedia", "table", "tabs", "toggle", "list");
 	return $buttons;
 }
 
 function add_plugin($plugin_array) {
 	global $data;
 
-	$plugin_array['yb_div'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['div'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['box'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['section'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['one_half'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['one_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['two_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['one_fourth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['three_fourth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['one_fifth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['gap'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['divider'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['clear'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['yb_button'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['placeholder_img'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['accordion'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['alert'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['yb_button'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['divider'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['dropcap'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['video'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['maps'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['gap'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['clear'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['icon'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['miniicon'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['iconbox'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
@@ -1644,29 +1524,14 @@ function add_plugin($plugin_array) {
 	$plugin_array['skill'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['pricing'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['pullquote'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['responsiveimage'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['socialmedia'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['table'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['tabs'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['toggle'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['yb_tooltip'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['separatorheadline'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['googlefont'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['one_half'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['one_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['two_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['one_fourth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['three_fourth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['one_fifth'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['teaser'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['teaserbox'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['callout'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['box'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['projects'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	// $plugin_array['projects'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['blog'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['bloglist'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['testimonial'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['section'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 
 	return $plugin_array;
 }

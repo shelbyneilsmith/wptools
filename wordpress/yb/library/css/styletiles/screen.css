@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "utf-8";
 /* RESET
 ----------------------------------------------------------------------------------------*/
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_base\.scss}line{font-family:\00003153}}
@@ -397,50 +397,62 @@ li.dropMenu ul {
 .wrapper.option-a .logo {
   width: 200px;
   height: 70px;
-  background-image: url("../images/logo.png");
+  background-image: url("../../_images/logo.png");
+  background-size: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000323}}
 .wrapper.option-a h1, .wrapper.option-a h2, .wrapper.option-a h3, .wrapper.option-a h4, .wrapper.option-a h5, .wrapper.option-a h6 {
   font-family: sans-serif;
   color: #222222;
+  margin-bottom: 24px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000329}}
 .wrapper.option-a h1 {
   font-size: 2.2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000333}}
 .wrapper.option-a h2 {
   font-size: 1.8em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000337}}
 .wrapper.option-a p {
   font-family: georgia, serif;
   color: #555555;
-  font-size: .9em;
+  font-size: 1em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000347}}
 .wrapper.option-a .navigation li {
   font-family: sans-serif;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000350}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000355}}
 .wrapper.option-a .masthead {
   background-image: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000362}}
 .wrapper.option-a .btn {
   color: #222222;
   font-family: sans-serif;
   font-weight: bold;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000367}}
 .wrapper.option-a .btn.btn-1 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000372}}
 .wrapper.option-a .btn.btn-2 {
   background-color: #c4c4c4;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000379}}
 .wrapper.option-a .main-inner {
   background: white;
   padding: 2%;
@@ -448,7 +460,7 @@ li.dropMenu ul {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000391}}
 .wrapper.option-a .pull-out p {
   font-family: sans-serif;
   font-size: 1.4em;
@@ -456,29 +468,29 @@ li.dropMenu ul {
   line-height: 1.4em;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003100}}
 .wrapper.option-a .brand-attributes ul li {
   font-family: sans-serif;
   font-weight: bold;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003106}}
 .wrapper.option-a .color-1 {
   background-color: black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003110}}
 .wrapper.option-a .color-2 {
   background-color: #555555;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003114}}
 .wrapper.option-a .color-3 {
   background-color: #aaaaaa;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003118}}
 .wrapper.option-a .color-4 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-a\.scss}line{font-family:\00003122}}
 .wrapper.option-a .color-5 {
   background-color: white;
 }
@@ -492,50 +504,62 @@ li.dropMenu ul {
 .wrapper.option-b .logo {
   width: 200px;
   height: 70px;
-  background-image: url("../images/logo.png");
+  background-image: url("../../_images/logo.png");
+  background-size: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000323}}
 .wrapper.option-b h1, .wrapper.option-b h2, .wrapper.option-b h3, .wrapper.option-b h4, .wrapper.option-b h5, .wrapper.option-b h6 {
   font-family: sans-serif;
   color: #222222;
+  margin-bottom: 24px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000329}}
 .wrapper.option-b h1 {
   font-size: 2.2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000333}}
 .wrapper.option-b h2 {
   font-size: 1.8em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000337}}
 .wrapper.option-b p {
   font-family: georgia, serif;
   color: #555555;
-  font-size: .9em;
+  font-size: 1em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000347}}
 .wrapper.option-b .navigation li {
   font-family: sans-serif;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000350}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000355}}
 .wrapper.option-b .masthead {
   background-image: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000362}}
 .wrapper.option-b .btn {
   color: #222222;
   font-family: sans-serif;
   font-weight: bold;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000367}}
 .wrapper.option-b .btn.btn-1 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000372}}
 .wrapper.option-b .btn.btn-2 {
   background-color: #c4c4c4;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000379}}
 .wrapper.option-b .main-inner {
   background: white;
   padding: 2%;
@@ -543,7 +567,7 @@ li.dropMenu ul {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000391}}
 .wrapper.option-b .pull-out p {
   font-family: sans-serif;
   font-size: 1.4em;
@@ -551,29 +575,29 @@ li.dropMenu ul {
   line-height: 1.4em;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003100}}
 .wrapper.option-b .brand-attributes ul li {
   font-family: sans-serif;
   font-weight: bold;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003106}}
 .wrapper.option-b .color-1 {
   background-color: black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003110}}
 .wrapper.option-b .color-2 {
   background-color: #555555;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003114}}
 .wrapper.option-b .color-3 {
   background-color: #aaaaaa;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003118}}
 .wrapper.option-b .color-4 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-b\.scss}line{font-family:\00003122}}
 .wrapper.option-b .color-5 {
   background-color: white;
 }
@@ -587,50 +611,62 @@ li.dropMenu ul {
 .wrapper.option-c .logo {
   width: 200px;
   height: 70px;
-  background-image: url("../images/logo.png");
+  background-image: url("../../_images/logo.png");
+  background-size: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000323}}
 .wrapper.option-c h1, .wrapper.option-c h2, .wrapper.option-c h3, .wrapper.option-c h4, .wrapper.option-c h5, .wrapper.option-c h6 {
   font-family: sans-serif;
   color: #222222;
+  margin-bottom: 24px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000329}}
 .wrapper.option-c h1 {
   font-size: 2.2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000333}}
 .wrapper.option-c h2 {
   font-size: 1.8em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000337}}
 .wrapper.option-c p {
   font-family: georgia, serif;
   color: #555555;
-  font-size: .9em;
+  font-size: 1em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000347}}
 .wrapper.option-c .navigation li {
   font-family: sans-serif;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000350}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000355}}
 .wrapper.option-c .masthead {
   background-image: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000362}}
 .wrapper.option-c .btn {
   color: #222222;
   font-family: sans-serif;
   font-weight: bold;
+  -webkit-transition: 0.15s all;
+  -moz-transition: 0.15s all;
+  -ms-transition: 0.15s all;
+  -o-transition: 0.15s all;
+  transition: 0.15s all;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000367}}
 .wrapper.option-c .btn.btn-1 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000372}}
 .wrapper.option-c .btn.btn-2 {
   background-color: #c4c4c4;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000373}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000379}}
 .wrapper.option-c .main-inner {
   background: white;
   padding: 2%;
@@ -638,7 +674,7 @@ li.dropMenu ul {
   overflow: hidden;
   *zoom: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000391}}
 .wrapper.option-c .pull-out p {
   font-family: sans-serif;
   font-size: 1.4em;
@@ -646,29 +682,29 @@ li.dropMenu ul {
   line-height: 1.4em;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003100}}
 .wrapper.option-c .brand-attributes ul li {
   font-family: sans-serif;
   font-weight: bold;
   color: #222222;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003100}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003106}}
 .wrapper.option-c .color-1 {
   background-color: black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003110}}
 .wrapper.option-c .color-2 {
   background-color: #555555;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003114}}
 .wrapper.option-c .color-3 {
   background-color: #aaaaaa;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003118}}
 .wrapper.option-c .color-4 {
   background-color: #dddddd;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/stupid\/Sites\/ybwp2\/web\/wp-content\/themes\/yb\/library\/scss\/styletiles\/_option-c\.scss}line{font-family:\00003122}}
 .wrapper.option-c .color-5 {
   background-color: white;
 }

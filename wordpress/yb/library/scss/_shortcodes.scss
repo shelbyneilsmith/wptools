@@ -7,26 +7,7 @@ hr {
 	margin: 30px 0;
 	height: 1px;
 	width: 100%;
-}
-hr, .hr1 {
 	border-bottom: 1px solid #ddd;
-}
-
-.hr2 {
-	border-bottom: 0;
-	background: url(../_images/dotted.png) repeat-x;
-}
-.hr3 {
-	border-bottom: 0;
-	height:5px;
-	background: url(../_images/shadow.png) no-repeat center top;
-}
-
-.hr4 {
-	border-bottom: 0;
-	height:14px;
-	background: url(../_images/stripes.png);
-	display: block;
 }
 
 .tagline {
@@ -55,15 +36,6 @@ hr, .hr1 {
 	margin:40px 0;
 }
 
-/* Rethink this */
-.tooltips a, .tooltips a img {
-	margin: 0 auto;
-	padding: 0;
-	display: inline-block;
-	max-width: 100%;
-	text-align: center;
-}
-
 /*-----------------------------------------------------------------------------------*/
 /*	Accordion
 /*-----------------------------------------------------------------------------------*/
@@ -73,8 +45,6 @@ hr, .hr1 {
 		display: block;
 		@include background-image(linear-gradient(bottom, #F7F7F7 0%, $white 100%));
 		background-color: #F9F9F9;
-		@include border-radius($border-radius);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
 		font-weight: 600;
 		margin-bottom: 10px;
 		a {
@@ -110,8 +80,6 @@ hr, .hr1 {
 .alert-message{
 	position: relative;
 	display: block;
-	@include border-radius($border-radius);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
 	font-weight:normal;
 	padding:10px 40px;
 	text-align: center;
@@ -144,97 +112,6 @@ hr, .hr1 {
 		&:hover {
 			opacity: 1;
 		}
-	}
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*	Callouts & Teaser
-/*-----------------------------------------------------------------------------------*/
-
-.teaser{
-	background: $white;
-	border: 1px solid #ddd;
-	display: block;
-	@include border-radius($border-radius);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
-	padding: 25px 25px 20px 25px;
-	h1,h2,h3,h4,h5,h6,p {
-		margin: 0 0 10px 0;
-	}
-	.teaser-img{
-		margin:-26px -26px 25px -26px;
-		@include border-radius($border-radius+2 $border-radius+2 0px 0px);
-		overflow: hidden;
-		img{
-			width:100%;
-			max-width:100%;
-			height:auto;
-		}
-	}
-	a.button{
-		margin: 20px 0 0 0;
-	}
-}
-
-/*-----------------------------------------------------------------------------------*/
-
-.teaserbox{
-	border: 1px solid #ddd;
-	display: block;
-	background: $white url(../_images/stripes.png) !important;
-	@include border-radius($border-radius);
-	@include box-shadow(1px 1px 3px 0px rgba(180, 180, 180, 0.2));
-	margin: 0 0px 0 0px;
-	padding:10px;
-	.border {
-		background: $white;
-		border:1px solid #e3e3e3;
-		padding:25px 25px 25px 25px;
-		@include box-shadow(inset 1px 1px 2px 0px rgba(180, 180, 180, 0.1));
-	}
-	a.button {
-		margin:20px 0 0 0;
-	}
-
-	p {
-		margin:5px 0 0 0;
-	}
-	h1,h2,h3,h4,h5,h6 {
-		line-height: 1.3;
-	}
-}
-
-
-
-/*-----------------------------------------------------------------------------------*/
-
-.callout{
-	margin:0 0px 0 0px;
-	padding:10px;
-	border: 1px solid #ddd;
-	display: block;
-	background: $white url(../_images/stripes.png) !important;
-	@include border-radius($border-radius);
-	@include box-shadow(1px 1px 3px 0px rgba(180, 180, 180, 0.2));
-	.border{
-		background: $white;
-		border:1px solid #e3e3e3;
-		padding:20px 20px 0px 20px;
-		@include box-shadow(inset 1px 1px 2px 0px rgba(180, 180, 180, 0.1));
-	}
-	.callout-button{
-		float: right;
-	}
-	.callout-content{
-		float: left;
-	}
-	a.button{
-		margin: 0;
-		text-align: center;
-	}
-	h1,h2,h3,h4,h5,h6 {
-		line-height: 1.3;
-		margin: 0 0 0px 0 !important;
 	}
 }
 
@@ -375,15 +252,6 @@ hr, .hr1 {
 }
 .gallery-columns-2 .gallery-item { width: 50%; }
 .gallery-columns-4 .gallery-item { width: 25%; }
-
-
-/*-----------------------------------------------------------------------------------*/
-/*	Google Font
-/*-----------------------------------------------------------------------------------*/
-
-.googlefont{
-	font-weight: 400;
-}
 
 /*-----------------------------------------------------------------------------------*/
 /*	Google Maps
@@ -1080,8 +948,6 @@ ul.styled-list {
 	border: 1px solid #ddd;
 	background-color: $white;
 	padding: 25px;
-	@include border-radius($border-radius);
-	@include box-shadow(1px 1px 2px 0px rgba(180, 180, 180, 0.2));
 	h4 {
 		text-align: center;
 		text-transform: uppercase;
@@ -1394,9 +1260,9 @@ ul.styled-list {
 		font-size: 12px;
 		padding: 10px 0px;
 		text-align: center;
-		background: url(../_images/dotted.png) repeat-x bottom left;
+		border-bottom: 2px dotted #dddddd;
 		&:last-child{
-			background: none;
+			border-bottom: 0;
 		}
 	}
 }
@@ -1432,16 +1298,6 @@ blockquote {
 }
 
 /*-----------------------------------------------------------------------------------*/
-/*	Responsive Images
-/*-----------------------------------------------------------------------------------*/
-
-.responsive img, .responsive iframe, .responsive object, .responsive embed{
-	max-width:100%;
-	/*width:100%;*/
-	height: auto;
-}
-
-/*-----------------------------------------------------------------------------------*/
 /*	Social Icons
 /*-----------------------------------------------------------------------------------*/
 
@@ -1450,7 +1306,6 @@ blockquote {
 	float: left;
 	margin:0 5px 5px 0;
 	background-color: #efefef !important;
-	@include border-radius($border-radius);
 	overflow: hidden;
 	width:40px;
 	height:40px;
@@ -1678,7 +1533,6 @@ blockquote {
 		padding: 10px 0px 10px 15px;
 		@include background-image(linear-gradient(bottom, #F7F7F7 0%, $white 100%));
 		background-color: #F9F9F9;
-		@include border-radius($border-radius);
 		font-weight: 600;
 		cursor: pointer;
 		overflow: hidden;
@@ -1698,7 +1552,6 @@ blockquote {
 		}
 		&.active{
 			color:#444444;
-			@include border-radius($border-radius $border-radius 0px 0px);
 			span{
 				background: url(../_images/accordion-close.png) no-repeat right center;
 			}
@@ -1711,8 +1564,6 @@ blockquote {
 	.toggle-inner{
 		background: $white;
 		margin: 0;
-		@include border-radius(0px 0px $border-radius $border-radius);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
 		border: 1px solid #ddd;
 		border-top: 0;
 		padding: 20px 20px 0px 20px;
@@ -1720,21 +1571,6 @@ blockquote {
 		div {
 			max-width: 100%;
 		}
-	}
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*	Separator
-/*-----------------------------------------------------------------------------------*/
-
-.title{
-	padding: 0;
-	margin: 0 0 20px 0;
-	background: url(../_images/stripes.png) left top;
-	line-height: 1 !important;
-	span{
-		background: $white;
-		padding-right: 7px;
 	}
 }
 
@@ -1846,37 +1682,6 @@ mark.dark{
 		z-index: 3;
 	}
 
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*	Blockquotes & Pullquotes
-/*-----------------------------------------------------------------------------------*/
-
-.visibility-mobile { display: none !important; }
-.visibility-mobile-portrait { display: none !important; }
-.visibility-mobile-landscape { display: none !important; }
-.visibility-tablet { display: none !important; }
-
-@media (max-width: 479px) {
-	.visibility-mobile { display: inherit !important; }
-	.visibility-mobile-portrait { display: inherit !important; }
-	.visibility-mobile-landscape { display: none !important; }
-	.visibility-desktop { display: none !important; }
-}
-
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-	.visibility-mobile { display: inherit !important; }
-	.visibility-mobile-portrait { display: none !important; }
-	.visibility-mobile-landscape { display: inherit !important; }
-	.visibility-desktop { display: none !important; }
-
-}
-
-@media (min-width: 768px) and (max-width: 959px) {
-	.visibility-tablet { display: inherit !important; }
-	.visibility-mobile-portrait { display: none !important; }
-	.visibility-mobile-landscape { display: none !important; }
-	.visibility-desktop { display: none !important; }
 }
 
 /*-----------------------------------------------------------------------------------*/

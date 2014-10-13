@@ -9,7 +9,7 @@
 .site-title {
 	font-size: 1.4em;
 	line-height: 1.2em;
-	font-weight: bold;
+	font-weight: $display-font-weight;
 	margin-bottom: 0;
 	a {
 		font-family: $display-font;
@@ -80,9 +80,14 @@ nav.main-nav {
 			}
 			& > a {
 				font-family: $display-font;
+				font-weight: $display-font-weight;
 				text-decoration: none;
 				&:hover {
 				}
+			}
+			.sub-menu {
+				background: $light-grey;
+				font-family: $display-font;
 			}
 		}
 	}

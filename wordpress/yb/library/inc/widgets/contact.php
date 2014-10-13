@@ -58,7 +58,7 @@ class widget_contact extends WP_Widget {
 	function form($instance) {
 
 		//$defaults = array( 'title' => 'Twitter Widget', 'posts' => '3', 'username' => 'helloyb' ); // Default Values
-		$defaults = array('title' => 'Contact Info', 'address' => '', 'phone' => '', 'fax' => '', 'email' => '', 'web' => '');
+		$defaults = array('title' => 'Contact Info', 'address' => '', 'phone' => '', 'fax' => '', 'email' => '', 'web' => '', 'tollfree' => '');
 		$instance = wp_parse_args((array) $instance, $defaults); ?>
 
 		<p>

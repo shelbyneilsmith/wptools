@@ -10,4 +10,4 @@
 .sublime-project
 
 # ignore assets folder and all subdirectories
-assets/
+/assets/

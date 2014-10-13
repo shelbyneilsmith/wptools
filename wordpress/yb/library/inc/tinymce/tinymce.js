@@ -2,9 +2,9 @@
 /*  Add TinyMCE Div Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
-    tinymce.create('tinymce.plugins.yb_div', {
+    tinymce.create('tinymce.plugins.div', {
         init : function(ed, url) {
-            ed.addButton('yb_div', {
+            ed.addButton('div', {
                 title : 'Add Div w/ Class',
                 image : url+'/description.png',
                 onclick : function() {
@@ -17,7 +17,51 @@
             return null;
         },
     });
-    tinymce.PluginManager.add('yb_div', tinymce.plugins.yb_div);
+    tinymce.PluginManager.add('div', tinymce.plugins.div);
+})();
+
+/*-----------------------------------------------------------------------------------*/
+/*  Add TinyMCE Box Button
+/*-----------------------------------------------------------------------------------*/
+(function() {
+    tinymce.create('tinymce.plugins.box', {
+        init : function(ed, url) {
+            ed.addButton('box', {
+                title : 'Add Box Field',
+                image : url+'/description.png',
+                onclick : function() {
+                     ed.selection.setContent('[box style="1 or 2" class="box-class"]Your Content...[/box]');
+
+                }
+            });
+        },
+        createControl : function(n, cm) {
+            return null;
+        },
+    });
+    tinymce.PluginManager.add('box', tinymce.plugins.box);
+})();
+
+/*-----------------------------------------------------------------------------------*/
+/*  Add TinyMCE Placeholder Image Button
+/*-----------------------------------------------------------------------------------*/
+(function() {
+    tinymce.create('tinymce.plugins.placeholder_img', {
+        init : function(ed, url) {
+            ed.addButton('placeholder_img', {
+                title : 'Add Placeholder Image',
+                image : url+'/gallery.png',
+                onclick : function() {
+                     ed.selection.setContent('[placeholder_img width="width" height="height"]');
+
+                }
+            });
+        },
+        createControl : function(n, cm) {
+            return null;
+        },
+    });
+    tinymce.PluginManager.add('placeholder_img', tinymce.plugins.placeholder_img);
 })();
 
 /*-----------------------------------------------------------------------------------*/
@@ -73,7 +117,7 @@
                 title : 'Add a Button',
                 image : url+'/button.png',
                 onclick : function() {
-                     ed.selection.setContent('[button link="http://www.google.de" size="small, medium, large" target="_blank or _self" icon="cog" type="gradient or flat" altcolor="true or false" lightbox="true or false"]Button[/button]');
+                     ed.selection.setContent('[yb_button link="http://www.google.de" size="small, medium, large" target="_blank or _self" icon="cog" type="gradient or flat" altcolor="true or false" lightbox="true or false"]Button[/yb_button]');
                 }
             });
         },
@@ -94,7 +138,7 @@
                 title : 'Add Divider',
                 image : url+'/divider.png',
                 onclick : function() {
-                     ed.selection.setContent('[hr style="1,2,3,4" margin="30px 0px 30px 0px"]');
+                     ed.selection.setContent('[hr margin="30px 0px 30px 0px"]');
 
                 }
             });
@@ -437,50 +481,6 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Responsive Image Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.responsiveimage', {
-        init : function(ed, url) {
-            ed.addButton('responsiveimage', {
-                title : 'Add Responsive Image',
-                image : url+'/responsiveimage.png',
-                onclick : function() {
-                     ed.selection.setContent('[responsive]IMAGE HERE[/responsive]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('responsiveimage', tinymce.plugins.responsiveimage);
-})();
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Pullquote Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.visibility', {
-        init : function(ed, url) {
-            ed.addButton('visibility', {
-                title : 'Add Visibility Item',
-                image : url+'/visibility.png',
-                onclick : function() {
-                     ed.selection.setContent('[visibility show="desktop, tablet, mobile-landscape, mobile-portrait"]Your Content..[/visibility]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('visibility', tinymce.plugins.visibility);
-})();
-
-/*-----------------------------------------------------------------------------------*/
 /*	Add TinyMCE SocialMedia Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
@@ -566,72 +566,6 @@
         },
     });
     tinymce.PluginManager.add('toggle', tinymce.plugins.toggle);
-})();
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Tooltip Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.yb_tooltip', {
-        init : function(ed, url) {
-            ed.addButton('yb_tooltip', {
-                title : 'Add Tooltip',
-                image : url+'/tooltip.png',
-                onclick : function() {
-                     ed.selection.setContent('[tooltip text="Tooltip Text"]Word[/tooltip]');
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('yb_tooltip', tinymce.plugins.yb_tooltip);
-})();
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Separator Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.separatorheadline', {
-        init : function(ed, url) {
-            ed.addButton('separatorheadline', {
-                title : 'Add Separator Headline',
-                image : url+'/separatorheadline.png',
-                onclick : function() {
-                     ed.selection.setContent('[separator headline="h1, h2, h3, h4, h5, h6" title="Your Title"]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('separatorheadline', tinymce.plugins.separatorheadline);
-})();
-
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Highlight Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.googlefont', {
-        init : function(ed, url) {
-            ed.addButton('googlefont', {
-                title : 'Add Googlefont Typo',
-                image : url+'/googlefont.png',
-                onclick : function() {
-                     ed.selection.setContent('[googlefont font="Chewy" size="50px" margin="10px 0 20px 0"]Your Text...[/googlefont]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('googlefont', tinymce.plugins.googlefont);
 })();
 
 /*-----------------------------------------------------------------------------------*/
@@ -767,116 +701,26 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Teaser Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.teaser', {
-        init : function(ed, url) {
-            ed.addButton('teaser', {
-                title : 'Add Teaser',
-                image : url+'/teaser.png',
-                onclick : function() {
-                     ed.selection.setContent('[teaser img="IMAGE-URL or leave blank" url="http://example.com"]YOUR CONTENT HERE[/teaser]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('teaser', tinymce.plugins.teaser);
-})();
-
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Teaserbox Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.teaserbox', {
-        init : function(ed, url) {
-            ed.addButton('teaserbox', {
-                title : 'Add Teaserbox',
-                image : url+'/teaserbox.png',
-                onclick : function() {
-                     ed.selection.setContent('[teaserbox title="Your Title" button="Buttontext" link="http://www.google.com" buttonsize="small, medium, large" buttontype="gradient or flat" buttonaltcolor="true or false" target="_blank or _self"]Your Content[/teaserbox]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('teaserbox', tinymce.plugins.teaserbox);
-})();
-
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Callout Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.callout', {
-        init : function(ed, url) {
-            ed.addButton('callout', {
-                title : 'Add Callout',
-                image : url+'/callout.png',
-                onclick : function() {
-                     ed.selection.setContent('[callout title="Your Title" button="Buttontext" link="http://www.google.com" buttontype="gradient or flat" buttonaltcolor="true or false"  target="_blank or _self"]Your Content[/callout]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('callout', tinymce.plugins.callout);
-})();
-
-/*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Box Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.box', {
-        init : function(ed, url) {
-            ed.addButton('box', {
-                title : 'Add Box Field',
-                image : url+'/description.png',
-                onclick : function() {
-                     ed.selection.setContent('[box style="1 or 2"]Your Content...[/box]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('box', tinymce.plugins.box);
-})();
-
-/*-----------------------------------------------------------------------------------*/
 /*	Add TinyMCE Projects Button
 /*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.projects', {
-        init : function(ed, url) {
-            ed.addButton('projects', {
-                title : 'Add Latest Projects',
-                image : url+'/projects.png',
-                onclick : function() {
-                     ed.selection.setContent('[portfolio projects="4" title="Latest Projects" show_title="yes or no" columns="2,3 or 4" filters="Portfolo Category slugs or all"]');
+// (function() {
+//     tinymce.create('tinymce.plugins.projects', {
+//         init : function(ed, url) {
+//             ed.addButton('projects', {
+//                 title : 'Add Latest Projects',
+//                 image : url+'/projects.png',
+//                 onclick : function() {
+//                      ed.selection.setContent('[portfolio projects="4" title="Latest Projects" show_title="yes or no" columns="2,3 or 4" filters="Portfolo Category slugs or all"]');
 
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('projects', tinymce.plugins.projects);
-})();
+//                 }
+//             });
+//         },
+//         createControl : function(n, cm) {
+//             return null;
+//         },
+//     });
+//     tinymce.PluginManager.add('projects', tinymce.plugins.projects);
+// })();
 
 /*-----------------------------------------------------------------------------------*/
 /*	Add TinyMCE Blog Button

@@ -40,17 +40,9 @@ only screen and (min-device-pixel-ratio: 2) {
 		background-image:url(../_images/backtotop@2x.png);
 		@include background-size(15px 10px);
 	}
-	.hr2{
-		background-image:url(../_images/dotted@2x.png);
-		@include background-size(4px 1px);
-	}
 	#alt-title .grid{
 		background-image:url(../_images/grid@2x.png);
 		@include background-size(2px 2px);
-	}
-	.hr-border, .hr4, .teaserbox, .callout, .description.style-2, .title {
-		background-image:url(../_images/stripes@2x.png);
-		@include background-size(5px 5px);
 	}
 	.close-infobar:after, .close-infobar.open:after{
 		background-image:url(../_images/toggle@2x.png);

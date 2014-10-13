@@ -64,15 +64,15 @@
 
 	<!-- Mobile Specific Metas & Favicons
 	========================================================= -->
-	<?php if(!empty($ybwp_data['media-favicon_front'])) { ?><link rel="shortcut icon" href="<?php echo $ybwp_data['media-favicon_front']['url'] ; ?>"><?php } ?>
+	<?php if(!empty($ybwp_data['media-favicon_front']['url'])) { ?><link rel="shortcut icon" href="<?php echo $ybwp_data['media-favicon_front']['url']; ?>"><?php } ?>
 
-	<?php if(!empty($ybwp_data['media-favicon_iphone'])) { ?><link rel="apple-touch-icon" href="<?php echo $ybwp_data['media-favicon_iphone']['url'] ; ?>"><?php } ?>
+	<?php if(!empty($ybwp_data['media-favicon_iphone']['url'])) { ?><link rel="apple-touch-icon" href="<?php echo $ybwp_data['media-favicon_iphone']['url']; ?>"><?php } ?>
 
-	<?php if(!empty($ybwp_data['media-favicon_iphone_retina'])) { ?><link rel="apple-touch-icon" sizes="114x114" href="<?php echo $ybwp_data['media-favicon_iphone_retina']['url'] ; ?>"><?php } ?>
+	<?php if(!empty($ybwp_data['media-favicon_iphone_retina']['url'])) { ?><link rel="apple-touch-icon" sizes="114x114" href="<?php echo $ybwp_data['media-favicon_iphone_retina']['url']; ?>"><?php } ?>
 
-	<?php if(!empty($ybwp_data['media-favicon_ipad'])) { ?><link rel="apple-touch-icon" sizes="72x72" href="<?php echo $ybwp_data['media-favicon_ipad']['url'] ; ?>"><?php } ?>
+	<?php if(!empty($ybwp_data['media-favicon_ipad']['url'])) { ?><link rel="apple-touch-icon" sizes="72x72" href="<?php echo $ybwp_data['media-favicon_ipad']['url']; ?>"><?php } ?>
 
-	<?php if(!empty($ybwp_data['media-favicon_ipad_retina'])) { ?><link rel="apple-touch-icon" sizes="144x144" href="<?php echo $ybwp_data['media-favicon_ipad_retina']['url'] ; ?>"><?php } ?>
+	<?php if(!empty($ybwp_data['media-favicon_ipad_retina']['url'])) { ?><link rel="apple-touch-icon" sizes="144x144" href="<?php echo $ybwp_data['media-favicon_ipad_retina']['url']; ?>"><?php } ?>
 
 	<!-- WordPress Stuff
 	========================================================= -->

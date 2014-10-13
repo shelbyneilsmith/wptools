@@ -48,16 +48,10 @@ YBBase is © Shelby Smith http://yellowberri.com/
 //@import 'widgets';
 
 /* ==== custom site styles ==== */
-html {
-	height: 100%;
-}
-
-body {
-	// color: $off-black;
-}
 
 body, .inner-wrap {
 	background-color: $main-bg-color;
+	overflow-x: hidden;
 }
 
 #wrapper {

@@ -23,6 +23,7 @@ $palette3-5: #fff;
 	h1, h2, h3, h4, h5, h6 {
 		font-family: sans-serif;
 		color: $off-black;
+		margin-bottom: 24px;
 	}
 
 	h1 {
@@ -45,6 +46,7 @@ $palette3-5: #fff;
 	.navigation {
 		li {
 			font-family: sans-serif;
+			@include transition(.15s all);
 			&.active, &:hover {
 			}
 		}
@@ -61,6 +63,7 @@ $palette3-5: #fff;
 		color: $off-black;
 		font-family: sans-serif;
 		font-weight: bold;
+		@include transition(.15s all);
 		&.btn-1 {
 			background-color: $light-grey;
 			&:hover {

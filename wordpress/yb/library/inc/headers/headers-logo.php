@@ -6,7 +6,7 @@
 	<?php if ( !empty($ybwp_data['opt-media-logo']['url'] ) ) { ?>
 		<a href="<?php echo home_url(); ?>/" title="<?php bloginfo('name') ?>" rel="home">
 			<?php if ( !empty($ybwp_data['opt-media-logo2x']['url'] ) ) : ?>
-				<img src="<?php echo $ybwp_data['opt-media-logo2x']['url'] ?>" width="<?php echo $ybwp_data['opt-media-logo']['width']; ?>" height="<?php echo $ybwp_data['opt-media-logo']['height']; ?>" alt="<?php bloginfo('name'); ?>" class="logo_retina" />
+				<img src="<?php echo $ybwp_data['opt-media-logo2x']['url'] ?>" width="<?php echo $ybwp_data['opt-media-logo']['width']; ?>" alt="<?php bloginfo('name'); ?>" class="logo_retina" />
 			<?php else : ?>
 				<img src="<?php echo $ybwp_data['opt-media-logo']['url']; ?>" alt="<?php bloginfo('name'); ?>" class="logo_standard" />
 			<?php endif; ?>
