@@ -5,9 +5,39 @@
 /*-----------------------------------------------------------------------------------*/
 function yb_div( $atts, $content = null) {
 	extract( shortcode_atts( array(
-		'class' => 'div-class'
+		'class' => ''
 	), $atts ) );
 	return '<div class="clearfix '.$class. '">' . do_shortcode($content) . '</div>';
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Section w/ Centered Container
+/*-----------------------------------------------------------------------------------*/
+function yb_section( $atts, $content = null) {
+
+extract( shortcode_atts( array(
+	'class'		=> '',
+	'bgcolor'		=> '',
+	'bgimage'		=> '',
+	'parallax'	=> 'false',
+	'padding' => '',
+	'border' => 'none'
+	), $atts ) );
+
+	if($parallax == 'false') {
+		$var1 = '';
+	}
+	else{
+		$var1 = 'section-parallax';
+	}
+
+	$var2 = '';
+
+	if($bgimage != ''){
+		$var2 = 'background-image: url(' . $bgimage . ');';
+	}
+
+	 return '<div class="'. $class . ' section ' . $var1 . '" style="background-color: ' . $bgcolor . '; border: ' . $border . '; padding: ' . $padding . '; ' . $var2 . '"><div class="container clearfix"><div class="sixteen columns">' . do_shortcode($content) . '</div></div></div>';
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -16,7 +46,7 @@ function yb_div( $atts, $content = null) {
 function yb_box( $atts, $content = null) {
 extract( shortcode_atts( array(
 		'style' => '1',
-		'class' => 'box-class'
+		'class' => ''
 		), $atts ) );
 		return '<div class="'.$class.' clearfix style-' .$style. '">' . do_shortcode($content) . '</div>';
 }
@@ -724,7 +754,7 @@ extract( shortcode_atts( array(
 		'twitter' => '',
 		'facebook' => '',
 		'skype' => '',
-		'google' => '',
+		'googleplus' => '',
 		'linkedin' => '',
 		'mail' => '',
 		), $atts ) );
@@ -745,7 +775,7 @@ extract( shortcode_atts( array(
 
 
 
-		if( $twitter != '' || $facebook != '' || $skype != '' || $google != '' || $linkedin != '' || $mail != '' ){
+		if( $twitter != '' || $facebook != '' || $skype != '' || $googleplus != '' || $linkedin != '' || $mail != '' ){
 			$return8 = '<div class="member-social"><ul>';
 			$return9 = '</ul></div>';
 
@@ -768,7 +798,7 @@ extract( shortcode_atts( array(
 			}
 
 			if($google != '') {
-			$return5 = '<li class="member-social-google">google+: <a href="' .$google. '" target="_blank" title="Google+">Google</a></li>';
+			$return5 = '<li class="member-social-googleplus">google+: <a href="' .$google. '" target="_blank" title="Google+">Google</a></li>';
 			} else{
 				$return5 = '';
 			}
@@ -1304,35 +1334,6 @@ function yb_blog($atts){
 add_shortcode('blog', 'yb_blog');
 
 /*-----------------------------------------------------------------------------------*/
-/*	Section
-/*-----------------------------------------------------------------------------------*/
-function yb_section( $atts, $content = null) {
-
-extract( shortcode_atts( array(
-	'bgcolor'		=> '#ffffff',
-	'bgimage'		=> '',
-	'parallax'	=> 'false',
-	'padding' => '',
-	'border' => 'none'
-	), $atts ) );
-
-	if($parallax == 'false') {
-		$var1 = '';
-	}
-	else{
-		$var1 = 'section-parallax';
-	}
-
-	$var2 = '';
-
-	if($bgimage != ''){
-		$var2 = 'background-image: url(' . $bgimage . ');';
-	}
-
-	 return '<div class="section ' . $var1 . '" style="background-color: ' . $bgcolor . '; border: ' . $border . '; padding: ' . $padding . '; ' . $var2 . '"><div class="container clearfix"><div class="sixteen columns">' . do_shortcode($content) . '</div></div></div>';
-}
-
-/*-----------------------------------------------------------------------------------*/
 /*	Video Section
 /*-----------------------------------------------------------------------------------*/
 function yb_videosection( $atts, $content = null) {
@@ -1369,17 +1370,17 @@ extract( shortcode_atts( array(
 /* ----------------------------------------------------- */
 
 function pre_process_shortcode($content) {
-	 global $shortcode_tags;
+	global $shortcode_tags;
 
-	 // Backup current registered shortcodes and clear them all out
-	 $orig_shortcode_tags = $shortcode_tags;
-	 remove_all_shortcodes();
+	// Backup current registered shortcodes and clear them all out
+	$orig_shortcode_tags = $shortcode_tags;
+	remove_all_shortcodes();
 
-	 add_shortcode('div', 'yb_div');
-	 add_shortcode('box', 'yb_box');
+	add_shortcode('div', 'yb_div');
 	add_shortcode('section', 'yb_section');
+	add_shortcode('box', 'yb_box');
 
-	 add_shortcode('one_third', 'yb_one_third');
+	add_shortcode('one_third', 'yb_one_third');
 	add_shortcode('one_third_last', 'yb_one_third_last');
 	add_shortcode('two_third', 'yb_two_third');
 	add_shortcode('two_third_last', 'yb_two_third_last');
@@ -1402,18 +1403,18 @@ function pre_process_shortcode($content) {
 	add_shortcode('five_sixth', 'yb_five_sixth');
 	add_shortcode('five_sixth_last', 'yb_five_sixth_last');
 
-	 add_shortcode('gap', 'yb_gap');
-	 add_shortcode('hr', 'yb_hr');
-	 add_shortcode('clear', 'yb_clear');
+	add_shortcode('gap', 'yb_gap');
+	add_shortcode('hr', 'yb_hr');
+	add_shortcode('clear', 'yb_clear');
 
-	 add_shortcode('yb_button', 'yb_buttons');
+	add_shortcode('yb_button', 'yb_buttons');
 
-	 add_shortcode('placeholder_img', 'yb_placeholder_img');
+	add_shortcode('placeholder_img', 'yb_placeholder_img');
 
-	 add_shortcode('accordion', 'yb_accordion');
-	 add_shortcode('alert', 'yb_alert');
+	add_shortcode('accordion', 'yb_accordion');
+	add_shortcode('alert', 'yb_alert');
 
-	 add_shortcode('br', 'yb_br');
+	add_shortcode('br', 'yb_br');
 
 	add_shortcode('dropcap', 'yb_dropcap');
 
@@ -1453,13 +1454,13 @@ function pre_process_shortcode($content) {
 
 	add_shortcode('tagline', 'yb_tagline');
 
-	 // Do the shortcode (only the one above is registered)
-	 $content = do_shortcode($content);
+	// Do the shortcode (only the one above is registered)
+	$content = do_shortcode($content);
 
-	 // Put the original shortcodes back
-	 $shortcode_tags = $orig_shortcode_tags;
+	// Put the original shortcodes back
+	$shortcode_tags = $orig_shortcode_tags;
 
-	 return $content;
+	return $content;
 }
 
 
@@ -1484,7 +1485,7 @@ function add_button() {
 
 // Define Position of TinyMCE Icons
 function register_button_3($buttons) {
-	array_push($buttons, "div", "box", "section", "one_half", "one_third", "two_third", "one_fourth", "three_fourth", "one_fifth", "gap", "divider", "clear", "yb_button", "placeholder_img");
+	array_push($buttons, "div", "section", "box", "one_half", "one_third", "two_third", "one_fourth", "three_fourth", "one_fifth", "gap", "divider", "clear", "yb_button", "placeholder_img");
 	return $buttons;
 }
 function register_button_4($buttons) {
@@ -1496,8 +1497,8 @@ function add_plugin($plugin_array) {
 	global $data;
 
 	$plugin_array['div'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
-	$plugin_array['box'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['section'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
+	$plugin_array['box'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['one_half'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['one_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';
 	$plugin_array['two_third'] = get_template_directory_uri().'/library/inc/tinymce/tinymce.js';

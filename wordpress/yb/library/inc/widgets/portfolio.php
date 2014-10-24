@@ -4,9 +4,9 @@ class widget_portfolio extends WP_Widget {
 
 	// Widget Settings
 	function widget_portfolio() {
-		$widget_ops = array('description' => __('Display your latest Portfolio') );
+		$widget_ops = array('description' => __('Display your latest Portfolio', 'yb') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'portfolio' );
-		$this->WP_Widget( 'portfolio', __('yb.Portfolio'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'portfolio', __('yb.Portfolio', 'yb'), $widget_ops, $control_ops );
 	}
 
 	// Widget Output

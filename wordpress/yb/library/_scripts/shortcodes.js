@@ -1,8 +1,3 @@
-var min_w = 1500; // minimum video width allowed
-var video_width_original = 1280;  // original video dimensions
-var video_height_original = 720;
-var vid_ratio = 1280/720;
-
 jQuery(document).ready(function($){
 
 	/* ------------------------------------------------------------------------ */
@@ -63,48 +58,6 @@ jQuery(document).ready(function($){
 			$(this).addClass("active").closest('.toggle').find('.toggle-inner').slideDown(200);
 		}
 	});
-
-	/* ------------------------------------------------------------------------ */
-	/* Video Background
-	/* ------------------------------------------------------------------------ */
-
-	vid_w_orig = parseInt($('video').attr('width'), 10);
-	vid_h_orig = parseInt($('video').attr('height'), 10);
-
-	$(window).resize(function () { resizeToCover(); });
-	$(window).trigger('resize');
-
-	function resizeToCover() {
-
-		$('.videosection .video-wrap').each(function(i){
-
-			var $sectionWidth = $(this).closest('.videosection').outerWidth();
-			var $sectionHeight = $(this).closest('.videosection').outerHeight();
-
-			$(this).width($sectionWidth);
-			$(this).height($sectionHeight);
-
-			// calculate scale ratio
-			var scale_h = $sectionWidth / video_width_original;
-			var scale_v = $sectionHeight / video_height_original;
-			var scale = scale_h > scale_v ? scale_h : scale_v;
-
-			// limit minimum width
-			min_w = vid_ratio * ($sectionHeight+20);
-
-			if (scale * video_width_original < min_w) {scale = min_w / video_width_original;}
-
-			$(this).find('video, .mejs-overlay, .mejs-poster').width(Math.ceil(scale * video_width_original +2));
-			$(this).find('video, .mejs-overlay, .mejs-poster').height(Math.ceil(scale * video_height_original +2));
-
-			$(this).scrollLeft(($(this).find('video').width() - $sectionWidth) / 2);
-
-			$(this).find('.mejs-overlay, .mejs-poster').scrollTop(($(this).find('video').height() - ($sectionHeight)) / 2);
-			$(this).scrollTop(($(this).find('video').height() - ($sectionHeight)) / 2);
-
-		});
-
-	} // end resizetocover
 
 /* EOF document.ready */
 });

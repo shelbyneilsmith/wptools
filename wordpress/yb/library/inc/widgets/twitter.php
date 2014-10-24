@@ -4,9 +4,9 @@ class widget_twitter extends WP_Widget {
 
 	// Widget Settings
 	function widget_twitter() {
-		$widget_ops = array('description' => __('Display your latest Tweets') );
+		$widget_ops = array('description' => __('Display your latest Tweets', 'yb') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'twitter' );
-		$this->WP_Widget( 'twitter', __('yb.Twitter'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'twitter', __('yb.Twitter', 'yb'), $widget_ops, $control_ops );
 	}
 
 	// Widget Output

@@ -32,18 +32,11 @@ $this->sections[] = array(
 			'default'   => '0'
 		),
 		array(
-			'id'        => 'opt-checkbox-twitterbar',
-			'type'      => 'checkbox',
-			'title'     => __('Enable Twitter-Bar in Footer', 'yb'),
-			'subtitle'  => __('Check to show Twitter-Bar in Footer.', 'yb'),
-			'default'   => '0'
-		),
-		array(
 			'id'        => 'opt-textarea-copyright',
 			'type'      => 'textarea',
 			'title'     => __('Copyright Text', 'yb'),
 			'subtitle'  => __('Enter your Copyright Text (HTML allowed)', 'yb'),
-			'default' => __('YB theme by <a href="http://yellowberri.com">Yellowberri</a>', 'yb'),
+			'default' => __('', 'yb'),
 		),
 		array(
 			'id'        => 'opt-checkbox-socialfooter',
@@ -64,7 +57,6 @@ $this->sections[] = array(
 			'type'      => 'textarea',
 			'title'     => __('Tracking Code', 'yb'),
 			'subtitle'  => __('Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.', 'yb'),
-			'validate'  => 'js',
 			'default' => ''
 		),
 	),

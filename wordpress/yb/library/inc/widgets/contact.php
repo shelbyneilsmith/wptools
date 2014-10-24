@@ -4,9 +4,9 @@ class widget_contact extends WP_Widget {
 
 	// Widget Settings
 	function widget_contact() {
-		$widget_ops = array('description' => __('Display your Contact Informations') );
+		$widget_ops = array('description' => __('Display your Contact Informations', 'yb') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'contact' );
-		$this->WP_Widget( 'contact', __('yb.Contact'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'contact', __('yb.Contact', 'yb'), $widget_ops, $control_ops );
 	}
 
 	// Widget Output
@@ -20,7 +20,11 @@ class widget_contact extends WP_Widget {
 
 		<address>
 			<?php if($instance['address']): ?>
-			<span class="address"><?php echo $instance['address']; ?></span>
+			<span class="address"><?php echo $instance['address']; ?>
+				<?php if($instance['address_2']): ?>
+				<br /><?php echo $instance['address_2']; ?>
+				<?php endif; ?>
+			</span>
 			<?php endif; ?>
 
 			<?php if($instance['phone']): ?>
@@ -47,6 +51,7 @@ class widget_contact extends WP_Widget {
 
 		$instance['title'] = $new_instance['title'];
 		$instance['address'] = $new_instance['address'];
+		$instance['address_2'] = $new_instance['address_2'];
 		$instance['phone'] = $new_instance['phone'];
 		$instance['fax'] = $new_instance['fax'];
 		$instance['tollfree'] = $new_instance['tollfree'];
@@ -57,8 +62,7 @@ class widget_contact extends WP_Widget {
 	// Backend Form
 	function form($instance) {
 
-		//$defaults = array( 'title' => 'Twitter Widget', 'posts' => '3', 'username' => 'helloyb' ); // Default Values
-		$defaults = array('title' => 'Contact Info', 'address' => '', 'phone' => '', 'fax' => '', 'email' => '', 'web' => '', 'tollfree' => '');
+		$defaults = array('title' => 'Contact Info', 'address' => '', 'address_2' => '', 'phone' => '', 'fax' => '', 'email' => '', 'web' => '', 'tollfree' => '');
 		$instance = wp_parse_args((array) $instance, $defaults); ?>
 
 		<p>
@@ -68,6 +72,10 @@ class widget_contact extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('address'); ?>">Address:</label>
 			<input class="widefat" style="width: 216px;" id="<?php echo $this->get_field_id('address'); ?>" name="<?php echo $this->get_field_name('address'); ?>" value="<?php echo $instance['address']; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('address_2'); ?>">Address Line 2:</label>
+			<input class="widefat" style="width: 216px;" id="<?php echo $this->get_field_id('address_2'); ?>" name="<?php echo $this->get_field_name('address_2'); ?>" value="<?php echo $instance['address_2']; ?>" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id('phone'); ?>">Phone:</label>

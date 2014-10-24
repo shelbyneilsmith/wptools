@@ -2,25 +2,26 @@
 	@include breakpoint(narrowColumn) {
 		.mobile-menu {
 			.nav-btn {
-				position: absolute;
-				top: 60px;
+				position: relative;
 				background: black;
 				padding: 5px 10px;
 				z-index: 999;
 				text-align: center;
 				&.right {
-					right: 30px;
+					position: absolute;
+					top: 30px;
+					right: 0;
 					float: right;
 				}
 				&.left {
-					left: 30px;
+					top: 0;
 					float: left;
+					margin-bottom: 20px;
 				}
 				&.topbar {
-					position: relative;
-					top: 0;
+					top: 0px;
 					right: 0;
-					margin: 5px 0;
+					margin: 10px 0 10px 10px;
 				}
 				&.thumb-btn {
 					position: fixed;
@@ -36,6 +37,7 @@
 					}
 					&.left {
 						left: 0;
+						margin-bottom: 0;
 					}
 				}
 			}

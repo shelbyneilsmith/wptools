@@ -6,24 +6,20 @@ function yb_scripts_basic() {
 	/* ------------------------------------------------------------------------ */
 	/* Register Scripts */
 	/* ------------------------------------------------------------------------ */
-	wp_register_script('shortcodes', get_template_directory_uri() . '/library/_scripts/shortcodes.js', 'jquery', '1.0', TRUE);
-	wp_register_script('tooltip', get_template_directory_uri() . '/library/_scripts/bootstrap-tooltip.js', 'jquery', '1.0', TRUE);
+	wp_register_script('modernizr', get_template_directory_uri() . '/library/_scripts/libs/modernizr.custom.min.js', 'jquery', '1.0', TRUE);
 
-	if( !empty($ybwp_data['opt-text-social-twitter'] ) ) {
-		wp_register_script('twitter', get_template_directory_uri() . '/library/_scripts/twitter/jquery.tweet.min.js', 'jquery', '1.0', TRUE);
-	}
+	wp_register_script('shortcodes', get_template_directory_uri() . '/library/_scripts/shortcodes.js', 'jquery', '1.0', TRUE);
+
+	// if( !empty($ybwp_data['opt-text-social-twitter'] ) ) {
+	// 	wp_register_script('twitter', get_template_directory_uri() . '/library/_scripts/twitter/jquery.tweet.min.js', 'jquery', '1.0', TRUE);
+	// }
 
 	// if ( $data['check_portfoliotype'] == true ) {
 	// 	wp_register_script('isotope', get_template_directory_uri() . '/library/_scripts/isotope.js', 'jquery', '1.5', TRUE);
 	// }
 
-	// if ( $data['check_flexslider'] == true ) {
-	// 	wp_register_script( 'flexslider-js', get_stylesheet_directory_uri() . '/library/_scripts/flexslider/jquery.flexslider-min.js', array( 'jquery' ), '', true );
-	// }
-
-	wp_register_script('waypoints', get_template_directory_uri() . '/library/_scripts/waypoints.js', 'jquery', '2.0.2', TRUE);
-
 	if ( !empty($ybwp_data['opt-checkbox-stickyheader'] ) ) {
+		wp_register_script('waypoints', get_template_directory_uri() . '/library/_scripts/waypoints.js', 'jquery', '2.0.2', TRUE);
 		wp_register_script('waypoints-sticky', get_template_directory_uri() . '/library/_scripts/waypoints-sticky.js', 'jquery', '1.4', TRUE);
 	}
 
@@ -34,31 +30,30 @@ function yb_scripts_basic() {
 	/* ------------------------------------------------------------------------ */
 	wp_enqueue_script('jquery');
 
-	wp_enqueue_script('shortcodes');
-	wp_enqueue_script('tooltip');
+	wp_enqueue_script('modernizr');
 
-	if( !empty($ybwp_data['opt-text-social-twitter'] ) ) {
-		wp_enqueue_script('twitter');
-	}
+	wp_enqueue_script('shortcodes');
+
+	// if( !empty($ybwp_data['opt-text-social-twitter'] ) ) {
+	// 	wp_enqueue_script('twitter');
+	// }
 
 	// if ( $data['check_portfoliotype'] == true ) {
 	// 	wp_enqueue_script('isotope');
 	// }
 
-	// if ( $data['check_flexslider'] == true ) {
-	// 	wp_enqueue_script( 'flexslider-js' );
-	// }
-
-	wp_enqueue_script('waypoints');
-
 	if ( !empty($ybwp_data['opt-checkbox-stickyheader'] ) ) {
+		wp_enqueue_script('waypoints');
 		wp_enqueue_script('waypoints-sticky');
 	}
 
 	wp_enqueue_script( 'yb-js' );
-	wp_localize_script( 'yb-js', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-}
 
+	/* ------------------------------------------------------------------------ */
+	/* Localize ajax script - Uncomment if needed! */
+	/* ------------------------------------------------------------------------ */
+	// wp_localize_script( 'yb-js', 'MyAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}
 add_action( 'wp_enqueue_scripts', 'yb_scripts_basic' );
 
 function yb_styles_basic() {
@@ -97,7 +92,6 @@ function yb_styles_basic() {
 	if (class_exists('Woocommerce')){
 		wp_enqueue_style( 'woocommerce' );
 	}
-
 }
 add_action( 'wp_enqueue_scripts', 'yb_styles_basic', 1 );
 

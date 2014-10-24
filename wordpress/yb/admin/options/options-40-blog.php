@@ -37,6 +37,14 @@ $this->sections[] = array(
 			'default'   => 'blog-fullwidth'
 		),
 		array(
+			'id'        => 'opt-checkbox-blogrss',
+			'type'      => 'checkbox',
+			'title'     => __('Enable RSS Feed for Blog', 'yb'),
+			'subtitle'  => __('Check to enable RSS feed', 'yb'),
+			'required' => array('opt-checkbox-blog','=','1'),
+			'default'   => '0'// 1 = on | 0 = off
+		),
+		array(
 			'id'        => 'opt-checkbox-sharebox',
 			'type'      => 'checkbox',
 			'title'     => __('Enable Share-Box on Post Detail', 'yb'),
@@ -89,6 +97,14 @@ $this->sections[] = array(
 			'type'      => 'section',
 			'title'     => __('Blog Title Settings', 'yb'),
 			'indent'    => false // Indent all options below until the next 'section' option is set.
+		),
+		array(
+			'id'        => 'opt-checkbox-showblogtitle',
+			'type'      => 'checkbox',
+			'title'     => __('Show Blog Title', 'yb'),
+			'subtitle'  => __('Uncheck to disable the blog title from showing.', 'yb'),
+			'required' => array('opt-checkbox-blog','=','1'),
+			'default'   => '1'// 1 = on | 0 = off
 		),
 		array(
 			'id'        => 'opt-text-blogtitle',
@@ -201,10 +217,10 @@ $this->sections[] = array(
 			'default'   => '0'// 1 = on | 0 = off
 		),
 		array(
-			'id'        => 'opt-checkbox-sharingboxgoogle',
+			'id'        => 'opt-checkbox-sharingboxgoogleplus',
 			'type'      => 'checkbox',
-			'title'     => __('Enable Google in Social Sharing Box', 'yb'),
-			'subtitle'  => __('Check to enable Google in Social Sharing Box', 'yb'),
+			'title'     => __('Enable Google+ in Social Sharing Box', 'yb'),
+			'subtitle'  => __('Check to enable Google+ in Social Sharing Box', 'yb'),
 			'required' => array('opt-checkbox-blog','=','1'),
 			'default'   => '0'// 1 = on | 0 = off
 		),

@@ -35,7 +35,7 @@
 	margin-left: $gutter * 0.5;
 	margin-right: $gutter * 0.5;
 	@include breakpoint(narrowColumn) {
-		width: 100% !important;
+		width: 100%;
 		margin: 0;
 	}
 }
@@ -44,6 +44,9 @@
 
 @mixin columnWidth($numCols) {
 	width: ($columnWidth * $numCols) + ($gutter * ($numCols - 1));
+	@include breakpoint(narrowColumn) {
+		width: 100%;
+	}
 }
 
 .container .one.column,
@@ -64,14 +67,14 @@
 .container .fifteen.columns { @include columnWidth(15); }
 .container .sixteen.columns, .sixteen.columns { @include columnWidth(16); }
 
-.container .one-half.columns { width: 50% - $gutter; }
-.container .one-third.columns { width: 33.3334% - $gutter; }
-.container .two-thirds.columns { width: 66.6667% - $gutter; }
+.container .one-half.columns { width: 50% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-third.columns { width: 33.3334% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .two-thirds.columns { width: 66.6667% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
 
-.container .one-fourth.columns { width: 25% - $gutter; }
-.container .one-fifth.columns { width: 20% - $gutter; }
-.container .one-sixth.columns { width: 16.6667% - $gutter; }
-.container .one-seventh.columns { width: 14.285714% - $gutter; }
+.container .one-fourth.columns { width: 25% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-fifth.columns { width: 20% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-sixth.columns { width: 16.6667% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-seventh.columns { width: 14.285714% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
 
 /* Offsets */
 @mixin columnOffset($offsetNum) {

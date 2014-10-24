@@ -4,9 +4,9 @@ class widget_facebook extends WP_Widget {
 
 	// Widget Settings
 	function widget_facebook() {
-		$widget_ops = array('description' => __('Display Facebook Like Box') );
+		$widget_ops = array('description' => __('Display Facebook Like Box', 'yb') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'facebook' );
-		$this->WP_Widget( 'facebook', __('yb.Facebook'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'facebook', __('yb.Facebook', 'yb'), $widget_ops, $control_ops );
 	}
 
 	// Widget Output

@@ -18,11 +18,6 @@
 				<a href="http://linkedin.com/shareArticle?mini=true&amp;url=<?php the_permalink();?>&amp;title=<?php the_title();?>" title="<?php _e( 'LinkedIn', 'yb' ) ?>" target="_blank"><?php _e( 'LinkedIn', 'yb' ) ?></a>
 			</li>
 			<?php } ?>
-			<?php if($ybwp_data['opt-checkbox-sharingboxreddit'] == true) { ?>
-			<li class="social-reddit">
-				<a href="http://www.reddit.com/submit?url=<?php the_permalink() ?>&amp;title=<?php echo urlencode(the_title('', '', false)) ?>" title="<?php _e( 'Reddit', 'yb' ) ?>" target="_blank"><?php _e( 'Reddit', 'yb' ) ?></a>
-			</li>
-			<?php } ?>
 			<?php if($ybwp_data['opt-checkbox-sharingboxdigg'] == true) { ?>
 			<li class="social-digg">
 				<a href="http://digg.com/submit?phase=2&amp;url=<?php the_permalink() ?>&amp;bodytext=&amp;tags=&amp;title=<?php echo urlencode(the_title('', '', false)) ?>" target="_blank" title="<?php _e( 'Digg', 'yb' ) ?>"><?php _e( 'Digg', 'yb' ) ?></a>
@@ -33,7 +28,7 @@
 				<a href="http://www.delicious.com/post?v=2&amp;url=<?php the_permalink() ?>&amp;notes=&amp;tags=&amp;title=<?php echo urlencode(the_title('', '', false)) ?>" title="<?php _e( 'Delicious', 'yb' ) ?>" target="_blank"><?php _e( 'Delicious', 'yb' ) ?></a>
 			</li>
 			<?php } ?>
-			<?php if($ybwp_data['opt-checkbox-sharingboxgoogle'] == true) { ?>
+			<?php if($ybwp_data['opt-checkbox-sharingboxgoogleplus'] == true) { ?>
 			<li class="social-googleplus">
 				<a href="https://plus.google.com/share?url=<?php the_permalink() ?>&amp;title=<?php echo urlencode(the_title('', '', false)) ?>" title="<?php _e( 'Google+', 'yb' ) ?>" target="_blank"><?php _e( 'Google+', 'yb' ) ?>+</a>
 			</li>

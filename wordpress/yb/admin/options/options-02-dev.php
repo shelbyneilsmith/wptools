@@ -34,6 +34,13 @@ $this->sections[] = array(
 			'required' => array('opt-checkbox-styletiles', '=', '1'),
 			'default'   => '5',
 		),
+		array(
+			'id'        => 'opt-checkbox-styletilestk',
+			'type'      => 'checkbox',
+			'title'     => __('Use Typekit on Styletiles.', 'yb'),
+			'subtitle'  => __('Be sure to specify the kit ID in general settings.', 'yb'),
+			'default'   => '0'
+		),
 	),
 );
 

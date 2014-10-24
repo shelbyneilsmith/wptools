@@ -23,24 +23,11 @@
 	</div>
 </div>
 
-<div id="page-wrap" class="clearfix">
+<div id="page-wrap" <?php post_class(); ?>>
 
 	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
 
-		<?php if ( $ybwp_data['opt-layout'] !== "1" ) {
-				$contentColumns = "twelve";
-				if ( $ybwp_data['opt-layout'] === "2" ) {
-					$sidebar_pos = 'sidebar-left';
-				} else {
-					$sidebar_pos = 'sidebar-right';
-				}
-			} else {
-				$contentColumns = "sixteen";
-				$sidebar_pos = '';
-			}
-		?>
-
-		<div id="content" class="<?php echo $sidebar_pos; ?> <?php echo $contentColumns; ?> columns">
+		<div id="content" class="<?php sidebarPosClass($page_layout); ?> columns">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 

@@ -702,8 +702,8 @@ h2 [class^="iconbox-"], h2 [class*=" iconbox-"] {
 .retinaicon-truck:before { content: "\f0d1" }
 .retinaicon-pinterest:before { content: "\f0d2" }
 .retinaicon-pinterest-sign:before { content: "\f0d3" }
-.retinaicon-google-plus-sign:before { content: "\f0d4" }
-.retinaicon-google-plus:before { content: "\f0d5" }
+.retinaicon-googleplus-sign:before { content: "\f0d4" }
+.retinaicon-googleplus:before { content: "\f0d5" }
 .retinaicon-money:before { content: "\f0d6" }
 .retinaicon-caret-down:before { content: "\f0d7" }
 .retinaicon-caret-up:before { content: "\f0d8" }
@@ -987,12 +987,12 @@ ul.styled-list {
 					margin:0;
 					padding:0;
 				}
-				&.member-social-facebook a { background: url(../_images/icons/facebook.png) no-repeat 0 0 }
-				&.member-social-twitter a { background: url(../_images/icons/twitter.png) no-repeat 0 0 }
-				&.member-social-skype a { background: url(../_images/icons/skype.png) no-repeat 0 0 }
-				&.member-social-google a { background: url(../_images/icons/googleplus.png) no-repeat 0 0 }
-				&.member-social-linkedin a { background: url(../_images/icons/linkedin.png) no-repeat 0 0 }
-				&.member-social-email a { background: url(../_images/icons/email.png) no-repeat 0 0 }
+				&.member-social-facebook a { background: url(../_images/social-icons/facebook.png) no-repeat 0 0 }
+				&.member-social-twitter a { background: url(../_images/social-icons/twitter.png) no-repeat 0 0 }
+				&.member-social-skype a { background: url(../_images/social-icons/skype.png) no-repeat 0 0 }
+				&.member-social-googleplus a { background: url(../_images/social-icons/googleplus.png) no-repeat 0 0 }
+				&.member-social-linkedin a { background: url(../_images/social-icons/linkedin.png) no-repeat 0 0 }
+				&.member-social-email a { background: url(../_images/social-icons/email.png) no-repeat 0 0 }
 			}
 		}
 	}

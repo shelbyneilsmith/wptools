@@ -1,35 +1,14 @@
-		<?php global $ybwp_data; ?>
+			<?php global $ybwp_data; ?>
 
-		<?php
-			if ( !empty($ybwp_data['opt-layout']) && !empty($ybwp_data['opt-homelayout']) ) {
-				if ( ( $ybwp_data['opt-layout'] === "Full Width" ) || ( $ybwp_data['opt-homelayout'] === "Full Width" ) ) {
-					$full_width_class = "full-width";
-				} else {
-					$full_width_class = "";
+			<?php
+				if ( !empty($ybwp_data['opt-layout']) && !empty($ybwp_data['opt-homelayout']) ) {
+					if ( ( $ybwp_data['opt-layout'] === "Full Width" ) || ( $ybwp_data['opt-homelayout'] === "Full Width" ) ) {
+						$full_width_class = "full-width";
+					} else {
+						$full_width_class = "";
+					}
 				}
-			}
-		?>
-
-		<?php if( !empty($ybwp_data['opt-checkbox-twitterbar'] ) ) { ?>
-			<div id="twitterbar" class="clearfix">
-				<div class="container <?php echo $full_width_class; ?>">
-					<div class="sixteen columns">
-						<div class="twitterpost"><?php _e('loading...', 'yb') ?></div>
-						<?php if(!empty($ybwp_data['opt-text-social-twitter'])) { ?>
-							<script type='text/javascript'>
-							jQuery(document).ready(function($){
-								$('.twitterpost').tweet({
-									modpath: '<?php echo get_template_directory_uri(); ?>/library/_scripts/twitter/index.php',
-									username: '<?php echo $ybwp_data['opt-text-social-twitter']; ?>',
-									count: "1"
-								});
-							});
-							</script>
-						<?php } ?>
-					</div>
-				</div>
-			</div>
-		<?php } ?>
+			?>
 
 			<footer id="footer" class="site-footer">
 				<div class="container <?php echo $full_width_class; ?>">
@@ -41,34 +20,34 @@
 						<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'site-footer-nav', 'container_class' => 'footer-nav sixteen columns' )); ?>
 					<?php endif; ?>
 				</div>
+				<div id="copyright" class="clearfix">
+					<div class="container <?php echo $full_width_class; ?>">
+
+						<div class="copyright-text eight columns">
+							<?php if( !empty($ybwp_data['opt-textarea-copyright'] )) { ?>
+								<?php echo $ybwp_data['opt-textarea-copyright']; ?>
+							<?php } else { ?>
+								Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?>
+							<?php } ?>
+						</div>
+
+						<?php if( !empty($ybwp_data['opt-checkbox-socialfooter']) && outputSocialIcons() ) { ?>
+							<div class="eight columns">
+								<div class="social-icons clearfix">
+									<ul>
+										<?php echo outputSocialIcons(); ?>
+									</ul>
+								</div>
+							</div>
+						<?php } ?>
+						<?php if ( !empty($ybwp_data['opt-checkbox-backtotop'] ) ) : ?>
+							<div id="back-to-top" class="sixteen columns"><a href="#"><?php _e( 'Back to Top', 'yb' ) ?></a></div>
+						<?php endif; ?>
+					</div>
+				</div><!-- end copyright -->
 			</footer>
 
-		<div id="copyright" class="clearfix">
-			<div class="container <?php echo $full_width_class; ?>">
-
-				<div class="copyright-text eight columns">
-					<?php if( !empty($ybwp_data['opt-textarea-copyright'] )) { ?>
-						<?php echo $ybwp_data['opt-textarea-copyright']; ?>
-					<?php } else { ?>
-						Copyright &copy; <?php echo date('Y'); ?> <?php bloginfo('name') ?>
-					<?php } ?>
-				</div>
-
-				<?php if( !empty($ybwp_data['opt-checkbox-socialfooter']) && outputSocialIcons() ) { ?>
-					<div class="eight columns">
-						<div class="social-icons clearfix">
-							<ul>
-								<?php echo outputSocialIcons(); ?>
-							</ul>
-						</div>
-					</div>
-				<?php } ?>
-				<?php if ( !empty($ybwp_data['opt-checkbox-backtotop'] ) ) : ?>
-					<div id="back-to-top" class="sixteen columns"><a href="#"><?php _e( 'Back to Top', 'yb' ) ?></a></div>
-				<?php endif; ?>
-			</div>
-		</div><!-- end copyright -->
-
+		</div><!-- end #wrapper -->
 		<?php if( !empty($ybwp_data['opt-textarea-analyticscode'])) { echo $ybwp_data['opt-textarea-analyticscode']; } ?>
 
 		<?php wp_footer(); ?>
@@ -79,6 +58,5 @@
 			<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
 			<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 		<![endif]-->
-		</div> <!-- end #wrapper -->
 	</body>
 </html> <!-- end page. -->

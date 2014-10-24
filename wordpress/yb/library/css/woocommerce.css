@@ -312,6 +312,7 @@
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
   cursor: pointer;
@@ -342,6 +343,7 @@ button.single_add_to_cart_button {
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
   -webkit-border-radius: 3px;
@@ -449,6 +451,7 @@ button.single_add_to_cart_button:hover {
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
 }
@@ -732,6 +735,7 @@ p.stars a.star-5:after {
   background-image: -webkit-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-color: #e9f2d2;
   border-color: #c0da66;
@@ -761,7 +765,7 @@ p.stars a.star-5:after {
   background-color: #fdf3f3;
   color: #d25c5a;
   list-style: none !important;
-  margin: 0 0 40px 0 !important;
+  margin: 0 0 40px 0!important;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -1021,6 +1025,7 @@ p.stars a.star-5:after {
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
   -webkit-border-radius: 3px;
@@ -1185,6 +1190,7 @@ p.stars a.star-5:after {
   background-image: -webkit-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #e9f2d2 0%, #ffffff 100%);
   background-color: #e9f2d2;
   color: #88b12b;
@@ -1318,6 +1324,7 @@ p.stars a.star-5:after {
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
   -webkit-border-radius: 3px;
@@ -1523,6 +1530,7 @@ td.actions input {
   background-image: -webkit-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -moz-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: -o-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-image: linear-gradient(bottom, #f7f7f7 0%, #ffffff 100%);
   background-color: #F9F9F9;
   -webkit-border-radius: 3px;

@@ -54,7 +54,7 @@ register_taxonomy("portfolio_filter", array("portfolio"), array("hierarchical" =
 function portfolio_edit_columns( $portfolio_columns ) {
 	$portfolio_columns = array(
 		"cb" => "<input type=\"checkbox\" />",
-		"title" => _x('Title', 'column name'),
+		"title" => _x('Title', 'column name', 'yb'),
 		"thumbnail" => __('Thumbnail', 'portfolioposttype'),
 		"portfolio_filter" => __('Filter', 'portfolioposttype'),
 		"author" => __('Author', 'portfolioposttype'),

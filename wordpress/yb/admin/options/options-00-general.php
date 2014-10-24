@@ -8,7 +8,7 @@ $this->sections[] = array(
 			'type'      => 'image_select',
 			'presets'   => true,
 			'title'     => __('Site Type', 'yb'),
-			'subtitle'  => __('Choose a basic site type to apply group of settings to speed up development!'),
+			'subtitle'  => __('Choose a basic site type to apply group of settings to speed up development!', 'yb'),
 			'default'   => 'Miscellaneous',
 			'options'   => array(
 				'Miscellaneous'	=> array('alt' => 'Miscellaneous', 'img' 	=> '', 'presets'	=> array( 'opt-checkbox-blog' => '0' )),
@@ -90,6 +90,13 @@ $this->sections[] = array(
 			'compiler' => array( 'body' )
 		),
 		array(
+			'id'        => 'opt-text-typekitid',
+			'type'      => 'text',
+			'title'     => __('Typekit ID', 'yb'),
+			'subtitle'  => __('If you want to use Typekit on this site, enter the kid ID', 'yb'),
+			'default'   => '',
+		),
+		array(
 			'id'        => 'opt-select-pagination',
 			'type'      => 'select',
 			'title'     => __('Pagination Type', 'yb'),
@@ -103,8 +110,7 @@ $this->sections[] = array(
 		array(
 			'id'        => 'opt-checkbox-breadcrumbs',
 			'type'      => 'checkbox',
-			'title'     => __('Enable Breadcrumbs on Regular Pages)', 'yb'),
-			// 'subtitle'  => __('Be careful: Page specific Settings get overwritten.', 'yb'),
+			'title'     => __('Enable Breadcrumbs on Regular Pages', 'yb'),
 			'default'   => '0'
 		),
 		array(

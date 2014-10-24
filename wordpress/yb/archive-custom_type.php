@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php get_template_part( 'library/inc/titlebar' ); ?>
+<?php echo titlebar(); ?>
 
 <?php
 	$page_layout = $ybwp_data['opt-layout'];
@@ -12,23 +12,9 @@
 	}
 ?>
 
-<div id="page-wrap" class="clearfix">
+<div id="page-wrap" <?php post_class(); ?>>
 	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
-		<?php
-			if ( ( $page_layout === "Centered Left Sidebar" ) || ( $page_layout === "Centered Right Sidebar" ) ) {
-				$contentColumns = "twelve";
-				if ( $page_layout === "Centered Left Sidebar" ) {
-					$sidebar_pos = 'sidebar-left';
-				}
-				if ( $page_layout === "Centered Right Sidebar" ) {
-					$sidebar_pos = 'sidebar-right';
-				}
-			} else {
-				$contentColumns = "sixteen";
-				$sidebar_pos = '';
-			}
-		?>
-		<div id="content" class="<?php echo $sidebar_pos; ?> <?php echo $contentColumns; ?> columns <?php echo $ybwp_data['opt-select-blogpostlayout']; ?>">
+		<div id="content" class="<?php sidebarPosClass($page_layout); ?> columns <?php echo $ybwp_data['opt-select-blogpostlayout']; ?>">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 

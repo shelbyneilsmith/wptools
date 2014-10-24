@@ -1,147 +1,147 @@
 //////available functions:////////
-		
+
 		//* flickrFeed_user_all(user_id, section_id, count) - adds a flickr feed to specified section, with lightbox effects added
-		
+
 		//* flickrFeed_set(user_id, set_id, section_id, count) - adds a flickr feed to specified section, with lightbox effects added
 
 		//* validateForm(formSelector) - enables front-end validation for selected form
-				
-		//* makeSlider(parentElement, slide_effect, speed, pause, control) - creates slideshow using nivo slider plugin. 
-		
+
+		//* makeSlider(parentElement, slide_effect, speed, pause, control) - creates slideshow using nivo slider plugin.
+
 		//* menuIntent(sens, int, slideSpeed, mouseOutTimeOut) - uses hover intent plugin to control navigation drop down menus. all arguments are optional. int, slideSpeed and mouseOutTimeOut are in milliseconds (1000 = 1 second);
 
 		//* function rwdSlider(element)
-		
+
 		//* function inputMask(element, maskPattern, placeHolder);
-		
+
 		//* function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBreak);
-		
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////create flickr feed, with lightbox effects/////////
-function flickrFeed_user_all(user_id, section_id, count){
-	var itemNum = 0;
-	jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?id="+user_id+"&lang=en-us&format=json&jsoncallback=?", function(data){
-	  jQuery.each(data.items, function(i,item){
-		var thumbImage = item.media.m;
-		var largeImage = thumbImage.replace('_m.jpg', '.jpg');
-		jQuery("<img/>").attr("src", thumbImage).appendTo(section_id)
-		  .wrap("<a href='" + largeImage + "' title='" + item.title + "'></a>").parent('a').lightBox();
-		itemNum++;
-		if(itemNum == count) {
-			return false;
-		}
-	  });
-	});
-}
+// function flickrFeed_user_all(user_id, section_id, count){
+// 	var itemNum = 0;
+// 	jQuery.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?id="+user_id+"&lang=en-us&format=json&jsoncallback=?", function(data){
+// 	  jQuery.each(data.items, function(i,item){
+// 		var thumbImage = item.media.m;
+// 		var largeImage = thumbImage.replace('_m.jpg', '.jpg');
+// 		jQuery("<img/>").attr("src", thumbImage).appendTo(section_id)
+// 		  .wrap("<a href='" + largeImage + "' title='" + item.title + "'></a>").parent('a').lightBox();
+// 		itemNum++;
+// 		if(itemNum == count) {
+// 			return false;
+// 		}
+// 	  });
+// 	});
+// }
 
 ////////create flickr feed from individual set, with lightbox effects/////////
-function flickrFeed_set(user_id, set_id, section_id, count){
-	var itemNum = 0;
-	jQuery.getJSON("http://api.flickr.com/services/feeds/photoset.gne?set="+set_id+"&nsid="+user_id+"&lang=en-us&format=json&jsoncallback=?", function(data){
-	  jQuery.each(data.items, function(i,item){
-		var thumbImage = item.media.m;
-		var largeImage = thumbImage.replace('_m.jpg', '.jpg');
-		jQuery("<img/>").attr("src", thumbImage).appendTo(section_id)
-			 .wrap("<a href='" + largeImage + "' title='" + item.title + "'></a>").parent('a').lightBox();
-			itemNum++;
-			if(itemNum == count) {
-				return false;
-			}
-	  });
-	});
-}
+// function flickrFeed_set(user_id, set_id, section_id, count){
+// 	var itemNum = 0;
+// 	jQuery.getJSON("http://api.flickr.com/services/feeds/photoset.gne?set="+set_id+"&nsid="+user_id+"&lang=en-us&format=json&jsoncallback=?", function(data){
+// 	  jQuery.each(data.items, function(i,item){
+// 		var thumbImage = item.media.m;
+// 		var largeImage = thumbImage.replace('_m.jpg', '.jpg');
+// 		jQuery("<img/>").attr("src", thumbImage).appendTo(section_id)
+// 			 .wrap("<a href='" + largeImage + "' title='" + item.title + "'></a>").parent('a').lightBox();
+// 			itemNum++;
+// 			if(itemNum == count) {
+// 				return false;
+// 			}
+// 	  });
+// 	});
+// }
 
 ////////add lightbox ability to images///////
-function makeLightbox(selector){
-		jQuery(selector+" a").attr('rel', 'lightbox');
-}
+// function makeLightbox(selector){
+// 		jQuery(selector+" a").attr('rel', 'lightbox');
+// }
 
 ///////form validation////////
-jQuery.fn.exists = function(){return jQuery(this).length>0;}
-function validateForm(formSelector){
-	if(jQuery(formSelector).exists())
-	{
-		jQuery(formSelector).validate();
-	}
-}
+// jQuery.fn.exists = function(){return jQuery(this).length>0;}
+// function validateForm(formSelector){
+// 	if(jQuery(formSelector).exists())
+// 	{
+// 		jQuery(formSelector).validate();
+// 	}
+// }
 
 
 ////////creates slideshow using nivo slider plugin///////
-function makeSlider(parentElement, slide_effect, speed, pause, control, start){
-	jQuery(parentElement+' img').hide();
-	jQuery(window).load(function(){
-	// feature box
-		var total = jQuery(parentElement+' img').length;
-		var rand = Math.floor(Math.random()*total);
-		jQuery(parentElement).nivoSlider({
-			effect: slide_effect, //sliceDown, sliceDownLeft, sliceUp, sliceUpLeft, sliceUpDown, sliceUpDownLeft, fold, fade, random, slideInRight, slideInLeft, boxRandom, boxRain, boxRainReverse, boxRainGrow, boxRainGrowReverse
-			slices:15,
-			animSpeed:speed, //slide transition speed, in milliseconds
-			pauseTime:pause, //how long each slide will show, in milliseconds
-			startSlide:start, //Set starting Slide (0 index)
-			directionNav:false, //Next & Prev
-			directionNavHide:true, //Only show on hover
-			controlNav: (control == "num" || control == "thumbs" || control == "rel") ? true : false, //1,2,3...
-			controlNavThumbs: (control == "thumbs") ? true : false, //Use thumbnails for Control Nav
-			controlNavThumbsFromRel: (control == "rel") ? true : false, //Use image rel for thumbs
-			controlNavThumbsSearch: '.jpg', //Replace this with...
-			controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
-			keyboardNav:true, //Use left & right arrows
-			pauseOnHover:true, //Stop animation while hovering
-			manualAdvance:false, //Force manual transitions
-			captionOpacity:0.8, //Universal caption opacity
-			beforeChange: function(){},
-			afterChange: function(){},
-			slideshowEnd: function(){} //Triggers after all slides have been shown
-		});
-	});
-}
+// function makeSlider(parentElement, slide_effect, speed, pause, control, start){
+// 	jQuery(parentElement+' img').hide();
+// 	jQuery(window).load(function(){
+// 	// feature box
+// 		var total = jQuery(parentElement+' img').length;
+// 		var rand = Math.floor(Math.random()*total);
+// 		jQuery(parentElement).nivoSlider({
+// 			effect: slide_effect, //sliceDown, sliceDownLeft, sliceUp, sliceUpLeft, sliceUpDown, sliceUpDownLeft, fold, fade, random, slideInRight, slideInLeft, boxRandom, boxRain, boxRainReverse, boxRainGrow, boxRainGrowReverse
+// 			slices:15,
+// 			animSpeed:speed, //slide transition speed, in milliseconds
+// 			pauseTime:pause, //how long each slide will show, in milliseconds
+// 			startSlide:start, //Set starting Slide (0 index)
+// 			directionNav:false, //Next & Prev
+// 			directionNavHide:true, //Only show on hover
+// 			controlNav: (control == "num" || control == "thumbs" || control == "rel") ? true : false, //1,2,3...
+// 			controlNavThumbs: (control == "thumbs") ? true : false, //Use thumbnails for Control Nav
+// 			controlNavThumbsFromRel: (control == "rel") ? true : false, //Use image rel for thumbs
+// 			controlNavThumbsSearch: '.jpg', //Replace this with...
+// 			controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
+// 			keyboardNav:true, //Use left & right arrows
+// 			pauseOnHover:true, //Stop animation while hovering
+// 			manualAdvance:false, //Force manual transitions
+// 			captionOpacity:0.8, //Universal caption opacity
+// 			beforeChange: function(){},
+// 			afterChange: function(){},
+// 			slideshowEnd: function(){} //Triggers after all slides have been shown
+// 		});
+// 	});
+// }
 
 /////////uses galleria plugin to make simple image slider
-function makeGalleria(parentElement, width, height) {
-	jQuery(window).load(function() {
-		Galleria.loadTheme('/js/galleria/themes/classic/galleria.classic.min.js');
-		jQuery(parentElement).galleria({
-			width: width,
-			height: height
-		});
-		jQuery(parentElement + " img").show()
-	});
-}
+// function makeGalleria(parentElement, width, height) {
+// 	jQuery(window).load(function() {
+// 		Galleria.loadTheme('/js/galleria/themes/classic/galleria.classic.min.js');
+// 		jQuery(parentElement).galleria({
+// 			width: width,
+// 			height: height
+// 		});
+// 		jQuery(parentElement + " img").show()
+// 	});
+// }
 
 
 ////////uses hover intent plugin to control navigation drop down menus////////
-function menuIntent(sens, interval, slideSpeed, mouseOutTimeOut) {
-	if(!sens) {
-		var sens = 5;
-	}
-	if(!interval) {
-		var interval = 100;
-	}
-	if(!slideSpeed) {
-		var slideSpeed = 200;
-	}
-	if(!mouseOutTimeOut) {
-		var mouseOutTimeOut = 300;
-	}
-	var menuConfig = {    
-		sensitivity: sens, // number = sensitivity threshold (must be 1 or higher)    
-		interval: interval, // number = milliseconds for onMouseOver polling interval    
-		over: function()
-		{
-			jQuery(this).children('ul').slideDown(slideSpeed);
-		}, // function = onMouseOver callback (REQUIRED)    
-		timeout: mouseOutTimeOut, // number = milliseconds delay before onMouseOut    
-		out: function()
-		{
-			jQuery(this).children('ul').slideUp(slideSpeed);
-		} // function = onMouseOut callback (REQUIRED)    
-	};				
-	jQuery('.dropMenu ul').hide();
-	jQuery('.dropMenu').hoverIntent(menuConfig);
-}
+// function menuIntent(sens, interval, slideSpeed, mouseOutTimeOut) {
+// 	if(!sens) {
+// 		var sens = 5;
+// 	}
+// 	if(!interval) {
+// 		var interval = 100;
+// 	}
+// 	if(!slideSpeed) {
+// 		var slideSpeed = 200;
+// 	}
+// 	if(!mouseOutTimeOut) {
+// 		var mouseOutTimeOut = 300;
+// 	}
+// 	var menuConfig = {
+// 		sensitivity: sens, // number = sensitivity threshold (must be 1 or higher)
+// 		interval: interval, // number = milliseconds for onMouseOver polling interval
+// 		over: function()
+// 		{
+// 			jQuery(this).children('ul').slideDown(slideSpeed);
+// 		}, // function = onMouseOver callback (REQUIRED)
+// 		timeout: mouseOutTimeOut, // number = milliseconds delay before onMouseOut
+// 		out: function()
+// 		{
+// 			jQuery(this).children('ul').slideUp(slideSpeed);
+// 		} // function = onMouseOut callback (REQUIRED)
+// 	};
+// 	jQuery('.dropMenu ul').hide();
+// 	jQuery('.dropMenu').hoverIntent(menuConfig);
+// }
 
 function rwdSlider(element) {
 	jQuery(window).load(function(){
@@ -175,17 +175,17 @@ function rwdSlider(element) {
 	});
 }
 
-function inputMask(element, maskPattern, placeHolder) {
-	placeHolder = typeof placeHolder !== 'undefined' ? placeHolder : "_";
-	jQuery(element).mask(maskPattern, {placeholder: placeHolder});
-}
+// function inputMask(element, maskPattern, placeHolder) {
+// 	placeHolder = typeof placeHolder !== 'undefined' ? placeHolder : "_";
+// 	jQuery(element).mask(maskPattern, {placeholder: placeHolder});
+// }
 
 function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBreak) {
 	$(window).load(function() {
 		var menuObj = $(menuID);
 		var initBool = true;
 		var menuOffset;
-		
+
 		if ((menuDirection == "top") || (menuDirection == "bottom")) {
 			menuOffset = menuObj.outerHeight();
 		} else if ((menuDirection == "left") || (menuDirection == "right")) {
@@ -194,21 +194,21 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 
 		function initMenu(menuState) {
 
-			var menuPosNeg = "";			
-			
+			var menuPosNeg = "";
+
 			if(menuState == "on") {
-			
+
 				menuObj.children('a.menuLink').show();
-								
-				var menuOnCSS = { 
-					position: 'absolute', 
+
+				var menuOnCSS = {
+					position: 'absolute',
 					zIndex: '9999'
 				};
 				menuObj.prependTo('body').wrap('<div id="menuWrap" />');
 				$('#menuWrap').css(menuOnCSS).css(menuDirection, 0);
 
 				$('<a class="menuLink" href="#"><span></span>Menu</a>').appendTo('#menuWrap').click(menuClick);
-		
+
 				$("<div id='dark-overlay'></div>").appendTo('body').css({
 					position: "fixed",
 					display: "none",
@@ -218,25 +218,25 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 					height: "100%",
 					background: "rgba(0,0,0,.75)"
 				});
-				
+
 				initBool = false;
-				
+
 				menuObj.hide();
 			} else if (menuState == "off") {
-			
-				var menuOffCSS = { 
+
+				var menuOffCSS = {
 					position: 'relative'
 				};
 				menuObj.insertAfter(returnAfter).show();
-				
+
 				$('#menuWrap').remove();
 				$("#dark-overlay").remove();
-				
+
 				initBool = true;
 			}
-			
+
 		}
-		
+
 		function menuClick() {
 			if (menuObj.css('display') == 'none') {
 				menuObj.show();
@@ -245,7 +245,7 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 				$('#menuWrap').css(menuDirection, newMenuOffset).css('position', 'fixed');
 			}
 			var menuAnim = parseInt($('#menuWrap').css(menuDirection),10) == 0 ? -menuOffset : 0;
-						
+
 			var anim = {opacity: 1};
 
 			anim[menuDirection] = menuAnim;
@@ -261,13 +261,13 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 		}
 
 		if (mobileBool) {
-		
+
 			initBool = false;
-			
+
 			if ($(window).width() < mobileBreak) {
 				initBool = true;
 			}
-			
+
 			$(window).resize(function() {
 				if ($(window).width() < mobileBreak) {
 					if (initBool) {
@@ -276,10 +276,10 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 				} else if ($(window).width() >= mobileBreak)	{
 					initMenu("off");
 				}
-				
+
 			});
 		}
-		
+
 		if (initBool) {
 			initMenu("on");
 		}
@@ -288,16 +288,16 @@ function offScreenMenu(menuID, returnAfter, menuDirection, mobileBool, mobileBre
 
 // usage: log('inside coolFunc', this, arguments);
 // paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
-window.log = function(){
-  log.history = log.history || [];   // store logs to an array for reference
-  log.history.push(arguments);
-  if(this.console) {
-   arguments.callee = arguments.callee.caller;
-   var newarr = [].slice.call(arguments);
-   (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
-  }
-};
+// window.log = function(){
+//   log.history = log.history || [];   // store logs to an array for reference
+//   log.history.push(arguments);
+//   if(this.console) {
+//    arguments.callee = arguments.callee.caller;
+//    var newarr = [].slice.call(arguments);
+//    (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
+//   }
+// };
 
 // make it safe to use console.log always
-(function(b){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c}})((function(){try
-{console.log();return window.console;}catch(err){return window.console={};}})());
+// (function(b){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,timeStamp,profile,profileEnd,time,timeEnd,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c}})((function(){try
+// {console.log();return window.console;}catch(err){return window.console={};}})());

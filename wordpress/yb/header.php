@@ -9,61 +9,17 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>
-	<?php
-		$page_title = '';
+	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
-		if (!is_front_page()) {
-			$page_title .= wp_title('');
-			$page_title .= " | ";
-		}
-		$page_title .= get_bloginfo('name');
-		$page_title .= " - ";
-		$page_title .= get_bloginfo('description');
-
-		echo $page_title;
-	?>
-	</title>
-
-	<!-- Google Chrome Frame for IE -->
 	<meta http-equiv="cleartype" content="on">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<!-- mobile meta (hooray!) -->
 	<meta name="HandheldFriendly" content="True">
 	<meta name="MobileOptimized" content="320">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Facebook Open Graph Meta Tags -->
-	<?php if ( !empty($ybwp_data['opt-media-fbimg']) ) : ?>
-	<meta property="og:image" content="<?php echo $ybwp_data['opt-media-fbimg']['url'] ?>"/>
-	<?php endif; ?>
+	<?php include_once( 'library/inc/fb_open_graph.php' ); ?>
 
-	<meta property="og:title" content="<?php echo $page_title; ?>"/>
-	<meta property="og:url" content="<?php echo get_permalink(); ?>"/>
-	<meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>"/>
-
-	<?php
-		if ( !empty($ybwp_data['opt-preset-sitetype']) ) {
-			if ( $ybwp_data['opt-preset-sitetype'] === "Miscellaneous" ) {
-				$site_type = $ybwp_data['opt-text-misc-sitetype'];
-			} else {
-				$site_type = $ybwp_data['opt-preset-sitetype'];
-			}
-		} else {
-			$site_type = "Miscellaneous";
-		}
-	?>
-	<?php if ( $site_type !== '' ) : ?>
-	<meta property="og:type" content="<?php echo $site_type; ?>"/>
-	<?php endif; ?>
-
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
-	<!-- Mobile Specific Metas & Favicons
-	========================================================= -->
 	<?php if(!empty($ybwp_data['media-favicon_front']['url'])) { ?><link rel="shortcut icon" href="<?php echo $ybwp_data['media-favicon_front']['url']; ?>"><?php } ?>
 
 	<?php if(!empty($ybwp_data['media-favicon_iphone']['url'])) { ?><link rel="apple-touch-icon" href="<?php echo $ybwp_data['media-favicon_iphone']['url']; ?>"><?php } ?>
@@ -74,18 +30,23 @@
 
 	<?php if(!empty($ybwp_data['media-favicon_ipad_retina']['url'])) { ?><link rel="apple-touch-icon" sizes="144x144" href="<?php echo $ybwp_data['media-favicon_ipad_retina']['url']; ?>"><?php } ?>
 
-	<!-- WordPress Stuff
-	========================================================= -->
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+	<?php if ( !empty($ybwp_data['opt-checkbox-blog'] )) : ?>
+		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+	<?php endif; ?>
 
 	<?php if( !empty($ybwp_data['opt-checkbox-pagecomments']) || !empty($ybwp_data['opt-checkbox-blogcomments'] ) ) : ?>
 		<?php if ( is_single() && comments_open() ) wp_enqueue_script( 'comment-reply' ); ?>
 	<?php endif; ?>
 
 	<?php wp_head(); ?>
-	<!-- end of wordpress head -->
+
 	<!--<script type="text/javascript" src="//wurfl.io/wurfl.js"></script>-->
 
+	<?php if (!empty($ybwp_data['opt-text-typekitid'])) : ?>
+		<script src="//use.typekit.net/<?php echo $ybwp_data['opt-text-typekitid']; ?>.js"></script>
+		<script>try{Typekit.load();}catch(e){}</script>
+	<?php endif; ?>
+	<!-- end of wordpress head -->
 </head>
 
 <body <?php body_class(); ?><?php main_bg(); ?>>
@@ -103,48 +64,32 @@
 	?>
 
 	<div id="wrapper">
+
 		<?php if( !empty($ybwp_data['opt-checkbox-topbar'] ) ) { ?>
-			<div id="topbar" class="clearfix <?php if($ybwp_data['opt-checkbox-socialtopbar'] == false) { echo 'no-social'; } ?>">
+			<div id="topbar" class="clearfix">
 				<div class="container <?php echo $full_width_class; ?>">
-				<?php if(!empty($ybwp_data['opt-textarea-callus'])) { ?>
-					<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar'] ) || !empty($ybwp_data['opt-checkbox-utilnav'] ) ) { ?>
-						<div class="eight columns">
-					<?php } else { ?>
-						<div class="sixteen columns">
+					<?php if(!empty($ybwp_data['opt-textarea-callus'])) { ?>
+						<div class="callus column"><?php echo $ybwp_data['opt-textarea-callus']; ?></div>
 					<?php } ?>
-							<div class="callus"><?php echo $ybwp_data['opt-textarea-callus']; ?></div>
-							<div class="clear"></div>
-					</div>
-					<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar']) || !empty($ybwp_data['opt-checkbox-utilnav'] ) ) { ?>
-						<div class="eight columns">
-					<?php } ?>
-				<?php } else { ?>
-					<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar'] ) || !empty($ybwp_data['opt-checkbox-utilnav'] ) ) { ?>
-						<div class="sixteen columns">
-					<?php } ?>
-				<?php } ?>
-						<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar'] ) ) { ?>
-							<?php if (outputSocialIcons()) : ?>
-							<nav class="social-icons clearfix">
-								<ul>
-									<?php echo outputSocialIcons(); ?>
-								</ul>
-							</nav>
-							<?php endif; ?>
-						<?php } ?>
-						<?php if ( !empty($ybwp_data['opt-checkbox-utilnav'] ) ) : ?>
-							<?php
-								if ( $ybwp_data['opt-checkbox-utilitynavmerge'] ) {
-									$utilmerge = ' util-merge';
-								} else {
-									$utilmerge = '';
-								}
-							?>
-							<?php wp_nav_menu( array('theme_location' => 'util-nav', 'container' => 'nav', 'container_id' => 'util-nav-header', 'container_class' => "util-nav$utilmerge" )); ?>
+					<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar'] ) ) { ?>
+						<?php if (outputSocialIcons()) : ?>
+						<nav class="social-icons clearfix column">
+							<ul>
+								<?php echo outputSocialIcons(); ?>
+							</ul>
+						</nav>
 						<?php endif; ?>
-					<?php if( !empty($ybwp_data['opt-checkbox-socialtopbar'] ) || !empty($ybwp_data['opt-checkbox-utilnav'] ) ) { ?>
-						</div>
 					<?php } ?>
+					<?php if ( !empty($ybwp_data['opt-checkbox-utilnav'] ) ) : ?>
+						<?php
+							if ( $ybwp_data['opt-checkbox-utilitynavmerge'] ) {
+								$utilmerge = ' util-merge';
+							} else {
+								$utilmerge = '';
+							}
+						?>
+						<?php wp_nav_menu( array('theme_location' => 'util-nav', 'container' => 'nav', 'container_id' => 'util-nav-header', 'container_class' => "util-nav$utilmerge column" )); ?>
+					<?php endif; ?>
 				</div>
 			</div> <!-- end topbar -->
 		<?php } ?>

@@ -4,9 +4,9 @@ class widget_embed extends WP_Widget_Text {
 
 	// Widget Settings
 	function widget_embed() {
-		$widget_ops = array('description' => __('Display Embed Video') );
+		$widget_ops = array('description' => __('Display Embed Video', 'yb') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'embed' );
-		$this->WP_Widget( 'embed', __('yb.Embed'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'embed', __('yb.Embed', 'yb'), $widget_ops, $control_ops );
 	}
 
 	// Widget Output

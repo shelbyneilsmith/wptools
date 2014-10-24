@@ -9,9 +9,9 @@ $this->sections[] = array(
 			'compiler'  => true,
 			'title'     => __('Select Header Layout', 'yb'),
 			'options'   => array(
-				'v1' => array('alt' => 'Logo/Nav Inline',       'img' => get_bloginfo('template_directory')."/library/_images/headers/header1.jpg"),
-				'v2' => array('alt' => 'Logo Left, Nav Dropped',  'img' => get_bloginfo('template_directory')."/library/_images/headers/header4.jpg"),
-				'v3' => array('alt' => 'Logo Centered, Nav Dropped', 'img' => get_bloginfo('template_directory')."/library/_images/headers/header5.jpg"),
+				'v1' => array('alt' => 'Logo/Nav Inline',       'img' => get_template_directory_uri()."/library/_images/headers/header1.jpg"),
+				'v2' => array('alt' => 'Logo Left, Nav Dropped',  'img' => get_template_directory_uri()."/library/_images/headers/header4.jpg"),
+				'v3' => array('alt' => 'Logo Centered, Nav Dropped', 'img' => get_template_directory_uri()."/library/_images/headers/header5.jpg"),
 			),
 			'default'   => 'v2'
 		),

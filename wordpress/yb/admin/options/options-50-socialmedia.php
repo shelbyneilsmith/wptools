@@ -19,20 +19,20 @@ $this->sections[] = array(
 			'title'     => __('Facebook Share Image Upload', 'yb'),
 			'subtitle'  => __('Upload the default image that you want Facebook to use when someone shares a page from your site.', 'yb'),
 		),
-		array(
-			'id'        => 'opt-checkbox-twitterwidget',
-			'type'      => 'checkbox',
-			'title'     => __('Enable Twitter Widget', 'yb'),
-			'subtitle'  => __('Check to enable twitter widget.', 'yb'),
-			'default'   => '0'// 1 = on | 0 = off
-		),
-		array(
-			'id'    => 'opt-info-twitterwarning',
-			'type'  => 'info',
-			'style' => 'warning',
-			'title' => __('Twitter Configuration API (1.1)', 'yb'),
-			'desc'  => __('You need to have a twitter App for your usage of the new Twitter API 1.1, login & create at https://dev.twitter.com/apps', 'yb')
-		),
+		// array(
+		// 	'id'        => 'opt-checkbox-twitterwidget',
+		// 	'type'      => 'checkbox',
+		// 	'title'     => __('Enable Twitter Widget', 'yb'),
+		// 	'subtitle'  => __('Check to enable twitter widget.', 'yb'),
+		// 	'default'   => '0'// 1 = on | 0 = off
+		// ),
+		// array(
+		// 	'id'    => 'opt-info-twitterwarning',
+		// 	'type'  => 'info',
+		// 	'style' => 'warning',
+		// 	'title' => __('Twitter Configuration API (1.1)', 'yb'),
+		// 	'desc'  => __('You need to have a twitter App for your usage of the new Twitter API 1.1, login & create at https://dev.twitter.com/apps', 'yb')
+		// ),
 		array(
 			'id'        => 'opt-text-social-twitter',
 			'type'      => 'text',
@@ -40,39 +40,39 @@ $this->sections[] = array(
 			'subtitle'  => __('Enter your Twitter username', 'yb'),
 			'default'   => '',
 		),
-		array(
-			'id'        => 'opt-text-social-twitter-consumerkey',
-			'type'      => 'text',
-			'title'     => __('Twitter App Consumer Key', 'yb'),
-			'subtitle'  => __('Enter your Twitter App Consumer Key.', 'yb'),
-			'default'   => '',
-		),
-		array(
-			'id'        => 'opt-text-social-twitter-consumersecret',
-			'type'      => 'text',
-			'title'     => __('Twitter App Consumer Secret', 'yb'),
-			'subtitle'  => __('Enter your Twitter App Consumer Secret.', 'yb'),
-			'default'   => '',
-		),
-		array(
-			'id'        => 'opt-text-social-twitter-accesstoken',
-			'type'      => 'text',
-			'title'     => __('Twitter App Access Token', 'yb'),
-			'subtitle'  => __('Enter your Twitter App Access Token.', 'yb'),
-			'default'   => '',
-		),
-		array(
-			'id'        => 'opt-text-social-twitter-tokensecret',
-			'type'      => 'text',
-			'title'     => __('Twitter App Access Token Secret', 'yb'),
-			'subtitle'  => __('Enter your Twitter App Access Token Secret.', 'yb'),
-			'default'   => '',
-		),
-		array(
-			'id'        => 'section-twitterconfig-end',
-			'type'      => 'section',
-			'indent'    => false // Indent all options below until the next 'section' option is set.
-		),
+		// array(
+		// 	'id'        => 'opt-text-social-twitter-consumerkey',
+		// 	'type'      => 'text',
+		// 	'title'     => __('Twitter App Consumer Key', 'yb'),
+		// 	'subtitle'  => __('Enter your Twitter App Consumer Key.', 'yb'),
+		// 	'default'   => '',
+		// ),
+		// array(
+		// 	'id'        => 'opt-text-social-twitter-consumersecret',
+		// 	'type'      => 'text',
+		// 	'title'     => __('Twitter App Consumer Secret', 'yb'),
+		// 	'subtitle'  => __('Enter your Twitter App Consumer Secret.', 'yb'),
+		// 	'default'   => '',
+		// ),
+		// array(
+		// 	'id'        => 'opt-text-social-twitter-accesstoken',
+		// 	'type'      => 'text',
+		// 	'title'     => __('Twitter App Access Token', 'yb'),
+		// 	'subtitle'  => __('Enter your Twitter App Access Token.', 'yb'),
+		// 	'default'   => '',
+		// ),
+		// array(
+		// 	'id'        => 'opt-text-social-twitter-tokensecret',
+		// 	'type'      => 'text',
+		// 	'title'     => __('Twitter App Access Token Secret', 'yb'),
+		// 	'subtitle'  => __('Enter your Twitter App Access Token Secret.', 'yb'),
+		// 	'default'   => '',
+		// ),
+		// array(
+		// 	'id'        => 'section-twitterconfig-end',
+		// 	'type'      => 'section',
+		// 	'indent'    => false // Indent all options below until the next 'section' option is set.
+		// ),
 		array(
 			'id'        => 'section-socialurls-start',
 			'type'      => 'section',
@@ -101,7 +101,7 @@ $this->sections[] = array(
 			'default'   => '',
 		),
 		array(
-			'id'        => 'opt-text-social-google',
+			'id'        => 'opt-text-social-googleplus',
 			'type'      => 'text',
 			'title'     => __('Google+ URL', 'yb'),
 			'subtitle'  => __('Enter URL to your Google+ Account', 'yb'),

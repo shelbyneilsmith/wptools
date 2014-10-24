@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
-<?php get_template_part( 'library/inc/titlebar' ); ?>
+<?php echo titlebar(); ?>
 
-<div id="page-wrap" class="portfolio-detail clearfix">
+<div id="page-wrap" <?php post_class(); ?>>
 	<div id="page-inner" class="container">
 
 		<div id="content">

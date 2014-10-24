@@ -8,7 +8,7 @@
                 title : 'Add Div w/ Class',
                 image : url+'/description.png',
                 onclick : function() {
-                     ed.selection.setContent('[div class="div-class"]Your Content...[/div]');
+                     ed.selection.setContent('[div class=""]Your Content...[/div]');
 
                 }
             });
@@ -21,6 +21,28 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
+/*  Add TinyMCE Section Button
+/*-----------------------------------------------------------------------------------*/
+(function() {
+    tinymce.create('tinymce.plugins.section', {
+        init : function(ed, url) {
+            ed.addButton('section', {
+                title : 'Add Section',
+                image : url+'/section.png',
+                onclick : function() {
+                     ed.selection.setContent('[section class="" bgcolor="" bgimage="" parallax="false" padding="30px 0" border=""]Your Content[/section]');
+
+                }
+            });
+        },
+        createControl : function(n, cm) {
+            return null;
+        },
+    });
+    tinymce.PluginManager.add('section', tinymce.plugins.section);
+})();
+
+/*-----------------------------------------------------------------------------------*/
 /*  Add TinyMCE Box Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
@@ -30,7 +52,7 @@
                 title : 'Add Box Field',
                 image : url+'/description.png',
                 onclick : function() {
-                     ed.selection.setContent('[box style="1 or 2" class="box-class"]Your Content...[/box]');
+                     ed.selection.setContent('[box style="1 or 2" class=""]Your Content...[/box]');
 
                 }
             });
@@ -402,7 +424,7 @@
                 title : 'Add Member',
                 image : url+'/member.png',
                 onclick : function() {
-                     ed.selection.setContent('[member name="John Doe" role="Web Developer" url="http://example.com" img="http://ybthemes.com/nopic.png" twitter="http://twitter.com" facebook="http://facebook.com" skype="http://skype.com" google="http://google.de" linkedin="http://linkedin.com" mail="helloyb@gmail.com"]Description[/member]');
+                     ed.selection.setContent('[member name="John Doe" role="Web Developer" url="http://example.com" img="http://ybthemes.com/nopic.png" twitter="http://twitter.com" facebook="http://facebook.com" skype="http://skype.com" googleplus="http://google.de" linkedin="http://linkedin.com" mail="helloyb@gmail.com"]Description[/member]');
 
                 }
             });
@@ -786,26 +808,4 @@
         },
     });
     tinymce.PluginManager.add('testimonial', tinymce.plugins.testimonial);
-})();
-
-/*-----------------------------------------------------------------------------------*/
-/*  Add TinyMCE Section Button
-/*-----------------------------------------------------------------------------------*/
-(function() {
-    tinymce.create('tinymce.plugins.section', {
-        init : function(ed, url) {
-            ed.addButton('section', {
-                title : 'Add Section',
-                image : url+'/section.png',
-                onclick : function() {
-                     ed.selection.setContent('[section bgcolor="#f9f9f9" bgimage="IMAGEURL" parallax="true" padding="40px 0" border="1px solid #ececec"]Your Content[/section]');
-
-                }
-            });
-        },
-        createControl : function(n, cm) {
-            return null;
-        },
-    });
-    tinymce.PluginManager.add('section', tinymce.plugins.section);
 })();
