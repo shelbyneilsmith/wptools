@@ -33,5 +33,11 @@ MYSQL_BIN="/Applications/MAMP/Library/bin"
 # Location of vhosts dir
 VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
 
+# Location of logs dir
+LOGS_DIR="/private/var/log/apache2"
+
 # Location of Apache bin
 APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
+
+# Owner/Group name (To find out: <?php echo(exec("whoami")); ?>)
+OWNER="_www"
