@@ -304,8 +304,8 @@ writevhost () {
 	<VirtualHost *:80>
 	DocumentRoot "$SITES_DIR/$project_id/web"
 	ServerName $project_id.$LOCAL_HOST
-	ErrorLog "logs/localhost-error.log"
-	CustomLog "logs/localhost-access.log" common
+	ErrorLog "$LOGS_DIR/error_log"
+	CustomLog "$LOGS_DIR/access_log" common
 	<Directory "$SITES_DIR/$project_id/web">
 	Order allow,deny
 	Allow from all
