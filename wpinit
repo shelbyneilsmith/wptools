@@ -168,7 +168,6 @@ copyfiles () {
 			# delete any default plugins and install our plugins folder
 			rm -R $SITES_DIR/$project_id/web/wp-content/plugins
 			cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
-
 		fi
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
@@ -366,6 +365,9 @@ siteinit () {
 
 	# Write the sublime text project file
 	writesublimeproject
+
+	#set owner permissions for the wordpress directory
+	sudo chown -R $OWNER: $SITES_DIR/$project_id/web
 
 	# Finally, restart apache!
 	restartapache
