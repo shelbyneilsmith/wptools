@@ -368,6 +368,7 @@ siteinit () {
 
 	#set owner permissions for the wordpress directory
 	sudo chown -R $OWNER: $SITES_DIR/$project_id/web
+ 	sudo chmod -R g+w $SITES_DIR/$project_id/web
 
 	# Finally, restart apache!
 	restartapache
