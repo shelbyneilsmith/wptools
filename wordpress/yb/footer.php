@@ -17,13 +17,13 @@
 					<?php } ?>
 
 					<?php if ( !empty($ybwp_data['opt-checkbox-footernav'] ) ) : ?>
-						<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'site-footer-nav', 'container_class' => 'footer-nav sixteen columns' )); ?>
+						<?php wp_nav_menu( array('theme_location' => 'footer-nav', 'container' => 'nav', 'container_id' => 'site-footer-nav', 'container_class' => 'footer-nav' )); ?>
 					<?php endif; ?>
 				</div>
 				<div id="copyright" class="clearfix">
 					<div class="container <?php echo $full_width_class; ?>">
 
-						<div class="copyright-text eight columns">
+						<div class="copyright-text">
 							<?php if( !empty($ybwp_data['opt-textarea-copyright'] )) { ?>
 								<?php echo $ybwp_data['opt-textarea-copyright']; ?>
 							<?php } else { ?>
@@ -32,16 +32,15 @@
 						</div>
 
 						<?php if( !empty($ybwp_data['opt-checkbox-socialfooter']) && outputSocialIcons() ) { ?>
-							<div class="eight columns">
-								<div class="social-icons clearfix">
-									<ul>
-										<?php echo outputSocialIcons(); ?>
-									</ul>
-								</div>
+							<div class="social-icons clearfix">
+								<ul>
+									<?php echo outputSocialIcons(); ?>
+								</ul>
 							</div>
 						<?php } ?>
+
 						<?php if ( !empty($ybwp_data['opt-checkbox-backtotop'] ) ) : ?>
-							<div id="back-to-top" class="sixteen columns"><a href="#"><?php _e( 'Back to Top', 'yb' ) ?></a></div>
+							<div id="back-to-top"><a href="#"><?php _e( 'Back to Top', 'yb' ) ?></a></div>
 						<?php endif; ?>
 					</div>
 				</div><!-- end copyright -->

@@ -1,8 +1,7 @@
 <?php get_header(); ?>
 
-<?php echo titlebar(); ?>
-
 <?php
+	$page_title = 'Whoops!';
 	$page_layout = $ybwp_data['opt-layout'];
 
 	if ( $page_layout === "Full Width" ) {
@@ -12,9 +11,19 @@
 	}
 ?>
 
+<div id="title">
+	<div class="container <?php echo $full_width_class; ?>">
+		<h1 class="page-title"><?php echo $page_title; ?></h1>
+
+		<?php if( !empty($ybwp_data['opt-checkbox-breadcrumbs'] ) ) : ?>
+			<?php echo $breadcrumbs; ?>
+		<?php endif; ?>
+	</div>
+</div>
+
 <div id="page-wrap">
 	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
-		<div id="content" class="<?php sidebarPosClass($page_layout); ?> columns">
+		<div id="content" class="<?php sidebarPosClass($page_layout); ?>">
 
 			<p><strong><?php _e("Looks like you've made a wrong turn somewhere. Let's get you back on track.", "yb") ?></strong></p>
 

@@ -2,11 +2,6 @@
 /*
 Author: Shelby Smith
 URL: htp://yellowberri.com
-
-This is where you can drop your custom functions or
-just edit things like thumbnail sizes, header images,
-sidebars, comments, ect.
-
 */
 
 global $ybwp_data;
@@ -20,40 +15,14 @@ global $ybwp_data;
 
 	/* ------------------------------------------------------------------------ */
 	/* Misc Includes */
-	include_once('library/inc/enqueue.php'); // Enqueue JavaScripts & CSS
-	include_once('library/inc/customjs.php'); // Load Custom JS
-	include_once('library/inc/shortcodes.php'); // Load Shortcodes
-	include_once('library/inc/utils.php'); // Load Utility Functions
-
-	// if ( $data['check_portfoliotype'] == true ) {
-	// 	include_once('library/inc/cpt-portfolio.php'); // Portfolio
-	// }
+	include_once('assets/inc/enqueue.php'); // Enqueue JavaScripts & CSS
+	include_once('assets/inc/shortcodes.php'); // Load Shortcodes
+	include_once('assets/inc/utils.php'); // Load Utility Functions
 
 	/* -------------------------------- ---------------------------------------- */
 	/* Widget Includes */
-	include_once('library/inc/widgets/embed.php');
-	include_once('library/inc/widgets/sponsor.php');
-	include_once('library/inc/widgets/contact.php');
-	include_once('library/inc/widgets/custommenu.php');
-	if ( !empty($ybwp_data['opt-checkbox-facebookwidget'] )) {
-		include_once('library/inc/widgets/facebook.php');
-	}
-	// if ( !empty($ybwp_data['opt-checkbox-twitterwidget'] )) {
-	// 	include_once('library/inc/widgets/twitter.php');
-	// }
-	// if ( $data['check_portfoliotype'] == true ) {
-	// 	include_once('library/inc/widgets/portfolio.php');
-	// }
-
-	/* ------------------------------------------------------------------------ */
-	/* Include Meta Box Script */
-	define( 'RWMB_URL', trailingslashit( get_template_directory_uri() . '/library/inc/meta-box' ) );
-	define( 'RWMB_DIR', trailingslashit( get_template_directory() . '/library/inc/meta-box' ) );
-	require_once RWMB_DIR . 'meta-box.php';
-	include 'library/inc/meta-boxes.php';
-	// if ( $data['check_portfoliotype'] == true ) {
-	// 	include 'library/inc/portfolio-meta-boxes.php';
-	// }
+	include_once('assets/inc/widgets/sponsor.php');
+	include_once('assets/inc/widgets/contact.php');
 
 /* ------------------------------------------------------------------------ */
 /* YB THEME INIT
@@ -92,24 +61,25 @@ global $ybwp_data;
 		}
 	}
 
-	/* WP 3.1 Post Formats */
-	// Add various post formats to use in the theme
-	add_action('init', 'setup_post_formats_support');
-	function setup_post_formats_support() {
-		add_theme_support( 'post-formats', array('gallery', 'link', 'quote', 'audio', 'video'));
-	}
-
 	/* Translation/Localisation */
-	/* Translations can be filed in the library/languages/ directory */
+	/* Translations can be filed in the assets/languages/ directory */
 	add_action('init', 'my_theme_setup');
 	function my_theme_setup(){
-		load_theme_textdomain( 'yb', get_template_directory() . '/library/languages' );
+		load_theme_textdomain( 'yb', get_template_directory() . '/assets/languages' );
 	}
 
 	$locale = get_locale();
-	$locale_file = get_template_directory() . "/library/languages/$locale.php";
+	$locale_file = get_template_directory() . "/assets/languages/$locale.php";
 	if ( is_readable($locale_file) )
 		require_once($locale_file);
+
+	/* Syncronize timezone */
+	add_action('init', 'sync_timezones');
+	function sync_timezones(){
+		$timezone = "America/Chicago";
+		update_option( 'timezone_string', $timezone );
+		date_default_timezone_set($timezone);
+	}
 
 	/* Basic permalink postname structure */
 	add_action( 'init', function() {
@@ -117,12 +87,21 @@ global $ybwp_data;
 		$wp_rewrite->set_permalink_structure( '/%postname%/' );
 	} );
 
+	// Don't show the toolbar on front-end facing pages. This can be disabled to restore dashboard control.
+	add_filter('show_admin_bar', '__return_false');
+
 	/* Disable Admin Bar for Subscribers (Not Admins) */
 	add_action('set_current_user', 'cc_hide_admin_bar');
 	function cc_hide_admin_bar() {
 		if (!current_user_can('edit_posts')) {
 			show_admin_bar(false);
 		}
+	}
+
+	/* Remove default tagline "Just another WordPress site" */
+	add_action('after_setup_theme', 'clear_default_tagline');
+	function clear_default_tagline() {
+		update_option( 'blogdescription', '' );
 	}
 
 	/* ------------------------------------------------------------------------ */
@@ -182,18 +161,22 @@ global $ybwp_data;
 	// exclude certain dev pages from the pages admin list
 	function exclude_this_page( $query ) {
 		$exclude_pages = array('dev', 'styletiles');
+		$exclude_ids = array();
+
+		foreach ( $exclude_pages as $page_slug ) {
+			$page = get_page_by_path($page_slug);
+			if ($page) {
+				$exclude_ids[] = $page->ID;
+			}
+		}
+
 		if( !is_admin() )
 			return $query;
+
 		global $pagenow, $wpdb;
+
 		if( 'edit.php' == $pagenow && ( get_query_var('post_type') && 'page' == get_query_var('post_type') ) )
-			foreach ( $exclude_pages as $page_slug ) {
-				$page = get_page_by_path($page_slug);
-				if ($page) {
-					$query->set( 'post__not_in', array($page->ID) ); // array page ids
-				} else {
-					return $query;
-				}
-			}
+			$query->set( 'post__not_in', $exclude_ids ); // array page ids
 		return $query;
 	}
 	if ( ((WP_ENV != 'development') && (WP_ENV != 'staging')) ) {
@@ -206,6 +189,8 @@ global $ybwp_data;
 	add_action('after_setup_theme', 'register_yb_menus');
 	function register_yb_menus() {
 		global $ybwp_data;
+		$util_nav = $ybwp_data['opt-checkbox-utilnav'];
+		$wireframes = $ybwp_data['opt-checkbox-wireframes'];
 
 		add_theme_support( 'menus' );
 
@@ -231,7 +216,7 @@ global $ybwp_data;
 		);
 
 		// optional utility navigation
-		if ( !empty($ybwp_data['opt-checkbox-utilnav'] )) {
+		if ( !empty( $util_nav )) {
 			$menus['Utility Navigation'] = array(
 					'slug' => 'util-nav',
 					'menu_items' => array(
@@ -244,7 +229,7 @@ global $ybwp_data;
 		}
 
 		// the menu for the wireframes pages. only shows in dev environments
-		if ( ((WP_ENV == 'development') || (WP_ENV == 'staging')) && !empty($ybwp_data['opt-checkbox-wireframes'] )) {
+		if ( ((WP_ENV == 'development') || (WP_ENV == 'staging')) && !empty( $wireframes )) {
 			$menus['Wireframes Navigation'] = array(
 					'slug' => 'wireframes-nav',
 					'menu_items' => array(
@@ -281,6 +266,10 @@ global $ybwp_data;
 	add_action( 'widgets_init', 'register_yb_sidebars' );
 	function register_yb_sidebars() {
 		global $ybwp_data;
+		$blog_sidebar = $ybwp_data['opt-checkbox-blog'];
+		$footer_widgets = $ybwp_data['opt-checkbox-footerwidgets'];
+		$footer_cols = $ybwp_data['opt-select-footercolumns'];
+		$shop_widgets = $ybwp_data['opt-checkbox-woocommerce'];
 
 		if (function_exists('register_sidebar')) {
 
@@ -299,7 +288,7 @@ global $ybwp_data;
 			/* ------------------------------------------------------------------------ */
 			/* Blog Widgets */
 
-			if ( !empty($ybwp_data['opt-checkbox-blog'] )) {
+			if ( !empty( $blog_sidebar )) {
 				register_sidebar(array(
 					'name' => __('Blog Sidebar','yb' ),
 					'id'   => 'blog-sidebar',
@@ -314,14 +303,14 @@ global $ybwp_data;
 			/* ------------------------------------------------------------------------ */
 			/* Footer Widgets */
 
-			if( !empty($ybwp_data['opt-checkbox-footerwidgets'] )) {
+			if( !empty( $footer_widgets )) {
 				$footercolumns = "four";
 
-				if(!empty($ybwp_data['opt-select-footercolumns'])) {
-					if($ybwp_data['opt-select-footercolumns'] == "4"){ $footercolumns = "four"; }
-					elseif($ybwp_data['opt-select-footercolumns'] ==  "3"){ $footercolumns = "one-third"; }
-					elseif($ybwp_data['opt-select-footercolumns'] ==  "2"){ $footercolumns = "eight"; }
-					elseif($ybwp_data['opt-select-footercolumns'] ==  "1"){ $footercolumns = "sixteen"; }
+				if(!empty( $footer_cols )) {
+					if( $footer_cols == "4" ){ $footercolumns = "four"; }
+					elseif( $footer_cols ==  "3" ){ $footercolumns = "one-third"; }
+					elseif( $footer_cols ==  "2" ){ $footercolumns = "eight"; }
+					elseif( $footer_cols ==  "1" ){ $footercolumns = "sixteen"; }
 				}
 				register_sidebar(array(
 					'name' => __('Footer Widgets','yb' ),
@@ -337,7 +326,7 @@ global $ybwp_data;
 			/* ------------------------------------------------------------------------ */
 			/* Shop Widgets */
 
-			if (!empty($ybwp_data['opt-checkbox-woocommerce']) && class_exists('Woocommerce')){
+			if (!empty( $shop_widgets ) && class_exists('Woocommerce')){
 				register_sidebar(array(
 					'name' => __('Shop Widgets','yb' ),
 					'id'   => 'shop-widgets',
@@ -353,108 +342,8 @@ global $ybwp_data;
 	}
 
 /* ------------------------------------------------------------------------ */
-/* Automatic Plugin Activation */
-/* ------------------------------------------------------------------------ */
-
-	require_once('library/inc/plugin-activation.php');
-
-	if ( !empty($ybwp_data['opt-checkbox-woocommerce'] )) {
-		$woocommerce_plugin = array(
-			'name'     				=> 'WooCommerce', // The plugin name
-			'slug'     				=> 'woocommerce', // The plugin slug (typically the folder name)
-			'source'   				=> 'http://downloads.wordpress.org/plugin/woocommerce.zip', // The plugin source
-			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-			'force_deactivation' 		=> true, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-		);
-	} else {
-		$woocommerce_plugin = '';
-	}
-
-	// add_action('tgmpa_register', 'yb_register_required_plugins');
-	// function yb_register_required_plugins() {
-		$plugins = array(
-			$woocommerce_plugin,
-	// 		array(
-	// 			'name'     				=> 'Slider Revolution', // The plugin name
-	// 			'slug'     				=> 'revslider', // The plugin slug (typically the folder name)
-	// 			'source'   				=> get_template_directory_uri() . '/library/plugins/revslider.zip', // The plugin source
-	// 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-	// 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-	// 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-	// 			'force_deactivation' 		=> true, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-	// 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-	// 		),
-	// 		array(
-	// 			'name'     				=> 'FlexSlider', // The plugin name
-	// 			'slug'     				=> 'flexslider', // The plugin slug (typically the folder name)
-	// 			'source'   				=> get_template_directory_uri() . '/library/plugins/flexslider.zip', // The plugin source
-	// 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-	// 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-	// 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-	// 			'force_deactivation' 		=> true, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-	// 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-	// 		),
-	// 		array(
-	// 			'name'     				=> 'Post Types Order', // The plugin name
-	// 			'slug'     				=> 'post-types-order', // The plugin slug (typically the folder name)
-	// 			'source'   				=> get_template_directory_uri() . '/library/plugins/post-types-order.zip', // The plugin source
-	// 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-	// 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-	// 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-	// 			'force_deactivation' 		=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-	// 			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
-	// 		),
-		);
-
-	// }
-
-	/**
-	* Array of configuration settings. Amend each line as needed.
-	* If you want the default strings to be available under your own theme domain,
-	* leave the strings uncommented.
-	* Some of the strings are added into a sprintf, so see the comments at the
-	* end of each line for what each argument will be.
-	*/
-	$config = array(
-		'domain'       		=> 'yb',         	// Text domain - likely want to be the same as your theme.
-		'default_path' 		=> '',                         			// Default absolute path to pre-packaged plugins
-		'parent_menu_slug' 	=> 'themes.php', 			// Default parent menu slug
-		'parent_url_slug' 	=> 'themes.php', 			// Default parent URL slug
-		'menu'         		=> 'install-required-plugins', 	// Menu slug
-		'has_notices'      		=> true,                       		// Show admin notices or not
-		'is_automatic'    		=> true,					// Automatically activate plugins after installation or not
-		'message' 			=> '',						// Message to output right before the plugins table
-		'strings'      		=> array(
-			'page_title'                       			=> __( 'Install Required Plugins', 'yb' ),
-			'menu_title'                       			=> __( 'Install Plugins', 'yb' ),
-			'installing'                       			=> __( 'Installing Plugin: %s', 'yb' ), // %1$s = plugin name
-			'oops'                             			=> __( 'Something went wrong with the plugin API.', 'yb' ),
-			'notice_can_install_required'     		=> _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_install_recommended'	=> _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_install'  			=> _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s)
-			'notice_can_activate_required'    		=> _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_activate_recommended'	=> _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_activate' 			=> _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s)
-			'notice_ask_to_update' 			=> _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_update' 			=> _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s)
-			'install_link' 					=> _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-			'activate_link' 				  	=> _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
-			'return'                           			=> __( 'Return to Required Plugins Installer', 'yb' ),
-			'plugin_activated'                 			=> __( 'Plugin activated successfully.', 'yb' ),
-			'complete' 						=> __( 'All plugins installed and activated successfully. %s', 'yb' ), // %1$s = dashboard link
-			'nag_type'						=> 'updated' // Determines admin notice type - can only be 'updated' or 'error'
-		)
-	);
-
-	tgmpa($plugins, $config);
-
-/* ------------------------------------------------------------------------ */
 /* Custom Excerpt Length */
 /* ------------------------------------------------------------------------ */
-
 	function new_excerpt_length($length) {
 		global $ybwp_data;
 		return $ybwp_data['opt-text-excerptlength'];
@@ -490,7 +379,7 @@ global $ybwp_data;
 	// calling your own login css so you can style it
 	function yb_login_css() {
 		/* I couldn't get wp_enqueue_style to work :( */
-		echo '<link rel="stylesheet" href="' . get_stylesheet_directory_uri() . '/library/css/login.css">';
+		echo '<link rel="stylesheet" href="' . get_stylesheet_directory_uri() . '/assets/styles/css/login.css">';
 	}
 
 	// changing the logo link from wordpress.org to your site
@@ -518,39 +407,11 @@ global $ybwp_data;
 	add_action('login_head', 'add_favicon');
 	add_action('admin_head', 'add_favicon');
 
-
 	// Custom Backend Footer
 	function yb_custom_admin_footer() {
 		echo '<span id="footer-thankyou">'.__('Developed by ', 'yb').'<a href="http://yellowberri.com" target="_blank">Yellowberri</a></span>.&nbsp;';
 	}
 	add_filter('admin_footer_text', 'yb_custom_admin_footer');
-
-	function custom_menu_order($menu_ord) {
-		if (!$menu_ord) return true;
-
-		return array(
-			'index.php', // Dashboard
-			'separator1', // First separator
-			'edit.php?post_type=page', // Pages
-			'edit.php', // Posts
-			'edit.php?post_type=events',
-			'edit.php?post_type=staff',
-			'edit.php?post_type=gg_galleries',
-			'edit.php?post_type=soliloquy',
-			'upload.php', // Media
-			'link-manager.php', // Links
-			'edit-comments.php', // Comments
-			'separator2', // Second separator
-			'themes.php', // Appearance
-			'plugins.php', // Plugins
-			'users.php', // Users
-			'tools.php', // Tools
-			'options-general.php', // Settings
-			'separator-last', // Last separator
-		);
-	}
-	//add_filter('custom_menu_order', 'custom_menu_order'); // Activate custom_menu_order
-	//add_filter('menu_order', 'custom_menu_order');
 
 	function edit_admin_menus() {
 		global $menu;
@@ -560,23 +421,20 @@ global $ybwp_data;
 	//add_action( 'admin_menu', 'edit_admin_menus' );
 
 	function custom_admin_icons() {
-	    // Change CSS selector to menu name.
-	    // Change content property to new icon code.
-	    // Icons found here: http://melchoyce.github.io/dashicons/
+		// Change CSS selector to menu name.
+		// Change content property to new icon code.
+		// Icons found here: http://melchoyce.github.io/dashicons/
 
-	    echo '
-	        <style>
-	            #adminmenu #menu-posts-smile_profile div.wp-menu-image:before { content: "\f328"; }
-	            #adminmenu #menu-posts-testimonial div.wp-menu-image:before { content: "\f205"; }
-	            #adminmenu #menu-posts-specials div.wp-menu-image:before { content: "\f323"; }
-	            #adminmenu #menu-posts-staff div.wp-menu-image:before { content: "\f307"; }
-	        </style>
-	    ';
+		echo '
+			<style>
+				#adminmenu #menu-posts-smile_profile div.wp-menu-image:before { content: "\f328"; }
+				#adminmenu #menu-posts-testimonial div.wp-menu-image:before { content: "\f205"; }
+				#adminmenu #menu-posts-specials div.wp-menu-image:before { content: "\f323"; }
+				#adminmenu #menu-posts-staff div.wp-menu-image:before { content: "\f307"; }
+			</style>
+		';
 	}
 	//add_action( 'admin_head', 'custom_admin_icons' );
-
-	// Don't show the toolbar on front-end facing pages. This can be disabled to restore dashboard control.
-	add_filter('show_admin_bar', '__return_false');
 
 /* ------------------------------------------------------------------------ */
 /* Add menus meta box to page edit screen */
@@ -621,8 +479,7 @@ global $ybwp_data;
 	 * Save our custom field value
 	 */
 	add_action('pre_post_update', 'yb_page_menus_save_post' );
-	function yb_page_menus_save_post( $post_id )
-	{
+	function yb_page_menus_save_post( $post_id ) {
 		if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 		if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'yb_page_menus_nonce' ) ) return;
 
@@ -727,11 +584,11 @@ global $ybwp_data;
 /* Page Slug Body Class */
 /* ------------------------------------------------------------------------ */
 	function add_slug_body_class( $classes ) {
-	global $post;
-	if ( isset( $post ) ) {
-	$classes[] = $post->post_type . '-' . $post->post_name;
-	}
-	return $classes;
+		global $post;
+		if ( isset( $post ) ) {
+			$classes[] = $post->post_type . '-' . $post->post_name;
+		}
+		return $classes;
 	}
 	add_filter( 'body_class', 'add_slug_body_class' );
 
@@ -758,6 +615,26 @@ global $ybwp_data;
 	}
 	add_filter( 'body_class', 'add_mobile_menu_body_classes' );
 
+/* ------------------------------------------------------------------------ */
+/* Disable Width & Height From Inserted Images */
+/* ------------------------------------------------------------------------ */
+	add_filter( 'post_thumbnail_html', 'remove_width_attribute', 10 );
+	add_filter( 'image_send_to_editor', 'remove_width_attribute', 10 );
+
+	function remove_width_attribute( $html ) {
+		$html = preg_replace( '/(width|height)="\d*"\s/', "", $html );
+		return $html;
+	}
+
+/* ------------------------------------------------------------------------ */
+/* Disable Wrapping of Images in p Tags */
+/* ------------------------------------------------------------------------ */
+
+	function filter_ptags_on_images($content){
+		return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+	}
+
+	add_filter('the_content', 'filter_ptags_on_images');
 
 /* ------------------------------------------------------------------------ */
 /* EOF

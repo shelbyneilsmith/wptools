@@ -1,17 +1,8 @@
 <?php
 $this->sections[] = array(
 	'title'     => __('Social Media', 'yb'),
-	// 'desc'      => __('Redux Framework was created with the developer in mind. It allows for any theme developer to have an advanced theme panel with most of the features a developer would need. For more information check out the Github repo at: <a href="https://github.com/ReduxFramework/Redux-Framework">https://github.com/ReduxFramework/Redux-Framework</a>', 'yb'),
 	'icon'      => 'el-icon-bullhorn',
-	// 'submenu' => false, // Setting submenu to false on a given section will hide it from the WordPress sidebar menu!
 	'fields'    => array(
-		array(
-			'id'        => 'opt-checkbox-facebookwidget',
-			'type'      => 'checkbox',
-			'title'     => __('Enable Facebook Widget', 'yb'),
-			'subtitle'  => __('Check to enable facebook widget.', 'yb'),
-			'default'   => '0'// 1 = on | 0 = off
-		),
 		array(
 			'id'        => 'opt-media-fbimg',
 			'type'      => 'media',
@@ -19,65 +10,18 @@ $this->sections[] = array(
 			'title'     => __('Facebook Share Image Upload', 'yb'),
 			'subtitle'  => __('Upload the default image that you want Facebook to use when someone shares a page from your site.', 'yb'),
 		),
-		// array(
-		// 	'id'        => 'opt-checkbox-twitterwidget',
-		// 	'type'      => 'checkbox',
-		// 	'title'     => __('Enable Twitter Widget', 'yb'),
-		// 	'subtitle'  => __('Check to enable twitter widget.', 'yb'),
-		// 	'default'   => '0'// 1 = on | 0 = off
-		// ),
-		// array(
-		// 	'id'    => 'opt-info-twitterwarning',
-		// 	'type'  => 'info',
-		// 	'style' => 'warning',
-		// 	'title' => __('Twitter Configuration API (1.1)', 'yb'),
-		// 	'desc'  => __('You need to have a twitter App for your usage of the new Twitter API 1.1, login & create at https://dev.twitter.com/apps', 'yb')
-		// ),
+		array(
+			'id'        => 'section-socialurls-start',
+			'type'      => 'section',
+			'title'     => __('Enter your username / URL to show or leave blank to hide Social Media Icons', 'yb'),
+			'indent'    => false // Indent all options below until the next 'section' option is set.
+		),
 		array(
 			'id'        => 'opt-text-social-twitter',
 			'type'      => 'text',
 			'title'     => __('Twitter Username', 'yb'),
 			'subtitle'  => __('Enter your Twitter username', 'yb'),
 			'default'   => '',
-		),
-		// array(
-		// 	'id'        => 'opt-text-social-twitter-consumerkey',
-		// 	'type'      => 'text',
-		// 	'title'     => __('Twitter App Consumer Key', 'yb'),
-		// 	'subtitle'  => __('Enter your Twitter App Consumer Key.', 'yb'),
-		// 	'default'   => '',
-		// ),
-		// array(
-		// 	'id'        => 'opt-text-social-twitter-consumersecret',
-		// 	'type'      => 'text',
-		// 	'title'     => __('Twitter App Consumer Secret', 'yb'),
-		// 	'subtitle'  => __('Enter your Twitter App Consumer Secret.', 'yb'),
-		// 	'default'   => '',
-		// ),
-		// array(
-		// 	'id'        => 'opt-text-social-twitter-accesstoken',
-		// 	'type'      => 'text',
-		// 	'title'     => __('Twitter App Access Token', 'yb'),
-		// 	'subtitle'  => __('Enter your Twitter App Access Token.', 'yb'),
-		// 	'default'   => '',
-		// ),
-		// array(
-		// 	'id'        => 'opt-text-social-twitter-tokensecret',
-		// 	'type'      => 'text',
-		// 	'title'     => __('Twitter App Access Token Secret', 'yb'),
-		// 	'subtitle'  => __('Enter your Twitter App Access Token Secret.', 'yb'),
-		// 	'default'   => '',
-		// ),
-		// array(
-		// 	'id'        => 'section-twitterconfig-end',
-		// 	'type'      => 'section',
-		// 	'indent'    => false // Indent all options below until the next 'section' option is set.
-		// ),
-		array(
-			'id'        => 'section-socialurls-start',
-			'type'      => 'section',
-			'title'     => __('Enter your username / URL to show or leave blank to hide Social Media Icons', 'yb'),
-			'indent'    => false // Indent all options below until the next 'section' option is set.
 		),
 		array(
 			'id'        => 'opt-text-social-facebook',

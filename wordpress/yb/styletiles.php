@@ -14,7 +14,7 @@
 		<link href="http://www.ybdevel.com/dev/css/styletiles.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
 		<!--[if lte IE 7]>
-			<link href="/wp-content/themes/yb/library/styletiles/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+			<link href="/wp-content/themes/yb/assets/styles/styletiles/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
 		<![endif]-->
 
 	</head>
@@ -33,12 +33,12 @@
 			<?php echo iframeTiles($ybwp_data['opt-text-styletilesnum'], range('a', 'z')); ?>
 		</div> <!-- end #wrapper -->
 
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="http://www.ybdevel.com/dev/js/scripts.js"></script>
-	<!-- Prompt IE 6 users to install Chrome Frame. -->
-	<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-	<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-	<![endif]-->
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="http://www.ybdevel.com/dev/js/scripts.js"></script>
+		<!-- Prompt IE 6 users to install Chrome Frame. -->
+		<!--[if lt IE 7 ]>
+			<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+			<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<![endif]-->
 	</body>
 </html>

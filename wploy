@@ -1,0 +1,165 @@
+#!/bin/sh
+#
+# Script to for basic Wordpress site deployment.
+#
+
+checkintent() {
+	if [[ $i && ${i} ]] ; then
+		migrate
+	else
+		echo "I really need to know what you want to do here..."
+		recheck
+	fi
+}
+
+recheck() {
+	read newintent
+	i=$newintent
+	checkintent
+}
+
+in_array() {
+	local haystack=${1}[@]
+	local needle=${2}
+	for i in ${!haystack}; do
+		if [[ ${i} == ${needle} ]]; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+pause() {
+	read -p "$*"
+}
+
+continueprompt() {
+	read ifcontinue
+
+	case $ifcontinue in
+		[nN] | [n|N][O|o] )
+			clear
+			echo "---------------------------------------------------------------------------"
+			pause "Probably a good idea. Might want to double check everything anyway. `echo $'\n> '`Press [Enter] to exit."
+			clear
+			exit
+			;;
+		[yY] | [yY][Ee][Ss] )
+			# Just continue script if user chooses "yes"
+			;;
+		* )
+			echo "\n---------------------------------------------------------------------------"
+			echo "Huh?"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+			;;
+	esac
+}
+
+migrate() {
+	if in_array cmds "${i}"; then
+		src_id="${i::1}"
+		dest_id="${i: -1}"
+
+		SRC_HOST=${src_id}_host
+		SRC_SSH_USER=${src_id}_ssh_user
+		SRC_SSH_PASS=${src_id}_ssh_pass
+		SRC_DB=${src_id}_db
+		SRC_DB_USER=${src_id}_db_user
+		SRC_DB_PASS=${src_id}_db_pass
+		SRC_PATH=${src_id}_path
+		SRC_URL=${src_id}_url
+
+		DEST_HOST=${dest_id}_host
+		DEST_SSH_USER=${dest_id}_ssh_user
+		DEST_SSH_PASS=${dest_id}_ssh_pass
+		DEST_DB=${dest_id}_db
+		DEST_DB_USER=${dest_id}_db_user
+		DEST_DB_PASS=${dest_id}_db_pass
+		DEST_PATH=${dest_id}_path
+		DEST_URL=${dest_id}_url
+
+		if [[ $dest_id == "p" ]]; then
+			echo "\n---------------------------------------------------------------------------"
+			echo "You are pushing your project to the production server!"
+			echo "Are you absolutely sure you want to do this?? [y/N]"
+			echo "---------------------------------------------------------------------------\n"
+			continueprompt
+		fi
+
+		if [[ $src_id == "l" ]]; then
+			#first, run out grunt build script
+			grunt build
+
+			#export Database
+			mysqldump -u $l_db_user -p$l_db_pass $l_db > $l_db.sql
+
+			#find and replace old URLs in SQL file
+			sed -i '' "s/${!SRC_URL}/${!DEST_URL}/g" ${!SRC_PATH}${l_db}.sql
+
+			#find and replace old Database Info in wp-config.php file
+			sed -i.backup -e"s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g" -e"s/define('DB_USER', '${!SRC_DB_USER}');/define('DB_USER', '${!DEST_DB_USER}');/g" -e"s/define('DB_PASSWORD', '${!SRC_DB_PASS}');/define('DB_PASSWORD', '${!DEST_DB_PASS}');/g" ${!SRC_PATH}wp-config.php
+
+			#move the site files to remote server
+			rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh $l_path ${!DEST_SSH_USER}@${!DEST_HOST}:${!DEST_PATH}
+
+			#remove database dump from working directory
+			rm ${!SRC_PATH}${l_db}.sql
+
+			#replace the altered wp-config with the backup on the local host
+			mv ${!SRC_PATH}wp-config.php.backup ${!SRC_PATH}wp-config.php
+
+			#log into remote host, import database and remove the backup wp-config file
+			ssh root@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}$l_db.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}$l_db.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}wp-config.php.backup"
+		elif [ $src_id == "s" ] || [ $src_id == "p" ]; then
+ssh root@${!SRC_HOST} /bin/bash << EOF
+mysqldump -u ${!SRC_DB_USER} -p${!SRC_DB_PASS} ${!SRC_DB} > /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}${!SRC_DB}.sql
+sed -i "s/${!SRC_URL}/${!DEST_URL}/g" /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}${!SRC_DB}.sql
+sed -i.backup -e"s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g" -e"s/define('DB_USER', '${!SRC_DB_USER}');/define('DB_USER', '${!DEST_DB_USER}');/g" -e"s/define('DB_PASSWORD', '${!SRC_DB_PASS}');/define('DB_PASSWORD', '${!DEST_DB_PASS}');/g" /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}wp-config.php
+EOF
+			if [[ $dest_id == "l" ]]; then
+				rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh ${!SRC_SSH_USER}@${!SRC_HOST}:${!SRC_PATH} $l_path
+			else
+				rsync -avO -e ssh ${l_path}wploy-excludes.txt ${!SRC_SSH_USER}@${!SRC_HOST}:${!SRC_PATH}
+ssh root@${!SRC_HOST} /bin/bash << EOF
+rsync -avO --exclude-from '/srv/users/'${!SRC_SSH_USER}'/'${!SRC_PATH}'wploy-excludes.txt' /srv/users/${!SRC_SSH_USER}/${!SRC_PATH} root@${!DEST_HOST}:/srv/users/${!DEST_SSH_USER}/${!DEST_PATH}
+rm /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}wploy-excludes.txt
+EOF
+			fi
+			ssh root@${!SRC_HOST} "rm /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}${!SRC_DB}.sql; mv /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}wp-config.php.backup /srv/users/${!SRC_SSH_USER}/${!SRC_PATH}wp-config.php"
+			if [[ $dest_id == "l" ]]; then
+				mysql -u $l_db_user -p$l_db_pass $l_db < ${l_path}${!SRC_DB}.sql; rm ${l_path}${!SRC_DB}.sql
+				rm ${l_path}wp-config.php.backup
+			else
+				ssh root@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}${!SRC_DB}.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}${!SRC_DB}.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}wp-config.php.backup"
+			fi
+		fi
+
+		# echo ${!SRC_HOST}
+	else
+		echo "I didn't understand what you're trying to do..."
+		recheck
+	fi
+}
+
+if [[ $1 && ${1} ]] ; then
+	project_id=$1
+	# load project wploy config file
+	# . wploy.config
+	source ~/Sites/$project_id/web/wploy.config
+
+	# set up available commands
+	declare -a cmds=('l2s' 'l2p' 's2l' 's2p' 'p2l' 'p2s')
+
+	#make sure were in the right directory and everything...
+	cd ~/Sites/$project_id/web/
+
+	if [[ $2 && ${2} ]] ; then
+		i=$2
+	fi
+
+	checkintent
+else
+	echo "Project ID not specified! Stop wasting my time."
+	exit
+fi

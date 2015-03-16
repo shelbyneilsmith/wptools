@@ -43,7 +43,8 @@ continueprompt() {
 purposeprompt() {
 	echo "A) I need to initialize a new Wordpress project."
 	echo "B) I'm collaborating on this project and I just need to clone it to use on my local machine."
-	echo "C) Nevermind, get me out of here so I can start over.\n"
+	echo "C) I just want to delete some stuff."
+	echo "D) Nevermind, get me out of here so I can start over.\n"
 
 	read purpose_opt
 
@@ -55,6 +56,9 @@ purposeprompt() {
 			purpose="collab"
 			;;
 		c|C )
+			purpose="delete"
+			;;
+		d|D )
 			echo "\n---------------------------------------------------------------------------"
 			echo "Goodbye."
 			echo "---------------------------------------------------------------------------\n"
@@ -142,9 +146,7 @@ copyfiles () {
 			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
 			# create the wordpress directory structure
-			#mkdir -p $SITES_DIR/$project_id/{web/design,assets/{docs,working_images}}
-
-			mkdir -p $SITES_DIR/$project_id/{web,assets/{docs,working_images}}
+			mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
 
 			# copy wireframes and styletile files over
 			#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
@@ -158,13 +160,26 @@ copyfiles () {
 			mv $SITES_DIR/$project_id/web/wordpress/* $SITES_DIR/$project_id/web
 			rm -R $SITES_DIR/$project_id/web/wordpress
 
-			# move the theme, wp-config, .htaccess, .gitignore & plugins over
+			# move the config files, .htaccess, .gitignore, etc. over
 			cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+			cp $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
+			cp $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
+			cp $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
+			cp $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
+
 			cp $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
 			cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
 			cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
+
+			# copy the grunt node modules over
+			mkdir $SITES_DIR/$project_id/web/node_modules
+			cp -r $WPINIT_DIR/wordpress/node_modules/* $SITES_DIR/$project_id/web/node_modules
+
+			# delete any default themes and set up our custom yb theme
+			rm -rf $SITES_DIR/$project_id/web/wp-content/themes/*/* && rmdir $SITES_DIR/$project_id/web/wp-content/themes/*
 			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
 			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
+
 			# delete any default plugins and install our plugins folder
 			rm -R $SITES_DIR/$project_id/web/wp-content/plugins
 			cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
@@ -181,6 +196,64 @@ copyfiles () {
 		# Clone the files...
 		git clone https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id $SITES_DIR/$project_id
 	fi
+}
+
+writeconfigs () {
+	if [ $purpose == "startclean" ] ; then
+		#WP-CONFIG
+		sed -i '' "s/\$project_id = '.*';/\$project_id = '$project_id';/g" $WPCONFIGFILE
+
+		sed -i '' "s/\$prod_preview_url_base = '.*';/\$prod_preview_url_base = '$PREVIEW_URL_BASE';/g" $WPCONFIGFILE
+		sed -i '' "s/\$staging_url_base = '.*';/\$staging_url_base = '$STAGING_URL_BASE';/g" $WPCONFIGFILE
+		if [[ $PRODUCTION_URL && ${PRODUCTION_URL} ]] ; then
+			sed -i '' "s/\$prod_domain = '.*';/\$prod_domain = '$PRODUCTION_URL';/g" $WPCONFIGFILE
+		fi
+		sed -i '' "s/define('DB_NAME', '');/\define('DB_NAME', '$project_id');/g" $WPCONFIGFILE
+		sed -i '' "s/define('DB_USER', '');/\define('DB_USER', '$LOCAL_DB_USER');/g" $WPCONFIGFILE
+		sed -i '' "s/define('DB_PASSWORD', '');/\define('DB_PASSWORD', '$LOCAL_DB_PASS');/g" $WPCONFIGFILE
+		sed -i '' "s/\$table_prefix  = '';/\$table_prefix = '$project_id$SECRET_CODE';/g" $WPCONFIGFILE
+		# get salts
+		CONFIGTEMP=$SITES_DIR/$project_id/web/wp-config_temp.php
+		curl -s https://api.wordpress.org/secret-key/1.1/salt | awk -f $WPINIT_DIR/salt_replacer.awk - $WPCONFIGFILE > $CONFIGTEMP
+		mv $CONFIGTEMP $WPCONFIGFILE
+
+		rm $SITES_DIR/$project_id/web/wp-config-sample.php
+
+		#WPLOY CONFIG
+		sed -i '' "s/l_db=/l_db=$project_id/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_user=/l_db_user=$LOCAL_DB_USER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_pass=/l_db_pass=$LOCAL_DB_PASS/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_url=/l_url=$project_id.$LOCAL_URL_BASE/g" $WPLOYCONFIGFILE
+
+		sed -i '' "s/s_host=/s_host=$STAGING_HOST/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_user=/s_ssh_user=$STAGING_SSH_USER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_pass=/s_ssh_pass=$STAGING_SSH_PASS/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db=/s_db=${project_id}_db/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_user=/s_db_user=admin_$SECRET_CODE/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_pass=/s_db_pass=$project_id$LIVE_DB_PASS_SUFFIX/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_path=/s_path=apps\\/${project_id}xstaging\\/public\\//g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_url=/s_url=$project_id.$STAGING_URL_BASE/g" $WPLOYCONFIGFILE
+
+		sed -i '' "s/p_host=/p_host=$PROD_HOST/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_user=/p_ssh_user=$PROD_SSH_USER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_pass=/p_ssh_pass=$PROD_SSH_PASS/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db=/p_db=${project_id}_db/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_user=/p_db_user=admin_$SECRET_CODE/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_pass=/p_db_pass=$project_id$LIVE_DB_PASS_SUFFIX/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_path=/p_path=apps\\/${project_id}\\/public\\//g" $WPLOYCONFIGFILE
+		if [[ $PRODUCTION_URL && ${PRODUCTION_URL} ]] ; then
+			sed -i '' "s/p_url=/p_url=$PRODUCTION_URL/g" $WPLOYCONFIGFILE
+		fi
+
+		#Gruntfile.js
+		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
+		#package.json
+		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GRUNTPACKAGEFILE
+		sed -i '' "s/\"description\": \"Website\",/\"description\": \"$project_id Website\",/g" $GRUNTPACKAGEFILE
+	fi
+
+	# sed -i '' "s/\$local_url_base = '.*';/\$local_url_base = '$LOCAL_URL_BASE';/g" $WPCONFIGFILE
+
 }
 
 setup_db () {
@@ -206,95 +279,73 @@ setup_db () {
 		$MYSQL_BIN/mysqladmin -u$LOCAL_DB_USER -p$LOCAL_DB_PASS create $project_id
 		# Import the saved sql file to the database
 		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
-		# Update the database with localhost information, if the proper tables exist (if wordpress is installed already)
-		if [ $(mysql -N -s -u root -proot -e "select count(*) from information_schema.tables where table_schema='$project_id' and table_name='${project_id}${SECRET_CODE}_options';") -eq 1 ]; then
-
-			$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
-				use $project_id;
-				UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
-			EOF
-		fi
 	fi
 }
 
-getsalts () {
-	curl -s https://api.wordpress.org/secret-key/1.1/salt | awk -f $WPINIT_DIR/salt_replacer.awk - $CONFIGFILE > $OUTPUTCONFIGFILE
+install_wp() {
+	#cd to working directory, using the alias we just set up
+	cd $SITES_DIR/$project_id/web
+	# then, install wordpress...you'll need to install wp-cli for this to work! (http://wp-cli.org/)
+	wp core install --url="http://${PRODUCTION_URL}" --title="${project_id}" --admin_user="${project_id}-admin" --admin_password="${project_id}${LIVE_DB_PASS_SUFFIX}" --admin_email="${ADMIN_EMAIL}"
 }
 
-configwp () {
-	CONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php
-	OUTPUTCONFIGFILE=$SITES_DIR/$project_id/web/wp-config2.php
+# gitsetup () {
+# 	if [ $purpose == "startclean" ] ; then
+# 		#set up git on remote server
+# 		if [ $1 == "bitbucket" ] ; then
+# 			echo "---------------------------------------------------------------------------"
+# 			echo "Setting up remote repository...Please enter a short description for this repository."
+# 			echo "---------------------------------------------------------------------------\n"
+# 			read repo_desc
 
-	if [ $purpose == "startclean" ] ; then
-		sed -i.bak "s/\$project_name = '.*';/\$project_name = '$project_id';/" $CONFIGFILE
+# 			#script for bitbucket repo initialization
+# 			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
 
-		sed -i.bak "s/\$secret_code = '.*';/\$secret_code = '$SECRET_CODE';/" $CONFIGFILE
-		sed -i.bak "s/\$staging_host_base = '.*';/\$staging_host_base = '$STAGING_HOST';/" $CONFIGFILE
-	fi
+# 			# Setting up the service hook on bitbucket end for pushing to staging server
+# 			##curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories/$GITUSER/$project_id/services/" -d "repo_slug=$project_id" -d "type=POST" -d "URL=http://$STAGING_IP/$scipt_loc/staging-script.php?repo_name=$project_id"
+# 		fi
 
-	sed -i.bak "s/\$local_host_base = '.*';/\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
+# 		# Initialize local Git repository and push it to the remote repo
+# 		git init $SITES_DIR/$project_id
+# 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id add .
+# 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id commit -am 'Initial Commit'
 
-	getsalts
-	mv $OUTPUTCONFIGFILE $CONFIGFILE
-}
+# 		if [ $1 == "bitbucket" ] ; then
+# 			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master
+# 		fi
+# 	fi
 
-gitsetup () {
-	if [ $purpose == "startclean" ] ; then
-		#set up git on remote server
-		if [ $1 == "bitbucket" ] ; then
-			echo "---------------------------------------------------------------------------"
-			echo "Setting up remote repository...Please enter a short description for this repository."
-			echo "---------------------------------------------------------------------------\n"
-			read repo_desc
+# 	# Creates the pre-commit .git hook
+# 	# cat > $SITES_DIR/$project_id/.git/hooks/pre-commit <<- EOF
+# 	# 	#!/bin/sh
+# 	# 	# dumps the db into an .sql file before adding it to the repo
+# 	# 	$MYSQL_BIN/mysqldump -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id > $SITES_DIR/$project_id/db/${project_id}_db.sql
+# 	# 	# change to the project directory
+# 	# 	cd $SITES_DIR/$project_id
+# 	# 	# add the db file to the repo
+# 	# 	git add db/${project_id}_db.sql
+# 	# EOF
+# 	# # Make executable
+# 	# chmod +x $SITES_DIR/$project_id/.git/hooks/pre-commit
 
-			#script for bitbucket repo initialization
-			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
-
-			# Setting up the service hook on bitbucket end for pushing to staging server
-			##curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories/$GITUSER/$project_id/services/" -d "repo_slug=$project_id" -d "type=POST" -d "URL=http://$STAGING_IP/$scipt_loc/staging-script.php?repo_name=$project_id"
-		fi
-
-		# Initialize local Git repository and push it to the remote repo
-		git init $SITES_DIR/$project_id
-		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id add .
-		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id commit -am 'Initial Commit'
-
-		if [ $1 == "bitbucket" ] ; then
-			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master
-		fi
-	fi
-
-	# Creates the pre-commit .git hook
-	cat > $SITES_DIR/$project_id/.git/hooks/pre-commit <<- EOF
-		#!/bin/sh
-		# dumps the db into an .sql file before adding it to the repo
-		$MYSQL_BIN/mysqldump -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id > $SITES_DIR/$project_id/db/${project_id}_db.sql
-		# change to the project directory
-		cd $SITES_DIR/$project_id
-		# add the db file to the repo
-		git add db/${project_id}_db.sql
-	EOF
-	# Make executable
-	chmod +x $SITES_DIR/$project_id/.git/hooks/pre-commit
-
-	# Creates the post-merge .git hook
-	cat > $SITES_DIR/$project_id/.git/hooks/post-merge <<- EOF0
-		#!/bin/sh
-		# get the db .sql file from the cloned repo and imports it to the server
-		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
-		# updates the db on the local machine with the proper local host information
-		$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
-			use $project_id;
-			UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
-		EOF
-		# update the wp-config file
-		sed -i.bak "s/\\\$local_host_base = '.*';/\\\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
-	EOF0
-	# Make executable
-	chmod +x $SITES_DIR/$project_id/.git/hooks/post-merge
+# 	# # Creates the post-merge .git hook
+# 	# cat > $SITES_DIR/$project_id/.git/hooks/post-merge <<- EOF0
+# 	# 	#!/bin/sh
+# 	# 	# get the db .sql file from the cloned repo and imports it to the server
+# 	# 	$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
+# 	# 	# updates the db on the local machine with the proper local host information
+# 	# 	$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
+# 	# 		use $project_id;
+# 	# 		UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
+# 	# 	EOF
+# 	# 	# update the wp-config file
+# 	# 	sed -i.bak "s/\\\$local_host_base = '.*';/\\\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
+# 	# EOF0
+# 	# # Make executable
+# 	# chmod +x $SITES_DIR/$project_id/.git/hooks/post-merge
 
 
-}
+# }
 
 writevhost () {
 	echo "Writing Virtual Host..."
@@ -302,7 +353,7 @@ writevhost () {
 	cat > $VHOSTS_DIR/$project_id.conf <<- EOF
 	<VirtualHost *:80>
 	DocumentRoot "$SITES_DIR/$project_id/web"
-	ServerName $project_id.$LOCAL_HOST
+	ServerName $project_id.$LOCAL_URL_BASE
 	ErrorLog "$LOGS_DIR/error_log"
 	CustomLog "$LOGS_DIR/access_log" common
 	<Directory "$SITES_DIR/$project_id/web">
@@ -336,6 +387,22 @@ writesublimeproject () {
 	EOF
 }
 
+setup_remotes() {
+ 	# first, production app & db (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
+	if [[ $PRODUCTION_URL && ${PRODUCTION_URL} ]] ; then
+		PROD_URL=$PRODUCTION_URL
+	else
+		PROD_URL="$project_id.com"
+	fi
+ 	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.4", "domains": ["'$PRODUCTION_URL'", "www.'$PRODUCTION_URL'", "'$project_id'.preview.yellowberri.com"]}')
+ 	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$project_id''$LIVE_DB_PASS_SUFFIX'"}}'
+	# now, staging
+ 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.4", "domains": ["'$project_id'.staging.yellowberri.com"]}')
+ 	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$project_id''$LIVE_DB_PASS_SUFFIX'"}}'
+}
+
 restartapache () {
 	echo "\nRestarting Apache!"
 	sudo $APACHE_DIR/apachectl -k restart
@@ -345,34 +412,45 @@ siteinit () {
 	# Test for project existence, start from scratch if necessary, and define type of project
 	preinit
 
+	# Add handy terminal command for quickly getting to project directory
+	echo 'alias '$project_id'="cd '$SITES_DIR'/'$project_id'/web"' >> ~/.sites
+
 	# Go ahead and copy relevant files to the project directory.
 	copyfiles
 
 	# Use the config info to alter the wp-config file.
-	configwp
+	writeconfigs
 
-	# Now, we need to create the local database (if it doesn't already exist)
+	#Now, we need to create the local database (if it doesn't already exist)
 	setup_db
 
-	# configure project version control
-	gitsetup "bitbucket"
+	#Let's go ahead and install our Wordpress site! (as long as wp-cli is installed)
+	if hash wp 2>/dev/null; then
+		install_wp
+	fi
+
+	# # configure project version control
+	# # gitsetup "bitbucket"
 
 	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
-	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_HOST' >> /private/etc/hosts"
+	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
 
-	# Write new virtual host file for the new site
+	# # Write new virtual host file for the new site
 	writevhost
 
-	# Write the sublime text project file
+	# # # Write the sublime text project file
 	writesublimeproject
 
-	#set owner permissions for the wordpress directory
+	# #set owner permissions for the wordpress directory
 	sudo chown -R $OWNER: $SITES_DIR/$project_id/web
  	sudo chmod -R g+w $SITES_DIR/$project_id/web
 
+ 	# set up project live AND staging environments on serverpilot
+ 	setup_remotes
+
 	# Finally, restart apache!
 	restartapache
-	#clear
+	clear
 	echo "---------------------------------------------------------------------------"
 	echo "...done! Your site is now ready to work on."
 	echo "---------------------------------------------------------------------------\n"
@@ -386,8 +464,9 @@ if [[ $1 && ${1} ]] ; then
 	# load config file
 	# . wpinit.config
 	source ${BASH_SOURCE[0]/%wpinit/wpinit.config}
-	# LOCAL_HOST =  localhost
-	# SUBLIMETEXTPROJECTS_DIR
+	if [[ $2 && ${2} ]] ; then
+		PRODUCTION_URL=$2
+	fi
 
 	clear
 	echo "---------------------------------------------------------------------------"

@@ -79,7 +79,7 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
 
 
               // Demo of how to use the dynamic CSS and write your own static CSS file
-              $filename = ABSPATH . '/wp-content/themes/yb/library/css/options-styles.css';
+              $filename = ABSPATH . '/wp-content/themes/yb/assets/styles/css/options-styles.css';
               global $wp_filesystem;
               if( empty( $wp_filesystem ) ) {
                 require_once( ABSPATH .'/wp-admin/includes/file.php' );

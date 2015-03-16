@@ -12,14 +12,11 @@
 
 <div id="title">
 	<div class="container <?php echo $full_width_class; ?>">
-		<div class="ten columns">
-			<h1><?php _e('Search Results for', 'yb') ?> <?php the_search_query(); ?></h1>
-		</div>
-		<?php if(get_post_meta( get_option('page_for_posts'), 'yb_featuredimage-breadcrumbs', true ) == true) { ?>
-			<div id="breadcrumbs" class="six columns">
-				<?php yb_breadcrumbs(); ?>
-			</div>
-		<?php } ?>
+		<h1 class="page-title"><?php _e('Search Results for', 'yb') ?> <?php the_search_query(); ?></h1>
+
+		<?php if( !empty($ybwp_data['opt-checkbox-breadcrumbs'] ) ) : ?>
+			<?php echo $breadcrumbs; ?>
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -27,10 +24,9 @@
 
 	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
 
-		<div id="content" class="<?php sidebarPosClass($page_layout); ?> columns">
+		<div id="content" class="<?php sidebarPosClass($page_layout); ?>">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
 				<div class="search-result clearfix">
 
 					<div class="search-content">
@@ -43,17 +39,15 @@
 					</div>
 
 					<div class="clear"></div>
-					<div class="search-meta"><?php get_template_part( 'library/inc/meta' ); ?></div>
+					<div class="search-meta"><?php get_template_part( 'assets/inc/meta' ); ?></div>
 
 				</div>
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'library/inc/nav' ); ?>
+			<?php get_template_part( 'assets/inc/nav' ); ?>
 
 			<?php else : ?>
-
 				<h2><?php _e('No results found.', 'yb') ?></h2>
-
 			<?php endif; ?>
 		</div> <!-- end #content -->
 

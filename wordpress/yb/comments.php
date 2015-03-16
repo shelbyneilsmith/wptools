@@ -1,6 +1,5 @@
 <div id="comments">
 	<?php
-
 		if (!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME']))
 			die ('Please do not load this page directly. Thanks!');
 
@@ -12,7 +11,6 @@
 	?>
 
 	<?php if ( have_comments() ) : ?>
-
 		<h3 id="comments" class="title"><span><?php comments_number(__('Responses', 'yb'), __('Response (1)', 'yb'), __('Responses (%)', 'yb') );?></span></h3>
 
 		<div class="navigation">
@@ -28,9 +26,7 @@
 			<div class="next-posts"><?php previous_comments_link() ?></div>
 			<div class="prev-posts"><?php next_comments_link() ?></div>
 		</div>
-
 	<?php else : // this is displayed if there are no comments so far ?>
-
 		<?php if ( comments_open() ) : ?>
 			<!-- If comments are open, but there are no comments. -->
 
@@ -38,12 +34,10 @@
 			<p class="hidden"><?php _e('Comments are closed.', 'yb'); ?></p>
 
 		<?php endif; ?>
-
 	<?php endif; ?>
 
 
 	<?php if ( comments_open() ) : ?>
-
 		<?php
 
 			$req = get_option( 'require_name_email' );
@@ -67,6 +61,5 @@
 			// Show Comment Form
 			comment_form($comments_args);
 		?>
-
 	<?php endif; // if you delete this the sky will fall on your head ?>
 </div>

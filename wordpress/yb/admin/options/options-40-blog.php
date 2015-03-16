@@ -17,7 +17,7 @@ $this->sections[] = array(
 			'subtitle'  => __('Select blog content and sidebar alignment.', 'yb'),
 			'required' => array('opt-checkbox-blog','=','1'),
 			'options'   => array(
-				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/library/_images/layout-default.png'),
+				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/images/layout-default.png'),
 				'Centered No Sidebar' => array('alt' => 'Centered No Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/1col.png'),
 				'Centered Left Sidebar' => array('alt' => 'Centered Left Sidebar',  'img' => ReduxFramework::$_url . 'assets/img/2cl.png'),
 				'Centered Right Sidebar' => array('alt' => 'Centered Right Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/2cr.png'),
@@ -119,35 +119,6 @@ $this->sections[] = array(
 			'title'     => __('Blog Breadcrumb Name', 'yb'),
 			'required' => array('opt-checkbox-blog','=','1'),
 			'default'   => 'Blog',
-		),
-		array(
-			'id'        => 'opt-select-blogtitlebar',
-			'type'      => 'select',
-			'title'     => __('Blog Titlebar', 'yb'),
-			'subtitle'  => __('Choose your Blog Titlebar Layout', 'yb'),
-			'required' => array('opt-checkbox-blog','=','1'),
-			'options'   => array(
-				'default' => 'default',
-				'Background-Image Style 1' => 'Background-Image Style 1',
-				'Background-Image Style 2' => 'Background-Image Style 2',
-			),
-			'default'   => 'default'
-		),
-		array(
-			'id'        => 'opt-media-blogtitlebar',
-			'type'      => 'media',
-			'url'       => true,
-			'title'     => __('Blog Titlebar Image (If Blog Titlebar Layout is set to Image)', 'yb'),
-			'required' => array('opt-select-blogtitlebar','!=','default'),
-			// 'compiler'  => 'true',
-			//'mode'      => false, // Can be set to false to allow any media type, or can also be set to any mime type.
-			// 'desc'      => __('Upload your site\'s low-res logo here.', 'yb'),
-			'subtitle'  => __('Upload a Blog Titlebar Image.', 'yb'),
-			// 'default'   => array('url' => 'http://s.wordpress.org/style/images/codeispoetry.png'),
-			//'hint'      => array(
-			//    'title'     => 'Hint Title',
-			//    'content'   => 'This is a <b>hint</b> for the media field with a Title.',
-			//)
 		),
 		array(
 			'id'        => 'opt-checkbox-blogbreadcrumbs',
