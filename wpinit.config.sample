@@ -32,7 +32,7 @@ LOCAL_DB_USER=root
 LOCAL_DB_PASS=root
 
 # Set the suffix for live database passwords
-LIVE_DB_PASS_SUFFIX=LogMe1n0438
+LIVE_DB_PASS_PREFIX=LogMe1n
 
 # Site administrator email address
 ADMIN_EMAIL=shelby@yellowberri.com

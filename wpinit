@@ -396,11 +396,11 @@ setup_remotes() {
 	fi
  	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.4", "domains": ["'$PRODUCTION_URL'", "www.'$PRODUCTION_URL'", "'$project_id'.preview.yellowberri.com"]}')
  	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$project_id''$LIVE_DB_PASS_SUFFIX'"}}'
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 	# now, staging
  	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.4", "domains": ["'$project_id'.staging.yellowberri.com"]}')
  	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$project_id''$LIVE_DB_PASS_SUFFIX'"}}'
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "admin_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 }
 
 restartapache () {
