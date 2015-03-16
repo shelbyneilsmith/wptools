@@ -1,43 +1,66 @@
-# Your main local virtual host base
-LOCAL_HOST=ybdev.local
+# Define various environment url bases
+LOCAL_URL_BASE=localdev
+PREVIEW_URL_BASE=preview.yellowberri.com
+STAGING_URL_BASE=staging.yellowberri.com
 
 # Location of sublime text projects dir
-SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/$project_id/web/wp-content/themes/yb"
+SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
 
 # Secret code for use in encoding some strings
-SECRET_CODE=4d6c024
-STAGING_HOST=ybdevel.com
+SECRET_CODE=0438
+
+# Production & Staging Credential
+STAGING_HOST=166.78.9.244
+STAGING_SSH_USER=serverpilot
+STAGING_SSH_PASS=LogMe1n234
+PROD_HOST=166.78.134.12
+PROD_SSH_USER=serverpilot
+PROD_SSH_PASS=LogMe1n234
 
 # Git server credentials
 GITUSER=yellowberri
 GITPASS=Yellowberri420!
 
-# Variables for staging server configuration
-##STAGING_IP=0.0.0.0 # Staging server IP address
-##scipt_loc=users/sites # Staging script location on staging server
+# ServerPilot API Credentials
+CLIENTID=cid_GL1JgvMkgxxQ4RiB
+APIKEY=iRG4x0IkYLhDl34KczJIX2hguQOlHg1yxZ95DSWlCKU
+PROD_SYSID=WLidezqHplyvzl0l
+STAGING_SYSID=fNkI7dp8EZbRwxnI
 
 # Local database credentials
 LOCAL_DB_USER=root
 LOCAL_DB_PASS=root
+
+# Set the suffix for live database passwords
+LIVE_DB_PASS_SUFFIX=LogMe1n0438
+
+# Site administrator email address
+ADMIN_EMAIL=shelby@yellowberri.com
 
 # Now, let's set some directory variables
 SITES_DIR="$HOME/Sites" # Main working directory for all sites
 WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
 
 # Location of MySQL database files
-DB_DIR="/Applications/MAMP/db/mysql"
+DB_DIR="/usr/local/mysql-5.6.21-osx10.8-x86_64/data"
 
 # Location of MySQL bin files
-MYSQL_BIN="/Applications/MAMP/Library/bin"
+MYSQL_BIN="/usr/local/mysql-5.6.21-osx10.8-x86_64/bin"
 
 # Location of vhosts dir
-VHOSTS_DIR="/Applications/MAMP/conf/apache/extra/vhosts"
+VHOSTS_DIR="/private/etc/apache2/extra/vhosts"
 
 # Location of logs dir
 LOGS_DIR="/private/var/log/apache2"
 
 # Location of Apache bin
-APACHE_DIR="/Applications/MAMP/bin/apache2/bin"
+APACHE_DIR="/usr/sbin"
 
 # Owner/Group name (To find out: <?php echo(exec("whoami")); ?>)
 OWNER="_www"
+
+# Config file paths
+WPCONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php
+WPLOYCONFIGFILE=$SITES_DIR/$project_id/web/wploy.config
+GRUNTFILE=$SITES_DIR/$project_id/web/Gruntfile.js
+GRUNTPACKAGEFILE=$SITES_DIR/$project_id/web/package.json
