@@ -3,4 +3,4 @@
 .submlime-project
 .sublime-workspace
 *.scssc
-*.config
+wpinit.config
