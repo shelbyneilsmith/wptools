@@ -93,68 +93,60 @@ preinit () {
 copyfiles () {
 	clear
 	if [ $purpose == "new" ] ; then
-		# if [ "$(git ls-remote https://${GITUSER}:${GITPASS}@bitbucket.org/$GITUSER/${project_id}.git 2> /dev/null)" ]; then
-		# 	clear
-		# 	echo "\n---------------------------------------------------------------------------"
-		# 	echo "Oh, wait. A repository for \"$project_id\" already exists. Get outta here!"
-		# 	echo "---------------------------------------------------------------------------\n"
-		# 	exit
-		# else
-			# Tell the user that the proper files are being copied over
-			echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
+		# Tell the user that the proper files are being copied over
+		echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
-			# create the wordpress directory structure
-			mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
+		# create the wordpress directory structure
+		mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
 
-			# copy wireframes and styletile files over
-			#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
+		# copy wireframes and styletile files over
+		#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
 
-			# get latest version of Wordpress and extract files to project directory
-			curl -L -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
-			tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
-			# delete the temporary Wordpress zip file
-			rm $SITES_DIR/$project_id/wp.temp.tar.gz
-			# move the Wordpress files from the "wordpress" default directory up into the "web" folder and then delete the "wordpress" folder
-			mv $SITES_DIR/$project_id/web/wordpress/* $SITES_DIR/$project_id/web
-			rm -R $SITES_DIR/$project_id/web/wordpress
+		# get latest version of Wordpress and extract files to project directory
+		curl -L -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
+		tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
+		# delete the temporary Wordpress zip file
+		rm $SITES_DIR/$project_id/wp.temp.tar.gz
+		# move the Wordpress files from the "wordpress" default directory up into the "web" folder and then delete the "wordpress" folder
+		mv $SITES_DIR/$project_id/web/wordpress/* $SITES_DIR/$project_id/web
+		rm -R $SITES_DIR/$project_id/web/wordpress
 
-			# move the config files, .htaccess, .gitignore, etc. over
-			cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
-			cp $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
-			cp $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
-			cp $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
-			cp $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
+		# move the config files, .htaccess, .gitignore, etc. over
+		cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+		cp $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
+		cp $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
+		cp $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
+		cp $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
 
-			cp $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
-			cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
-			cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
+		cp $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
+		cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
+		cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
 
-			# copy the grunt node modules over
-			mkdir $SITES_DIR/$project_id/web/node_modules
-			cp -r $WPINIT_DIR/wordpress/node_modules/* $SITES_DIR/$project_id/web/node_modules
+		# copy the grunt node modules over
+		mkdir $SITES_DIR/$project_id/web/node_modules
+		cp -r $WPINIT_DIR/wordpress/node_modules/* $SITES_DIR/$project_id/web/node_modules
 
-			# delete any default themes and set up our custom yb theme
-			rm -rf $SITES_DIR/$project_id/web/wp-content/themes/*/* && rmdir $SITES_DIR/$project_id/web/wp-content/themes/*
-			mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
-			cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
+		# delete any default themes and set up our custom yb theme
+		rm -rf $SITES_DIR/$project_id/web/wp-content/themes/*/* && rmdir $SITES_DIR/$project_id/web/wp-content/themes/*
+		mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
+		cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
 
-			# delete any default plugins and install our plugins folder
-			rm -R $SITES_DIR/$project_id/web/wp-content/plugins
-			cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
-		# fi
+		# delete any default plugins and install our plugins folder
+		rm -R $SITES_DIR/$project_id/web/wp-content/plugins
+		cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
 		echo "\nPulling down files from staging...\n"
-
-		####NEED TO CHECK WHETHER OR NOT STAGING SITE EXISTS!####
 
 		# Create the empty project directory, if it doesn't already exist
 		if [ ! -d $SITES_DIR/$project_id ] ; then
 			mkdir $SITES_DIR/$project_id
 		fi
 
-		# # Clone the files...
-		# git clone https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id $SITES_DIR/$project_id
+		if (ssh $STAGING_SSH_USER@$STAGING_HOST "[ -d apps/${project_id}xstaging ]"); then
+			# Check if staging site exists and pull files down, if it does
+			rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:apps/${project_id}xstaging/public $SITES_DIR/$project_id/web
+		fi
 	fi
 }
 
@@ -301,64 +293,6 @@ install_wp() {
 	done
 }
 
-# gitsetup () {
-# 	if [ $purpose == "new" ] ; then
-# 		#set up git on remote server
-# 		if [ $1 == "bitbucket" ] ; then
-# 			echo "---------------------------------------------------------------------------"
-# 			echo "Setting up remote repository...Please enter a short description for this repository."
-# 			echo "---------------------------------------------------------------------------\n"
-# 			read repo_desc
-
-# 			#script for bitbucket repo initialization
-# 			curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories" -d "name=$project_id" -d "description=$repo_desc" -d "is_private=true"
-
-# 			# Setting up the service hook on bitbucket end for pushing to staging server
-# 			##curl -k -X POST --user $GITUSER:$GITPASS "https://api.bitbucket.org/1.0/repositories/$GITUSER/$project_id/services/" -d "repo_slug=$project_id" -d "type=POST" -d "URL=http://$STAGING_IP/$scipt_loc/staging-script.php?repo_name=$project_id"
-# 		fi
-
-# 		# Initialize local Git repository and push it to the remote repo
-# 		git init $SITES_DIR/$project_id
-# 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id add .
-# 		git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id commit -am 'Initial Commit'
-
-# 		if [ $1 == "bitbucket" ] ; then
-# 			git --git-dir=/$SITES_DIR/$project_id/.git --work-tree=$SITES_DIR/$project_id push https://$GITUSER:$GITPASS@bitbucket.org/$GITUSER/$project_id master
-# 		fi
-# 	fi
-
-# 	# Creates the pre-commit .git hook
-# 	# cat > $SITES_DIR/$project_id/.git/hooks/pre-commit <<- EOF
-# 	# 	#!/bin/sh
-# 	# 	# dumps the db into an .sql file before adding it to the repo
-# 	# 	$MYSQL_BIN/mysqldump -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id > $SITES_DIR/$project_id/db/${project_id}_db.sql
-# 	# 	# change to the project directory
-# 	# 	cd $SITES_DIR/$project_id
-# 	# 	# add the db file to the repo
-# 	# 	git add db/${project_id}_db.sql
-# 	# EOF
-# 	# # Make executable
-# 	# chmod +x $SITES_DIR/$project_id/.git/hooks/pre-commit
-
-# 	# # Creates the post-merge .git hook
-# 	# cat > $SITES_DIR/$project_id/.git/hooks/post-merge <<- EOF0
-# 	# 	#!/bin/sh
-# 	# 	# get the db .sql file from the cloned repo and imports it to the server
-# 	# 	$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/db/${project_id}_db.sql
-# 	# 	# updates the db on the local machine with the proper local host information
-# 	# 	$MYSQL_BIN/mysql -u$LOCAL_DB_USER -p$LOCAL_DB_PASS <<- EOF
-# 	# 		use $project_id;
-# 	# 		UPDATE ${project_id}${SECRET_CODE}_options SET option_value='http://${project_id}.${LOCAL_HOST}' WHERE option_name='siteurl' OR option_name='home';
-# 	# 	EOF
-# 	# 	# update the wp-config file
-# 	# 	sed -i.bak "s/\\\$local_host_base = '.*';/\\\$local_host_base = '$LOCAL_HOST';/" $CONFIGFILE
-# 	# EOF0
-# 	# # Make executable
-# 	# chmod +x $SITES_DIR/$project_id/.git/hooks/post-merge
-
-
-# }
-
 writevhost () {
 	echo "Writing Virtual Host..."
 
@@ -447,9 +381,6 @@ siteinit () {
 		# set up project live AND staging environments on serverpilot
 		setup_remotes
 	fi
-
-	# # # configure project version control
-	# # # gitsetup "bitbucket"
 
 	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
 	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
