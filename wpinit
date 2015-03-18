@@ -116,26 +116,26 @@ copyfiles () {
 		echo "\nMoving files to new worpress site!\n"
 
 		# move the config files, .htaccess, .gitignore, etc. over
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
 
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
-		rsync -h --info=progress2 $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
+		rsync -a --info=progress2 $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
 
 		# copy the grunt node modules over
-		mkdir $SITES_DIR/$project_id/web/node_modules
-		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web
+		# mkdir $SITES_DIR/$project_id/web/node_modules
+		rsync -a --info=progress2 --delete $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web
 
 		# delete any default themes and set up our custom yb theme
 		find $SITES_DIR/$project_id/web/wp-content/themes/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
-		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/yb $SITES_DIR/$project_id/web/wp-content/themes
+		rsync -a --info=progress2 --delete $WPINIT_DIR/wordpress/yb $SITES_DIR/$project_id/web/wp-content/themes
 
 		# delete any default plugins and install our plugins folder
 		rm -R $SITES_DIR/$project_id/web/wp-content/plugins
-		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content/plugins
+		rsync -a --info=progress2 --delete $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content/plugins
 
 		echo "\nOkay. Done moving files!\n"
 	elif [ $purpose == "collab" ] ; then
