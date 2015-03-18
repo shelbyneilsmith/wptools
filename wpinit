@@ -142,14 +142,13 @@ copyfiles () {
 		# Clone the files from the repository
 		echo "\nPulling down files from staging...\n"
 
-		# # Create the empty project directory, if it doesn't already exist
-		# if [ ! -d $SITES_DIR/$project_id ] ; then
-		# 	mkdir $SITES_DIR/$project_id
-		# fi
-
 		if (ssh $STAGING_SSH_USER@$STAGING_HOST "[ -d apps/${project_id}xstaging ]"); then
 			# Check if staging site exists and pull files down, if it does
-			rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:apps/${project_id}xstaging/public $SITES_DIR/$project_id/web
+			rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:apps/${project_id}xstaging/public/ $SITES_DIR/$project_id/web
+
+			sed -i '' "s/define('DB_NAME', '.*');/\define('DB_NAME', '$project_id');/g" $WPCONFIGFILE
+			sed -i '' "s/define('DB_USER', '.*');/\define('DB_USER', '$LOCAL_DB_USER');/g" $WPCONFIGFILE
+			sed -i '' "s/define('DB_PASSWORD', '.*');/\define('DB_PASSWORD', '$LOCAL_DB_PASS');/g" $WPCONFIGFILE
 		fi
 	fi
 }
