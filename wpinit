@@ -168,7 +168,7 @@ writeconfigs () {
 	sed -i '' "s/define('DB_NAME', '');/\define('DB_NAME', '$project_id');/g" $WPCONFIGFILE
 	sed -i '' "s/define('DB_USER', '');/\define('DB_USER', '$LOCAL_DB_USER');/g" $WPCONFIGFILE
 	sed -i '' "s/define('DB_PASSWORD', '');/\define('DB_PASSWORD', '$LOCAL_DB_PASS');/g" $WPCONFIGFILE
-	sed -i '' "s/\$table_prefix  = '';/\$table_prefix = '$project_id$SECRET_CODE';/g" $WPCONFIGFILE
+	sed -i '' "s/\$table_prefix  = '';/\$table_prefix = '${project_id}${SECRET_CODE}_';/g" $WPCONFIGFILE
 	# get salts
 	SALTS=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 	SALT_STRING='__salts__'
