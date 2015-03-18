@@ -134,6 +134,7 @@ EOF
 				ssh root@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}${!SRC_DB}.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}${!SRC_DB}.sql; rm /srv/users/${!DEST_SSH_USER}/${!DEST_PATH}wp-config.php.backup"
 			fi
 			if [[ $dest_id == "s" ]]; then
+				echo "activate code freeze"
 				# ssh root@${!SRC_HOST} "wp plugin activate code-freeze"
 			fi
 		fi

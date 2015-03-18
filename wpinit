@@ -111,6 +111,8 @@ copyfiles () {
 		mv $SITES_DIR/$project_id/web/wordpress/* $SITES_DIR/$project_id/web
 		rm -R $SITES_DIR/$project_id/web/wordpress
 
+		echo "\nMoving files to new worpress site!\n"
+
 		# move the config files, .htaccess, .gitignore, etc. over
 		cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
 		cp $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
@@ -134,6 +136,8 @@ copyfiles () {
 		# delete any default plugins and install our plugins folder
 		rm -R $SITES_DIR/$project_id/web/wp-content/plugins
 		cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
+
+		echo "\nOkay. Done moving files!\n"
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
 		echo "\nPulling down files from staging...\n"
@@ -201,8 +205,8 @@ writeconfigs () {
 	sed -i '' "s/s_ssh_user=/s_ssh_user=$STAGING_SSH_USER/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_ssh_pass=/s_ssh_pass=$STAGING_SSH_PASS/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_db=/s_db=${project_id}_db/g" $WPLOYCONFIGFILE
-	sed -i '' "s/s_db_user=/s_db_user=admin_$SECRET_CODE/g" $WPLOYCONFIGFILE
-	sed -i '' "s/s_db_pass=/s_db_pass=$project_id$LIVE_DB_PASS_SUFFIX/g" $WPLOYCONFIGFILE
+	sed -i '' "s/s_db_user=/s_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
+	sed -i '' "s/s_db_pass=/s_db_pass=$LIVE_DB_PASS_PREFIX$SECRET_CODE/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_path=/s_path=apps\\/${project_id}xstaging\\/public\\//g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_url=/s_url=$project_id.$STAGING_URL_BASE/g" $WPLOYCONFIGFILE
 
@@ -210,8 +214,8 @@ writeconfigs () {
 	sed -i '' "s/p_ssh_user=/p_ssh_user=$PROD_SSH_USER/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_ssh_pass=/p_ssh_pass=$PROD_SSH_PASS/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_db=/p_db=${project_id}_db/g" $WPLOYCONFIGFILE
-	sed -i '' "s/p_db_user=/p_db_user=admin_$SECRET_CODE/g" $WPLOYCONFIGFILE
-	sed -i '' "s/p_db_pass=/p_db_pass=$project_id$LIVE_DB_PASS_SUFFIX/g" $WPLOYCONFIGFILE
+	sed -i '' "s/p_db_user=/p_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
+	sed -i '' "s/p_db_pass=/p_db_pass=$LIVE_DB_PASS_PREFIX$SECRET_CODE/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_path=/p_path=apps\\/${project_id}\\/public\\//g" $WPLOYCONFIGFILE
 	if [[ $prod_domain && ${prod_domain} ]] ; then
 		sed -i '' "s/p_url=/p_url=$prod_domain/g" $WPLOYCONFIGFILE
