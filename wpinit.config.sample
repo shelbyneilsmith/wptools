@@ -6,7 +6,7 @@ STAGING_URL_BASE=staging.yellowberri.com
 # Location of sublime text projects dir
 SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
 
-# Secret code for use in encoding some strings
+# Secret code for use in encoding some strings (keep it to like 4 or 5 characters, please)
 SECRET_CODE=0438
 
 # Production & Staging Credential
@@ -42,10 +42,10 @@ SITES_DIR="$HOME/Sites" # Main working directory for all sites
 WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
 
 # Location of MySQL database files
-DB_DIR="/usr/local/mysql-5.6.21-osx10.8-x86_64/data"
+DB_DIR="/usr/local/mysql/data"
 
 # Location of MySQL bin files
-MYSQL_BIN="/usr/local/mysql-5.6.21-osx10.8-x86_64/bin"
+MYSQL_BIN="/usr/local/mysql/bin"
 
 # Location of vhosts dir
 VHOSTS_DIR="/private/etc/apache2/extra/vhosts"

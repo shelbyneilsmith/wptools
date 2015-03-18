@@ -45,7 +45,8 @@ define('WP_ENV', $wp_env);
 $table_prefix  = '';
 
 # Security Salts, Keys, Etc
-{{salts}}
+__salts__
+
 
 # Localized Language Stuff
 define('WPLANG', '');
@@ -75,7 +76,7 @@ define('DISALLOW_FILE_EDIT', true);
 define( 'WP_DEFAULT_THEME', 'yb' );
 
 # Plugin License Keys
-define('GF_LICENSE_KEY','9d511f9fd6bf3992746ccd48d73cc208'); // Gravity Forms License Key
+__plugin_keys__
 
 /* That's all, stop editing! Happy blogging. */
 
