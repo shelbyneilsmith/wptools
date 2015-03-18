@@ -92,12 +92,14 @@ preinit () {
 
 copyfiles () {
 	clear
+	# create the wordpress directory structure
+	mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
+	echo "\nNew project directory created..."
+
 	if [ $purpose == "new" ] ; then
 		# Tell the user that the proper files are being copied over
-		echo "\nNew project directory created...\nGrabbing the latest version of Wordpress and getting everything set up.\n"
+		echo "\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
-		# create the wordpress directory structure
-		mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
 
 		# copy wireframes and styletile files over
 		#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
@@ -114,38 +116,35 @@ copyfiles () {
 		echo "\nMoving files to new worpress site!\n"
 
 		# move the config files, .htaccess, .gitignore, etc. over
-		cp $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
-		cp $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
-		cp $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
-		cp $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
-		cp $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
 
-		cp $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
-		cp $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
-		cp $WPINIT_DIR/wordpress/.gitignore $SITES_DIR/$project_id/.gitignore
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
+		rsync -h --info=progress2 $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
 
 		# copy the grunt node modules over
-		mkdir $SITES_DIR/$project_id/web/node_modules
-		cp -r $WPINIT_DIR/wordpress/node_modules/* $SITES_DIR/$project_id/web/node_modules
+		rsync -rh --info=progress2 $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web/node_modules
 
 		# delete any default themes and set up our custom yb theme
-		rm -rf $SITES_DIR/$project_id/web/wp-content/themes/*/* && rmdir $SITES_DIR/$project_id/web/wp-content/themes/*
-		mkdir $SITES_DIR/$project_id/web/wp-content/themes/yb
-		cp -r $WPINIT_DIR/wordpress/yb/* $SITES_DIR/$project_id/web/wp-content/themes/yb
+		find $SITES_DIR/$project_id/web/wp-content/themes/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/yb $SITES_DIR/$project_id/web/wp-content/themes/yb
 
 		# delete any default plugins and install our plugins folder
 		rm -R $SITES_DIR/$project_id/web/wp-content/plugins
-		cp -r $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content
+		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/plugins $SITES_DIR/$project_id/web/wp-content/plugins
 
 		echo "\nOkay. Done moving files!\n"
 	elif [ $purpose == "collab" ] ; then
 		# Clone the files from the repository
 		echo "\nPulling down files from staging...\n"
 
-		# Create the empty project directory, if it doesn't already exist
-		if [ ! -d $SITES_DIR/$project_id ] ; then
-			mkdir $SITES_DIR/$project_id
-		fi
+		# # Create the empty project directory, if it doesn't already exist
+		# if [ ! -d $SITES_DIR/$project_id ] ; then
+		# 	mkdir $SITES_DIR/$project_id
+		# fi
 
 		if (ssh $STAGING_SSH_USER@$STAGING_HOST "[ -d apps/${project_id}xstaging ]"); then
 			# Check if staging site exists and pull files down, if it does
@@ -206,7 +205,7 @@ writeconfigs () {
 	sed -i '' "s/s_ssh_pass=/s_ssh_pass=$STAGING_SSH_PASS/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_db=/s_db=${project_id}_db/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_db_user=/s_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
-	sed -i '' "s/s_db_pass=/s_db_pass=$LIVE_DB_PASS_PREFIX$SECRET_CODE/g" $WPLOYCONFIGFILE
+	sed -i '' "s/s_db_pass=/s_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_path=/s_path=apps\\/${project_id}xstaging\\/public\\//g" $WPLOYCONFIGFILE
 	sed -i '' "s/s_url=/s_url=$project_id.$STAGING_URL_BASE/g" $WPLOYCONFIGFILE
 
@@ -215,7 +214,7 @@ writeconfigs () {
 	sed -i '' "s/p_ssh_pass=/p_ssh_pass=$PROD_SSH_PASS/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_db=/p_db=${project_id}_db/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_db_user=/p_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
-	sed -i '' "s/p_db_pass=/p_db_pass=$LIVE_DB_PASS_PREFIX$SECRET_CODE/g" $WPLOYCONFIGFILE
+	sed -i '' "s/p_db_pass=/p_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
 	sed -i '' "s/p_path=/p_path=apps\\/${project_id}\\/public\\//g" $WPLOYCONFIGFILE
 	if [[ $prod_domain && ${prod_domain} ]] ; then
 		sed -i '' "s/p_url=/p_url=$prod_domain/g" $WPLOYCONFIGFILE
@@ -344,8 +343,8 @@ setup_remotes() {
 	else
 		PROD_URL="$project_id.com"
 	fi
- 	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.4", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
- 	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
+	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.4", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
+	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
 	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 	# now, staging
  	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.4", "domains": ["'$project_id'.staging.yellowberri.com"]}')
@@ -543,7 +542,7 @@ if [[ $project_id && ${project_id} ]] ; then
 
 			sitedelete
 
-			echo "---------------------------------------------------------------------------"
+			echo "\n---------------------------------------------------------------------------"
 			echo "...done! Site, database and setup are deleted."
 			echo "---------------------------------------------------------------------------\n"
 
