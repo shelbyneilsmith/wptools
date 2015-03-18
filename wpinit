@@ -126,7 +126,8 @@ copyfiles () {
 		rsync -h --info=progress2 $WPINIT_DIR/wordpress/.htaccess $SITES_DIR/$project_id/web/.htaccess
 
 		# copy the grunt node modules over
-		rsync -rh --info=progress2 $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web
+		# mkdir $SITES_DIR/$project_id/web/node_modules
+		rsync -rh --info=progress2 --delete $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web
 
 		# delete any default themes and set up our custom yb theme
 		find $SITES_DIR/$project_id/web/wp-content/themes/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
@@ -297,7 +298,7 @@ install_wp() {
 }
 
 writevhost () {
-	echo "Writing Virtual Host..."
+	echo "\nWriting Virtual Host..."
 
 	cat > $VHOSTS_DIR/$project_id.conf <<- EOF
 	<VirtualHost *:80>
