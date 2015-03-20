@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       		},
 		concurrent: {
 			watch: {
-				tasks: ['browserSync', 'watch', 'compass:watch'],
+				tasks: ['watch', 'compass:watch'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -153,6 +153,6 @@ module.exports = function(grunt) {
 
 
 	// register task
-	grunt.registerTask('default', [ 'concurrent:watch' ]);
+	grunt.registerTask('default', [ 'browserSync', 'concurrent:watch' ]);
 	grunt.registerTask('build', [ 'jshint', 'uglify', 'imagemin' ]);
 };
