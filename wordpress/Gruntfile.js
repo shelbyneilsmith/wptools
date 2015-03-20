@@ -47,10 +47,29 @@ module.exports = function(grunt) {
 				ext: '.min.js'
 			}
       		},
-
+		concurrent: {
+			watch: {
+				tasks: ['browserSync', 'watch', 'compass:watch'],
+				options: {
+					logConcurrentOutput: true
+				}
+			}
+		},
       		// style (Sass) compilation via Compass
 		compass: {
-			dist: {
+			watch: {
+				options: {
+					sassDir: '<%= assetsDir %>/styles/scss',
+					cssDir: '<%= assetsDir %>/styles/css',
+					imagesDir: '<%= assetsDir %>/images',
+					images: '<%= assetsDir %>/images',
+					javascriptsDir: '<%= assetsDir %>/scripts/build',
+					fontsDir: '<%= assetsDir %>/fonts',
+					outputStyle: 'expanded',
+					watch: true
+				}
+			},
+			compile: {
 				options: {
 					sassDir: '<%= assetsDir %>/styles/scss',
 					cssDir: '<%= assetsDir %>/styles/css',
@@ -59,10 +78,10 @@ module.exports = function(grunt) {
 					javascriptsDir: '<%= assetsDir %>/scripts/build',
 					fontsDir: '<%= assetsDir %>/fonts',
 					environment: 'production',
-					outputStyle: 'expanded',
+					outputStyle: 'compressed',
 					relativeAssets: true,
 					noLineComments: true,
-					force: true
+					force: true,
 				}
 			}
 		},
@@ -92,18 +111,14 @@ module.exports = function(grunt) {
 		},
     		// watch our project for changes
 		watch: {
-			compass: {
-				files: [
-					'<%= assetsDir %>/styles/scss/*',
-					'<%= assetsDir %>/styles/scss/**/*',
-				],
-				tasks: ['compass']
-			},
 			js: {
 				files: [
 					'<%= jshint.all %>'
 				],
-				tasks: ['jshint', 'uglify']
+				tasks: ['jshint', 'uglify'],
+				options: {
+					spawn: false,
+				},
 			}
 		},
 		browserSync: {
@@ -130,12 +145,14 @@ module.exports = function(grunt) {
 	// load tasks
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 
+
 	// register task
-	grunt.registerTask('default', [ 'compass', 'uglify', 'browserSync', 'watch' ]);
+	grunt.registerTask('default', [ 'concurrent:watch' ]);
 	grunt.registerTask('build', [ 'jshint', 'uglify', 'imagemin' ]);
 };
