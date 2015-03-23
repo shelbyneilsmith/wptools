@@ -57,9 +57,19 @@ extract( shortcode_atts( array(
 function yb_placeholder_img( $atts, $content = null) {
 	extract( shortcode_atts( array(
 		'width' => 'width',
-		'height' => 'height'
+		'height' => 'height',
+		'float' => 'none'
 	), $atts ) );
-	return '<img src="http://placehold.it/'.$width.'x'.$height.'" />';
+
+	if ( $float == 'left' ) {
+		$margin = " margin: 0 20px 20px 0;";
+	} else if ( $float == 'right' ) {
+		$margin = " margin: 0 0px 20px 20px;";
+	} else {
+		$margin = "";
+	}
+
+	return '<img style="float: '.$float.';'.$margin.'" src="http://placehold.it/'.$width.'x'.$height.'" />';
 }
 
 

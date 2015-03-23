@@ -74,7 +74,7 @@
                 title : 'Add Placeholder Image',
                 image : url+'/gallery.png',
                 onclick : function() {
-                     ed.selection.setContent('[placeholder_img width="width" height="height"]');
+                     ed.selection.setContent('[placeholder_img width="width" height="height" float="none"]');
 
                 }
             });
