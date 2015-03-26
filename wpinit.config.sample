@@ -1,3 +1,6 @@
+# Server type - eg. Apache or Nginx
+SERVER_TYPE=nginx
+
 # Define various environment url bases
 LOCAL_URL_BASE=localdev
 PREVIEW_URL_BASE=preview.yellowberri.com
@@ -11,11 +14,15 @@ SECRET_CODE=0438
 
 # Production & Staging Credential
 STAGING_HOST=166.78.9.244
-STAGING_SSH_USER=serverpilot
+STAGING_SSH_USER=root
 STAGING_SSH_PASS=LogMe1n234
+STAGING_OWNER=serverpilot
+STAGING_GROUP=serverpilot
 PROD_HOST=166.78.134.12
-PROD_SSH_USER=serverpilot
+PROD_SSH_USER=root
 PROD_SSH_PASS=LogMe1n234
+PROD_OWNER=serverpilot
+PROD_GROUP=serverpilot
 
 # Git server credentials
 GITUSER=yellowberri
@@ -58,6 +65,7 @@ APACHE_DIR="/usr/sbin"
 
 # Owner/Group name (To find out: <?php echo(exec("whoami")); ?>)
 OWNER="_www"
+GROUP="staff"
 
 # Config file paths
 WPCONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php

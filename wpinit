@@ -200,7 +200,10 @@ writeconfigs () {
 		sed -i '' "s/l_db=/l_db=$project_id/g" $WPLOYCONFIGFILE
 		sed -i '' "s/l_db_user=/l_db_user=$LOCAL_DB_USER/g" $WPLOYCONFIGFILE
 		sed -i '' "s/l_db_pass=/l_db_pass=$LOCAL_DB_PASS/g" $WPLOYCONFIGFILE
+		sed -i '' "s#l_path=#l_path=$SITES_DIR/$project_id/web/#g" $WPLOYCONFIGFILE
 		sed -i '' "s/l_url=/l_url=$project_id.$LOCAL_URL_BASE/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_owner=/l_owner=$OWNER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_group=/l_group=$GROUP/g" $WPLOYCONFIGFILE
 
 		sed -i '' "s/s_host=/s_host=$STAGING_HOST/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_ssh_user=/s_ssh_user=$STAGING_SSH_USER/g" $WPLOYCONFIGFILE
@@ -208,8 +211,10 @@ writeconfigs () {
 		sed -i '' "s/s_db=/s_db=${project_id}_db/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_db_user=/s_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_db_pass=/s_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_path=/s_path=apps\\/${project_id}xstaging\\/public\\//g" $WPLOYCONFIGFILE
+		sed -i '' "s#s_path=#s_path=/srv/users/serverpilot/apps/${project_id}xstaging/public/#g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_url=/s_url=$project_id.$STAGING_URL_BASE/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_owner=/s_owner=$STAGING_OWNER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_group=/s_group=$STAGING_GROUP/g" $WPLOYCONFIGFILE
 
 		sed -i '' "s/p_host=/p_host=$PROD_HOST/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_ssh_user=/p_ssh_user=$PROD_SSH_USER/g" $WPLOYCONFIGFILE
@@ -217,10 +222,12 @@ writeconfigs () {
 		sed -i '' "s/p_db=/p_db=${project_id}_db/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_db_user=/p_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_db_pass=/p_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_path=/p_path=apps\\/${project_id}\\/public\\//g" $WPLOYCONFIGFILE
+		sed -i '' "s#p_path=#p_path=/srv/users/serverpilot/apps/${project_id}/public/#g" $WPLOYCONFIGFILE
 		if [[ $prod_domain && ${prod_domain} ]] ; then
 			sed -i '' "s/p_url=/p_url=$prod_domain/g" $WPLOYCONFIGFILE
 		fi
+		sed -i '' "s/p_owner=/p_owner=$PROD_OWNER/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_group=/p_group=$PROD_GROUP/g" $WPLOYCONFIGFILE
 
 		#Gruntfile.js
 		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
@@ -307,18 +314,32 @@ install_wp() {
 writevhost () {
 	echo "\nWriting Virtual Host..."
 
-	cat > $VHOSTS_DIR/$project_id.conf <<- EOF
-	<VirtualHost *:80>
-	DocumentRoot "$SITES_DIR/$project_id/web"
-	ServerName $project_id.$LOCAL_URL_BASE
-	ErrorLog "$LOGS_DIR/error_log"
-	CustomLog "$LOGS_DIR/access_log" common
-	<Directory "$SITES_DIR/$project_id/web">
-	Order allow,deny
-	Allow from all
-	</Directory>
-	</VirtualHost>
-	EOF
+	if [[ $SERVER_TYPE == "apache" ]]; then
+		cat > $VHOSTS_DIR/$project_id.conf <<- EOF
+		<VirtualHost *:80>
+		DocumentRoot "$SITES_DIR/$project_id/web"
+		ServerName $project_id.$LOCAL_URL_BASE
+		ErrorLog "$LOGS_DIR/error_log"
+		CustomLog "$LOGS_DIR/access_log" common
+		<Directory "$SITES_DIR/$project_id/web">
+		Order allow,deny
+		Allow from all
+		</Directory>
+		</VirtualHost>
+		EOF
+	elif [[ $SERVER_TYPE == "nginx" ]]; then
+		cat > /usr/local/etc/nginx/sites-available/$project_id <<- EOF
+		server {
+		listen       80;
+		server_name  $project_id.localdev;
+		root       /Users/stupid/Sites/$project_id/web;
+		access_log  /usr/local/etc/nginx/logs/$project_id.access.log  main;
+		include global/restrictions.conf;
+		include global/wordpress.conf;
+		}
+		EOF
+		ln -sfv /usr/local/etc/nginx/sites-available/$project_id /usr/local/etc/nginx/sites-enabled/$project_id
+	fi
 }
 
 writesublimeproject () {
@@ -360,9 +381,16 @@ setup_remotes() {
 	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 }
 
-restartapache () {
-	echo "\nRestarting Apache!"
-	sudo $APACHE_DIR/apachectl -k restart
+restartserver () {
+	if [[ $SERVER_TYPE == "apache" ]]; then
+		echo "\nRestarting Apache!"
+		sudo $APACHE_DIR/apachectl -k restart
+	elif [[ $SERVER_TYPE == "nginx" ]]; then
+		echo "\nRestarting Nginx!"
+		sudo nginx -t
+		sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+		sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+	fi
 }
 
 siteinit () {
@@ -411,11 +439,11 @@ siteinit () {
 	fi
 
 	#set owner permissions for the wordpress directory
-	sudo chown -R $OWNER: $SITES_DIR/$project_id/web
+	sudo chown -R $OWNER:$GROUP $SITES_DIR/$project_id/web
 	sudo chmod -R g+w $SITES_DIR/$project_id/web
 
 	# Finally, restart apache!
-	restartapache
+	restartserver
 	clear
 	echo "---------------------------------------------------------------------------"
 	echo "...done! Your site is now ready to work on."
@@ -435,14 +463,20 @@ sitedelete () {
 	pause "Oh well, suit yourself... press [Enter] to delete the files & directories (and database, if applicable)."
 
 	# First, remove the main site files
-	rm -rf $SITES_DIR/$project_id
+	sudo rm -rf $SITES_DIR/$project_id
 
 	# Go ahead and drop the database
 	$MYSQL_BIN/mysqladmin drop $project_id -f -u$LOCAL_DB_USER -p$LOCAL_DB_PASS
 
 	# Delete vhost and sublime project files
-	rm $VHOSTS_DIR/$project_id.conf
-	rm $SUBLIMETEXTPROJECTS_DIR/$project_id.sublime-project
+	if [[ $SERVER_TYPE == "apache" ]]; then
+		sudo rm $VHOSTS_DIR/$project_id.conf
+	elif [[ $SERVER_TYPE == "nginx" ]]; then
+		unlink /usr/local/etc/nginx/sites-enabled/$project_id
+		sudo rm /usr/local/etc/nginx/sites-available/$project_id
+	fi
+
+	sudo rm $SUBLIMETEXTPROJECTS_DIR/$project_id.sublime-project
 
 	# Finally, remove the hosts line and bash_profile shortcut
 	sudo sed -i '' '/127.0.0.1 '$project_id'.'$LOCAL_URL_BASE'/d' /private/etc/hosts
