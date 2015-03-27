@@ -331,7 +331,7 @@ writevhost () {
 		cat > /usr/local/etc/nginx/sites-available/$project_id <<- EOF
 		server {
 		listen       80;
-		server_name  $project_id.localdev;
+		server_name  $project_id.$LOCAL_URL_BASE;
 		root       /Users/stupid/Sites/$project_id/web;
 		access_log  /usr/local/etc/nginx/logs/$project_id.access.log  main;
 		include global/restrictions.conf;
@@ -426,7 +426,7 @@ siteinit () {
 	fi
 
 	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
-	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
+	#sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
 	# sudo sed -i '' '/127.0.0.1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
 	# sudo sed -i '' '/::1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
 
@@ -479,7 +479,7 @@ sitedelete () {
 	sudo rm $SUBLIMETEXTPROJECTS_DIR/$project_id.sublime-project
 
 	# Finally, remove the hosts line and bash_profile shortcut
-	sudo sed -i '' '/127.0.0.1 '$project_id'.'$LOCAL_URL_BASE'/d' /private/etc/hosts
+	sudo sed -i '' "/127.0.0.1 $project_id..*/d" /private/etc/hosts
 	sed -i '' "\#alias $project_id=\"cd $SITES_DIR/$project_id/web\"#d" ~/.sites
 
 	if [ $killstaging == true ] ; then

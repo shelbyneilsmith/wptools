@@ -2,7 +2,7 @@
 SERVER_TYPE=nginx
 
 # Define various environment url bases
-LOCAL_URL_BASE=localdev
+LOCAL_URL_BASE=yb
 PREVIEW_URL_BASE=preview.yellowberri.com
 STAGING_URL_BASE=staging.yellowberri.com
 
