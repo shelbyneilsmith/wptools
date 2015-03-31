@@ -231,6 +231,7 @@ writeconfigs () {
 
 		#Gruntfile.js
 		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
+		sed -i '' "s/localTLD: '',/localTLD: '$LOCAL_URL_BASE',/g" $GRUNTFILE
 		#package.json
 		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GRUNTPACKAGEFILE
 		sed -i '' "s/\"description\": \"Website\",/\"description\": \"$project_id Website\",/g" $GRUNTPACKAGEFILE
@@ -442,7 +443,7 @@ siteinit () {
 	sudo chown -R $OWNER:$GROUP $SITES_DIR/$project_id/web
 	sudo chmod -R g+w $SITES_DIR/$project_id/web
 
-	# Finally, restart apache!
+	# Finally, restart apache or nginx!
 	restartserver
 	clear
 	echo "---------------------------------------------------------------------------"
@@ -504,6 +505,25 @@ sitedelete () {
 	fi
 }
 
+newvhost () {
+	echo "\n---------------------------------------------------------------------------"
+	echo "Ok, we're just setting up a new virtual host for you."
+	echo "---------------------------------------------------------------------------\n"
+	# Write new virtual host file for the new site
+	writevhost
+
+	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
+	#sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
+	# sudo sed -i '' '/127.0.0.1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
+	# sudo sed -i '' '/::1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
+
+	# Finally, restart apache or nginx!
+	restartserver
+	echo "\n---------------------------------------------------------------------------"
+	echo "...done! Your site is now ready to work on."
+	echo "---------------------------------------------------------------------------\n"
+}
+
 # Let's get started.
 
 project_id=""
@@ -542,7 +562,7 @@ source ${BASH_SOURCE[0]/%wpinit/wpinit.config}
 if [[ $project_id && ${project_id} ]] ; then
 	case "$purpose" in
 		new )
-			while getopts ":d:u:p:t" opt; do
+			while getopts ":d:u:p:t:v" opt; do
 				case $opt in
 					d )
 						prod_domain=$OPTARG
@@ -555,6 +575,10 @@ if [[ $project_id && ${project_id} ]] ; then
 						;;
 					t )
 						testinst=true
+						;;
+					v )
+						newvhost
+						exit 1
 						;;
 					\? )
 						echo "Invalid option: -$OPTARG" 1>&2

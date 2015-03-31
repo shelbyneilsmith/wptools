@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		projectID: '',
+		localTLD: '',
 		projectDir: '~/sites/<%= projectID %>',
 		assetsDir: 'wp-content/themes/yb/assets',
 		// let us know if our JS is sound
@@ -132,7 +133,7 @@ module.exports = function(grunt) {
 			options: {
 				watchTask: true,
 				open: false,
-				proxy: "<%= projectID %>.localdev",
+				proxy: "<%= projectID %>.<%= localTLD %>",
 				ghostMode: {
 					clicks: true,
 					forms: true,
