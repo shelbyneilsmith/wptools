@@ -32,35 +32,15 @@
 /* Comment Layout */
 /* ------------------------------------------------------------------------ */
 
-	function yb_comments( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment; ?>
+	function yb_comments($disqus_shortname = '') {
+		global $ybwp_data;
 
-		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
-		<div id="comment-<?php comment_ID(); ?>" class="comment-body clearfix">
-
-				<div class="avatar"><?php echo get_avatar($comment, $size = '50'); ?></div>
-
-				<div class="comment-text">
-
-				 <div class="author">
-					<span><?php if($comment->comment_author_url == '' || $comment->comment_author_url == 'http://Website'){ echo get_comment_author(); } else { echo comment_author_link(); } ?></span>
-					<div class="date">
-					<?php printf(__('%1$s at %2$s', 'yb'), get_comment_date(),  get_comment_time() ) ?></a><?php edit_comment_link( __( '(Edit)', 'yb'),'  ','' ) ?>
-						&middot; <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>  </div>
-				 </div>
-
-				 <div class="text"><?php comment_text() ?></div>
-
-
-				 <?php if ( $comment->comment_approved == '0' ) : ?>
-					<em><?php _e( 'Your comment is awaiting moderation.', 'yb' ) ?></em>
-					<br />
-					<?php endif; ?>
-
-				</div>
-
-		</div>
-	<?php
+		if ( !empty($ybwp_data['opt-checkbox-disquscomments']) && !empty($disqus_shortname) ) {
+			disqus_embed($disqus_shortname);
+		} else {
+			// comments_template();
+			yb_comments_old();
+		}
 	}
 
 /* ------------------------------------------------------------------------ */
@@ -400,6 +380,27 @@
 		}
 
 		return $output;
+	}
+
+/* ------------------------------------------------------------------------ */
+/* Disqus Comment System */
+/* ------------------------------------------------------------------------ */
+	function disqus_embed($disqus_shortname) {
+		global $post;
+		wp_enqueue_script('disqus_embed','http://'.$disqus_shortname.'.disqus.com/embed.js');
+		echo '<div id="disqus_thread"></div>
+			<script type="text/javascript">
+			var disqus_shortname = "'.$disqus_shortname.'";
+			var disqus_title = "'.$post->post_title.'";
+			var disqus_url = "'.get_permalink($post->ID).'";
+			var disqus_identifier = "'.$disqus_shortname.'-'.$post->ID.'";
+			</script>';
+	}
+
+	// Disqus Comment Count
+	function disqus_count($disqus_shortname) {
+		wp_enqueue_script('disqus_count','http://'.$disqus_shortname.'.disqus.com/count.js');
+		echo '<a href="'. get_permalink() .'#disqus_thread"></a>';
 	}
 
 ?>

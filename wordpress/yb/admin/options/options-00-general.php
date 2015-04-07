@@ -55,6 +55,12 @@ $this->sections[] = array(
 			'default'   => '1'
 		),
 		array(
+			'id'        => 'opt-checkbox-disquscomments',
+			'type'      => 'checkbox',
+			'title'     => __('Use Disqus for all Comments', 'yb'),
+			'default'   => '1'
+		),
+		array(
 			'id'        => 'opt-checkbox-mediamenu',
 			'type'      => 'checkbox',
 			'title'     => __('Disable Media item from showing in Admin menu', 'yb'),

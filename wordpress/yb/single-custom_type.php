@@ -33,7 +33,7 @@
 				<?php } ?>
 
 				<?php //if ( !$ybwp_data['opt-checkbox-blogcomments'] ) : // change "blogcomments" to whatever applies here ?>
-					<div class="comments"><?php comments_template(); ?></div>
+					<?php //yb_comments(); ?>
 				<?php //endif; ?>
 			<?php endwhile; endif; ?>
 

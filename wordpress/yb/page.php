@@ -29,7 +29,7 @@
 				<?php the_content(); ?>
 
 				<?php if(!$ybwp_data['opt-checkbox-pagecomments']) { ?>
-					<?php comments_template(); ?>
+					<?php yb_comments(); ?>
 				<?php } ?>
 			<?php endwhile; endif; ?>
 

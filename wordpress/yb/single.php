@@ -93,7 +93,7 @@
 				<?php } ?>
 
 				<?php if ( !$ybwp_data['opt-checkbox-blogcomments'] ) : ?>
-					<div class="comments"><?php comments_template(); ?></div>
+					<?php yb_comments(); ?>
 				<?php endif; ?>
 
 			<?php endwhile; endif; ?>

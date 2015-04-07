@@ -478,15 +478,16 @@ global $ybwp_data;
 	/**
 	 * Save our custom field value
 	 */
-	add_action('pre_post_update', 'yb_page_menus_save_post' );
-	function yb_page_menus_save_post( $post_id ) {
+	add_action('pre_post_update', 'yb_page_menus_save_post', 13, 2 );
+	function yb_page_menus_save_post( $post_id, $post_object ) {
 		if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 		if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'yb_page_menus_nonce' ) ) return;
 
-		// if( !current_user_can( 'edit_post' ) ) return;
+		// If this is just a revision, don't save in menu
+		if ( wp_is_post_revision( $post_id ) )
+			return;
 
 		// save the data with update_post_meta
-		$page_obj = get_post($post_id);
 		$all_menus = wp_get_nav_menus();
 
 		foreach ( $all_menus as $menu ) {
@@ -495,17 +496,17 @@ global $ybwp_data;
 			if (isset($_POST['nav-menu-group']) && in_array($menu->name, $_POST['nav-menu-group'])) {
 				if ( !checkMenuForPage($menuID, $post_id) ) {
 					$itemData = array(
-						'menu-item-object-id' => $post_id,
-						'menu-item-title' 	=> get_the_title($post_id),
+						'menu-item-object-id' 	=> $post_id,
+						'menu-item-title' 		=> __(get_the_title($post_id)),
 						'menu-item-url' 		=> get_permalink($post_id),
 						'menu-item-object' 	=> 'page',
-						'menu-item-position'  	=> $page_obj->menu_order,
+						'menu-item-position'  	=> $post_object->menu_order,
 						'menu-item-type' 	=> 'post_type',
 						'menu-item-status' 	=> 'publish'
 					);
-					remove_action( 'save_post', 'yb_page_menus_save_post' );
+					remove_action( 'save_post', 'yb_page_menus_save_post', 13, 2 );
 					wp_update_nav_menu_item( $menuID, 0, $itemData );
-					add_action( 'save_post', 'yb_page_menus_save_post' );
+					add_action( 'save_post', 'yb_page_menus_save_post', 13, 2 );
 				}
 			} else {
 				$isInMenu = checkMenuForPage($menuID, $post_id);
