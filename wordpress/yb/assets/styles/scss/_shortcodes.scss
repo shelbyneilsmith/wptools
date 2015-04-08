@@ -173,33 +173,6 @@
 	}
 }
 
-
-/*-----------------------------------------------------------------------------------*/
-/*	Toggle
-/*-----------------------------------------------------------------------------------*/
-
-.testimonial{
-	background: $white;
-	border: 1px solid #d3d3d3;
-	padding:20px;
-	position: relative;
-	@include border-radius($border-radius);
-	@include box-shadow(1px 1px 2px 0px rgba(180, 180, 180, 0.2));
-	&:after{
-		content: '';
-		width:22px;
-		height:22px;
-		position: absolute;
-		bottom:-22px;
-		left:30px;
-		background: url(../../images/testimonials.png) no-repeat;
-	}
-}
-.testimonial-author{
-	margin: 4px 0 20px 56px;
-	color: #b2b2b2;
-}
-
 /*-----------------------------------------------------------------------------------*/
 /*	Toggle
 /*-----------------------------------------------------------------------------------*/
