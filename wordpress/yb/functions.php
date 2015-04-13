@@ -51,14 +51,18 @@ global $ybwp_data;
 		if ( function_exists( 'add_image_size' ) ) add_theme_support( 'post-thumbnails' );
 
 		if ( function_exists( 'add_image_size' ) ) {
-			add_image_size( 'standard', 700, 300, true );			// Standard Blog Image
-			add_image_size( 'blog-medium', 320, 210, true );		// Medium Blog Image
-			add_image_size( 'sixteen-columns', 940, 475, true ); 	// for portfolio wide
-			add_image_size( 'ten-columns', 640, 500, true );		// for portfolio side-by-side
-			add_image_size( 'eight-columns', 460, 300, true ); 		// perfect for responsive - adjust height in CSS
-			add_image_size( 'eight-columns-thin', 460, 250, true ); 	// Portfolio 1 Col / perfect for responsive - adjust height in CSS
-			add_image_size( 'widget-thumb', 60, 60, true ); 		// used for widget thumbnail
+			add_image_size( 'medium-plus', 800, 600, false ); // Bigger than medium, copy me.
 		}
+	}
+
+	/* Add thumbnail sizes to Media */
+	// https://codex.wordpress.org/Function_Reference/add_image_size#For_Media_Library_Images_.28Admin.29
+	add_filter( 'image_size_names_choose', 'setup_custom_sizes' );
+
+	function setup_custom_sizes( $sizes ) {
+		return array_merge( $sizes, array(
+			'medium-plus' => __( 'Medium Plus' ),
+			) );
 	}
 
 	/* Translation/Localisation */
