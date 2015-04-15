@@ -427,7 +427,8 @@ siteinit () {
 	fi
 
 	# If necessary, write the ip exception in hosts file for the new site (uncomment the next line) *this is especially useful for proxy server set up*
-	#sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
+	sudo bash -c "echo '127.0.0.1 $project_id.$LOCAL_URL_BASE' >> /private/etc/hosts"
+	
 	# sudo sed -i '' '/127.0.0.1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
 	# sudo sed -i '' '/::1/s/$/ '$project_id.$LOCAL_URL_BASE'/' /private/etc/hosts
 
