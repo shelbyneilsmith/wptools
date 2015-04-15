@@ -400,7 +400,7 @@ siteinit () {
 
 	if [ $testinst == false ] ; then
 		# Add handy terminal command for quickly getting to project directory
-		echo 'alias '$project_id'="cd '$SITES_DIR'/'$project_id'/web"' >> ~/.sites
+		sudo bash -c "echo 'alias $project_id=\"cd $SITES_DIR/$project_id/web\"' >> ~/.sites"
 	fi
 
 	# Go ahead and copy relevant files to the project directory.
