@@ -1,6 +1,9 @@
 # Server type - eg. Apache or Nginx
 SERVER_TYPE=nginx
 
+# Whether to write to local etc/hosts file.
+WRITE_HOSTS=true
+
 # Define various environment url bases
 LOCAL_URL_BASE=yb
 PREVIEW_URL_BASE=preview.yellowberri.com
