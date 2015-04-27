@@ -123,7 +123,7 @@ global $ybwp_data;
 				),
 				'Development/Design' => array(
 					'content' => file_get_contents('http://www.ybdevel.com/dev/designcopy.txt'),
-					'template' => 'dev.php',
+					'template' => 'page-dev.php',
 					'slug' => 'dev',
 					'status' => 'publish',
 				),
