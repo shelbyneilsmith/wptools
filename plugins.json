@@ -2,7 +2,7 @@
 	"plugins": [
 	{
 		"name": "advanced-custom-fields",
-		"url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.zip",
+		"url": "http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9NTUxNzJ8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE1LTA0LTI5IDIzOjIzOjMy",
 		"is_activated": true,
 		"serial_key": null
 	},
