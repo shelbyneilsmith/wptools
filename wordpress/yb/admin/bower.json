@@ -1,0 +1,26 @@
+{
+  "name": "Yellowberri",
+  "version": "0.0.0",
+  "authors": [
+    "Dalton Rowe <dalton@yellowberri.com>"
+  ],
+  "description": "Yellowberri theme backend functionality",
+  "keywords": [
+    "wordpress",
+    "yellowberri",
+    "backend"
+  ],
+  "license": "MIT",
+  "homepage": "yellowberri.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "redux-framework": "https://github.com/reduxframework/redux-framework.git#~3.5.3",
+    "TGM-Plugin-Activation": "https://github.com/thomasgriffin/TGM-Plugin-Activation.git#~2.4.2"
+  }
+}
