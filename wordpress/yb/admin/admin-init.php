@@ -1,8 +1,8 @@
 <?php
 
 /* Required Plugins Setup */
-if (file_exists(dirname(__FILE__).'/plugin-init.php')) {
-	require_once( dirname(__FILE__).'/plugin-init.php' );
+if (file_exists(dirname(__FILE__).'/plugins-init.php')) {
+	require_once( dirname(__FILE__).'/plugins-init.php' );
 }
 
 /* Load Redux Extensions*/
