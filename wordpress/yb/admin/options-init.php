@@ -55,7 +55,7 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
             add_filter('redux/options/'.$this->args['opt_name'].'/compiler', array( $this, 'compiler_action' ), 10, 2);
 
             // Change the arguments after they've been declared, but before the panel is created
-            // add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
+            //add_filter('redux/options/'.$this->args['opt_name'].'/args', array( $this, 'change_arguments' ) );
 
             // Change the default value of a field after it's been set, but before it's been useds
             //add_filter('redux/options/'.$this->args['opt_name'].'/defaults', array( $this,'change_defaults' ) );
@@ -124,7 +124,7 @@ if (!class_exists('redux_theme_Redux_Framework_config')) {
 
          * */
         function change_arguments($args) {
-            $args['dev_mode'] = false;
+            //$args['dev_mode'] = true;
 
             return $args;
         }
@@ -1130,4 +1130,3 @@ if (!function_exists('redux_theme_validate_callback_function')):
         return $return;
     }
 endif;
-
