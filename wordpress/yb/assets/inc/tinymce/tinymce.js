@@ -8,8 +8,7 @@
                 title : 'Add Div w/ Class',
                 image : url+'/description.png',
                 onclick : function() {
-                     ed.selection.setContent('[div class=""]Your Content...[/div]');
-
+                     ed.selection.setContent('<p>[div class=""]</p><p>Content Here</p><p>[/div]</p>');
                 }
             });
         },
@@ -30,8 +29,7 @@
                 title : 'Add Section',
                 image : url+'/section.png',
                 onclick : function() {
-                     ed.selection.setContent('[section class="" bgcolor="" bgimage="" parallax="false" padding="30px 0" border=""]Your Content[/section]');
-
+                     ed.selection.setContent('<p>[section class="" bgcolor="" bgimage="" parallax="false" padding="30px 0" border=""]</p><p>Content here</p><p>[/section]</p>');
                 }
             });
         },
@@ -52,7 +50,7 @@
                 title : 'Add Box Field',
                 image : url+'/description.png',
                 onclick : function() {
-                     ed.selection.setContent('[box style="1 or 2" class=""]Your Content...[/box]');
+                     ed.selection.setContent('<p>[box style="1 or 2" class=""]</p><p>Content Here</p><p>[/box]</p>');
 
                 }
             });
@@ -74,8 +72,7 @@
                 title : 'Add Placeholder Image',
                 image : url+'/gallery.png',
                 onclick : function() {
-                     ed.selection.setContent('[placeholder_img width="width" height="height" float="none"]');
-
+                     ed.selection.setContent('[placeholder_img width="600" height="400" float="none"]');
                 }
             });
         },
@@ -87,7 +84,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Accordion Button
+/*  Add TinyMCE Accordion Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.accordion', {
@@ -96,8 +93,7 @@
                 title : 'Add Accordion',
                 image : url+'/accordion.png',
                 onclick : function() {
-                     ed.selection.setContent('[accordion open="2"]<br />[accordion-item title="First Tab Title"]Your Text[/accordion-item]<br />[accordion-item title="Second Tab Title"]Your Text[/accordion-item]<br />[accordion-item title="Third Tab Title"]Your Text[/accordion-item]<br />[/accordion]');
-
+                     ed.selection.setContent('<p>[accordion open="2"]</p><p>[accordion-item title="First Tab Title"]</p><p>Content here</p><p>[/accordion-item]</p><p>[accordion-item title="Second Tab Title"]</p><p>Content here</p><p>[/accordion-item]</p><p>[accordion-item title="Third Tab Title"]</p><p>Content here</p><p>[/accordion-item]</p><p>[/accordion]</p>');
                 }
             });
         },
@@ -109,7 +105,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Button
+/*  Add TinyMCE Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.yb_button', {
@@ -118,7 +114,7 @@
                 title : 'Add a Button',
                 image : url+'/button.png',
                 onclick : function() {
-                     ed.selection.setContent('[yb_button link="http://www.google.de" size="small, medium, large" target="_blank or _self" icon="cog" type="gradient or flat" altcolor="true or false" lightbox="true or false"]Button[/yb_button]');
+                     ed.selection.setContent('[yb_button link="http://www.google.de" size="small, medium, large" target="_self" icon="" type="flat" altcolor="false" lightbox="false"]Button[/yb_button]');
                 }
             });
         },
@@ -130,7 +126,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Video Button
+/*  Add TinyMCE Video Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.video', {
@@ -140,7 +136,6 @@
                 image : url+'/video.png',
                 onclick : function() {
                      ed.selection.setContent('[embedvideo type="youtube, vimeo, dailymotion" id="Enter video ID (eg. 8F7UOBIT4Vk)"]');
-
                 }
             });
         },
@@ -152,7 +147,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Gap Button
+/*  Add TinyMCE Gap Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.gap', {
@@ -162,7 +157,6 @@
                 image : url+'/gap.png',
                 onclick : function() {
                      ed.selection.setContent('[gap height="30"]');
-
                 }
             });
         },
@@ -174,7 +168,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE SocialMedia Button
+/*  Add TinyMCE SocialMedia Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.socialmedia', {
@@ -184,7 +178,6 @@
                 image : url+'/socialmedia.png',
                 onclick : function() {
                      ed.selection.setContent('[social icon="facebook" url="http://facebook.com"]');
-
                 }
             });
         },
@@ -196,7 +189,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Tabs Button
+/*  Add TinyMCE Tabs Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.tabs', {
@@ -205,8 +198,7 @@
                 title : 'Add Tabs',
                 image : url+'/tabs.png',
                 onclick : function() {
-                     ed.selection.setContent('[tabgroup]<br />[tab title="Tab 1"]Tab 1 content goes here.[/tab]<br />[tab title="Tab 2" icon="file"]Tab 2 content goes here.[/tab]<br />[tab icon="file"]Tab 3 content goes here.[/tab]<br />[/tabgroup]');
-
+                     ed.selection.setContent('<p>[tabgroup]</p><p>[tab title="Tab 1"]</p><p>Tab 1 Content Here</p><p>[/tab]</p><p>[tab title="Tab 2" icon="file"]</p><p>Tab 2 Content Here</p><p>[/tab]</p><p>[tab icon="file"]</p><p>Tab 3 Content Here</p><p>[/tab]</p><p>[/tabgroup]</p>');
                 }
             });
         },
@@ -218,7 +210,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE Toggle Button
+/*  Add TinyMCE Toggle Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.toggle', {
@@ -227,8 +219,7 @@
                 title : 'Add Toggle',
                 image : url+'/toggle.png',
                 onclick : function() {
-                     ed.selection.setContent('[toggle title="Toggle Title" open="true or false" icon="star"]Your Content goes here...[/toggle]');
-
+                     ed.selection.setContent('<p>[toggle title="Toggle Title" open="false" icon=""]</p><p>Content Here</p><p>[/toggle]</p>');
                 }
             });
         },
@@ -240,7 +231,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE 1/2 Button
+/*  Add TinyMCE 1/2 Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.one_half', {
@@ -249,7 +240,7 @@
                 title : 'Add 1/2 Columns',
                 image : url+'/one_half.png',
                 onclick : function() {
-                     ed.selection.setContent('[one_half]Content here.[/one_half] [one_half_last]Content here.[/one_half_last]');
+                     ed.selection.setContent('<p>[one_half]</p><p>Left Column</p><p>[/one_half]</p><p>[one_half_last]</p><p>Right Column</p><p>[/one_half_last]</p>');
 
                 }
             });
@@ -262,7 +253,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE 1/3 Button
+/*  Add TinyMCE 1/3 Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.one_third', {
@@ -271,7 +262,7 @@
                 title : 'Add 1/3 Columns',
                 image : url+'/one_third.png',
                 onclick : function() {
-                     ed.selection.setContent('[one_third]Content here.[/one_third] [one_third]Content here.[/one_third] [one_third_last]Content here.[/one_third_last]');
+                     ed.selection.setContent('<p>[one_third]</p><p>Left Column</p><p>[/one_third]</p><p>[one_third]</p><p>Middle Column</p><p>[/one_third]</p><p>[one_third_last]</p><p>Right Column</p><p>[/one_third_last]</p>');
 
                 }
             });
@@ -284,7 +275,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE 2/3 Button
+/*  Add TinyMCE 2/3 Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.two_third', {
@@ -293,7 +284,7 @@
                 title : 'Add 2/3 Columns',
                 image : url+'/two_third.png',
                 onclick : function() {
-                     ed.selection.setContent('[two_third]Content here.[/two_third] [one_third_last]Content here.[/one_third_last]');
+                     ed.selection.setContent('<p>[two_third]</p><p>Left Column</p><p>[/two_third]</p><p>[one_third_last]</p><p>Right Column</p><p>[/one_third_last]</p>');
 
                 }
             });
@@ -306,7 +297,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE 1/4 Button
+/*  Add TinyMCE 1/4 Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.one_fourth', {
@@ -315,7 +306,7 @@
                 title : 'Add 1/4 Columns',
                 image : url+'/one_fourth.png',
                 onclick : function() {
-                     ed.selection.setContent('[one_fourth]Content here.[/one_fourth] [one_fourth]Content here.[/one_fourth] [one_fourth]Content here.[/one_fourth] [one_fourth_last]Content here.[/one_fourth_last]');
+                     ed.selection.setContent('<p>[one_fourth]</p><p>Left Outer Column</p><p>[/one_fourth]</p><p>[one_fourth]</p><p>Left Inner Column</p><p>[/one_fourth]</p><p>[one_fourth]</p><p>Right Inner Column</p><p>[/one_fourth]</p><p>[one_fourth_last]</p><p>Right Outer Column</p><p>[/one_fourth_last]</p>');
 
                 }
             });
@@ -328,7 +319,7 @@
 })();
 
 /*-----------------------------------------------------------------------------------*/
-/*	Add TinyMCE 3/4 Button
+/*  Add TinyMCE 3/4 Button
 /*-----------------------------------------------------------------------------------*/
 (function() {
     tinymce.create('tinymce.plugins.three_fourth', {
@@ -337,8 +328,7 @@
                 title : 'Add 3/4 Columns',
                 image : url+'/three_fourth.png',
                 onclick : function() {
-                     ed.selection.setContent('[three_fourth]Content here.[/three_fourth][one_fourth_last]Content here.[/one_fourth_last]');
-
+                     ed.selection.setContent('<p>[three_fourth]</p><p>Left Column</p><p>[/three_fourth]</p><p>[one_fourth_last]</p><p>Right Column</p><p>[/one_fourth_last]</p>');
                 }
             });
         },
