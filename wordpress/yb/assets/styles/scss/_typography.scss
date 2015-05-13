@@ -9,7 +9,7 @@ body {
 	/* 16px / 24px */
 	font-size: #{$base-font-size}px;
 	line-height: #{$line / $em}em;
-	font-family: verdana, sans-serif;
+	font-family: $copy-font;
 }
 
 p, ul, ol, dl, blockquote {
