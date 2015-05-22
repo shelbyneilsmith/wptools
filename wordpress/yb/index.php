@@ -21,7 +21,7 @@
 	}
 ?>
 
-<?php if( !empty($ybwp_data['opt-checkbox-showblogtitle'] ) : ?>
+<?php if( !empty($ybwp_data['opt-checkbox-showblogtitle'] )) : ?>
 	<div id="title">
 		<div class="container <?php echo $full_width_class; ?>">
 			<h1 class="page-title"><?php echo $page_title; ?></h1>
@@ -47,7 +47,7 @@
 		<div id="content" class="<?php sidebarPosClass($page_layout); ?> columns <?php echo $ybwp_data['opt-select-blogpostlayout']; ?>">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-				<?php get_template_part( 'assets/inc/post-format/content', get_post_format() ); ?>
+				<?php get_template_part( 'assets/inc/content', get_post_format() ); ?>
 			<?php endwhile; ?>
 
 

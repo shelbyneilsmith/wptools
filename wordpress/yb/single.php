@@ -16,7 +16,7 @@
 	}
 ?>
 
-<?php if( !empty($ybwp_data['opt-checkbox-showblogtitle'] ) : ?>
+<?php if( !empty($ybwp_data['opt-checkbox-showblogtitle'] )) : ?>
 	<div id="title">
 		<div class="container <?php echo $full_width_class; ?>">
 			<h1 class="page-title"><?php echo $page_title; ?></h1>

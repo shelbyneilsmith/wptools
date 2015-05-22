@@ -17,7 +17,7 @@ $this->sections[] = array(
 			'subtitle'  => __('Select blog content and sidebar alignment.', 'yb'),
 			'required' => array('opt-checkbox-blog','=','1'),
 			'options'   => array(
-				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/images/layout-default.png'),
+				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/images/admin/layout-default.png'),
 				'Centered No Sidebar' => array('alt' => 'Centered No Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/1col.png'),
 				'Centered Left Sidebar' => array('alt' => 'Centered Left Sidebar',  'img' => ReduxFramework::$_url . 'assets/img/2cl.png'),
 				'Centered Right Sidebar' => array('alt' => 'Centered Right Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/2cr.png'),
