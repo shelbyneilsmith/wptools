@@ -48,6 +48,9 @@ function yb_styles_basic() {
 	/* ------------------------------------------------------------------------ */
 	/* Enqueue Stylesheets */
 	/* ------------------------------------------------------------------------ */
+	if( !empty($ybwp_data['opt-checkbox-dashicons'] ) ) {
+		wp_enqueue_style( 'dashicons' );
+	}
 
 	wp_enqueue_style( 'yb-stylesheet' );
 	wp_enqueue_style( 'yb-options-stylesheet' );

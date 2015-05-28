@@ -42,6 +42,13 @@ $this->sections[] = array(
 			'default'   => '',
 		),
 		array(
+			'id'        => 'opt-checkbox-dashicons',
+			'type'      => 'checkbox',
+			'title'     => __('Enable Wordpress Dashicons for Front-end Use', 'yb'),
+			'subtitle' => __('See <a href="https://developer.wordpress.org/resource/dashicons" target="_blank">https://developer.wordpress.org/resource/dashicons</a> for more information.', 'yb'),
+			'default'   => '0'
+		),
+		array(
 			'id'        => 'opt-checkbox-breadcrumbs',
 			'type'      => 'checkbox',
 			'title'     => __('Enable Breadcrumbs on Regular Pages', 'yb'),
