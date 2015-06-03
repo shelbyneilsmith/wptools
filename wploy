@@ -42,6 +42,7 @@ continueprompt() {
 }
 
 migrate() {
+	LANG=C LC_ALL=C
 	if [[ $dest_id == "p" ]]; then
 		echo "\n---------------------------------------------------------------------------"
 		echo "You are pushing your project to the production server!"
@@ -144,8 +145,8 @@ while getopts ":h" opt; do
 		h )
 			echo "Usage:"
 			echo "	wploy -h"
-			echo "	wpinit <project_id> [-m <l2s><l2p><s2p><p2s>]"
-			echo "	wpinit <project_id> [-s <staging><prod>]"
+			echo "	wploy<project_id> [-m <l2s><l2p><s2p><p2s>]"
+			echo "	wploy <project_id> [-s <staging><prod>]"
 			exit 0
 			;;
 		\? )
