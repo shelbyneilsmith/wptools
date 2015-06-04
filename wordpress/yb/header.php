@@ -22,7 +22,7 @@
 
 	<?php include_once( 'assets/inc/fb_open_graph.php' ); ?>
 
-	<link rel="shortcut icon" href="favicon.png">
+	<link rel="shortcut icon" href="/wp-content/themes/yb/favicon.png">
 
 	<?php if ( !empty($ybwp_data['opt-checkbox-blog'] )) : ?>
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
