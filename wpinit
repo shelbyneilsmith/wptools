@@ -197,37 +197,37 @@ writeconfigs () {
 
 	if [ $testinst == false ] ; then
 		#WPLOY CONFIG
-		sed -i '' "s/l_db=/l_db=$project_id/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_db_user=/l_db_user=$LOCAL_DB_USER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_db_pass=/l_db_pass=$LOCAL_DB_PASS/g" $WPLOYCONFIGFILE
-		sed -i '' "s#l_path=#l_path=$SITES_DIR/$project_id/web/#g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_url=/l_url=$project_id.$LOCAL_URL_BASE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_owner=/l_owner=$OWNER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_group=/l_group=$GROUP/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db=\"\"/l_db=\"$project_id\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_user=\"\"/l_db_user=\"$LOCAL_DB_USER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_pass=\"\"/l_db_pass=\"$LOCAL_DB_PASS\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s#l_path=\"\"#l_path=\"$SITES_DIR/$project_id/web/\"#g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_url=\"\"/l_url=\"$project_id.$LOCAL_URL_BASE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_owner=\"\"/l_owner=\"$OWNER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_group=\"\"/l_group=\"$GROUP\"/g" $WPLOYCONFIGFILE
 
-		sed -i '' "s/s_host=/s_host=$STAGING_HOST/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_ssh_user=/s_ssh_user=$STAGING_SSH_USER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_ssh_pass=/s_ssh_pass=$STAGING_SSH_PASS/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db=/s_db=${project_id}_db/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_user=/s_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_pass=/s_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s#s_path=#s_path=/srv/users/serverpilot/apps/${project_id}xstaging/public/#g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_url=/s_url=$project_id.$STAGING_URL_BASE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_owner=/s_owner=$STAGING_OWNER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_group=/s_group=$STAGING_GROUP/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_host=\"\"/s_host=\"$STAGING_HOST\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_user=\"\"/s_ssh_user=\"$STAGING_SSH_USER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_pass=\"\"/s_ssh_pass=\"$STAGING_SSH_PASS\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db=\"\"/s_db=\"${project_id}_db\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_user=\"\"/s_db_user=\"${project_id:0:5}_$SECRET_CODE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_pass=\"\"/s_db_pass=\"${LIVE_DB_PASS_PREFIX}$SECRET_CODE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s#s_path=\"\"#s_path=\"/srv/users/serverpilot/apps/${project_id}xstaging/public/\"#g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_url=\"\"/s_url=\"$project_id.$STAGING_URL_BASE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_owner=\"\"/s_owner=\"$STAGING_OWNER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_group=\"\"/s_group=\"$STAGING_GROUP\"/g" $WPLOYCONFIGFILE
 
-		sed -i '' "s/p_host=/p_host=$PROD_HOST/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_ssh_user=/p_ssh_user=$PROD_SSH_USER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_ssh_pass=/p_ssh_pass=$PROD_SSH_PASS/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db=/p_db=${project_id}_db/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_user=/p_db_user=${project_id:0:5}_$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_pass=/p_db_pass=${LIVE_DB_PASS_PREFIX}$SECRET_CODE/g" $WPLOYCONFIGFILE
-		sed -i '' "s#p_path=#p_path=/srv/users/serverpilot/apps/${project_id}/public/#g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_host=\"\"/p_host=\"$PROD_HOST\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_user=\"\"/p_ssh_user=\"$PROD_SSH_USER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_pass=\"\"/p_ssh_pass=\"$PROD_SSH_PASS\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db=\"\"/p_db=\"${project_id}_db\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_user=\"\"/p_db_user=\"${project_id:0:5}_$SECRET_CODE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_pass=\"\"/p_db_pass=\"${LIVE_DB_PASS_PREFIX}$SECRET_CODE\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s#p_path=\"\"#p_path=\"/srv/users/serverpilot/apps/${project_id}/public/\"#g" $WPLOYCONFIGFILE
 		if [[ $prod_domain && ${prod_domain} ]] ; then
-			sed -i '' "s/p_url=/p_url=$prod_domain/g" $WPLOYCONFIGFILE
+			sed -i '' "s/p_url=\"\"/p_url=\"$prod_domain\"/g" $WPLOYCONFIGFILE
 		fi
-		sed -i '' "s/p_owner=/p_owner=$PROD_OWNER/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_group=/p_group=$PROD_GROUP/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_owner=\"\"/p_owner=\"$PROD_OWNER\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_group=\"\"/p_group=\"$PROD_GROUP\"/g" $WPLOYCONFIGFILE
 
 		#Gruntfile.js
 		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE

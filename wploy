@@ -161,12 +161,12 @@ project_id=$1; shift
 
 # load wp-init config file
 # . wpinit.config
-source ${BASH_SOURCE[0]/%wploy/wpinit.config}
+. ${BASH_SOURCE[0]/%wploy/wpinit.config}
 
 if [[ $project_id && ${project_id} ]] ; then
 	# load project wploy config file
 	# . wploy.config
-	source ~/Sites/$project_id/web/wploy.config
+	. ~/Sites/$project_id/web/wploy.config
 
 	# set up available commands
 	declare -a cmds=('l2s' 'l2p' 's2l' 's2p' 'p2l' 'p2s')
@@ -193,25 +193,25 @@ if [[ $project_id && ${project_id} ]] ; then
 					src_id="${intent::1}"
 					dest_id="${intent: -1}"
 
-					SRC_HOST=${src_id}_host
-					SRC_SSH_USER=${src_id}_ssh_user
-					SRC_SSH_PASS=${src_id}_ssh_pass
-					SRC_DB=${src_id}_db
-					SRC_DB_USER=${src_id}_db_user
-					SRC_DB_PASS=${src_id}_db_pass
-					SRC_PATH=${src_id}_path
-					SRC_URL=${src_id}_url
+					SRC_HOST="${src_id}_host"
+					SRC_SSH_USER="${src_id}_ssh_user"
+					SRC_SSH_PASS="${src_id}_ssh_pass"
+					SRC_DB="${src_id}_db"
+					SRC_DB_USER="${src_id}_db_user"
+					SRC_DB_PASS="${src_id}_db_pass"
+					SRC_PATH="${src_id}_path"
+					SRC_URL="${src_id}_url"
 
-					DEST_HOST=${dest_id}_host
-					DEST_SSH_USER=${dest_id}_ssh_user
-					DEST_SSH_PASS=${dest_id}_ssh_pass
-					DEST_DB=${dest_id}_db
-					DEST_DB_USER=${dest_id}_db_user
-					DEST_DB_PASS=${dest_id}_db_pass
-					DEST_PATH=${dest_id}_path
-					DEST_URL=${dest_id}_url
-					DEST_OWNER=${dest_id}_owner
-					DEST_GROUP=${dest_id}_group
+					DEST_HOST="${dest_id}_host"
+					DEST_SSH_USER="${dest_id}_ssh_user"
+					DEST_SSH_PASS="${dest_id}_ssh_pass"
+					DEST_DB="${dest_id}_db"
+					DEST_DB_USER="${dest_id}_db_user"
+					DEST_DB_PASS="${dest_id}_db_pass"
+					DEST_PATH="${dest_id}_path"
+					DEST_URL="${dest_id}_url"
+					DEST_OWNER="${dest_id}_owner"
+					DEST_GROUP="${dest_id}_group"
 				else
 					echo "I didn't understand what you're trying to do..."
 					exit 1
