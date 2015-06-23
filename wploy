@@ -94,7 +94,7 @@ rsync -avO --exclude-from ${!SRC_PATH}'wploy-excludes.txt' ${!SRC_PATH} ${!DEST_
 rm ${!SRC_PATH}wploy-excludes.txt
 EOF
 		fi
-		ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo rm ${!SRC_PATH}${!SRC_DB}.sql; mv ${!SRC_PATH}wp-config.php.backup ${!SRC_PATH}wp-config.php"
+		ssh -t ${!SRC_SSH_USER}@${!SRC_HOST} "sudo rm ${!SRC_PATH}${!SRC_DB}.sql; mv ${!SRC_PATH}wp-config.php.backup ${!SRC_PATH}wp-config.php"
 		if [[ $dest_id == "l" ]]; then
 			# change ownership of files in new environment
 			sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}
