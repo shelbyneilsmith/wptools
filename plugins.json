@@ -37,13 +37,16 @@
 		"serial_key": null
 	},
 	{
-		"name": "wp-super-cache",
-		"url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.4.2.zip",
+		"name": "wordfence",
+		"url": "https://downloads.wordpress.org/plugin/wordfence.6.0.9.zip",
 		"is_activated": false,
-		"serial_key": {
-			"key_constant": "WPSC_LICENSE_KEY",
-			"key_value": "asdfasd"
-		}
+		"serial_key": null
+	},
+	{
+		"name": "sucuri-scanner",
+		"url": "https://downloads.wordpress.org/plugin/sucuri-scanner.1.7.11.zip",
+		"is_activated": false,
+		"serial_key": null
 	},
 	{
 		"name": "gravityforms",

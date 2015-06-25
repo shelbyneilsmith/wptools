@@ -1,51 +1,51 @@
 # Server type - eg. Apache or Nginx
-SERVER_TYPE=nginx
+SERVER_TYPE='nginx'
 
 # Whether to write to local etc/hosts file.
-WRITE_HOSTS=true
+WRITE_HOSTS='true'
 
 # Define various environment url bases
-LOCAL_URL_BASE=yb
-PREVIEW_URL_BASE=preview.yellowberri.com
-STAGING_URL_BASE=staging.yellowberri.com
+LOCAL_URL_BASE='yb'
+PREVIEW_URL_BASE='preview.yellowberri.com'
+STAGING_URL_BASE='staging.yellowberri.com'
 
 # Location of sublime text projects dir
 SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
 
 # Secret code for use in encoding some strings (keep it to like 4 or 5 characters, please)
-SECRET_CODE=0438
+SECRET_CODE='0438'
 
 # Production & Staging Credential
-STAGING_HOST=166.78.9.244
-STAGING_SSH_USER=root
-STAGING_SSH_PASS=LogMe1n234
-STAGING_OWNER=serverpilot
-STAGING_GROUP=serverpilot
-PROD_HOST=104.239.144.68
-PROD_SSH_USER=root
-PROD_SSH_PASS=4PdZ24CRhsto
-PROD_OWNER=serverpilot
-PROD_GROUP=serverpilot
+STAGING_HOST='45.55.77.8'
+STAGING_SSH_USER='root'
+STAGING_SSH_PASS='486039rkOixdfkfkPs$2'
+STAGING_OWNER='serverpilot'
+STAGING_GROUP='serverpilot'
+PROD_HOST='104.239.144.68'
+PROD_SSH_USER='root'
+PROD_SSH_PASS='4PdZ24CRhsto'
+PROD_OWNER='serverpilot'
+PROD_GROUP='serverpilot'
 
 # Git server credentials
-GITUSER=yellowberri
-GITPASS=Yellowberri420!
+GITUSER='yellowberri'
+GITPASS='Yellowberri420!'
 
 # ServerPilot API Credentials
-CLIENTID=cid_GL1JgvMkgxxQ4RiB
-APIKEY=iRG4x0IkYLhDl34KczJIX2hguQOlHg1yxZ95DSWlCKU
-PROD_SYSID=WLidezqHplyvzl0l
-STAGING_SYSID=fNkI7dp8EZbRwxnI
+CLIENTID='cid_GL1JgvMkgxxQ4RiB'
+APIKEY='sfBuF9sX0peEOdTa5SL0Iu9R1dha6xYTXUBfiOGeGBY'
+PROD_SYSID='xtzZYr4H8o7iLnu0'
+STAGING_SYSID='6lnGsuPIFOvo7Lsr'
 
 # Local database credentials
-LOCAL_DB_USER=root
-LOCAL_DB_PASS=root
+LOCAL_DB_USER='root'
+LOCAL_DB_PASS='root'
 
-# Set the suffix for live database passwords
-LIVE_DB_PASS_PREFIX=LogMe1n
+# Set the prefix for live database passwords
+LIVE_DB_PASS_PREFIX='LogMe1n'
 
 # Site administrator email address
-ADMIN_EMAIL=shelby@yellowberri.com
+ADMIN_EMAIL='shelby@yellowberri.com'
 
 # Now, let's set some directory variables
 SITES_DIR="$HOME/Sites" # Main working directory for all sites
@@ -66,12 +66,12 @@ LOGS_DIR="/private/var/log/apache2"
 # Location of Apache bin
 APACHE_DIR="/usr/sbin"
 
-# Owner/Group name (To find out: <?php echo(exec("whoami")); ?>)
-OWNER="stupid"
-GROUP="staff"
+# Owner/Group name (To find out: <?php echo(exec('whoami')); ?>)
+OWNER='stupid'
+GROUP='staff'
 
 # Config file paths
-WPCONFIGFILE=$SITES_DIR/$project_id/web/wp-config.php
-WPLOYCONFIGFILE=$SITES_DIR/$project_id/web/wploy.config
-GRUNTFILE=$SITES_DIR/$project_id/web/Gruntfile.js
-GRUNTPACKAGEFILE=$SITES_DIR/$project_id/web/package.json
+WPCONFIGFILE="$SITES_DIR/$project_id/web/wp-config.php"
+WPLOYCONFIGFILE="$SITES_DIR/$project_id/web/wploy.config"
+GRUNTFILE="$SITES_DIR/$project_id/web/Gruntfile.js"
+GRUNTPACKAGEFILE="$SITES_DIR/$project_id/web/package.json"

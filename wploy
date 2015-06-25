@@ -105,8 +105,8 @@ EOF
 			ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}wp-config.php.backup; sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 		fi
 		if [[ $dest_id == "s" ]]; then
-			# echo "activate code freeze"
-			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "cd ${!SRC_PATH}; wp plugin activate code-freeze --allow-root"
+			#echo "activate code freeze"
+			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u serverpilot -i -- wp plugin activate code-freeze --allow-root --path=${!SRC_PATH}"
 		fi
 	fi
 }

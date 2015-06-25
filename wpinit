@@ -197,37 +197,37 @@ writeconfigs () {
 
 	if [ $testinst == false ] ; then
 		#WPLOY CONFIG
-		sed -i '' "s/l_db=\"\"/l_db=\"$project_id\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_db_user=\"\"/l_db_user=\"$LOCAL_DB_USER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_db_pass=\"\"/l_db_pass=\"$LOCAL_DB_PASS\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s#l_path=\"\"#l_path=\"$SITES_DIR/$project_id/web/\"#g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_url=\"\"/l_url=\"$project_id.$LOCAL_URL_BASE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_owner=\"\"/l_owner=\"$OWNER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/l_group=\"\"/l_group=\"$GROUP\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db=''/l_db='$project_id'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_user=''/l_db_user='$LOCAL_DB_USER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_db_pass=''/l_db_pass='$LOCAL_DB_PASS'/g" $WPLOYCONFIGFILE
+		sed -i '' "s#l_path=''#l_path='$SITES_DIR/$project_id/web/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_url=''/l_url='$project_id.$LOCAL_URL_BASE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_owner=''/l_owner='$OWNER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/l_group=''/l_group='$GROUP'/g" $WPLOYCONFIGFILE
 
-		sed -i '' "s/s_host=\"\"/s_host=\"$STAGING_HOST\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_ssh_user=\"\"/s_ssh_user=\"$STAGING_SSH_USER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_ssh_pass=\"\"/s_ssh_pass=\"$STAGING_SSH_PASS\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db=\"\"/s_db=\"${project_id}_db\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_user=\"\"/s_db_user=\"${project_id:0:5}_$SECRET_CODE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_pass=\"\"/s_db_pass=\"${LIVE_DB_PASS_PREFIX}$SECRET_CODE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s#s_path=\"\"#s_path=\"/srv/users/serverpilot/apps/${project_id}xstaging/public/\"#g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_url=\"\"/s_url=\"$project_id.$STAGING_URL_BASE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_owner=\"\"/s_owner=\"$STAGING_OWNER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_group=\"\"/s_group=\"$STAGING_GROUP\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_host=''/s_host='$STAGING_HOST'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_user=''/s_ssh_user='$STAGING_SSH_USER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_ssh_pass=''/s_ssh_pass='$STAGING_SSH_PASS'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db=''/s_db='${project_id}_db'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_user=''/s_db_user='${project_id:0:5}_$SECRET_CODE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_pass=''/s_db_pass='${LIVE_DB_PASS_PREFIX}$SECRET_CODE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s#s_path=''#s_path='/srv/users/serverpilot/apps/${project_id}xstaging/public/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_url=''/s_url='$project_id.$STAGING_URL_BASE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_owner=''/s_owner='$STAGING_OWNER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_group=''/s_group='$STAGING_GROUP'/g" $WPLOYCONFIGFILE
 
-		sed -i '' "s/p_host=\"\"/p_host=\"$PROD_HOST\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_ssh_user=\"\"/p_ssh_user=\"$PROD_SSH_USER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_ssh_pass=\"\"/p_ssh_pass=\"$PROD_SSH_PASS\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db=\"\"/p_db=\"${project_id}_db\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_user=\"\"/p_db_user=\"${project_id:0:5}_$SECRET_CODE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_pass=\"\"/p_db_pass=\"${LIVE_DB_PASS_PREFIX}$SECRET_CODE\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s#p_path=\"\"#p_path=\"/srv/users/serverpilot/apps/${project_id}/public/\"#g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_host=''/p_host='$PROD_HOST'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_user=''/p_ssh_user='$PROD_SSH_USER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_ssh_pass=''/p_ssh_pass='$PROD_SSH_PASS'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db=''/p_db='${project_id}_db'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_user=''/p_db_user='${project_id:0:5}_$SECRET_CODE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_pass=''/p_db_pass='${LIVE_DB_PASS_PREFIX}$SECRET_CODE'/g" $WPLOYCONFIGFILE
+		sed -i '' "s#p_path=''#p_path='/srv/users/serverpilot/apps/${project_id}/public/'#g" $WPLOYCONFIGFILE
 		if [[ $prod_domain && ${prod_domain} ]] ; then
-			sed -i '' "s/p_url=\"\"/p_url=\"$prod_domain\"/g" $WPLOYCONFIGFILE
+			sed -i '' "s/p_url=''/p_url='$prod_domain'/g" $WPLOYCONFIGFILE
 		fi
-		sed -i '' "s/p_owner=\"\"/p_owner=\"$PROD_OWNER\"/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_group=\"\"/p_group=\"$PROD_GROUP\"/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_owner=''/p_owner='$PROD_OWNER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_group=''/p_group='$PROD_GROUP'/g" $WPLOYCONFIGFILE
 
 		#Gruntfile.js
 		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
@@ -277,7 +277,7 @@ install_wp() {
 	if [[ $wp_pass && ${wp_pass} ]] ; then
 		wp_pass=$wp_pass
 	else
-		wp_pass="${project_id}${LIVE_DB_PASS_SUFFIX}"
+		wp_pass="${project_id}${LIVE_DB_PASS_PREFIX}"
 	fi
 
 	#cd to working directory, using the alias we just set up
@@ -380,11 +380,11 @@ setup_remotes() {
 	else
 		PROD_URL="$project_id.com"
 	fi
-	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.4", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
+	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.6", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
 	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
 	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 	# now, staging
- 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.4", "domains": ["'$project_id'.staging.yellowberri.com"]}')
+ 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.6", "domains": ["'$project_id'.staging.yellowberri.com"]}')
  	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
 	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
 }
