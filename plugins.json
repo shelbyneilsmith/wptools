@@ -49,6 +49,12 @@
 		"serial_key": null
 	},
 	{
+		"name": "wps-hide-login",
+		"url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.1.2.zip",
+		"is_activated": false,
+		"serial_key": null
+	},
+	{
 		"name": "gravityforms",
 		"url": "",
 		"is_activated": true,
