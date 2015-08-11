@@ -21,9 +21,9 @@ STAGING_SSH_USER='root'
 STAGING_SSH_PASS='486039rkOixdfkfkPs$2'
 STAGING_OWNER='serverpilot'
 STAGING_GROUP='serverpilot'
-PROD_HOST='104.239.144.68'
+PROD_HOST='104.236.68.55'
 PROD_SSH_USER='root'
-PROD_SSH_PASS='4PdZ24CRhsto'
+PROD_SSH_PASS='32jxVYkwaleqntbacb-:'
 PROD_OWNER='serverpilot'
 PROD_GROUP='serverpilot'
 
@@ -34,7 +34,7 @@ GITPASS='Yellowberri420!'
 # ServerPilot API Credentials
 CLIENTID='cid_GL1JgvMkgxxQ4RiB'
 APIKEY='sfBuF9sX0peEOdTa5SL0Iu9R1dha6xYTXUBfiOGeGBY'
-PROD_SYSID='xtzZYr4H8o7iLnu0'
+PROD_SYSID='eYQNEcr5hDaZioR6'
 STAGING_SYSID='6lnGsuPIFOvo7Lsr'
 
 # Local database credentials
