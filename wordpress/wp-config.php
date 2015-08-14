@@ -66,12 +66,10 @@ if(isset($_SERVER['SERVER_ADDR'])) {
 		define('WP_HOME', "http://$server_var");
 	}
 } else {
-
-	define('FORCE_SSL_ADMIN', true);
-	if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-		$_SERVER['HTTPS']='on';
-	}
-	
+	// define('FORCE_SSL_ADMIN', true);
+	// if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+	// 	$_SERVER['HTTPS']='on';
+	// }
 }
 
 define('WP_DEBUG', $wp_debug);
