@@ -29,6 +29,27 @@ ExpiresByType text/css "access 1 month"
 ExpiresByType application/javascript "access plus 1 year"
 </IfModule>
 
+# ----------------------------------------------------------------------
+# Security Headers - X-XSS-Protection
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Security Headers - X-Frame-Options
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always append X-Frame-Options SAMEORIGIN
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Security Headers - X-Content-Type: nosniff
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options nosniff
+</IfModule>
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
