@@ -62,5 +62,11 @@
 			"key_constant": "GF_LICENSE_KEY",
 			"key_value": "9d511f9fd6bf3992746ccd48d73cc208"
 		}
+	},
+	{
+		"name": "backupbuddy",
+		"url": "",
+		"is_activated": true,
+		"serial_key": null
 	}]
 }
