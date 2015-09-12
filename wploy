@@ -58,35 +58,30 @@ migrate() {
 		fi
 
 		#export Database
-		mysqldump -u $l_db_user -p$l_db_pass $l_db > ${!SRC_PATH}${l_db}.sql
-
-		#find and replace old URLs in SQL file
-		sed -i '' "s/${!SRC_URL}/${!DEST_URL}/g" ${!SRC_PATH}${l_db}.sql
-
-		#find and replace old Database Info in wp-config.php file
-		sed -i.backup -e"s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g" -e"s/define('DB_USER', '${!SRC_DB_USER}');/define('DB_USER', '${!DEST_DB_USER}');/g" -e"s/define('DB_PASSWORD', '${!SRC_DB_PASS}');/define('DB_PASSWORD', '${!DEST_DB_PASS}');/g" -e"s#define( 'WPCACHEHOME', '.*' );#define( 'WPCACHEHOME', '${!DEST_PATH}wp-content/plugins/wp-super-cache/' );#g" ${!SRC_PATH}wp-config.php
-
+		mysqldump -u $SRC_DB_USER_ESC -p$SRC_DB_PASS_ESC ${!SRC_DB} > ${!SRC_PATH}${!SRC_DB}.sql
 
 		#move the site files to remote server
-		rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh $l_path ${!DEST_SSH_USER}@${!DEST_HOST}:${!DEST_PATH}
+		rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh ${!SRC_PATH} ${!DEST_SSH_USER}@${!DEST_HOST}:${!DEST_PATH}
 
 		#remove database dump from working directory
-		rm ${!SRC_PATH}${l_db}.sql
+		rm ${!SRC_PATH}${!SRC_DB}.sql
 
-		#replace the altered wp-config with the backup on the local host
-		mv ${!SRC_PATH}wp-config.php.backup ${!SRC_PATH}wp-config.php
-
-		#log into remote host, import database and remove the backup wp-config file && set owner for site files
-		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < ${!DEST_PATH}$l_db.sql; rm ${!DEST_PATH}$l_db.sql; rm ${!DEST_PATH}wp-config.php.backup; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
+		#find and replace old Database Info in wp-config.php file
+ssh ${!DEST_SSH_USER}@${!DEST_HOST} /bin/bash << EOF
+sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
+EOF
+		#log into remote host, import database, search & replace urls and set owner for site files
+		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u serverpilot -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 
 	elif [ $src_id == "s" ] || [ $src_id == "p" ]; then
+		if [[ $dest_id == "l" ]]; then
+			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u serverpilot -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!SRC_PATH}"
+		fi
 ssh ${!SRC_SSH_USER}@${!SRC_HOST} /bin/bash << EOF
-mysqldump -u ${!SRC_DB_USER} -p${!SRC_DB_PASS} ${!SRC_DB} > ${!SRC_PATH}${!SRC_DB}.sql
-sed -i "s/${!SRC_URL}/${!DEST_URL}/g" ${!SRC_PATH}${!SRC_DB}.sql
-sed -i.backup -e"s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g" -e"s/define('DB_USER', '${!SRC_DB_USER}');/define('DB_USER', '${!DEST_DB_USER}');/g" -e"s/define('DB_PASSWORD', '${!SRC_DB_PASS}');/define('DB_PASSWORD', '${!DEST_DB_PASS}');/g" -e"s#define( 'WPCACHEHOME', '.*' );#define( 'WPCACHEHOME', '${!DEST_PATH}wp-content/plugins/wp-super-cache/' );#g" ${!SRC_PATH}wp-config.php
+mysqldump -u $SRC_DB_USER_ESC -p$SRC_DB_PASS_ESC ${!SRC_DB} > ${!SRC_PATH}${!SRC_DB}.sql
 EOF
 		if [[ $dest_id == "l" ]]; then
-			rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh ${!SRC_SSH_USER}@${!SRC_HOST}:${!SRC_PATH} $l_path
+			rsync -avO --exclude-from 'wploy-excludes.txt' -e ssh ${!SRC_SSH_USER}@${!SRC_HOST}:${!SRC_PATH} ${!DEST_PATH}
 		else
 			rsync -avO -e ssh ${l_path}wploy-excludes.txt ${!SRC_SSH_USER}@${!SRC_HOST}:${!SRC_PATH}
 ssh ${!SRC_SSH_USER}@${!SRC_HOST} /bin/bash << EOF
@@ -94,15 +89,23 @@ rsync -avO --exclude-from ${!SRC_PATH}'wploy-excludes.txt' ${!SRC_PATH} ${!DEST_
 rm ${!SRC_PATH}wploy-excludes.txt
 EOF
 		fi
-		ssh -t ${!SRC_SSH_USER}@${!SRC_HOST} "sudo rm ${!SRC_PATH}${!SRC_DB}.sql; mv ${!SRC_PATH}wp-config.php.backup ${!SRC_PATH}wp-config.php"
+		ssh -t ${!SRC_SSH_USER}@${!SRC_HOST} "sudo rm ${!SRC_PATH}${!SRC_DB}.sql"
 		if [[ $dest_id == "l" ]]; then
+			# find and replace database credentials in wp-config on destination:
+			sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
+
 			# change ownership of files in new environment
 			sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}
 
-			mysql -u $l_db_user -p$l_db_pass $l_db < ${l_path}${!SRC_DB}.sql; sudo rm ${l_path}${!SRC_DB}.sql
-			sudo rm ${l_path}wp-config.php.backup
+			mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}${!SRC_DB}.sql
+
+			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u serverpilot -i -- wp search-replace ${!DEST_URL} ${!SRC_URL} --path=${!SRC_PATH}"
 		else
-			ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u ${!DEST_DB_USER} -p${!DEST_DB_PASS} ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}wp-config.php.backup; sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
+			# find and replace database credentials in wp-config on destination:
+ssh ${!DEST_SSH_USER}@${!DEST_HOST} /bin/bash << EOF
+sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
+EOF
+			ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u serverpilot -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; sudo rm ${!DEST_PATH}${!SRC_DB}.sql; sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 		fi
 		if [[ $dest_id == "s" ]]; then
 			#echo "activate code freeze"
@@ -195,16 +198,17 @@ if [[ $project_id && ${project_id} ]] ; then
 
 					SRC_HOST="${src_id}_host"
 					SRC_SSH_USER="${src_id}_ssh_user"
-					SRC_SSH_PASS="${src_id}_ssh_pass"
 					SRC_DB="${src_id}_db"
 					SRC_DB_USER="${src_id}_db_user"
 					SRC_DB_PASS="${src_id}_db_pass"
 					SRC_PATH="${src_id}_path"
 					SRC_URL="${src_id}_url"
 
+					SRC_DB_USER_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!SRC_DB_USER}")
+					SRC_DB_PASS_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!SRC_DB_PASS}")
+
 					DEST_HOST="${dest_id}_host"
 					DEST_SSH_USER="${dest_id}_ssh_user"
-					DEST_SSH_PASS="${dest_id}_ssh_pass"
 					DEST_DB="${dest_id}_db"
 					DEST_DB_USER="${dest_id}_db_user"
 					DEST_DB_PASS="${dest_id}_db_pass"
@@ -212,6 +216,9 @@ if [[ $project_id && ${project_id} ]] ; then
 					DEST_URL="${dest_id}_url"
 					DEST_OWNER="${dest_id}_owner"
 					DEST_GROUP="${dest_id}_group"
+
+					DEST_DB_USER_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_USER}")
+					DEST_DB_PASS_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_PASS}")
 				else
 					echo "I didn't understand what you're trying to do..."
 					exit 1
