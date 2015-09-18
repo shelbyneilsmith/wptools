@@ -100,10 +100,6 @@ copyfiles () {
 		# Tell the user that the proper files are being copied over
 		echo "\nGrabbing the latest version of Wordpress and getting everything set up.\n"
 
-
-		# copy wireframes and styletile files over
-		#cp -r $WPINIT_DIR/design/* $SITES_DIR/$project_id/web/design
-
 		# get latest version of Wordpress and extract files to project directory
 		curl -L -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
 		tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
@@ -115,7 +111,7 @@ copyfiles () {
 
 		echo "\nMoving files to new worpress site!\n"
 
-		# move the config files, .htaccess, .gitignore, etc. over
+		# move the config files, .htaccess, etc. over
 		rsync -ah --info=progress2 $WPINIT_DIR/wordpress/wp-config.php $SITES_DIR/$project_id/web/wp-config.php
 
 		rsync -ah --info=progress2 $WPINIT_DIR/wordpress/install.php $SITES_DIR/$project_id/web/wp-content/install.php
@@ -169,7 +165,7 @@ writeconfigs () {
 	sed -i '' "s/define('DB_NAME', '');/\define('DB_NAME', '$project_id');/g" $WPCONFIGFILE
 	sed -i '' "s/define('DB_USER', '');/\define('DB_USER', '$LOCAL_DB_USER');/g" $WPCONFIGFILE
 	sed -i '' "s/define('DB_PASSWORD', '');/\define('DB_PASSWORD', '$LOCAL_DB_PASS');/g" $WPCONFIGFILE
-	sed -i '' "s/\$table_prefix  = '';/\$table_prefix = '${project_id}${SECRET_CODE}_';/g" $WPCONFIGFILE
+	sed -i '' "s/\$table_prefix  = '';/\$table_prefix = '${project_id}${DBPREFIXHASH}_';/g" $WPCONFIGFILE
 	# get salts
 	SALTS=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 	SALT_STRING='__salts__'
@@ -208,24 +204,22 @@ writeconfigs () {
 		sed -i '' "s/s_host=''/s_host='$STAGING_HOST'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_ssh_user=''/s_ssh_user='$STAGING_SSH_USER'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_db=''/s_db='${project_id}_db'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_user=''/s_db_user='${project_id:0:5}_$SECRET_CODE'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_db_pass=''/s_db_pass='${LIVE_DB_PASS_PREFIX}$SECRET_CODE'/g" $WPLOYCONFIGFILE
-		sed -i '' "s#s_path=''#s_path='/srv/users/serverpilot/apps/${project_id}xstaging/public/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_user=''/s_db_user='$STAGINGDBUSER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_db_pass=''/s_db_pass='$STAGINGDBPASS'/g" $WPLOYCONFIGFILE
+		sed -i '' "s#s_path=''#s_path='/srv/users/$project_id/apps/${project_id}xstaging/public/'#g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_url=''/s_url='$project_id.$STAGING_URL_BASE'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_owner=''/s_owner='$STAGING_OWNER'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/s_group=''/s_group='$STAGING_GROUP'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/s_owner=''/s_owner='$project_id'/g" $WPLOYCONFIGFILE
 
 		sed -i '' "s/p_host=''/p_host='$PROD_HOST'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_ssh_user=''/p_ssh_user='$PROD_SSH_USER'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_db=''/p_db='${project_id}_db'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_user=''/p_db_user='${project_id:0:5}_$SECRET_CODE'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_db_pass=''/p_db_pass='${LIVE_DB_PASS_PREFIX}$SECRET_CODE'/g" $WPLOYCONFIGFILE
-		sed -i '' "s#p_path=''#p_path='/srv/users/serverpilot/apps/${project_id}/public/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_user=''/p_db_user='$PRODDBUSER'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_db_pass=''/p_db_pass='$PRODDBPASS'/g" $WPLOYCONFIGFILE
+		sed -i '' "s#p_path=''#p_path='/srv/users/$project_id/apps/$project_id/public/'#g" $WPLOYCONFIGFILE
 		if [[ $prod_domain && ${prod_domain} ]] ; then
 			sed -i '' "s/p_url=''/p_url='$prod_domain'/g" $WPLOYCONFIGFILE
 		fi
-		sed -i '' "s/p_owner=''/p_owner='$PROD_OWNER'/g" $WPLOYCONFIGFILE
-		sed -i '' "s/p_group=''/p_group='$PROD_GROUP'/g" $WPLOYCONFIGFILE
+		sed -i '' "s/p_owner=''/p_owner='$project_id'/g" $WPLOYCONFIGFILE
 
 		#Gruntfile.js
 		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
@@ -252,8 +246,8 @@ setup_db () {
 	if [ $purpose == "collab" ] ; then
 		# Since we're collaborating, we need to go ahead and grab the database from the staging server and import it to our local machine
 ssh root@$STAGING_HOST /bin/bash << EOF
-mysqldump -u ${project_id:0:5}'_'$SECRET_CODE -p$LIVE_DB_PASS_PREFIX$SECRET_CODE ${project_id}_db > /srv/users/$STAGING_SSH_USER/apps/${project_id}xstaging/public/${project_id}_db.sql
-sed -i "s/$project_id.$STAGING_URL_BASE/$project_id.$LOCAL_URL_BASE/g" /srv/users/$STAGING_SSH_USER/apps/${project_id}xstaging/public/${project_id}_db.sql
+mysqldump -u ${project_id:0:5}'_'$DBPREFIXHASH -p$STAGINGDBPASS ${project_id}_db > /srv/users/${project_id}/apps/${project_id}xstaging/public/${project_id}_db.sql
+sed -i "s/$project_id.$STAGING_URL_BASE/$project_id.$LOCAL_URL_BASE/g" /srv/users/${project_id}/apps/${project_id}xstaging/public/${project_id}_db.sql
 EOF
 		rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:apps/${project_id}xstaging/public/${project_id}_db.sql $SITES_DIR/$project_id/web
 		mysql -u $LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/web/${project_id}_db.sql; rm $SITES_DIR/$project_id/web/${project_id}_db.sql
@@ -261,23 +255,6 @@ EOF
 }
 
 install_wp() {
-	#settle on domain & admin user credentials
-	if [[ $prod_domain && ${prod_domain} ]] ; then
-		PROD_URL=$prod_domain
-	else
-		PROD_URL=$project_id.$LOCAL_URL_BASE
-	fi
-	if [[ $wp_user && ${wp_user} ]] ; then
-		wp_user=$wp_user
-	else
-		wp_user="${project_id}-admin"
-	fi
-	if [[ $wp_pass && ${wp_pass} ]] ; then
-		wp_pass=$wp_pass
-	else
-		wp_pass="${project_id}${LIVE_DB_PASS_PREFIX}"
-	fi
-
 	#cd to working directory, using the alias we just set up
 	cd $SITES_DIR/$project_id/web
 	# then, install wordpress...you'll need to install wp-cli for this to work! (http://wp-cli.org/)
@@ -378,13 +355,24 @@ setup_remotes() {
 	else
 		PROD_URL="$project_id.com"
 	fi
-	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$PROD_SYSID'", "runtime": "php5.6", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
+	# create the system user for production
+	PRODSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$PROD_SYSID'", "name": "'$project_id'", "password": "'$PRODSYSUSERPASS'"}')
+	prod_sys_user_id=$(echo $PRODSYSUSER | jq '.data | .id' | sed s/\"//g)
+
+	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$prod_sys_user_id'", "runtime": "php5.6", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
 	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
+
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'$PRODDBUSER'", "password": "'$PRODDBPASS'"}}'
+
 	# now, staging
- 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$STAGING_SYSID'", "runtime": "php5.6", "domains": ["'$project_id'.staging.yellowberri.com"]}')
+	# create the system user for staging
+	STAGINGSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$STAGING_SYSID'", "name": "'$project_id'", "password": "'$STAGINGSYSUSERPASS'"}')
+	staging_sys_user_id=$(echo $STAGINGSYSUSER | jq '.data | .id' | sed s/\"//g)
+
+ 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$staging_sys_user_id'", "runtime": "php5.6", "domains": ["'$project_id'.staging.yellowberri.com"]}')
  	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'${project_id:0:5}'_'$SECRET_CODE'", "password": "'$LIVE_DB_PASS_PREFIX''$SECRET_CODE'"}}'
+
+	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'$STAGINGDBUSER'", "password": "'$STAGINGDBPASS'"}}'
 }
 
 restartserver () {
@@ -397,6 +385,39 @@ restartserver () {
 		sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 		sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 	fi
+}
+
+writecredsfile () {
+	cat > ${SITES_DIR}/${project_id}/web/${project_id}_creds.txt <<- EOF
+	WORDPRESS LOGIN
+	/ybcms/
+	admin username: $wp_user
+	password: $wp_pass
+
+	--------------------------------------------------------------
+
+	ServerPilot FTP
+
+	Production
+	username: $project_id
+	password: $PRODSYSUSERPASS
+
+	Staging
+	username: $project_id
+	password: $STAGINGSYSUSERPASS
+
+	--------------------------------------------------------------
+
+	STAGING DB CREDS
+	s_db=${project_id}_db
+	s_db_user=$STAGINGDBUSER
+	s_db_pass=$STAGINGDBPASS
+
+	PRODUCTION DB CREDS
+	p_db=${project_id}_db
+	p_db_user=$PRODDBUSER
+	p_db_pass=$PRODDBPASS
+	EOF
 }
 
 siteinit () {
@@ -413,7 +434,15 @@ siteinit () {
 
 	if [ $purpose == "new" ] ; then
 		PLUGINS=$(cat $WPINIT_DIR/plugins.json | jq -r ".plugins[] | .name")
+
+		# create database users & passwords for use in various situations
+		PRODDBUSER=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+		PRODDBPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+		STAGINGDBUSER=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+		STAGINGDBPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
 		# Use the config info to alter the wp-config file.
+		DBPREFIXHASH=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n 1)
 		writeconfigs
 	fi
 
@@ -423,10 +452,30 @@ siteinit () {
 	if [ $purpose == "new" ] ; then
 		#Let's go ahead and install our Wordpress site! (as long as wp-cli is installed)
 		if hash wp 2>/dev/null; then
+			#settle on domain & admin user credentials
+			if [[ $prod_domain && ${prod_domain} ]] ; then
+				PROD_URL=$prod_domain
+			else
+				PROD_URL=$project_id.$LOCAL_URL_BASE
+			fi
+			if [[ $wp_user && ${wp_user} ]] ; then
+				wp_user=$wp_user
+			else
+				WPADMINUSER=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+				wp_user="$WPADMINUSER"
+			fi
+			if [[ $wp_pass && ${wp_pass} ]] ; then
+				wp_pass=$wp_pass
+			else
+				WPADMINPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+				wp_pass="$WPADMINPASS"
+			fi
 			install_wp
 		fi
 		if [ $testinst == false ] ; then
 			# set up project live AND staging environments on serverpilot
+			PRODSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+			STAGINGSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 			setup_remotes
 		fi
 	fi
@@ -445,9 +494,13 @@ siteinit () {
 
 	# Finally, restart apache or nginx!
 	restartserver
+
+	writecredsfile
+
 	clear
 	echo "---------------------------------------------------------------------------"
 	echo "...done! Your site is now ready to work on."
+	echo "Don't forget to move your site credentials file somewhere safe! (DO IT NOW!!)"
 	echo "---------------------------------------------------------------------------\n"
 }
 
