@@ -67,7 +67,8 @@ module.exports = function(grunt) {
 					javascriptsDir: '<%= assetsDir %>/scripts/build',
 					fontsDir: '<%= assetsDir %>/fonts',
 					outputStyle: 'expanded',
-					watch: true
+					watch: true,
+					quiet: true
 				}
 			},
 			compile: {
