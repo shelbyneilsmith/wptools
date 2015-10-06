@@ -14,7 +14,6 @@
 
 						<?php get_template_part('assets/inc/footer/footer', 'copyright'); ?>
 
-
 					</div>
 
 				</div>

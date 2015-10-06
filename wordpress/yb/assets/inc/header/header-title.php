@@ -7,8 +7,7 @@
   }
   else {
     $page_title .= get_bloginfo('name');
-    $page_title .= " - ";
-    $page_title .= get_bloginfo('description');
+    if (get_bloginfo('description') !== "") { $page_title .= " - " . get_bloginfo('description'); }
   }
 
   echo $page_title;

@@ -1,6 +1,9 @@
 <?php 
 
-/* remove all the unneeded stuff. */
+/* ------------------------------------------------------------------------ */
+/* Head Cleanup */
+/* ------------------------------------------------------------------------ */
+
 function yb_head_cleanup() {
   global $ybwp_data;
 
@@ -16,15 +19,23 @@ function yb_head_cleanup() {
   /* remove feed links */
   remove_action('wp_head', 'feed_links_extra', 3 );
 }
+
 add_action('init', 'yb_head_cleanup');
 
-/* Emoji Removal */
+
+/* ------------------------------------------------------------------------ */
+/* Remove Emoji Rendering */
+/* ------------------------------------------------------------------------ */
+
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-/* add RSS links to head section */
+/* ------------------------------------------------------------------------ */
+/* RSS Head Links */
+/* ------------------------------------------------------------------------ */
+
 function yb_add_rss_to_head() {
   add_theme_support( 'automatic-feed-links' );
 }
@@ -32,13 +43,19 @@ if ( !empty($ybwp_data['opt-checkbox-blogrss'] )) {
   add_action('init', 'yb_add_rss_to_head');
 }
 
-/* what does this do? */
+/* ------------------------------------------------------------------------ */
+/* Set Locale File : What does this do? */
+/* ------------------------------------------------------------------------ */
+
 $locale = get_locale();
 $locale_file = get_template_directory() . "/assets/languages/$locale.php";
 if ( is_readable($locale_file) )
   require_once($locale_file);
 
-/* syncronize timezone */
+/* ------------------------------------------------------------------------ */
+/* Set Timezone */
+/* ------------------------------------------------------------------------ */
+
 function yb_sync_timezones(){
   $timezone = "America/Chicago";
   update_option( 'timezone_string', $timezone );
@@ -46,17 +63,22 @@ function yb_sync_timezones(){
 }
 add_action('init', 'yb_sync_timezones');
 
-/* basic permalink postname structure */
+/* ------------------------------------------------------------------------ */
+/* Set Pretty Permalinks */
+/* ------------------------------------------------------------------------ */
+
 function yb_set_permalinks() {
   global $wp_rewrite;
   $wp_rewrite->set_permalink_structure( '/%postname%/' );
 }
 add_action( 'init', 'yb_set_permalinks');
 
-/* don't show the toolbar on front-end facing pages. this can be disabled to restore dashboard control */
+/* ------------------------------------------------------------------------ */
+/* Disable Admin Toolbar */
+/* ------------------------------------------------------------------------ */
+
 add_filter('show_admin_bar', '__return_false');
 
-/* disable admin bar for subscribers (not admins) */
 function cc_hide_admin_bar() {
   if (!current_user_can('edit_posts')) {
     show_admin_bar(false);
@@ -64,60 +86,70 @@ function cc_hide_admin_bar() {
 }
 add_action('set_current_user', 'cc_hide_admin_bar');
 
-/* Remove default tagline "Just another WordPress site" */
+/* ------------------------------------------------------------------------ */
+/* Remove Default Tagline */
+/* ------------------------------------------------------------------------ */
+
 function clear_default_tagline() {
-  update_option( 'blogdescription', '' );
-}
-
-/* set up default pages */
-function setup_default_pages() {
-  $default_pages = array(
-    'Home' => array(
-      'content' => '',
-      'template' => 'template-full-width.php',
-      'slug' => '',
-      'status' => 'publish',
-      ),
-    'Wireframes' => array(
-      'content' => file_get_contents('http://www.ybdevel.com/dev/wireframes-copy_150430.txt'),
-      'template' => 'page-wireframes.php',
-      'slug' => 'wireframes',
-      'status' => 'publish',
-      ),
-    );
-
-  /* create defaults pages */
-  foreach ( $default_pages as $page_title => $page_var ) {
-    $new_page = array(
-      'post_type' => 'page',
-      'post_title' => $page_title,
-      'post_name' => $page_var['slug'],
-      'post_content' => $page_var['content'],
-      'post_status' => $page_var['status'],
-      'post_author' => 1,
-      );
-
-    /* if page ID is not set create new page */
-    $page_check = get_page_by_title($page_title);
-    if( !isset($page_check->ID) ) {
-      $new_page_id = wp_insert_post($new_page);
-
-      /* if template it set, update the post */
-      if( !empty($page_var['template']) ) {
-        update_post_meta($new_page_id, '_wp_page_template', $page_var['template']);
-      }
-    }
-  } /* end foreach */
-
-  /* set wp front page options */
-  if ( $page_title === "Home" ) {
-    $homeSet = get_page_by_title( $page_title );
-    update_option( 'show_on_front', 'page' );
-    update_option( 'page_on_front', $homeSet->ID );
+  if (get_option( 'blogdescription', 'notfound') === "Just another WordPress site") {
+    update_option( 'blogdescription', '' );
   }
 }
+add_action('after_setup_theme', 'clear_default_tagline');
 
+/* ------------------------------------------------------------------------ */
+/* Setup Default Pages */
+/* ------------------------------------------------------------------------ */
+
+function setup_default_pages() {
+  if (get_option('this_has_run') != "yes") {
+    $default_pages = array(
+      'Home' => array(
+        'content' => '',
+        'template' => 'page.php',
+        'slug' => '',
+        'status' => 'publish',
+        ),
+      'Wireframes' => array(
+        'content' => file_get_contents('http://www.ybdevel.com/dev/wireframes-copy_150430.txt'),
+        'template' => 'page-wireframes.php',
+        'slug' => 'wireframes',
+        'status' => 'publish',
+        ),
+      );
+    foreach ( $default_pages as $page_title => $page_var ) {
+      $page_check = get_page_by_title($page_title);
+      $new_page = array(
+        'post_type' => 'page',
+        'post_title' => $page_title,
+        'post_name' => $page_var['slug'],
+        'post_content' => $page_var['content'],
+        'post_status' => $page_var['status'],
+        'post_author' => 1,
+        );
+      if(!isset($page_check->ID)){
+        $new_page_id = wp_insert_post($new_page);
+        if(!empty($page_var['template'])){
+          update_post_meta($new_page_id, '_wp_page_template', $page_var['template']);
+        }
+      }
+
+      if ( $page_title === "Home" ) {
+        $homeSet = get_page_by_title( $page_title );
+        update_option( 'page_on_front', $homeSet->ID );
+        update_option( 'show_on_front', 'page' );
+      }
+    }
+
+    update_option( 'this_has_run', 'yes' );
+  }
+}
+add_action('after_setup_theme', 'setup_default_pages');
+
+/* ------------------------------------------------------------------------ */
 /* exclude wireframes from the pages admin list */
+/* ------------------------------------------------------------------------ */
+
 function exclude_this_page( $query ) {
   global $pagenow, $wpdb;
 
@@ -147,7 +179,10 @@ if ( ((WP_ENV != 'development') && (WP_ENV != 'staging')) ) {
   add_action( 'pre_get_posts' ,'exclude_this_page' );
 }
 
+/* ------------------------------------------------------------------------ */
 /* create the default menus */
+/* ------------------------------------------------------------------------ */
+
 function yb_register_menus() {
 
   global $ybwp_data;
@@ -230,7 +265,9 @@ function yb_register_menus() {
 }
 add_action('after_setup_theme', 'yb_register_menus');
 
+/* ------------------------------------------------------------------------ */
 /* create sidebars */
+/* ------------------------------------------------------------------------ */
 
 function yb_register_sidebars() {
   global $ybwp_data;
@@ -302,31 +339,5 @@ function yb_register_sidebars() {
 if (function_exists('register_sidebar')) {
   add_action( 'widgets_init', 'yb_register_sidebars' );
 }
-
-/* custom excerpt length */
-function new_excerpt_length($length) {
-  global $ybwp_data;
-  return $ybwp_data['opt-text-excerptlength'];
-}
-if (!empty($ybwp_data['opt-text-excerptlength'])) {
-  add_filter('excerpt_length', 'new_excerpt_length');
-}
-
-/* Theme Setup Functions */
-function yb_theme_setup(){
-  /* Translation/Localisation */
-  /* Translations can be filed in the assets/languages/ directory */
-  load_theme_textdomain( 'yb', get_template_directory() . '/assets/languages' );
-
-
-  /* Run only once */
-  if ( get_option('this_has_run') != "yes" ) {
-    /* remove tagline */
-    add_action('after_setup_theme', 'clear_default_tagline');
-    add_action('after_setup_theme', 'setup_default_pages');
-    update_option( 'this_has_run', 'yes' );
-  }
-}
-add_action('init', 'yb_theme_setup');
 
 ?>

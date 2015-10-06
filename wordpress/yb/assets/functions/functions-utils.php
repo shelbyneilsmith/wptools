@@ -1,6 +1,18 @@
 <?php
 
 /* ------------------------------------------------------------------------ */
+/* custom excerpt length */
+/* ------------------------------------------------------------------------ */
+
+function new_excerpt_length($length) {
+  global $ybwp_data;
+  return $ybwp_data['opt-text-excerptlength'];
+}
+if (!empty($ybwp_data['opt-text-excerptlength'])) {
+  add_filter('excerpt_length', 'new_excerpt_length');
+}
+
+/* ------------------------------------------------------------------------ */
 /* custom WP title */
 /* ------------------------------------------------------------------------ */
 
