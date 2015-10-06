@@ -18,36 +18,6 @@ $this->sections[] = array(
 			'subtitle'  => __('This will only show in development environments.', 'yb'),
 			'default'   => '1'
 		),
-		array(
-			'id'        => 'opt-checkbox-styletiles',
-			'type'      => 'checkbox',
-			'title'     => __('Enable styletiles options.', 'yb'),
-			'subtitle'  => __('This will only show in development environments.', 'yb'),
-			'default'   => '1'
-		),
-		array(
-			'id'        => 'opt-text-styletilesnum',
-			'type'      => 'text',
-			'title'     => __('Number of StyleTiles', 'yb'),
-			'subtitle'  => __('Please specify how many styletiles you want to use. <br />(No more than 26, you psychopath)', 'yb'),
-			'required' => array('opt-checkbox-styletiles', '=', '1'),
-			'default'   => '3',
-		),
-		array(
-			'id'        => 'opt-text-colorsnum',
-			'type'      => 'text',
-			'title'     => __('Number of Colors in Color Palette', 'yb'),
-			'subtitle'  => __('Please specify how many colors are in your color palette.', 'yb'),
-			'required' => array('opt-checkbox-styletiles', '=', '1'),
-			'default'   => '5',
-		),
-		array(
-			'id'        => 'opt-checkbox-styletilestk',
-			'type'      => 'checkbox',
-			'title'     => __('Use Typekit on Styletiles.', 'yb'),
-			'subtitle'  => __('Be sure to specify the kit ID in general settings.', 'yb'),
-			'default'   => '0'
-		),
 	),
 );
 
