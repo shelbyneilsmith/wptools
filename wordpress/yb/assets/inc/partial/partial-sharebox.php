@@ -1,4 +1,6 @@
 <?php global $ybwp_data; ?>
+
+<?php if( $ybwp_data['opt-checkbox-sharebox'] ) { ?>
 <div class="sharebox clearfix">
 	<h4><?php _e('Share this Story', 'yb'); ?></h4>
 	<div class="social-icons clearfix">
@@ -41,3 +43,4 @@
 		</ul>
 	</div>
 </div>
+<?php } ?>

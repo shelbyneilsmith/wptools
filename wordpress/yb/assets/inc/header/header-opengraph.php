@@ -1,3 +1,5 @@
+<?php global $ybwp_data; ?>
+
 <!-- Facebook Open Graph Meta Tags -->
 <?php if ( !empty($ybwp_data['opt-media-fbimg']) ) : ?>
 	<meta property="og:image" content="<?php echo $ybwp_data['opt-media-fbimg']['url'] ?>"/>
