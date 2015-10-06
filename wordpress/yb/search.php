@@ -1,30 +1,20 @@
 <?php get_header(); ?>
 
-<?php
-	$page_layout = $ybwp_data['opt-layout'];
-
-	if ( $page_layout === "Full Width" ) {
-		$full_width_class = "full-width";
-	} else {
-		$full_width_class = "";
-	}
-?>
-
-<div id="title">
-	<div class="container <?php echo $full_width_class; ?>">
-		<h1 class="page-title"><?php _e('Search Results for', 'yb') ?> <?php the_search_query(); ?></h1>
-
-		<?php if( !empty($ybwp_data['opt-checkbox-breadcrumbs'] ) ) : ?>
-			<?php echo $breadcrumbs; ?>
-		<?php endif; ?>
-	</div>
-</div>
-
 <div id="page-wrap" <?php post_class(); ?>>
 
-	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
+	<div id="title">
+		<div class="container">
+			<div class="sixteen columns">
+				<h1 class="page-title"><?php _e('Search Results for', 'yb') ?> <?php the_search_query(); ?></h1>
 
-		<div id="content" class="<?php sidebarPosClass($page_layout); ?>">
+				<?php get_template_part('assets/inc/partial/partial', 'breadcrumbs'); ?>
+			</div>
+		</div>
+	</div>
+
+	<div id="page-inner" class="container">
+
+		<div id="content" class="">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<div class="search-result clearfix">
@@ -38,23 +28,25 @@
 						<div class="search-excerpt"><?php the_excerpt(); ?></div>
 					</div>
 
-					<div class="clear"></div>
-					<div class="search-meta"><?php get_template_part( 'assets/inc/meta' ); ?></div>
+					<div class="search-meta"><?php get_template_part( 'assets/inc/partial/partial', 'meta' ); ?></div>
 
 				</div>
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'assets/inc/nav' ); ?>
+			<?php get_template_part( 'assets/inc/partial', 'pagination' ); ?>
 
-			<?php else : ?>
-				<h2><?php _e('No results found.', 'yb') ?></h2>
-			<?php endif; ?>
-		</div> <!-- end #content -->
+		<?php else : ?>
 
-		<?php if ( ( $page_layout === "Centered Left Sidebar" ) || ( $page_layout === "Centered Right Sidebar" ) ) : ?>
-			<?php get_sidebar(); ?>
+			<h2><?php _e('No results found.', 'yb') ?></h2>
+
 		<?php endif; ?>
-	</div>
-</div>
+		
+	</div> <!-- end #content -->
+
+	<?php get_sidebar(); ?>
+
+</div> <!-- #page-inner -->
+
+</div> <!-- #page-wrap -->
 
 <?php get_footer(); ?>

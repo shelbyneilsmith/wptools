@@ -1,31 +1,20 @@
 <?php get_header(); ?>
 
-<?php
-	$page_title = 'Whoops!';
-	$page_layout = $ybwp_data['opt-layout'];
+<div id="page-wrap four-oh-four">
 
-	if ( $page_layout === "Full Width" ) {
-		$full_width_class = "full-width";
-	} else {
-		$full_width_class = "";
-	}
-?>
+	<div id="title">
+		<div class="container">
+			<div class="sixteen columns">
+				<h1 class="page-title">Sorry, this page was not found.</h1>
 
-<div id="title">
-	<div class="container <?php echo $full_width_class; ?>">
-		<h1 class="page-title"><?php echo $page_title; ?></h1>
-
-		<?php if( !empty($ybwp_data['opt-checkbox-breadcrumbs'] ) ) : ?>
-			<?php echo $breadcrumbs; ?>
-		<?php endif; ?>
+				<?php get_template_part('assets/inc/partial/partial', 'breadcrumbs'); ?>
+			</div>
+		</div>
 	</div>
-</div>
 
-<div id="page-wrap">
-	<div id="page-inner" class="container <?php echo $full_width_class; ?>">
-		<div id="content" class="<?php sidebarPosClass($page_layout); ?>">
-
-			<p><strong><?php _e("Looks like you've made a wrong turn somewhere. Let's get you back on track.", "yb") ?></strong></p>
+	<div id="page-inner" class="container">
+		
+		<div id="content" class="">
 
 			<p>You may not be able to find this page because of:</p>
 
@@ -36,12 +25,12 @@
 			</ol>
 
 			<span align="center"><a href="<?php echo home_url(); ?>" target="_self" class="button alternative-1 large"><?php _e("Back to Home", "yb") ?></a></span>
-		</div> <!-- end content -->
+		</div> <!-- #content -->
 
-		<?php if ( ( $page_layout === "Centered Left Sidebar" ) || ( $page_layout === "Centered Right Sidebar" ) ) : ?>
-			<?php get_sidebar(); ?>
-		<?php endif; ?>
-	</div>
-</div> <!-- end page-wrap -->
+		<?php get_sidebar(); ?>
+		
+	</div> <!-- #page-inner -->
+
+</div> <!-- #page-wrap -->
 
 <?php get_footer(); ?>

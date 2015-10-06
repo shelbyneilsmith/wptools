@@ -19,7 +19,7 @@
 		</div>
 
 		<ol class="commentlist clearfix">
-			 <?php wp_list_comments(); ?>
+			 <?php wp_list_comments(array( 'callback' => 'yb_comments' )); ?>
 		</ol>
 
 		<div class="navigation">
