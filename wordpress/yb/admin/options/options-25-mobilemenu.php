@@ -68,7 +68,6 @@ $this->sections[] = array(
 			'options'   => array(
 				'header-right' => 'Header Right Side',
 				'header-left' => 'Header Left Side',
-				'top-bar' => 'Top Bar',
 				'bottom-thumb-right' => 'Bottom of Screen Thumb - Right Side',
 				'bottom-thumb-left' => 'Bottom of Screen Thumb - Left Side'
 			),
