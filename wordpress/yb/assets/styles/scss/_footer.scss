@@ -1,8 +1,11 @@
 /*==== footer styles ====*/
 .site-footer {
-	position: relative;
-	background: #444444;
-	color: #999999;
+	color: $footer-text-color;
+
+	@include breakpoint(narrowColumn) { background-color: $footer-color; }
+	& > .container {
+		padding: 3em 0;
+	}
 	a{
 		color:#999999;
 		&:hover {
@@ -10,12 +13,12 @@
 		}
 	}
 	.widget {
-		margin-top: 30px;
-		margin-bottom: 30px;
+		margin-top: 1em;
+		margin-bottom: 2em;
 		@include breakpoint(narrowColumn) {
 			margin-bottom: 0;
 			&:last-of-type {
-				margin-bottom: 30px;
+				margin-bottom: 2em;
 			}
 		}
 		h3 {
@@ -44,55 +47,40 @@
 				background: $off-black;
 				@include box-shadow(none);
 				&:hover {
-					background: $accent_color;
-					border-color: $accent_color;
+					background: $accent-color;
+					border-color: $accent-color;
 				}
 			}
 		}
 	}
 }
 
-#text-3 {
-	img {
-		@include breakpoint(narrowColumn) {
-			float: none;
-			display: block;
-			margin-bottom: 20px;
-			max-width: 300px;
-		}
-	}
-}
-
 #site-footer-nav {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	ul {
+	padding:1em 0;
+
+	ul#menu-footer-navigation {
+		@include clearfix;
+
 		li {
 			float: left;
 			margin-right: 30px;
-			&:last-of-type {
-				margin-right: 0;
-			}
-			@include breakpoint(narrowColumn) {
-				width: 100%;
-			}
+
+			&:last-of-type { margin-right: 0; }
+			@include breakpoint(narrowColumn) { width: 100%; }
 		}
 	}
 }
 
 
-#copyright {
-	background: #222222;
-	color: #777777;
+.copyright-text {
+	color: $footer-text-color;
+	padding:1em 0;
 	a {
 		color: #888888;
 		&:hover { color: white; }
 	}
-	.copyright-text {
-		padding: 10px 0;
-		@include breakpoint(narrowColumn) {
-			text-align: center;
-		}
+	@include breakpoint(narrowColumn) {
+		text-align: center;
 	}
 }
 

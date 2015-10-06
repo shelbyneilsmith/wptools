@@ -3,7 +3,8 @@
 %inner-col {
 	position: relative;
 	margin: 0 auto;
-	width: $mainWidth;
+	/* width: $mainWidth; */
+	width:100%;
 	@include breakpoint(multiColumn) {
 		width: $multiWidth;
 	}
@@ -13,9 +14,6 @@
 	}
 	@include breakpoint(mobile) {
 		width: $mobileWidth;
-	}
-	&.full-width {
-		width: 100%;
 	}
 }
 
@@ -30,6 +28,18 @@
 		visibility: hidden;
 	}
 }
+
+.container.full-width,
+#page-wrap.full-width .container,
+.full-width #page-wrap .container,
+.full-width #title .container,
+.full-width #site-masthead .container,
+.full-width #footer .container,
+{ width:100%; }
+
+.sidebar-left #content { float:right; }
+.sidebar-right #content { float:left; }
+
 .column, .columns {
 	float: left;
 	margin-left: $gutter * 0.5;
@@ -95,3 +105,18 @@
 .container .offset-by-thirteen { @include columnOffset(13);  }
 .container .offset-by-fourteen { @include columnOffset(14);  }
 .container .offset-by-fifteen { @include columnOffset(15); }
+
+#content {
+	@extend .sixteen;
+	@extend .columns;
+}
+
+#main-sidebar {
+	@extend .four;
+	@extend .columns;
+}
+
+body.sidebar-right #content,
+body.sidebar-left #content {
+	@extend .twelve;
+}

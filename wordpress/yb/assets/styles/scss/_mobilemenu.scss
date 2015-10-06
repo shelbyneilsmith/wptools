@@ -1,124 +1,204 @@
-.js {
+/* ------------------------------------------------------------------------ */
+/* Nav Button */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu .nav-btn {
 	@include breakpoint(narrowColumn) {
-		.mobile-menu {
-			.nav-btn {
-				position: relative;
-				background: black;
-				padding: 5px 10px;
-				z-index: 999;
-				text-align: center;
-				&:before {
-					content: '\2630';
-					font-size: 16px;
-				}
-				&.right {
-					position: absolute;
-					top: 30px;
-					right: 0;
-					float: right;
-				}
-				&.left {
-					top: 0;
-					float: left;
-					margin-bottom: 20px;
-				}
-				&.topbar {
-					top: 0px;
-					right: 0;
-					margin: 10px 0 10px 10px;
-				}
-				&.thumb-btn {
-					position: fixed;
-					top: auto;
-					bottom: 0;
-					height: 50px;
-					line-height: 50px;
-					width: 100px;
-					padding: 0 10px;
-					z-index: 99999;
-					&.right {
-						right: 0;
-					}
-					&.left {
-						left: 0;
-						margin-bottom: 0;
-					}
-				}
+		position: relative;
+		background: $mobilemenu-button-color;
+		color: $mobilemenu-button-text-color;
+		padding: 5px 10px;
+		z-index: 999;
+		text-align: center;
+		&:before {
+			content: '\2630';
+			font-size: 16px;
+		}
+		&.right {
+			position: absolute;
+			top: 3em;
+			right: 0;
+			float: right;
+		}
+		&.left {
+			top: 0;
+			float: left;
+			margin-bottom: 20px;
+		}
+		&.thumb-btn {
+			position: fixed;
+			top: auto;
+			bottom: 0;
+			height: 50px;
+			line-height: 50px;
+			width: 100px;
+			padding: 0 10px;
+			z-index: 99999;
+			&.right {
+				right: 0;
 			}
-			#main-nav-header {
-				display: none;
-				& > ul {
-					padding: 30px;
-					& > li {
-						float: none;
-						margin-right: 0;
-						margin-bottom: 10px;
-					}
+			&.left {
+				left: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* Close Button */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu  {
+	@include breakpoint(narrowColumn) {
+
+		.close-btn {
+			position: absolute;
+			top: 30px;
+			right: 30px;
+			z-index: 999;
+			color: $mobilemenu-close-button-color;
+			font-size: 60px;
+			font-family: 'entypo';
+			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* Main Website Body (Offscreen Nav) */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu.offscreen-nav {
+	@include breakpoint(narrowColumn) {
+
+		#main-nav-header {
+			display: none;
+			& > ul {
+				padding: 30px;
+				& > li {
+					float: none;
+					margin-right: 0;
+					margin-bottom: 10px;
 				}
 			}
 		}
-		.offscreen-nav {
-			#navigation {
-				display: none;
+
+		#navigation {
+			display: none;
+		}
+
+		.inner-wrap {
+			position: relative;
+			overflow: hidden;
+			overflow-y: auto;
+			left: 0;
+			top: 0;
+			min-height: 100%;
+			@include transition(all .35s);
+		}
+
+		&.nav-open {
+			#wrapper {
+				overflow: hidden;
 			}
 			.inner-wrap {
-				position: relative;
-				overflow: hidden;
-				overflow-y: auto;
-				left: 0;
-				top: 0;
-				min-height: 100%;
-				@include transition(all .35s);
-			}
-			&.nav-open {
-				#wrapper {
-					overflow: hidden;
-				}
-				.inner-wrap {
-					width: 100%;
-					height: 100%;
-				}
-			}
-			#main-nav-header {
-				position: absolute;
-				display: block;
-				height: 100%;
 				width: 100%;
-				@include clearfix();
-				background: darken($light-grey, 10%);
-				@include transition(all .35s);
-				z-index: 9999;
-				.sub-menu {
-					position: relative;
-					padding: 0;
-					max-height: none;
-					overflow: visible;
-					width: auto;
-					z-index: inherit;
-					background: none;
-					margin-bottom: inherit;
-					margin-top: 10px;
-					li {
-						margin-bottom: inherit;
-						&:last-of-type {
-							margin-bottom: 0;
-						}
-						a {
-							font-size: 1em;
-						}
-					}
-				}
-				&:hover {
-					.sub-menu {
-						padding: 0px;
-						max-height: none;
-					}
+				height: 100%;
+			}
+		}
+
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* Mobile Menu #main-nav-header */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu {
+	@include breakpoint(narrowColumn) {
+		
+		#main-nav-header {
+			display: none;
+			& > ul {
+				padding: 30px;
+				& > li {
+					float: none;
+					margin-right: 0;
+					margin-bottom: 10px;
 				}
 			}
 		}
-		.mobilenav-anim-slide-over {
+
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* Mobile Menu #main-nav-header (Offscreen Nav) */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu.offscreen-nav {
+	@include breakpoint(narrowColumn) {
+
+		#main-nav-header {
+			position: absolute;
+			display: block;
+			height: 100%;
 			width: 100%;
-			&.mobilenav-pos-top, &.mobilenav-pos-bottom, &.mobilenav-pos-left, &.mobilenav-pos-right {
+			@include clearfix();
+			background: $mobilemenu-bg-color;
+			@include transition(all .35s);
+			z-index: 9999;
+		}
+
+		#main-nav-header .sub-menu {
+			position: relative;
+			padding: 0;
+			max-height: none;
+			overflow: visible;
+			width: auto;
+			z-index: inherit;
+			background: none;
+			margin-bottom: inherit;
+			margin-top: 10px;
+			li {
+				margin-bottom: inherit;
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+				a {
+					font-size: 1em;
+				}
+			}
+		}
+		&:hover {
+			.sub-menu {
+				padding: 0px;
+				max-height: none;
+			}
+		}
+
+	}
+}
+
+/* ------------------------------------------------------------------------ */
+/* Offscreen Nav Reveal Options */
+/* ------------------------------------------------------------------------ */
+
+html.js body.mobile-menu.offscreen-nav {
+	@include breakpoint(narrowColumn) {
+
+		/* Slide Over */
+		&.mobilenav-anim-slide-over {
+			width: 100%;
+			&.mobilenav-pos-top, 
+			&.mobilenav-pos-bottom, 
+			&.mobilenav-pos-left, 
+			&.mobilenav-pos-right {
 				&.nav-open {
 					#main-nav-header {
 						left: 0;
@@ -126,38 +206,16 @@
 					}
 				}
 			}
-			&.mobilenav-pos-top {
-				#main-nav-header {
-					top: -100%;
-				}
-			}
-			&.mobilenav-pos-bottom {
-				#main-nav-header {
-					top: 100%;
-				}
-			}
-			&.mobilenav-pos-left {
-				#main-nav-header {
-					left: -100%;
-				}
-			}
-			&.mobilenav-pos-right {
-				#main-nav-header {
-					left: 100%;
-				}
-			}
+			&.mobilenav-pos-top { #main-nav-header { top: -100%; } }
+			&.mobilenav-pos-bottom { #main-nav-header { top: 100%; } }
+			&.mobilenav-pos-left { #main-nav-header { left: -100%; } }
+			&.mobilenav-pos-right { #main-nav-header { left: 100%; } }
 		}
-		.mobilenav-anim-slide-push {
-			&.mobilenav-pos-top, &.mobilenav-pos-bottom {
-				#main-nav-header {
-					height: 85%;
-				}
-			}
-			&.mobilenav-pos-left, &.mobilenav-pos-right {
-				#main-nav-header {
-					width: 85%;
-				}
-			}
+
+		/* Slide Push */
+		&.mobilenav-anim-slide-push {
+			&.mobilenav-pos-top, &.mobilenav-pos-bottom { #main-nav-header { height: 85%; } }
+			&.mobilenav-pos-left, &.mobilenav-pos-right { #main-nav-header { width: 85%; } }
 			&.mobilenav-pos-top, &.mobilenav-pos-left {
 				&.nav-open {
 					#main-nav-header {
@@ -167,175 +225,83 @@
 				}
 			}
 			&.mobilenav-pos-top {
-				&.nav-open {
-					.inner-wrap {
-						top: 85%;
-					}
-				}
-				#main-nav-header {
-					top: -85%;
-				}
-			}
-			&.mobilenav-pos-bottom {
-				&.nav-open {
-					#main-nav-header {
-						top: 15%;
-					}
-					.inner-wrap {
-						top: -85%;
-					}
-				}
-				#main-nav-header {
-					top: 100%;
-				}
-			}
-			&.mobilenav-pos-left {
-				&.nav-open {
-					.inner-wrap {
-						left: 85%;
-					}
-				}
-				#main-nav-header {
-					left: -85%;
-				}
-			}
-			&.mobilenav-pos-right {
-				&.nav-open {
-					#main-nav-header {
-						left: 15%;
-					}
-					.inner-wrap {
-						left: -85%;
-					}
-				}
-				#main-nav-header {
-					left: 100%;
-				}
-			}
-		}
-		.mobilenav-anim-slide-reveal {
-			#main-nav-header {
-				z-index: 0;
-			}
-			.inner-wrap {
-				z-index: 9;
-			}
-			&.mobilenav-pos-top, &.mobilenav-pos-bottom {
-				#main-nav-header {
-					height: 85%;
-				}
-			}
-			&.mobilenav-pos-left, &.mobilenav-pos-right {
-				#main-nav-header {
-					width: 85%;
-				}
-			}
-			&.mobilenav-pos-bottom {
-				#main-nav-header {
-					bottom: 0;
-				}
-			}
-			&.mobilenav-pos-right {
-				#main-nav-header {
-					right: 0;
-				}
-			}
-			&.nav-open {
-				&.mobilenav-pos-top {
-					.inner-wrap {
-						top: 85%;
-					}
-				}
+				&.nav-open { .inner-wrap { top: 85%; } }
+				#main-nav-header { top: -85%; } }
 				&.mobilenav-pos-bottom {
-					.inner-wrap {
-						top: -85%;
+					&.nav-open { 
+						#main-nav-header { top: 15%; }
+						.inner-wrap { top: -85%; }
 					}
+					#main-nav-header { top: 100%; }
 				}
 				&.mobilenav-pos-left {
-					.inner-wrap {
-						left: 85%;
-					}
+					&.nav-open { .inner-wrap { left: 85%; } }
+					#main-nav-header { left: -85%; }
 				}
 				&.mobilenav-pos-right {
-					.inner-wrap {
-						left: -85%;
+					&.nav-open {
+						#main-nav-header { left: 15%; }
+						.inner-wrap { left: -85%; }
 					}
+					#main-nav-header { left: 100%; }
 				}
 			}
-		}
-		.mobilenav-anim-slide-along {
-			@extend .mobilenav-anim-slide-reveal;
-			&.mobilenav-pos-top {
-				#main-nav-header {
-					top: -50%;
-				}
+
+			/* Slide Reveal */
+			&.mobilenav-anim-slide-reveal {
+				#main-nav-header { z-index: 0; }
+				.inner-wrap { z-index: 9; }
+				&.mobilenav-pos-top, &.mobilenav-pos-bottom { #main-nav-header { height: 85%; } }
+				&.mobilenav-pos-left, &.mobilenav-pos-right { #main-nav-header { width: 85%; } }
+				&.mobilenav-pos-bottom { #main-nav-header { bottom: 0; } }
+				&.mobilenav-pos-right { #main-nav-header { right: 0; } }
 				&.nav-open {
-					#main-nav-header {
-						top: 0%;
-					}
+					&.mobilenav-pos-top { .inner-wrap { top: 85%; } }
+					&.mobilenav-pos-bottom { .inner-wrap { top: -85%; } }
+					&.mobilenav-pos-left { .inner-wrap { left: 85%; } }
+					&.mobilenav-pos-right { .inner-wrap { left: -85%; } }
 				}
 			}
-			&.mobilenav-pos-bottom {
-				#main-nav-header {
-					top: 50%;
+
+			/* Slide Along */
+			&.mobilenav-anim-slide-along {
+				@extend .mobilenav-anim-slide-reveal;
+				&.mobilenav-pos-top {
+					#main-nav-header { top: -50%; }
+					&.nav-open { #main-nav-header { top: 0%; } }
 				}
-				&.nav-open {
-					#main-nav-header {
-						top: 15%;
-					}
+				&.mobilenav-pos-bottom {
+					#main-nav-header { top: 50%; }
+					&.nav-open { #main-nav-header { top: 15%; } }
 				}
-			}
-			&.mobilenav-pos-left {
-				#main-nav-header {
-					left: -50%;
+				&.mobilenav-pos-left {
+					#main-nav-header { left: -50%; }
+					&.nav-open { #main-nav-header { left: 0%; } }
 				}
-				&.nav-open {
-					#main-nav-header {
-						left: 0%;
-					}
-				}
-			}
-			&.mobilenav-pos-right {
-				#main-nav-header {
-					left: 50%;
-				}
-				&.nav-open {
-					#main-nav-header {
-						left: 15%;
-					}
+				&.mobilenav-pos-right {
+					#main-nav-header { left: 50%; }
+					&.nav-open { #main-nav-header { left: 15%; } }
 				}
 			}
-		}
-		.mobilenav-anim-fall-down {
-			@extend .mobilenav-anim-slide-reveal;
-			#main-nav-header {
-				ul#menu-main-navigation {
-					position: relative;
-					top: -100%;
-					@include transition(all .25s);
-				}
-			}
-			&.nav-open {
+
+			/* Fall Down */
+			&.mobilenav-anim-fall-down {
+				@extend .mobilenav-anim-slide-reveal;
 				#main-nav-header {
 					ul#menu-main-navigation {
-						top: 0;
-						@include transition(all .25s .15s);
+						position: relative;
+						top: -100%;
+						@include transition(all .25s);
 					}
 				}
-			}
-		}
-		.close-btn {
-			position: absolute;
-			top: 30px;
-			right: 30px;
-			z-index: 999;
-			color: white;
-			font-size: 60px;
-			font-family: 'entypo';
-			text-decoration: none;
-			&:hover {
-				text-decoration: none;
+				&.nav-open {
+					#main-nav-header {
+						ul#menu-main-navigation {
+							top: 0;
+							@include transition(all .25s .15s);
+						}
+					}
+				}
 			}
 		}
 	}
-}

@@ -1,9 +1,9 @@
 /*==== general header styles ====*/
-.site-masthead {
+#site-masthead {
 	position: relative;
 	background: $light-grey;
 	& > .container {
-		padding: 30px 0;
+		padding: 3em 0;
 	}
 }
 
@@ -74,7 +74,9 @@ nav.main-nav {
 }
 
 nav.util-nav {
-	float: right;
+	position: absolute;
+	top:0;
+	right:2.5%;
 	padding: 10px 0;
 	@include breakpoint(narrowColumn) {
 		float: left;
@@ -108,27 +110,25 @@ nav.util-nav {
 		font-size: 12px;
 		line-height: 1;
 		cursor: pointer;
-		opacity: 0.5;
 		border: none;
 		@include transition(all 0.4s ease 0s);
 		@include box-shadow(none);
 		color: white;
-		&:hover{
-			opacity: 1;
-		}
+		background-color:$dark-grey;
 		&:focus {
 			opacity: 1;
 			font-size: 12px;
 			padding: 8px 0 8px 34px;
 			width: 115px;
 			border: none;
-			color: #555555;
-			background-color: #efefef;
+			color: white;
+			outline:none;
+			background-color: lighten($dark-grey,5%);			
 			cursor: text;
 		}
 	}
 	input[type=text] {
-		background-image: url(../../images/search.png);
+		background-image: url(../../images/misc-icons/search.png);
 		background-repeat: no-repeat;
 		background-position: 9px 8px;
 		margin-right: 1%;

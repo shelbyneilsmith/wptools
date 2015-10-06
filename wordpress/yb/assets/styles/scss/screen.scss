@@ -1,16 +1,18 @@
-/*
+/**
+
 Theme Name: YB
 Theme URI:
 Description: Use this theme to start your yb wordpress theme.
 Author: Yellowberri
 Author URI: http://yellowberri.com/
 Template: yb
-Version: 1.0
+Version: 1.1
 Tags: yb
-.
+
 YB is © Shelby Smith http://yellowberri.com/
-.
-*/
+
+**/
+
 @charset "utf-8";
 
 @import "var/settings";
@@ -22,10 +24,10 @@ YB is © Shelby Smith http://yellowberri.com/
 
 @import 'reset';
 
-/*=== theme styles ===*/
+/* theme styles */
 
+@import 'var/colors';
 @import 'responsive';
-@import 'colors';
 @import 'grid';
 @import 'mixins';
 @import 'fonts';
@@ -34,70 +36,81 @@ YB is © Shelby Smith http://yellowberri.com/
 @import 'typography';
 @import 'socialicons';
 @import 'shortcodes';
+@import 'mobilemenu';
 
-/* ==== custom site styles ==== */
+/* ------------------------------------------------------------------------ */
+/* Theme Defaults */
+/* ------------------------------------------------------------------------ */
 
 body, .inner-wrap {
-	background-color: $main-bg-color;
-	overflow-x: hidden;
+  overflow-x: hidden;
+  background-color: $footer-color;
 }
 
 #wrapper {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-#main {
-	position: relative;
-	clear: both;
-}
-
-#container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 #content {
-	margin-bottom: 30px;
-	&.sidebar-left {
-		float: right;
-	}
+  margin-bottom: 2em;
+
+  p:last-of-type { margin-bottom:0; }
 }
 
 #title {
-	padding: 30px 0;
-	border-bottom: 1px solid $light-grey;
-	h1 {
-		margin-bottom: 0;
-	}
+  padding:0 0 2em;
+  margin-bottom:2em;
+  border-bottom: 1px solid $light-grey;
+  h1 { margin:0; }
 }
 
 .page-title {
-	margin-bottom: 0;
-	@include large;
-	font-family: $display-font;
-	margin-bottom: 0;
-	font-weight: bold;
-	text-rendering: optimizeLegibility;
+  font-family: $display-font;
+  @include large;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+#page-wrap, .inner-wrap {
+  background-color:$main-bg-color;
 }
 
 #page-wrap {
+  padding: 30px 0;
+  @include clearfix();
 }
 
-#page-inner {
-	position: relative;
-	padding: 30px 0;
-	@include clearfix();
+#breadcrumbs-nav {
+  margin-top:1em;
 }
 
-#breadcrumbs {
+.content-post {
+  margin-bottom:2em;
+
+  h2.post-title {
+    margin-bottom:8px;
+  }
+
+  h2.post-title a {
+    text-decoration: none;
+  }
+
+  .post-meta {
+    margin-bottom:.5em;
+  }
+
+  .post-meta span {
+    font-size: .9em;
+  }
 }
 
-#crumbs {
-	float: right;
-	@include breakpoint(narrowColumn) {
-		float: left;
-		margin-top: 10px;
-	}
+.type-post {
+  #author-info {
+    margin-bottom:2em;
+  }
 }
 
 @import 'header';
@@ -106,6 +119,4 @@ body, .inner-wrap {
 
 @import 'print';
 
-/* ------------------------------------------------------------------------ */
-/* EOF
-/* ------------------------------------------------------------------------ */
+/* EOF */

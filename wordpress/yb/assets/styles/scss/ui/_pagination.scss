@@ -19,14 +19,14 @@
 				background: $light-grey;
 			}
 			a {
-				background: $button_color;
-				color: $button_text_color;
+				background: $button-color;
+				color: $button-text-color;
 				padding: 5px;
 				display: block;
 				text-decoration: none;
 				@include transition(all $trans-speed);
 				&:hover {
-					background: lighten($button_color, 10%);
+					background: lighten($button-color, 10%);
 				}
 			}
 		}
