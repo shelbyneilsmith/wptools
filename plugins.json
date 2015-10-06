@@ -13,14 +13,8 @@
 		"serial_key": null
 	},
 	{
-		"name": "custom-post-type-ui",
-		"url": "https://downloads.wordpress.org/plugin/custom-post-type-ui.1.0.4.zip",
-		"is_activated": true,
-		"serial_key": null
-	},
-	{
-		"name": "post-type-order",
-		"url": "https://downloads.wordpress.org/plugin/post-types-order.zip",
+		"name": "simple-page-ordering",
+		"url": "https://downloads.wordpress.org/plugin/simple-page-ordering.2.2.4.zip",
 		"is_activated": true,
 		"serial_key": null
 	},
