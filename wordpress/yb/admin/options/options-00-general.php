@@ -75,18 +75,6 @@ $this->sections[] = array(
 			'default'   => '0'
 		),
 		array(
-			'id'        => 'opt-color-chrome-theme',
-			'type'      => 'color_rgba',
-			'title'     => __('Chrome Theme Color', 'yb'),
-			'subtitle'  => __('Meta tag to customize Android chrome tabs', 'yb'),
-			'options'   => array(
-				'show_palette_only'         => true,
-				'show_selection_palette' => false,
-				'show_alpha' => false,
-			),
-			'default'   => '0',
-		),
-		array(
 			'id'        => 'section-misc-end',
 			'type'      => 'section',
 			'indent'    => false

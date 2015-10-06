@@ -5,11 +5,11 @@
 /* ------------------------------------------------------------------------ */
 
 function new_excerpt_length($length) {
-  global $ybwp_data;
-  return $ybwp_data['opt-text-excerptlength'];
+	global $ybwp_data;
+	return $ybwp_data['opt-text-excerptlength'];
 }
 if (!empty($ybwp_data['opt-text-excerptlength'])) {
-  add_filter('excerpt_length', 'new_excerpt_length');
+	add_filter('excerpt_length', 'new_excerpt_length');
 }
 
 /* ------------------------------------------------------------------------ */
@@ -100,7 +100,7 @@ function yb_breadcrumbs() {
 	$home = get_bloginfo('name');
 	$blog = $ybwp_data['opt-text-blogbreadcrumb'];
 	/* 1 - show current post/page title in breadcrumbs, 0 - don't show */
-	$showCurrent = 1; 
+	$showCurrent = 1;
 	/* tag before the current crumb */
 	$before = '<span class="current">';
 	/* tag after the current crumb */
@@ -436,7 +436,7 @@ if( !empty($ybwp_data['opt-checkbox-readmore']) ) {
 function add_slug_body_class( $classes ) {
   global $post;
   if ( isset( $post ) ) {
-    $classes[] = $post->post_type . '-' . $post->post_name;
+	 $classes[] = $post->post_type . '-' . $post->post_name;
   }
   return $classes;
 }

@@ -1,10 +1,9 @@
-<?php 
+<?php
 
 /* custom login page */
 
 /* calling your own login css so you can style it */
 function yb_login_css() {
-
   echo '<link rel="stylesheet" href="' . get_stylesheet_directory_uri() . '/assets/styles/css/login.css">';
 }
 

@@ -4,13 +4,6 @@ $this->sections[] = array(
 	'icon'      => 'el-icon-bullhorn',
 	'fields'    => array(
 		array(
-			'id'        => 'opt-media-fbimg',
-			'type'      => 'media',
-			'url'       => true,
-			'title'     => __('Facebook Share Image Upload', 'yb'),
-			'subtitle'  => __('Upload the default image that you want Facebook to use when someone shares a page from your site.', 'yb'),
-		),
-		array(
 			'id'        => 'section-socialurls-start',
 			'type'      => 'section',
 			'title'     => __('Enter your username / URL to show or leave blank to hide Social Media Icons', 'yb'),

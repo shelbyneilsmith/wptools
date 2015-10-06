@@ -9,11 +9,10 @@
 
 <head>
   <meta charset="utf-8">
-  
+
   <?php get_template_part('assets/inc/header/header', 'title'); ?>
 
   <?php get_template_part('assets/inc/header/header', 'meta'); ?>
-  <?php //get_template_part('assets/inc/header/header', 'opengraph'); ?>
 
   <link rel="shortcut icon" href="/wp-content/themes/yb/favicon.ico">
   <link rel="shortcut icon" href="/wp-content/themes/yb/favicon.png">

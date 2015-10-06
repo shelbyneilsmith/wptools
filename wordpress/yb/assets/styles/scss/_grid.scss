@@ -1,10 +1,10 @@
 /* ==== grid settings defined in _global.scss ====*/
 
-%inner-col {
+.container {
 	position: relative;
 	margin: 0 auto;
 	/* width: $mainWidth; */
-	width:100%;
+	width: 100%;
 	@include breakpoint(multiColumn) {
 		width: $multiWidth;
 	}
@@ -15,10 +15,6 @@
 	@include breakpoint(mobile) {
 		width: $mobileWidth;
 	}
-}
-
-.container {
-	@extend %inner-col;
 	/* Self Clearing Goodness */
 	&:after {
 		content: "\0020";
