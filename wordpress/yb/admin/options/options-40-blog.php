@@ -114,6 +114,14 @@ $this->sections[] = array(
 			'default'   => 'Blog',
 		),
 		array(
+			'id'        => 'opt-checkbox-showblogtitlearchives',
+			'type'      => 'checkbox',
+			'title'     => __('Show Blog Title on Archive pages', 'yb'),
+			'subtitle'  => __('Check to display the blog title on archives.', 'yb'),
+			'required' => array('opt-checkbox-blog','=','1'),
+			'default'   => '0'// 1 = on | 0 = off
+		),
+		array(
 			'id'        => 'opt-text-blogbreadcrumb',
 			'type'      => 'text',
 			'title'     => __('Blog Breadcrumb Name', 'yb'),
