@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 @import "var/settings";
+@import "var/colors";
 
 @import "compass/layout";
 @import "compass/utilities";
@@ -9,7 +10,6 @@
 
 @import 'responsive';
 @import 'mixins';
-@import 'colors';
 @import 'fonts';
 
 body.login {
