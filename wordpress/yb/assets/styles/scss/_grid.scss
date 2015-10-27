@@ -8,6 +8,9 @@
 	@include breakpoint(multiColumn) {
 		width: $multiWidth;
 	}
+	@include breakpoint(max) {
+		width: $maxWidth;
+	}
 	@include breakpoint(narrowColumn) {
 		width: $narrowWidth;
 		margin: 0 auto;

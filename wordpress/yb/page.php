@@ -2,23 +2,23 @@
 
 <div id="page-wrap" <?php post_class(); ?>>
 
-  <?php get_template_part('assets/inc/partial/partial', 'title_page'); ?>
+	<?php get_template_part('assets/inc/partial/partial', 'title_page'); ?>
 
 	<div id="page-inner" class="container">
 
 		<div id="content" class="">
 
-      <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-        <?php the_content(); ?>
+				<?php the_content(); ?>
 
-        <?php get_template_part('assets/inc/partial/partial', 'comments'); ?>
+				<?php get_template_part('assets/inc/partial/partial', 'comments'); ?>
 
-      <?php endwhile; endif; ?>
+			<?php endwhile; endif; ?>
 
-    </div> <!-- #content -->
+		</div> <!-- #content -->
 
-    <?php get_sidebar(); ?>
+		<?php get_sidebar(); ?>
 
 	</div><!-- #page-inner -->
 

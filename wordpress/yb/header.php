@@ -8,42 +8,39 @@
 <?php global $ybwp_data; ?>
 
 <head>
-  <meta charset="utf-8">
+	<meta charset="utf-8">
 
-  <?php get_template_part('assets/inc/header/header', 'title'); ?>
+	<?php get_template_part('assets/inc/header/header', 'title'); ?>
 
-  <?php get_template_part('assets/inc/header/header', 'meta'); ?>
+	<?php get_template_part('assets/inc/header/header', 'meta'); ?>
 
-  <link rel="shortcut icon" href="/wp-content/themes/yb/favicon.ico">
-  <link rel="shortcut icon" href="/wp-content/themes/yb/favicon.png">
+	<link rel="shortcut icon" href="/wp-content/themes/yb/favicon.ico">
+	<link rel="shortcut icon" href="/wp-content/themes/yb/favicon.png">
 
-  <?php get_template_part('assets/inc/header/header', 'blog_pingback'); ?>
+	<?php get_template_part('assets/inc/header/header', 'blog_pingback'); ?>
 
-  <!-- start wordpress head -->
-  <?php wp_head(); ?>
-  <!-- end wordpress head -->
+	<!-- start wordpress head -->
+	<?php wp_head(); ?>
+	<!-- end wordpress head -->
 
-  <?php get_template_part('assets/inc/header/header', 'comments'); ?>
-  <?php get_template_part('assets/inc/header/header', 'typekit'); ?>
+	<?php get_template_part('assets/inc/header/header', 'comments'); ?>
+	<?php get_template_part('assets/inc/header/header', 'typekit'); ?>
 
-  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
 <body <?php body_class(); ?>>
 
-  <?php get_template_part('assets/inc/header/header', 'bp_indicator'); ?>
+	<?php get_template_part('assets/inc/header/header', 'bp_indicator'); ?>
 
-  <div id="wrapper">
-    <header id="site-masthead" class="clearfix">
-      <div class="container">
+	<div id="wrapper">
+		<header id="site-masthead" class="clearfix">
+			<div class="container">
+				<?php get_template_part('assets/inc/partial/partial', 'search'); ?>
+				<?php get_template_part('assets/inc/header/header', 'utility_nav'); ?>
 
-        <div class="four columns">
-          <?php get_template_part('assets/inc/header/header', 'logo'); ?>
-        </div>
+				<?php get_template_part('assets/inc/header/header', 'logo'); ?>
 
-        <div class="twelve columns">
-          <?php get_template_part('assets/inc/header/header', 'main_nav'); ?>
-        </div>
-      </div>
-
-    </header><!-- .site-masthead-->
+				<?php get_template_part('assets/inc/header/header', 'main_nav'); ?>
+			</div>
+		</header><!-- .site-masthead-->

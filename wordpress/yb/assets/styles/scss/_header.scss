@@ -108,7 +108,7 @@ nav.util-nav {
 		padding: 8px 0 8px 34px;
 		width: 0px;
 		font-size: 12px;
-		line-height: 1;
+		line-height: auto;
 		cursor: pointer;
 		border: none;
 		@include transition(all 0.4s ease 0s);
@@ -123,7 +123,7 @@ nav.util-nav {
 			border: none;
 			color: white;
 			outline:none;
-			background-color: lighten($dark-grey,5%);			
+			background-color: lighten($dark-grey,5%);
 			cursor: text;
 		}
 	}
