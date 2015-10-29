@@ -8,6 +8,7 @@ package.json
 wploy.config
 wploy-excludes.txt
 node_modules/
+wp-content/wfcache/
 wp-content/themes/yb/assets/.sass-cache/
 wp-content/themes/yb/assets/scripts/source/
 wp-content/themes/yb/assets/styles/scss/
