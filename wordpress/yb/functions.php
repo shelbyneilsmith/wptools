@@ -49,6 +49,7 @@ include_once('assets/functions/functions-woocommerce.php');
 
 /*include_once('assets/inc/widgets/widget-sponsor.php');*/
 /*include_once('assets/inc/widgets/widget-contact.php');*/
+/*include_once('assets/inc/widgets/widget-video_embed.php');*/
 
 /* ------------------------------------------------------------------------ */
 /* Custom Functions */
