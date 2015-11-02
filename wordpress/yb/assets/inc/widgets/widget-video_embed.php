@@ -23,17 +23,69 @@ class widget_video_embed extends WP_Widget {
 
 			if (_is_youtube($vid_url)) {
 				$vid_id = _youtube_video_id($vid_url);
-				$embed_code = "<iframe id='ytplayer' type='text/html' width='$width' height='$height' src='https://www.youtube.com/embed/$vid_id?rel=0&showinfo=0&color=white&iv_load_policy=3' frameborder='0' allowfullscreen></iframe>";
+				$imageUrl = "//img.youtube.com/vi/" . $vid_id . "/maxresdefault.jpg";
+				$embed_code = "<iframe id='ytplayer' type='text/html' width='$width' height='$height' src='https://www.youtube.com/embed/$vid_id?rel=0&autoplay=1&showinfo=0&color=white&iv_load_policy=3' frameborder='0' allowfullscreen></iframe>";
 			} else if (_is_vimeo($vid_url)) {
 				$vid_id = _vimeo_video_id($vid_url);
-				$embed_code = "<iframe src='https://player.vimeo.com/video/$vid_id' width='$width' height='$height' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
+				$vimeoMetaUrl = 'http://vimeo.com/api/v2/video/' . $vid_id . '.php';
+
+				$vimeoMeta = unserialize(file_get_contents($vimeoMetaUrl));
+				$imageUrl = $vimeoMeta[0]['thumbnail_large'];
+				$embed_code = "<iframe src='https://player.vimeo.com/video/$vid_id?autoplay=1' width='$width' height='$height' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
 			} else {
-				$embed_code = '<iframe width="420" height="315" src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allowfullscreen></iframe>';
+				$vid_id = "jNQXAC9IVRw";
+				$imageUrl = "//img.youtube.com/vi/" . $vid_id . "/maxresdefault.jpg";
+				$embed_code = "<iframe width='420' height='315' src='https://www.youtube.com/embed/$vid_id?rel=0&autoplay=1&showinfo=0&color=white&iv_load_policy=3' frameborder='0' allowfullscreen></iframe>";
 			}
 		?>
-			<div class="vid-wrap">
-				<?php echo $embed_code; ?>
+			<style>
+				.vid-poster {
+					position: relative;
+					display: block;
+				}
+				.vid-poster .play-button {
+					position: absolute;
+					display: block;
+					width: 50px;
+					height: 50px;
+					background: black;
+					background: rgba(0, 0, 0, 0.5);
+					margin-top: -25px;
+					top: 50%;
+					margin-left: -25px;
+					left: 50%;
+					border-radius: 100%;
+				}
+				.vid-poster .play-button:hover {
+					background: black;
+				}
+				.vid-poster .play-button:after {
+					content: '';
+					position: absolute;
+					display: block;
+					margin-top: -15px;
+					top: 50%;
+					margin-left: -9px;
+					left: 50%;
+					border-style: solid;
+					border-width: 15px 0 15px 24px;
+					border-color: transparent transparent transparent rgba(255, 255, 255, 1);
+				}
+			</style>
+			<div class="vid-container">
+				<a class="vid-poster" href="<?php echo $vid_url; ?>" target="_blank"><span class="play-button"></span><img src="<?php echo $imageUrl; ?>" /></a>
 			</div>
+			<script>
+				(function($){
+					$('a.vid-poster').each(function() {
+						$(this).click(function() {
+							$(this).parent().prepend("<div class='vid-wrap'><?php echo $embed_code; ?></div>");
+							$(this).remove();
+							return false;
+						});
+					});
+				})( jQuery );
+			</script>
 		<?php
 		echo $after_widget;
 		// ------
