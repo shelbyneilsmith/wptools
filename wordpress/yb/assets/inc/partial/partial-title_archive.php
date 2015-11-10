@@ -27,13 +27,11 @@
   elseif (is_shop()) {
     $page_title = woocommerce_page_title();
   }
-  elseif ( is_post_type_archive( get_post_type() ) ) {
-    $post_type_object = get_post_type_object( get_post_type() );
-    $page_title = $post_type_object->labels->name;
+  elseif ( is_post_type_archive() ) {
+    $page_title = post_type_archive_title( '', false );
   }
 
-  /* Prefix blog archives with custom blog name */
-  if (!empty($ybwp_data['opt-checkbox-showblogtitlearchives']) && !is_post_type_archive( get_post_type() ) ) {
+  if (!empty($ybwp_data['opt-checkbox-showblogtitlearchives'])) {
     $page_title = $ybwp_data['opt-text-blogtitle'] . ' | ' . $page_title;
   }
 ?>
