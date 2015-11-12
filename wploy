@@ -52,7 +52,7 @@ migrate() {
 	fi
 
 	if [ $multisite == true ] ; then
-		$network_param="--network "
+		network_param='--network '
 	fi
 
 	if [[ $src_id == "l" ]]; then
@@ -183,7 +183,7 @@ if [[ $project_id && ${project_id} ]] ; then
 	#make sure were in the right directory and everything...
 	cd ~/Sites/$project_id/web/
 
-	while getopts ":s:m:" opt; do
+	while getopts ":sm::n" opt; do
 		case $opt in
 			s )
 				remote_id=$OPTARG
@@ -195,6 +195,9 @@ if [[ $project_id && ${project_id} ]] ; then
 					echo "I don't recognize the target server..."
 					exit 1
 				fi
+				;;
+			n )
+				multisite=true
 				;;
 			m )
 				intent=$OPTARG
@@ -226,20 +229,6 @@ if [[ $project_id && ${project_id} ]] ; then
 
 					DEST_DB_USER_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_USER}")
 					DEST_DB_PASS_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_PASS}")
-
-					while getopts ":ms" opt; do
-						case $opt in
-							ms )
-								multisite=true
-								;;
-							\? )
-								echo "Invalid option: -$OPTARG" 1>&2
-								;;
-							: )
-								echo "Invalid option: $OPTARG requires an argument" 1>&2
-								;;
-						esac
-					done
 				else
 					echo "I didn't understand what you're trying to do..."
 					exit 1
