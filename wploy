@@ -183,7 +183,7 @@ if [[ $project_id && ${project_id} ]] ; then
 	#make sure were in the right directory and everything...
 	cd ~/Sites/$project_id/web/
 
-	while getopts ":sm::n" opt; do
+	while getopts ":s:nm:" opt; do
 		case $opt in
 			s )
 				remote_id=$OPTARG
@@ -195,9 +195,6 @@ if [[ $project_id && ${project_id} ]] ; then
 					echo "I don't recognize the target server..."
 					exit 1
 				fi
-				;;
-			n )
-				multisite=true
 				;;
 			m )
 				intent=$OPTARG
@@ -236,6 +233,9 @@ if [[ $project_id && ${project_id} ]] ; then
 
 				# checkintent
 				migrate
+				;;
+			n )
+				multisite=true
 				;;
 			\? )
 				echo "Invalid option: -$OPTARG" 1>&2
