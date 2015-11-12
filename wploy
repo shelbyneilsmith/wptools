@@ -154,7 +154,7 @@ while getopts ":h" opt; do
 		h )
 			echo "Usage:"
 			echo "	wploy -h"
-			echo "	wploy<project_id> [-m [-ms <multisite>] <l2s><l2p><s2p><p2s>]"
+			echo "	wploy<project_id> [-m <l2s><l2p><s2p><p2s> [-n <multisite>]]"
 			echo "	wploy <project_id> [-s <staging><prod>]"
 			exit 0
 			;;
