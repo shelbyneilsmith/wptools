@@ -52,9 +52,7 @@ migrate() {
 	fi
 
 	if [ $multisite == true ] ; then
-		$network_param = "--network ";
-	else
-		$network_param = "";
+		$network_param="--network "
 	fi
 
 	if [[ $src_id == "l" ]]; then
@@ -148,6 +146,7 @@ purpose=""
 intent=""
 remote_id=""
 multisite=false ## set up as single-site by default
+network_param=""
 
 # First, we want to set up some help documentation
 while getopts ":h" opt; do
@@ -198,20 +197,6 @@ if [[ $project_id && ${project_id} ]] ; then
 				fi
 				;;
 			m )
-				while getopts ":ms" opt; do
-					case $opt in
-						ms )
-							multisite=true
-							;;
-						\? )
-							echo "Invalid option: -$OPTARG" 1>&2
-							;;
-						: )
-							echo "Invalid option: $OPTARG requires an argument" 1>&2
-							;;
-					esac
-				done
-
 				intent=$OPTARG
 				if in_array cmds "${intent}"; then
 					src_id="${intent::1}"
@@ -241,10 +226,25 @@ if [[ $project_id && ${project_id} ]] ; then
 
 					DEST_DB_USER_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_USER}")
 					DEST_DB_PASS_ESC=$(sed 's/[\*\.&]/\\&/g' <<<"${!DEST_DB_PASS}")
+
+					while getopts ":ms" opt; do
+						case $opt in
+							ms )
+								multisite=true
+								;;
+							\? )
+								echo "Invalid option: -$OPTARG" 1>&2
+								;;
+							: )
+								echo "Invalid option: $OPTARG requires an argument" 1>&2
+								;;
+						esac
+					done
 				else
 					echo "I didn't understand what you're trying to do..."
 					exit 1
 				fi
+
 				# checkintent
 				migrate
 				;;
