@@ -51,6 +51,12 @@ migrate() {
 		continueprompt
 	fi
 
+	if [ $multisite == true ] ; then
+		$network_param = "--network ";
+	else
+		$network_param = "";
+	fi
+
 	if [[ $src_id == "l" ]]; then
 		if [ -d $SITES_DIR/$project_id/web/node_modules ]; then #check if grunt exists
 			#first, run out grunt build script - if grunt exists for this project
@@ -71,11 +77,11 @@ ssh ${!DEST_SSH_USER}@${!DEST_HOST} /bin/bash << EOF
 sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
 EOF
 		#log into remote host, import database, search & replace urls and set owner for site files
-		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
+		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${network_param}${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 
 	elif [ $src_id == "s" ] || [ $src_id == "p" ]; then
 		if [[ $dest_id == "l" ]]; then
-			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u ${!SRC_OWNER} -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!SRC_PATH}"
+			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u ${!SRC_OWNER} -i -- wp search-replace ${network_param}${!SRC_URL} ${!DEST_URL} --path=${!SRC_PATH}"
 		fi
 ssh ${!SRC_SSH_USER}@${!SRC_HOST} /bin/bash << EOF
 mysqldump -u $SRC_DB_USER_ESC -p$SRC_DB_PASS_ESC ${!SRC_DB} > ${!SRC_PATH}${!SRC_DB}.sql
@@ -99,13 +105,13 @@ EOF
 
 			mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo rm ${!DEST_PATH}${!SRC_DB}.sql
 
-			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u ${!SRC_OWNER} -i -- wp search-replace ${!DEST_URL} ${!SRC_URL} --path=${!SRC_PATH}"
+			ssh ${!SRC_SSH_USER}@${!SRC_HOST} "sudo -u ${!SRC_OWNER} -i -- wp search-replace ${network_param}${!DEST_URL} ${!SRC_URL} --path=${!SRC_PATH}"
 		else
 			# find and replace database credentials in wp-config on destination:
 ssh ${!DEST_SSH_USER}@${!DEST_HOST} /bin/bash << EOF
 sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
 EOF
-			ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; sudo rm ${!DEST_PATH}${!SRC_DB}.sql; sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
+			ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${network_param}${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; sudo rm ${!DEST_PATH}${!SRC_DB}.sql; sudo chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 		fi
 		if [[ $dest_id == "s" ]]; then
 			#echo "activate code freeze"
@@ -141,6 +147,7 @@ project_id=""
 purpose=""
 intent=""
 remote_id=""
+multisite=false ## set up as single-site by default
 
 # First, we want to set up some help documentation
 while getopts ":h" opt; do
@@ -148,7 +155,7 @@ while getopts ":h" opt; do
 		h )
 			echo "Usage:"
 			echo "	wploy -h"
-			echo "	wploy<project_id> [-m <l2s><l2p><s2p><p2s>]"
+			echo "	wploy<project_id> [-m [-ms <multisite>] <l2s><l2p><s2p><p2s>]"
 			echo "	wploy <project_id> [-s <staging><prod>]"
 			exit 0
 			;;
@@ -191,6 +198,20 @@ if [[ $project_id && ${project_id} ]] ; then
 				fi
 				;;
 			m )
+				while getopts ":ms" opt; do
+					case $opt in
+						ms )
+							multisite=true
+							;;
+						\? )
+							echo "Invalid option: -$OPTARG" 1>&2
+							;;
+						: )
+							echo "Invalid option: $OPTARG requires an argument" 1>&2
+							;;
+					esac
+				done
+
 				intent=$OPTARG
 				if in_array cmds "${intent}"; then
 					src_id="${intent::1}"
