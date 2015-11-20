@@ -74,7 +74,7 @@ migrate() {
 ssh ${!DEST_SSH_USER}@${!DEST_HOST} /bin/bash << EOF
 sed -i -e "s/define('DB_NAME', '${!SRC_DB}');/define('DB_NAME', '${!DEST_DB}');/g; s/define('DB_USER', '$SRC_DB_USER_ESC');/define('DB_USER', '$DEST_DB_USER_ESC');/g; s/define('DB_PASSWORD', '$SRC_DB_PASS_ESC');/define('DB_PASSWORD', '$DEST_DB_PASS_ESC');/g" ${!DEST_PATH}wp-config.php
 if [ $multisite == true ] ; then
-	sed -i -e "s/define('DOMAIN_CURRENT_SITE', '${!SRC_URL}')/define('DOMAIN_CURRENT_SITE', '${!DEST_URL}')/g;" ${!DEST_PATH}wp-config.php
+sed -i -e "s/define('DOMAIN_CURRENT_SITE', '${!SRC_URL}')/define('DOMAIN_CURRENT_SITE', '${!DEST_URL}')/g;" ${!DEST_PATH}wp-config.php
 fi
 EOF
 		#log into remote host, import database, search & replace urls and set owner for site files
