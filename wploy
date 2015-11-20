@@ -78,7 +78,7 @@ sed -i -e "s/define('DOMAIN_CURRENT_SITE', '${!SRC_URL}')/define('DOMAIN_CURRENT
 fi
 EOF
 		#log into remote host, import database, search & replace urls and set owner for site files
-		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${network_param}${!SRC_URL} ${!DEST_URL} --path=${!DEST_PATH}; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
+		ssh ${!DEST_SSH_USER}@${!DEST_HOST} "mysql -u $DEST_DB_USER_ESC -p$DEST_DB_PASS_ESC ${!DEST_DB} < ${!DEST_PATH}${!SRC_DB}.sql; sudo -u ${!DEST_OWNER} -i -- wp search-replace ${network_param}${!SRC_URL} ${!DEST_URL} --url=${!SRC_URL} --path=${!DEST_PATH}; chown -R ${!DEST_OWNER}:${!DEST_GROUP} ${!DEST_PATH}"
 
 	elif [ $src_id == "s" ] || [ $src_id == "p" ]; then
 		if [[ $dest_id == "l" ]]; then
