@@ -17,11 +17,6 @@ YB is © Shelby Smith http://yellowberri.com/
 
 @import "var/settings";
 
-@import "compass/layout";
-@import "compass/utilities";
-@import "compass/typography";
-@import "compass/css3";
-
 @import 'reset';
 
 /* theme styles */
@@ -80,7 +75,7 @@ body, .inner-wrap {
 
 #page-wrap {
 	padding: 30px 0;
-	@include clearfix();
+	@extend %clearfix;
 }
 
 #breadcrumbs-nav {

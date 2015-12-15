@@ -36,18 +36,18 @@
 @mixin buttonColor($btnColor, $btnTxtColor, $btnStyle) {
 	color: $btnTxtColor;
 	@if $btnStyle == "gradient" {
-		@include background-image(linear-gradient(bottom, $btnColor 0%, lighten($btnColor, 10%) 100%));
+		background: linear-gradient(to bottom, $btnColor 0%, lighten($btnColor, 10%) 100%);
 		border: 1px solid $btnColor;
-		@include box-shadow(inset 0 0 1px lighten($btnColor, 20%), 0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		box-shadow: inset 0 0 1px lighten($btnColor, 20%), 0 1px 1px 0 rgba(180, 180, 180, 0.2);
 		&:hover {
-			@include background-image(linear-gradient(bottom, lighten($btnColor, 5%) 0%, lighten($btnColor, 15%) 100%));
+			background: linear-gradient(to bottom, lighten($btnColor, 5%) 0%, lighten($btnColor, 15%) 100%);
 		}
 	}
 	@else {
 		background-color: $btnColor;
 		background-image: none;
 		border: 0;
-		@include box-shadow(none);
+		box-shadow: none;
 		&:hover {
 			background-color: lighten($btnColor, 10%);
 			background-image: none;
@@ -70,5 +70,13 @@
 		background-size: 100%;
 		width: $width;
 		height: $height;
+	}
+}
+
+%clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
 	}
 }

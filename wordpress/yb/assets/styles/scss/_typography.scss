@@ -84,7 +84,7 @@ h5, h6 {
 
 /* LINKS
 ----------------------------------------------------------------------------------------*/
-a, a:visited { outline: none; color: $accent-color; @include transition(all $trans-speed); text-decoration: underline; }
+a, a:visited { outline: none; color: $accent-color; transition: all $trans-speed; text-decoration: underline; }
 a:hover { outline: none; text-decoration:none; }
 a:active, a:focus { outline: none; }
 

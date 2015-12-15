@@ -45,7 +45,7 @@
 				border: 1px solid $off-black;
 				padding: 4px;
 				background: $off-black;
-				@include box-shadow(none);
+				box-shadow: none;
 				&:hover {
 					background: $accent-color;
 					border-color: $accent-color;
@@ -59,7 +59,7 @@
 	padding:1em 0;
 
 	ul#menu-footer-navigation {
-		@include clearfix;
+		@extend %clearfix;
 
 		li {
 			float: left;

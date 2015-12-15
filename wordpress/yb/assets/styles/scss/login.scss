@@ -3,11 +3,6 @@
 @import "var/settings";
 @import "var/colors";
 
-@import "compass/layout";
-@import "compass/utilities";
-@import "compass/typography";
-@import "compass/css3";
-
 @import 'responsive';
 @import 'mixins';
 @import 'fonts';
@@ -29,9 +24,9 @@ body.login {
 	}
 	&.wp-core-ui .button-primary {
 		background: $accent-color;
-		@include border-radius(0);
+		border-radius: 0;
 		border: 0;
-		@include box-shadow(none);
+		box-shadow: none;
 	}
 	#nav, #backtoblog {
 		a:hover {

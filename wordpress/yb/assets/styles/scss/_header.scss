@@ -42,7 +42,7 @@
 		}
 	}
 	&.stuck {
-		@include box-shadow(0 2px 4px rgba(0, 0, 0, .1));
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
 	}
 }
 
@@ -111,8 +111,8 @@ nav.util-nav {
 		line-height: auto;
 		cursor: pointer;
 		border: none;
-		@include transition(all 0.4s ease 0s);
-		@include box-shadow(none);
+		transition: all 0.4s ease 0s;
+		box-shadow: none;
 		color: white;
 		background-color:$dark-grey;
 		&:focus {
@@ -151,7 +151,7 @@ nav.util-nav {
 		margin: 0 auto;
 		position: fixed !important;
 		top: 0;
-		@include box-shadow(0 2px 4px rgba(black, .3));
+		box-shadow: 0 2px 4px rgba(black, .3);
 		z-index: 2000;
 		width: 100%;
 	}

@@ -99,7 +99,7 @@ html.js body.mobile-menu.offscreen-nav {
 			left: 0;
 			top: 0;
 			min-height: 100%;
-			@include transition(all .35s);
+			transition: all .35s;
 		}
 
 		&.nav-open {
@@ -121,7 +121,7 @@ html.js body.mobile-menu.offscreen-nav {
 
 html.js body.mobile-menu {
 	@include breakpoint(narrowColumn) {
-		
+
 		#main-nav-header {
 			display: none;
 			& > ul {
@@ -149,10 +149,15 @@ html.js body.mobile-menu.offscreen-nav {
 			display: block;
 			height: 100%;
 			width: 100%;
-			@include clearfix();
 			background: $mobilemenu-bg-color;
-			@include transition(all .35s);
+			transition: all .35s;
 			z-index: 9999;
+
+			&:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
 		}
 
 		#main-nav-header .sub-menu {
@@ -177,7 +182,7 @@ html.js body.mobile-menu.offscreen-nav {
 		}
 		&:hover {
 			.sub-menu {
-				padding: 0px;
+				padding: 0;
 				max-height: none;
 			}
 		}
@@ -195,9 +200,9 @@ html.js body.mobile-menu.offscreen-nav {
 		/* Slide Over */
 		&.mobilenav-anim-slide-over {
 			width: 100%;
-			&.mobilenav-pos-top, 
-			&.mobilenav-pos-bottom, 
-			&.mobilenav-pos-left, 
+			&.mobilenav-pos-top,
+			&.mobilenav-pos-bottom,
+			&.mobilenav-pos-left,
 			&.mobilenav-pos-right {
 				&.nav-open {
 					#main-nav-header {
@@ -228,7 +233,7 @@ html.js body.mobile-menu.offscreen-nav {
 				&.nav-open { .inner-wrap { top: 85%; } }
 				#main-nav-header { top: -85%; } }
 				&.mobilenav-pos-bottom {
-					&.nav-open { 
+					&.nav-open {
 						#main-nav-header { top: 15%; }
 						.inner-wrap { top: -85%; }
 					}
@@ -291,14 +296,14 @@ html.js body.mobile-menu.offscreen-nav {
 					ul#menu-main-navigation {
 						position: relative;
 						top: -100%;
-						@include transition(all .25s);
+						transition: all .25s;
 					}
 				}
 				&.nav-open {
 					#main-nav-header {
 						ul#menu-main-navigation {
 							top: 0;
-							@include transition(all .25s .15s);
+							transition: all .25s .15s;
 						}
 					}
 				}

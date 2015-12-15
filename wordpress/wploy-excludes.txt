@@ -3,7 +3,7 @@
 .gitignore
 .gitattributes
 .sass-cache/
-Gruntfile.js
+Gulpfile.js
 package.json
 wploy.config
 wploy-excludes.txt

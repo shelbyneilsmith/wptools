@@ -90,10 +90,18 @@ preinit () {
 	fi
 }
 
+node_symlinks() {
+	node_modules=(browser-sync del gulp gulp-autoprefixer gulp-cache gulp-concat gulp-imagemin gulp-jshint gulp-minify-css gulp-notify gulp-rename gulp-ruby-sass gulp-sourcemaps gulp-uglify jshint)
+
+	for i in ${node_modules[@]}; do
+		ln -s $SITES_DIR/$project_id/node_modules/$i $SITES_DIR/$project_id/web/node_modules/$i
+	done
+}
+
 copyfiles () {
 	clear
 	# create the wordpress directory structure
-	mkdir -p $SITES_DIR/$project_id/{web,_working_/{docs,images}}
+	mkdir -p $SITES_DIR/$project_id/{web/node_modules,_working_/{docs,images}}
 	echo "\nNew project directory created..."
 
 	if [ $purpose == "new" ] ; then
@@ -119,11 +127,12 @@ copyfiles () {
 
 		if [ $testinst == false ] ; then
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/wploy.config $SITES_DIR/$project_id/web/wploy.config
-			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/Gruntfile.js $SITES_DIR/$project_id/web/Gruntfile.js
+			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/Gulpfile.js $SITES_DIR/$project_id/web/Gulpfile.js
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
-			# copy the grunt node modules over
-			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/node_modules $SITES_DIR/$project_id/web/
+
+			# set up the node module symlinks for Gulp
+			node_symlinks
 		fi
 
 		# delete any default themes and set up our custom yb theme
@@ -221,12 +230,12 @@ writeconfigs () {
 		fi
 		sed -i '' "s/p_owner=''/p_owner='$project_id'/g" $WPLOYCONFIGFILE
 
-		#Gruntfile.js
-		sed -i '' "s/projectID: '',/projectID: '$project_id',/g" $GRUNTFILE
-		sed -i '' "s/localTLD: '',/localTLD: '$LOCAL_URL_BASE',/g" $GRUNTFILE
+		#Gulpfile.js
+		sed -i '' "s/var projectID = '';/var projectID = '$project_id';/g" $GULPFILE
+
 		#package.json
-		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GRUNTPACKAGEFILE
-		sed -i '' "s/\"description\": \"Website\",/\"description\": \"$project_id Website\",/g" $GRUNTPACKAGEFILE
+		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GULPPACKAGEFILE
+		sed -i '' "s/\"description\": \"Website\",/\"description\": \"$project_id Website\",/g" $GULPPACKAGEFILE
 	fi
 }
 

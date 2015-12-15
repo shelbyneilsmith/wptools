@@ -12,7 +12,7 @@
 	left: 5px;
 	height: 10px;
 	width: 10px;
-	@include border-radius(50%);
+	border-radius: 50%;
 	z-index: 9999;
 	background-color: white;
 	@include breakpoint( mobile ) { background-color: red; }

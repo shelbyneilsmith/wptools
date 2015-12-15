@@ -1,6 +1,6 @@
-/* Fonts */
+//* Fonts */
 
-/* Set local icon font */
+//* Set local icon font */
 @font-face {
 	font-family: '#{$icons}';
 	font-style: normal;
@@ -11,7 +11,7 @@
 		url('/wp-content/themes/yb/assets/fonts/icons/#{$icons}.ttf')  format('truetype');
 }
 
-/* @include fontFace ($font-name, $file-name, $weight: "normal") */
+//* @include fontFace ($font-name, $file-name, $weight: "normal") */
 
-/* Import Google Web Fonts */
+//* Import Google Web Fonts */
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);

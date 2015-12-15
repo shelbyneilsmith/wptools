@@ -19,7 +19,7 @@
 }
 
 .fltlft, .alignleft {
-	@include float-left;
+	float: left;
 	margin-right: 1.618em;
 	margin-bottom: 1.618em;
 	@include breakpoint(narrowColumn) {
@@ -32,7 +32,7 @@
 }
 
 .fltrt, .alignright {
-	@include float-right;
+	float: right;
 	margin-left: 1.618em;
 	margin-bottom: 1.618em;
 	@include breakpoint(narrowColumn) {
@@ -60,7 +60,7 @@
 		max-height: 0;
 		overflow: hidden;
 		width: 200px;
-		@include transition(all .15s);
+		transition: all .15s;
 		z-index: 999;
 		li {
 			a {
@@ -109,8 +109,8 @@
 	padding: 12px 20px;
 	font-weight:bold;
 	display: inline-block;
-	@include border-radius($border-radius);
-	@include transition(all $trans-speed);
+	border-radius: $border-radius;
+	transition: all $trans-speed;
 	text-decoration: none;
 	border: 0;
 	&:hover {

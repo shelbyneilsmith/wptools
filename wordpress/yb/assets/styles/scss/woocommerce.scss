@@ -1,7 +1,3 @@
-@import "compass/layout";
-@import "compass/utilities";
-@import "compass/typography";
-@import "compass/css3";
 /*-----------------------------------------------------------------------------------*/
 /*  WooCommerce General
 /*-----------------------------------------------------------------------------------*/
@@ -67,7 +63,7 @@
 			font-size: 12px;
 			line-height:12px;
 			color: #999999 !important;
-			@include border-radius(3px);
+			border-radius: 3px;
 	}
 	a {
 		&:hover {
@@ -106,8 +102,8 @@
 		margin:0 20px 20px 0;
 		padding: 20px 20px 15px 20px;
 		position: relative;
-		@include border-radius(4px);
-		@include box-shadow(0px 1px 2px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 4px;
+		box-shadow: 0px 1px 2px 0px rgba(180, 180, 180, 0.2);
 		overflow: hidden;
 		background: #fafafa;
 		&.last{
@@ -175,8 +171,8 @@
 		.attachment-shop_single{
 			border: 1px solid #cccccc;
 			overflow: hidden;
-			@include border-radius(4px);
-			@include box-shadow(0px 1px 2px 0px rgba(180, 180, 180, 0.2));
+			border-radius: 4px;
+			box-shadow: 0px 1px 2px 0px rgba(180, 180, 180, 0.2);
 		}
 		.thumbnails{
 			margin-top: 17px;
@@ -186,8 +182,8 @@
 				padding: 4px;
 				margin-right: 20px;
 				overflow: hidden;
-				@include border-radius(4px);
-				@include box-shadow(0px 1px 2px 0px rgba(180, 180, 180, 0.2));
+				border-radius: 4px;
+				box-shadow: 0px 1px 2px 0px rgba(180, 180, 180, 0.2);
 			}
 		}
 	}
@@ -235,8 +231,8 @@
 	overflow:hidden;
 	width:96px;
 	margin-right: 20px;
-	@include border-radius(3px);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+	border-radius: 3px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	.minus, .plus, .qty {
 		border:0;
 		color:#444444;
@@ -258,7 +254,7 @@
 		}
 	}
 	.minus, .plus{
-		@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+		background: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 		background-color: #F9F9F9;
 		cursor:pointer;
 		width:26px;
@@ -282,10 +278,10 @@ button.single_add_to_cart_button{
 	font-weight:bold;
 	display: inline-block;
 	color: #444444;
-	@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+	background: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 	background-color: #F9F9F9;
-	@include border-radius(3px);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+	border-radius: 3px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	&:hover{
 		color: #999999;
 	}
@@ -298,7 +294,7 @@ button.single_add_to_cart_button{
 		background: #fafafa;
 		border: 1px solid #d3d3d3;
 		clear: both;
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
 		td {
 			vertical-align: middle;
 			padding: 20px;
@@ -334,7 +330,7 @@ button.single_add_to_cart_button{
 .product_meta{
 	background: #fafafa;
 	padding: 20px;
-	@include border-radius(3px);
+	border-radius: 3px;
 	.posted_in, .tagged_as, .sku_wrapper{
 		display: block;
 		color: #999999;
@@ -362,7 +358,7 @@ button.single_add_to_cart_button{
 			border: 1px solid #d3d3d3;
 			display: block;
 			padding: 10px 20px;
-			@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+			background: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 			background-color: #F9F9F9;
 			&:hover{
 				color:#666666;
@@ -380,7 +376,7 @@ button.single_add_to_cart_button{
 		border: 1px solid #d3d3d3;
 		clear: both;
 		padding: 20px 20px 0px 20px;
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
 		h2 {
 			font-size: 18px;
 			color: #219fd1;
@@ -464,7 +460,7 @@ button.single_add_to_cart_button{
 		clear: both;
 		background: #fafafa;
 		padding: 20px;
-		@include border-radius(3px);
+		border-radius: 3px;
 		margin-bottom:20px;
 		border: none;
 		&:last-child{
@@ -475,8 +471,8 @@ button.single_add_to_cart_button{
 			margin-right: 20px;
 			display: block;
 			border: 4px solid white;
-			@include border-radius(3px);
-			@include box-shadow(0px 1px 3px rgba(black,0.4), 0 0 0 1px rgba(black,0.1));
+			border-radius: 3px;
+			box-shadow: 0px 1px 3px rgba(black,0.4), 0 0 0 1px rgba(black,0.1);
 		}
 		.comment-text .description{
 			clear:both;
@@ -520,11 +516,11 @@ p.stars {
 		display: block;
 		position: relative;
 		float: left;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		padding: 6px;
 		background: #fafafa;
 		margin-right: 5px;
-		@include border-radius(4px);
+		border-radius: 4px;
 		font-weight: 600;
 		&:hover, &.active {
 			background: #efefef;
@@ -579,7 +575,7 @@ p.stars {
 	a.button{
 		margin: 0;
 		float: right;
-		@include background-image(linear-gradient(bottom, #e9f2d2 0%, white 100%));
+		background-image: linear-gradient(to bottom, #e9f2d2 0%, white 100%);
 		background-color: #e9f2d2;
 		border-color:#c0da66;
 		color:#88b12b;
@@ -610,8 +606,8 @@ p.stars {
 .woocommerce, .woocommerce-page {
 	table {
 		&.shop_table {
-			@include border-radius(4px);
-			@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
+			border-radius: 4px;
+			box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
 			border:1px solid #ddd;
 			border-collapse:separate;
 			margin:0 -1px 24px 0;
@@ -689,7 +685,7 @@ p.stars {
 			vertical-align:middle;
 		}
 		a.remove {
-			@include border-radius(100%);
+			border-radius: 100%;
 			color:#c0081a;
 			display:block;
 			font-size:1.5em;
@@ -713,13 +709,13 @@ p.stars {
 					border: 1px solid #ccc;
 					padding: 10px 8px;
 					outline: none;
-					@include border-radius(2px);
+					border-radius: 2px;
 					color: #666;
 					font-size: 13px;
 					margin: 0 10px 0 0;
 					width: 180px;
 					color: #999;
-					@include box-shadow(0 1px 2px 0 rgba(180, 180, 180, 0.2));
+					box-shadow: 0 1px 2px 0 rgba(180, 180, 180, 0.2);
 					border: 1px solid #d4d4d4
 				}
 			}
@@ -758,8 +754,8 @@ p.stars {
 .cart_totals{
 	float: right;
 	width: 458px;
-	@include border-radius(4px);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.1));
+	border-radius: 4px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
 	border:1px solid #ddd;
 	overflow: hidden;
 	h2 {
@@ -793,8 +789,8 @@ p.stars {
 .shipping_calculator{
 	float: left;
 	width: 458px;
-	@include border-radius(4px);
-	@include box-shadow(0px 1px 2px 0px rgba(180, 180, 180, 0.1));
+	border-radius: 4px;
+	box-shadow: 0px 1px 2px 0px rgba(180, 180, 180, 0.1);
 	border:1px solid #ddd;
 	overflow: hidden;
 	h2 {
@@ -815,10 +811,10 @@ p.stars {
 		border: 1px solid #ddd;
 		font-weight:bold;
 		display: inline-block;
-		@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+		background-image: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 		background-color: #F9F9F9;
-		@include border-radius(3px);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 3px;
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	}
 }
 
@@ -832,8 +828,8 @@ p.stars {
 		padding: 20px 20px 0px 20px;
 		margin: 0 0 40px 0;
 		overflow: hidden;
-		@include border-radius(3px);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 3px;
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 		h3 {
 			border-bottom: 1px solid #dddddd;
 			background: #fafafa;
@@ -846,7 +842,7 @@ p.stars {
 
 .woocommerce form.checkout {
 	input, select, .submit, textarea{
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		width: 100%;
 		padding: 10px 10px;
 		background: #fafafa;
@@ -901,8 +897,8 @@ p.stars {
 	padding: 0px;
 	border: 1px solid #dddddd;
 	overflow: hidden;
-	@include border-radius(3px);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+	border-radius: 3px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	ul {
 		list-style: none;
 		margin: 0;
@@ -939,8 +935,8 @@ p.stars {
 			border: 1px solid #c0da66;
 			font-weight:bold;
 			display: inline-block;
-			@include border-radius(3px);
-			@include background-image(linear-gradient(bottom, #e9f2d2 0%, white 100%));
+			border-radius: 3px;
+			background: linear-gradient(to bottom, #e9f2d2 0%, white 100%);
 			background-color: #e9f2d2;
 			color:#88b12b;
 		}
@@ -965,8 +961,8 @@ p.stars {
 	border: 1px solid #dddddd;
 	overflow: hidden;
 	background: #fafafa;
-	@include border-radius(3px);
-	@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+	border-radius: 3px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 }
 
 /*.checkout_coupon .form-row-first{
@@ -988,12 +984,12 @@ p.stars {
 	}
 	.col-1, .col-2 {
 		width: 49%;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		padding: 20px;
 		border: 1px solid #dddddd;
 		overflow: hidden;
-		@include border-radius(3px);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 3px;
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	}
 	address{
 		font-style: normal;
@@ -1030,7 +1026,7 @@ p.stars {
 		padding: 0;
 	}
 	input, select, .submit, textarea{
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		width: 100%;
 		padding: 10px 10px;
 		background: #fafafa;
@@ -1045,10 +1041,10 @@ p.stars {
 		display: inline-block;
 		width: auto;
 		color: #219fd1;
-		@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+		background: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 		background-color: #F9F9F9;
-		@include border-radius(3px);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 3px;
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	}
 }
 
@@ -1163,13 +1159,13 @@ td.actions input{
 			z-index:2;
 			width:0.9em;
 			height:0.9em;
-			@include border-radius(1em);
+			border-radius: 1em;
 			border:1px solid #999999;
 			cursor:pointer;
 			background:#efefef;
 			outline:none;
 			top:-0.3em;
-			@include box-shadow(0 1px 2px rgba(black,0.3), inset 0 0 0 1px rgba(white,0.65));
+			box-shadow: 0 1px 2px rgba(black,0.3), inset 0 0 0 1px rgba(white,0.65);
 			&:last-child {
 				margin-left:-1em
 			}
@@ -1181,13 +1177,13 @@ td.actions input{
 			display:block;
 			border:0;
 			background:#efefef;
-			@include box-shadow(inset 0 0 0 1px rgba(0,0,0,0.5));
-			@include border-radius(1em);
+			box-shadow: inset 0 0 0 1px rgba(0,0,0,0.5);
+			border-radius: 1em;
 		}
 	}
 	.price_slider_wrapper {
 		.ui-widget-content {
-			@include border-radius(1em);
+			border-radius: 1em;
 			background:#1e1e1e;
 		}
 	}
@@ -1213,10 +1209,10 @@ td.actions input{
 		font-weight:bold;
 		display: inline-block;
 		color: #444444;
-		@include background-image(linear-gradient(bottom, #F7F7F7 0%, white 100%));
+		background: linear-gradient(to bottom, #F7F7F7 0%, white 100%);
 		background-color: #F9F9F9;
-		@include border-radius(3px);
-		@include box-shadow(0px 1px 1px 0px rgba(180, 180, 180, 0.2));
+		border-radius: 3px;
+		box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.2);
 	}
 }
 
@@ -1458,7 +1454,7 @@ td.actions input{
 .woocommerce form select,
 .woocommerce form submit,
 .woocommerce form textarea{
-	@include box-sizing(border-box);
+	box-sizing: border-box;
 	width: 100%;
 	padding: 10px 10px;
 	background: #fafafa;
