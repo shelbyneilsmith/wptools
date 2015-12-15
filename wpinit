@@ -94,7 +94,7 @@ node_symlinks() {
 	node_modules=(browser-sync del gulp gulp-autoprefixer gulp-cache gulp-concat gulp-imagemin gulp-jshint gulp-minify-css gulp-notify gulp-rename gulp-ruby-sass gulp-sourcemaps gulp-uglify jshint)
 
 	for i in ${node_modules[@]}; do
-		ln -s $SITES_DIR/$project_id/node_modules/$i $SITES_DIR/$project_id/web/node_modules/$i
+		ln -s $SITES_DIR/node_modules/$i $SITES_DIR/$project_id/web/node_modules/$i
 	done
 }
 
@@ -598,9 +598,10 @@ while getopts ":h" opt; do
 		h )
 			echo "Usage:"
 			echo "	wpinit -h"
-			echo "	wpinit new <project_id> [-d <prod_domain>] [-u <wp_user>] [-p <wp_pass>] [-t <testinst>] [-v <newvhost>]"
+			echo "	wpinit new <project_id> [-d <prod_domain>] [-u <wp_user>] [-p <wp_pass>] [-t <testinst>] [-v <newvhost>] [-s <node_symlinks>]"
 			echo "	wpinit collab <project_id>"
 			echo "	wpinit delete <project_id> [-k <killstaging>]"
+			echo "        wpinit nodesl <project_id> (helper - sets up node_modules symlinks for Gulp)"
 			exit 0
 			;;
 		\? )
@@ -651,6 +652,10 @@ if [[ $project_id && ${project_id} ]] ; then
 			siteinit
 
 			shift $((OPTIND -1))
+			;;
+		nodesl )
+			node_symlinks
+			exit 1
 			;;
 		collab )
 			siteinit
