@@ -1,5 +1,5 @@
 var projectID = '';
-
+var localTLD = '';
 var assetsDir = 'wp-content/themes/yb/assets/';
 
 var gulp = require('gulp'),
@@ -93,7 +93,7 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     browserSync.init({
-        proxy: projectID + ".yb"
+        proxy: projectID + "." + localTLD
     });
 
     // Watch .scss files

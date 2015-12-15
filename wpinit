@@ -232,6 +232,8 @@ writeconfigs () {
 
 		#Gulpfile.js
 		sed -i '' "s/var projectID = '';/var projectID = '$project_id';/g" $GULPFILE
+		sed -i '' "s/var assetsDir = '';/var assetsDir = 'wp-content/themes/yb/assets/';/g" $GULPFILE
+		sed -i '' "s/var localTLD = '';/var localTLD = '$LOCAL_URL_BASE';/g" $GULPFILE
 
 		#package.json
 		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GULPPACKAGEFILE
