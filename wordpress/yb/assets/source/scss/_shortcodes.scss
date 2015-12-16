@@ -1,0 +1,248 @@
+.gap {
+	display:block;
+	width:100%;
+	margin:0;
+	clear: both;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Accordion
+/*-----------------------------------------------------------------------------------*/
+.accordion {
+	.accordion-title{
+		border: 1px solid #ddd;
+		display: block;
+		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
+		background-color: #F9F9F9;
+		font-weight: 600;
+		margin-bottom: 10px;
+		a {
+			display: block;
+			padding:10px 15px 10px 15px;
+			background: url(../img/accordion-open.png) no-repeat right center;
+			color:#999999 !important;
+			i {
+				margin:0px 8px 0 0px;
+				opacity: 0.4;
+			}
+		}
+		&.active a{
+			color: #444444 !important;
+			background: url(../img/accordion-close.png) no-repeat right center;
+			i {
+				opacity: 0.95;
+			}
+		}
+	}
+	.accordion-inner{
+		padding:2px 12px 14px 12px;
+		display:none;
+	}
+	.accordion-inner div{
+		max-width: 100%;
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Columns
+/*-----------------------------------------------------------------------------------*/
+.one_half { width: 48%; @include breakpoint(narrowColumn) { width: 100%; } }
+.one_third { width: 30.66%; @include breakpoint(narrowColumn) { width: 100%; } }
+.two_third { width: 65.33%; @include breakpoint(narrowColumn) { width: 100%; } }
+.one_fourth { width: 22%; @include breakpoint(narrowColumn) { width: 100%; } }
+.three_fourth { width: 74%; @include breakpoint(narrowColumn) { width: 100%; } }
+
+.one_half,
+.one_third,
+.two_third,
+.three_fourth,
+.one_fourth {
+	position: relative;
+	margin-right: 4%;
+	margin-bottom: 20px;
+	float: left;
+	 @include breakpoint(narrowColumn) {
+	 	margin-right: 0;
+	 }
+}
+
+.last {margin-right:0 !important;}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Social Icons
+/*-----------------------------------------------------------------------------------*/
+
+.social-icon {
+	display: block;
+	float: left;
+	margin:0 5px 5px 0;
+	background-color: #efefef !important;
+	overflow: hidden;
+	width:40px;
+	height:40px;
+	a {
+		transition: all 0.2s ease 0s;
+		display:inline-block;
+		width:40px;
+		height:40px;
+		text-indent:-9999px;
+		background-position: 0px 0px;
+		background-repeat: no-repeat;
+		&:hover{
+			background-color: #cccccc;
+			background-position: 0px -40px !important;
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Tabs
+/*-----------------------------------------------------------------------------------*/
+
+.tabs {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 1px;
+}
+.tab {
+	float: left;
+	margin-right: -1px;
+	.tab a {
+		color: #666666;
+		border: 1px solid #d3d3d3;
+		display: block;
+		padding: 10px 20px;
+		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
+		background-color: #F9F9F9;
+		i {
+			opacity: 0.6;
+			margin:-1px 2px 0 2px;
+		}
+		&.selected {
+			background: $white;
+			border-bottom-color: $white;
+			color: #333333;
+			i {
+				opacity: 0.9;
+			}
+		}
+		&:hover{
+			color: #666666;
+			background: $white;
+		}
+	}
+}
+.panel {
+	background: $white;
+	border: 1px solid #d3d3d3;
+	clear: both;
+	padding: 20px 20px 0px 20px;
+	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+}
+
+/* Vertical Tabs */
+
+.tabstyle-vertical {
+	box-sizing: border-box;
+	.tabs{
+		display:block;
+		float: left;
+		width: 25%;
+		top: 0;
+		z-index: 2;
+	}
+	.tab{
+		float: none;
+		display: block;
+		margin-bottom: -1px;
+		a.selected {
+			background: $white;
+			 border-right-color: $white;
+			 border-bottom-color: #d3d3d3;
+			 color:#333333;
+		}
+	}
+	.panels {
+		float: left;
+		width: 75%;
+		margin-left: 0px;
+		z-index: 1;
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Toggle
+/*-----------------------------------------------------------------------------------*/
+
+.toggle{
+	margin-bottom: 20px;
+	.toggle-title{
+		border: 1px solid #ddd;
+		display: block;
+		position: relative;
+		padding: 10px 0px 10px 15px;
+		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
+		background-color: #F9F9F9;
+		font-weight: 600;
+		cursor: pointer;
+		overflow: hidden;
+		color: #999999;
+		span {
+			float: right;
+			display: block;
+			margin: -10px 0px -10px 0px;
+			width: 42px;
+			height: 42px;
+			background: url(../img/accordion-open.png) no-repeat right center;
+			color: #999999;
+		}
+		i {
+			margin: -2px 8px 0 0px;
+			opacity: 0.4;
+		}
+		&.active{
+			color:#444444;
+			span{
+				background: url(../img/accordion-close.png) no-repeat right center;
+			}
+			i {
+				opacity: 0.95;
+				line-height: 1;
+			}
+		}
+	}
+	.toggle-inner{
+		background: $white;
+		margin: 0;
+		border: 1px solid #ddd;
+		border-top: 0;
+		padding: 20px 20px 0px 20px;
+		display: none;
+		div {
+			max-width: 100%;
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Section
+/*-----------------------------------------------------------------------------------*/
+
+.section{
+	margin: 0;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+	background-position: center center;
+	background-size: cover;
+	&.section-parallax{
+		background-attachment: fixed;
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	EOF
+/*-----------------------------------------------------------------------------------*/

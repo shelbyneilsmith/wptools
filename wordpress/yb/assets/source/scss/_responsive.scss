@@ -1,0 +1,22 @@
+/* breakpoints */
+@mixin breakpoint($point) {
+	@if $point == mobile { @media screen and (max-width: $mobile-column) { @content } }
+	@if $point == narrowColumn { @media screen and (max-width: $narrow-column) { @content } }
+	@if $point == multiColumn { @media screen and (min-width: $multi-column){ @content } }
+	@if $point == max { @media screen and (min-width: $max-column){ @content } }
+}
+
+.break-indicator {
+	background-color: $white;
+	border-radius: 50%;
+	height: 10px;
+	left: 5px;
+	position: fixed;
+	top: 5px;
+	width: 10px;
+	z-index: 9999;
+	@include breakpoint(mobile) { background-color: red; }
+	@include breakpoint(narrowColumn) { background-color: yellow; }
+	@include breakpoint(multiColumn) { background-color: green; }
+	@include breakpoint(max) {background-color: purple; }
+}

@@ -9,8 +9,8 @@ $this->sections[] = array(
 			'title'     => __('Home Layout', 'yb'),
 			'subtitle'  => __('Select home content and sidebar alignment. <br /><br /><i>(Note: For consistency and simplicity, if setting the home page to be full width, this will also apply to the header and footer, regardless of any other layout settings.)</i>', 'yb'),
 			'options'   => array(
-				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/images/admin/layout-default.png'),
-				'Full Width' => array('alt' => 'Full Width', 'img' =>  '/wp-content/themes/yb/assets/images/admin/layout-fullwidth.png'),
+				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/img/admin/layout-default.png'),
+				'Full Width' => array('alt' => 'Full Width', 'img' =>  '/wp-content/themes/yb/assets/img/admin/layout-fullwidth.png'),
 				'Centered No Sidebar' => array('alt' => 'Centered No Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/1col.png'),
 				'Centered Left Sidebar' => array('alt' => 'Centered Left Sidebar',  'img' => ReduxFramework::$_url . 'assets/img/2cl.png'),
 				'Centered Right Sidebar' => array('alt' => 'Centered Right Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/2cr.png'),

@@ -28,8 +28,8 @@ $this->sections[] = array(
 			'required' => array('opt-checkbox-woocommerce','=','1'),
 			'subtitle'  => __('Select store content and sidebar alignment.', 'yb'),
 			'options'   => array(
-				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/images/admin/layout-default.png'),
-				'Full Width' => array('alt' => 'Full Width', 'img' =>  '/wp-content/themes/yb/assets/images/admin/layout-fullwidth.png'),
+				'default' => array('alt' => 'Global Default',       'img' => '/wp-content/themes/yb/assets/img/admin/layout-default.png'),
+				'Full Width' => array('alt' => 'Full Width', 'img' =>  '/wp-content/themes/yb/assets/img/admin/layout-fullwidth.png'),
 				'Centered No Sidebar' => array('alt' => 'Centered No Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/1col.png'),
 				'Centered Left Sidebar' => array('alt' => 'Centered Left Sidebar',  'img' => ReduxFramework::$_url . 'assets/img/2cl.png'),
 				'Centered Right Sidebar' => array('alt' => 'Centered Right Sidebar', 'img' => ReduxFramework::$_url . 'assets/img/2cr.png'),

@@ -4,9 +4,9 @@ function yb_scripts_basic() {
 	global$ybwp_data;
 
 	/* register scripts */
-	// wp_register_script( 'modernizr', get_template_directory_uri() . '/assets/scripts/vendor/modernizr.custom.min.js', 'jquery', null, TRUE );
+	// wp_register_script( 'modernizr', get_template_directory_uri() . '/assets/vendor/modernizr.custom.min.js', 'jquery', null, TRUE );
 
-	wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/assets/scripts/build/main.min.js', array( 'jquery' ), null, TRUE );
+	wp_register_script( 'yb-js', get_stylesheet_directory_uri() . '/assets/js/scripts.min.js', array( 'jquery' ), null, TRUE );
 
 	/* enqueue scripts */
 	wp_enqueue_script('jquery');
@@ -15,7 +15,7 @@ function yb_scripts_basic() {
 
 	/* If Mobile menu is set to Offscreen nav */
 	if (!empty($ybwp_data['opt-checkbox-mobilemenu']) && $ybwp_data['opt-select-mobilemenutype'] === "offscreen-nav" ) {
-		wp_register_script( 'yb-mobilemenu', get_stylesheet_directory_uri() . '/assets/scripts/build/mobilemenu.min.js', array( 'jquery' ), null, FALSE );
+		wp_register_script( 'yb-mobilemenu', get_stylesheet_directory_uri() . '/assets/js/mobilemenu.min.js', array( 'jquery' ), null, FALSE );
 		wp_enqueue_script( 'yb-mobilemenu' );
 	}
 
@@ -28,10 +28,10 @@ function yb_styles_basic() {
 	global $ybwp_data;
 
 	/* register main stylesheet */
-	wp_register_style( 'yb-stylesheet', get_stylesheet_directory_uri() . '/assets/styles/css/screen.min.css', array(), NULL, 'all' );
+	wp_register_style( 'yb-stylesheet', get_stylesheet_directory_uri() . '/assets/css/screen.min.css', array(), NULL, 'all' );
 
 	/* ie-only style sheet */
-	wp_register_style( 'yb-ie-only', get_stylesheet_directory_uri() . '/assets/styles/css/ie.min.css', array(), NULL );
+	wp_register_style( 'yb-ie-only', get_stylesheet_directory_uri() . '/assets/css/ie.min.css', array(), NULL );
 
 	/* enqueue stylesheets */
 	if( !empty($ybwp_data['opt-checkbox-dashicons'] ) ) {
@@ -43,7 +43,7 @@ function yb_styles_basic() {
 	wp_enqueue_style('yb-ie-only');
 
 	if (class_exists('Woocommerce')){
-		wp_register_style( 'woocommerce', get_template_directory_uri() . '/assets/styles/css/woocommerce.min.css', array(), '1', 'all' );
+		wp_register_style( 'woocommerce', get_template_directory_uri() . '/assets/css/woocommerce.min.css', array(), '1', 'all' );
 		wp_enqueue_style( 'woocommerce' );
 	}
 }

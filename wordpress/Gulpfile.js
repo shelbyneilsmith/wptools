@@ -19,27 +19,27 @@ var gulp = require('gulp'),
 
 var paths = {
     css: {
-        src: [assetsDir + 'styles/scss'],
-        dist: assetsDir + 'styles/css'
+        src: [assetsDir + 'source/scss'],
+        dist: assetsDir + 'css'
     },
     js: {
-        src: [assetsDir + 'scripts/source'],
-        dist: assetsDir + 'scripts/build'
+        src: [assetsDir + 'source/js'],
+        dist: assetsDir + 'js'
     },
     img: {
-        src: [assetsDir + 'images'],
-        dist: assetsDir + 'images'
+        src: [assetsDir + 'source/img'],
+        dist: assetsDir + 'img'
     }
 };
 
 gulp.task('lint', function() {
     return gulp.src(paths.js.src + '/**/*.js')
-        .pipe(jshint())
+        .pipe(jshint({"globals": ["jQuery", "alert", "Modernizr", "MyAjax", "G_vmlCanvasManager", "WebFontConfig", "Raphael", "SVGStateMap"]}))
         .pipe(jshint.reporter('default'));
 });
 
 gulp.task('styles', function() {
-    return sass(paths.css.src + '/**/*.scss', { sourcemap: true })
+    return sass(paths.css.src + '/**/*.scss', { sourcemap: true, require: ['susy'], })
         .pipe(sourcemaps.init())
         .on('error', function (err) {
             console.error('Error!', err.message);
@@ -54,7 +54,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('styles-dist', function() {
-    return sass(paths.css.src + '/**/*.scss', { style: 'compressed' })
+    return sass(paths.css.src + '/**/*.scss', { style: 'compressed', require: ['susy'] })
         .pipe(minifycss())
         .pipe(rename({suffix: '.min'}))
         .pipe(autoprefixer('last 2 version'))
@@ -64,7 +64,7 @@ gulp.task('styles-dist', function() {
 
 gulp.task('scripts', function() {
     return gulp.src(paths.js.src + '/**/*.js')
-        .pipe(concat('main.js'))
+        // .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.js.dist))
         .pipe(notify({ message: 'Scripts task complete' }))
@@ -73,7 +73,7 @@ gulp.task('scripts', function() {
 
 gulp.task('scripts-dist', function() {
     return gulp.src(paths.js.src + '/**/*.js')
-        .pipe(concat('main.js'))
+        // .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest(paths.js.dist))
@@ -82,25 +82,28 @@ gulp.task('scripts-dist', function() {
 
 gulp.task('images', function() {
     return gulp.src([paths.img.src + '/**/*'])
-        .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
+        .pipe(cache(imagemin({ pngquant: true, progressive: true, interlaced: true })))
         .pipe(gulp.dest(paths.img.dist))
         .pipe(notify({ message: 'Images task complete' }));
 });
 
 gulp.task('clean', function() {
-    return del([paths.css.dist, paths.js.dist, paths.img.dist]);
+    return del([paths.css.dist, paths.js.dist]);
 });
 
 gulp.task('watch', function() {
     browserSync.init({
-        proxy: projectID + "." + localTLD
-    });
+        proxy: projectID + "." + localTLD,
+});
 
     // Watch .scss files
     gulp.watch(paths.css.src + '/**/*.scss', ['styles']);
 
     // Watch .js files
     gulp.watch(paths.js.src + '/**/*.js', ['scripts']);
+
+    // Watch image files
+    gulp.watch(paths.img.src + '/**/*', ['images']);
 });
 
 gulp.task('default', ['watch']);

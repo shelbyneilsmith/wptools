@@ -1,0 +1,45 @@
+//* ------------------------------------------------------------------------ */
+//* Default Colors */
+//* ------------------------------------------------------------------------ */
+
+$white: #fff;
+$black: #000;
+$off-black: #222;
+$light-grey: #ddd;
+$dark-grey: #555;
+
+//* ------------------------------------------------------------------------ */
+//* Project Colors */
+//* ------------------------------------------------------------------------ */
+
+$brand-primary: #f00;
+
+//* ------------------------------------------------------------------------ */
+//* Theme Colors */
+//* ------------------------------------------------------------------------ */
+
+$accent-color: $brand-primary;
+
+$main-bg-color: $white;
+$body-font-color: $dark-grey;
+$footer-color: $off-black;
+$footer-text-color: $light-grey;
+
+$mobilemenu-bg-color: $dark-grey;
+$mobilemenu-button-color: $accent-color;
+$mobilemenu-button-text-color: $black;
+$mobilemenu-close-button-color: $white;
+
+$button-color: $accent-color;
+$button-text-color: $white;
+$button-alt-color: $dark-grey;
+$button-alt-text-color: $white;
+
+$hr-color: $light-grey !default;
+
+$blockquote-border-color: $light-grey !default;
+
+//$alert-color-info: #468bbf;
+//$alert-color_warning: #efd877;
+//$alert-color_success: #88b12b;
+//$alert-color_error: #d25c5a;

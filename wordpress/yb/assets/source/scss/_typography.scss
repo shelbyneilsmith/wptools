@@ -1,0 +1,119 @@
+//
+// Typography
+// --------------------------------------------------
+
+body {
+	/* 16px / 22px */
+	font-size: #{$font-size-base}px;
+	line-height: #{$line-height-computed / $font-size-base}em;
+	font-family: $copy-font;
+}
+
+p, ul, ol, dl, blockquote {
+	margin-bottom: 1.618em;
+}
+
+
+// Headings
+// -------------------------
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $display-font;
+	margin-bottom: 0.809em;
+	font-weight: $display-font-weight;
+	text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: $display-font;
+	font-weight: $display-font-weight;
+}
+
+h1, .h1 { font-size: $font-size-h1; line-height: ($line-height-computed * 1.5) / 30 * 1em; }
+h2, .h2 { font-size: $font-size-h2; line-height: ($line-height-computed * 1.5) / 30 * 1em; }
+h3, .h3 { font-size: $font-size-h3; line-height: 1.091em; }
+h4, .h4 { font-size: $font-size-h4; line-height: 1.333em; }
+h5, .h5 { font-size: $font-size-h5; line-height: 1.5em; }
+h6, .h6 { font-size: $font-size-h6; line-height: 1.5em; }
+
+// Page header
+// -------------------------
+
+.page-title {
+	font-family: $display-font;
+	font-size: $font-size-h1;
+	font-weight: $display-font-weight;
+	margin-bottom: $line-height-computed;
+	text-rendering: optimizeLegibility;
+}
+
+/* LINKS
+----------------------------------------------------------------------------------------*/
+a,
+a:visited {
+	color: $accent-color;
+	transition: all $trans-speed;
+	text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+
+// Lists
+// -------------------------
+
+// Unordered and Ordered lists
+ul,
+ol {
+	margin-bottom: ($line-height-computed / 2);
+	margin-top: 0;
+
+	ul,
+	ol {
+		margin-bottom: 0;
+	}
+}
+
+// List options
+
+.list-media {
+	list-style: none;
+	margin-left: 0;
+}
+
+// Inline turns list items into inline-block
+.list-inline {
+	@include list-media;
+	margin-left: -5px;
+
+	> li {
+		display: inline-block;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+}
+
+
+// Blockquotes
+blockquote {
+  border-left: 5px solid $blockquote-border-color;
+  font-size: $blockquote-font-size;
+  margin: 0 0 $line-height-computed;
+  padding: ($line-height-computed / 2) $line-height-computed;
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Addresses
+address {
+  font-style: normal;
+  line-height: $line-height-base;
+  margin-bottom: $line-height-computed;
+}
+
