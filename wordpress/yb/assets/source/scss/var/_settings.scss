@@ -37,11 +37,11 @@ $has-alt-btn-color: true;
 //* responsive breakpoint settings */
 $mobile-column: (400 / $font-size-base) * 1em;
 $narrow-column: (720 / $font-size-base) * 1em;
-$multi-column: (1080 / $font-size-base) * 1em;
+$wide-column: (1080 / $font-size-base) * 1em;
 $max-column: (1600 / $font-size-base) * 1em;
 
 $main-width: $narrow-column;
-$multi-width: $multi-column;
+$wide-width: $wide-column;
 $max-width: $max-column;
 $narrow-width: 95%;
 $mobile-width: 90%;

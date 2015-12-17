@@ -33,14 +33,14 @@
 				</div>
 			<?php endwhile; ?>
 
-			<?php get_template_part( 'assets/inc/partial', 'pagination' ); ?>
+			<?php get_template_part( 'assets/inc/partial/partial', 'pagination' ); ?>
 
 		<?php else : ?>
 
 			<h2><?php _e('No results found.', 'yb') ?></h2>
 
 		<?php endif; ?>
-		
+
 	</div> <!-- end #content -->
 
 	<?php get_sidebar(); ?>

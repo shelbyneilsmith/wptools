@@ -2,39 +2,45 @@
 .site-footer {
 	color: $footer-text-color;
 
-	@include breakpoint(narrowColumn) { background-color: $footer-color; }
+	@include breakpoint(narrow) { background-color: $footer-color; }
 	& > .container {
 		padding: 3em 0;
 	}
-	a{
+
+	a {
 		color:#999999;
 		&:hover {
-			color: white;
+			color: $white;
 		}
 	}
+
 	.widget {
 		margin-top: 1em;
 		margin-bottom: 2em;
-		@include breakpoint(narrowColumn) {
+		@include breakpoint(narrow) {
 			margin-bottom: 0;
 			&:last-of-type {
 				margin-bottom: 2em;
 			}
 		}
+
 		h3 {
 			font-size:15px;
-			color: white;
-			padding:0 0 5px 0;
+			color: $white;
+			padding: 0 0 5px;
 			border-bottom:1px solid $dark-grey;
-			margin: 0 0 20px 0;
+			margin: 0 0 20px;
 		}
+
 		ul {
 			margin-bottom: 0;
 		}
-		&.widget_nav_menu {
+
+		&.widget-nav-menu {
 			ul {
 				list-style: none;
 				margin-left: 0;
+
 				li {
 					list-style: none;
 				}
@@ -46,6 +52,7 @@
 				padding: 4px;
 				background: $off-black;
 				box-shadow: none;
+
 				&:hover {
 					background: $accent-color;
 					border-color: $accent-color;
@@ -56,7 +63,7 @@
 }
 
 #site-footer-nav {
-	padding:1em 0;
+	padding: 1em 0;
 
 	ul#menu-footer-navigation {
 		@extend %clearfix;
@@ -66,7 +73,8 @@
 			margin-right: 30px;
 
 			&:last-of-type { margin-right: 0; }
-			@include breakpoint(narrowColumn) { width: 100%; }
+
+			@include breakpoint(narrow) { width: 100%; }
 		}
 	}
 }
@@ -77,9 +85,9 @@
 	padding:1em 0;
 	a {
 		color: #888888;
-		&:hover { color: white; }
+		&:hover { color: $white; }
 	}
-	@include breakpoint(narrowColumn) {
+	@include breakpoint(narrow) {
 		text-align: center;
 	}
 }

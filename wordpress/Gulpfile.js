@@ -1,6 +1,6 @@
 var projectID = '';
 var localTLD = '';
-var assetsDir = 'wp-content/themes/yb/assets/';
+var assetsDir = '';
 
 var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),

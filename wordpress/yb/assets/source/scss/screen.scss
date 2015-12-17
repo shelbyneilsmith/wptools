@@ -11,13 +11,13 @@ Tags: yb
 
 **/
 
-@charset "utf-8";
+@charset 'utf-8';
 
-@import "var/settings";
+@import 'var/settings';
 
 @import 'reset';
 
-/* theme styles */
+//* theme styles */
 
 @import 'var/colors';
 @import 'responsive';
@@ -36,8 +36,8 @@ Tags: yb
 /* ------------------------------------------------------------------------ */
 
 body, .inner-wrap {
-	overflow-x: hidden;
 	background-color: $footer-color;
+	overflow-x: hidden;
 }
 
 #wrapper {
@@ -57,11 +57,12 @@ body, .inner-wrap {
 	padding:0 0 2em;
 	margin-bottom:2em;
 	border-bottom: 1px solid $light-grey;
+
 	h1 { margin:0; }
 }
 
 #page-wrap, .inner-wrap {
-	background-color:$main-bg-color;
+	background-color: $main-bg-color;
 }
 
 #page-wrap {
@@ -70,32 +71,32 @@ body, .inner-wrap {
 }
 
 #breadcrumbs-nav {
-	margin-top:1em;
+	margin-top: 1em;
 }
 
 .content-post {
-	margin-bottom:2em;
+	margin-bottom: 2em;
 
-	h2.post-title {
-		margin-bottom:8px;
-	}
+	.post-title {
+		margin-bottom: 8px;
 
-	h2.post-title a {
-		text-decoration: none;
+		a {
+			text-decoration: none;
+		}
 	}
 
 	.post-meta {
-		margin-bottom:.5em;
-	}
+		margin-bottom: .5em;
 
-	.post-meta span {
-		font-size: .9em;
+		span {
+			font-size: .9em;
+		}
 	}
 }
 
 .type-post {
 	#author-info {
-		margin-bottom:2em;
+		margin-bottom: 2em;
 	}
 }
 
@@ -105,4 +106,4 @@ body, .inner-wrap {
 
 @import 'print';
 
-/* EOF */
+//* EOF */

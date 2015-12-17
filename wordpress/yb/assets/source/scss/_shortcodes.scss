@@ -9,48 +9,52 @@
 /*	Accordion
 /*-----------------------------------------------------------------------------------*/
 .accordion {
-	.accordion-title{
+	.accordion-title {
 		border: 1px solid #ddd;
 		display: block;
 		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
 		background-color: #F9F9F9;
 		font-weight: 600;
 		margin-bottom: 10px;
+
 		a {
 			display: block;
-			padding:10px 15px 10px 15px;
-			background: url(../img/accordion-open.png) no-repeat right center;
+			padding: 10px 15px 10px 15px;
+			background: url('../img/accordion-open.png') no-repeat right center;
 			color:#999999 !important;
 			i {
-				margin:0px 8px 0 0px;
-				opacity: 0.4;
+				margin:0 8px 0 0px;
+				opacity: .4;
 			}
 		}
-		&.active a{
+
+		&.active a {
 			color: #444444 !important;
-			background: url(../img/accordion-close.png) no-repeat right center;
+			background: url('../img/accordion-close.png') no-repeat right center;
 			i {
-				opacity: 0.95;
+				opacity: .95;
 			}
 		}
 	}
-	.accordion-inner{
-		padding:2px 12px 14px 12px;
+
+	.accordion-inner {
+		padding: 2px 12px 14px;
 		display:none;
-	}
-	.accordion-inner div{
-		max-width: 100%;
+
+		div {
+			max-width: 100%;
+		}
 	}
 }
 
 /*-----------------------------------------------------------------------------------*/
 /*	Columns
 /*-----------------------------------------------------------------------------------*/
-.one_half { width: 48%; @include breakpoint(narrowColumn) { width: 100%; } }
-.one_third { width: 30.66%; @include breakpoint(narrowColumn) { width: 100%; } }
-.two_third { width: 65.33%; @include breakpoint(narrowColumn) { width: 100%; } }
-.one_fourth { width: 22%; @include breakpoint(narrowColumn) { width: 100%; } }
-.three_fourth { width: 74%; @include breakpoint(narrowColumn) { width: 100%; } }
+.one_half { width: 48%; @include breakpoint(narrow) { width: 100%; } }
+.one_third { width: 30.66%; @include breakpoint(narrow) { width: 100%; } }
+.two_third { width: 65.33%; @include breakpoint(narrow) { width: 100%; } }
+.one_fourth { width: 22%; @include breakpoint(narrow) { width: 100%; } }
+.three_fourth { width: 74%; @include breakpoint(narrow) { width: 100%; } }
 
 .one_half,
 .one_third,
@@ -61,7 +65,8 @@
 	margin-right: 4%;
 	margin-bottom: 20px;
 	float: left;
-	 @include breakpoint(narrowColumn) {
+
+	 @include breakpoint(narrow) {
 	 	margin-right: 0;
 	 }
 }
@@ -81,17 +86,19 @@
 	overflow: hidden;
 	width:40px;
 	height:40px;
+
 	a {
 		transition: all 0.2s ease 0s;
 		display:inline-block;
 		width:40px;
 		height:40px;
 		text-indent:-9999px;
-		background-position: 0px 0px;
+		background-position: 0 0;
 		background-repeat: no-repeat;
-		&:hover{
+
+		&:hover {
 			background-color: #cccccc;
-			background-position: 0px -40px !important;
+			background-position: 0 -40px !important;
 		}
 	}
 }
@@ -107,9 +114,11 @@
 	position: relative;
 	top: 1px;
 }
+
 .tab {
 	float: left;
 	margin-right: -1px;
+
 	.tab a {
 		color: #666666;
 		border: 1px solid #d3d3d3;
@@ -117,47 +126,55 @@
 		padding: 10px 20px;
 		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
 		background-color: #F9F9F9;
+
 		i {
-			opacity: 0.6;
-			margin:-1px 2px 0 2px;
+			opacity: .6;
+			margin: -1px 2px 0 2px;
 		}
+
 		&.selected {
 			background: $white;
 			border-bottom-color: $white;
 			color: #333333;
+
 			i {
-				opacity: 0.9;
+				opacity: .9;
 			}
 		}
-		&:hover{
+
+		&:hover {
 			color: #666666;
 			background: $white;
 		}
 	}
 }
+
 .panel {
 	background: $white;
 	border: 1px solid #d3d3d3;
 	clear: both;
-	padding: 20px 20px 0px 20px;
-	box-shadow: 0px 1px 1px 0px rgba(180, 180, 180, 0.1);
+	padding: 20px 20px 0;
+	box-shadow: 0 1px 1px 0 rgba(180, 180, 180, .1);
 }
 
 /* Vertical Tabs */
 
 .tabstyle-vertical {
 	box-sizing: border-box;
-	.tabs{
+
+	.tabs {
 		display:block;
 		float: left;
 		width: 25%;
 		top: 0;
 		z-index: 2;
 	}
-	.tab{
+
+	.tab {
 		float: none;
 		display: block;
 		margin-bottom: -1px;
+
 		a.selected {
 			background: $white;
 			 border-right-color: $white;
@@ -165,10 +182,11 @@
 			 color:#333333;
 		}
 	}
+
 	.panels {
 		float: left;
 		width: 75%;
-		margin-left: 0px;
+		margin-left: 0;
 		z-index: 1;
 	}
 }
@@ -177,50 +195,58 @@
 /*	Toggle
 /*-----------------------------------------------------------------------------------*/
 
-.toggle{
+.toggle {
 	margin-bottom: 20px;
-	.toggle-title{
+
+	.toggle-title {
 		border: 1px solid #ddd;
 		display: block;
 		position: relative;
-		padding: 10px 0px 10px 15px;
+		padding: 10px 0 10px 15px;
 		background: linear-gradient(to bottom, #F7F7F7 0%, $white 100%);
 		background-color: #F9F9F9;
 		font-weight: 600;
 		cursor: pointer;
 		overflow: hidden;
 		color: #999999;
+
 		span {
 			float: right;
 			display: block;
-			margin: -10px 0px -10px 0px;
+			margin: -10px 0;
 			width: 42px;
 			height: 42px;
-			background: url(../img/accordion-open.png) no-repeat right center;
+			background: url('../img/accordion-open.png') no-repeat right center;
 			color: #999999;
 		}
+
 		i {
-			margin: -2px 8px 0 0px;
-			opacity: 0.4;
+			margin: -2px 8px 0 0;
+			opacity: .4;
 		}
-		&.active{
+
+		&.active {
 			color:#444444;
-			span{
-				background: url(../img/accordion-close.png) no-repeat right center;
+
+			span {
+				background: url('../img/accordion-close.png') no-repeat right center;
 			}
+
 			i {
-				opacity: 0.95;
+				opacity: .95;
 				line-height: 1;
 			}
 		}
 	}
-	.toggle-inner{
+
+	.toggle-inner {
 		background: $white;
 		margin: 0;
 		border: 1px solid #ddd;
 		border-top: 0;
-		padding: 20px 20px 0px 20px;
+		padding: 20px 20px 0;
 		display: none;
+
 		div {
 			max-width: 100%;
 		}
@@ -231,14 +257,15 @@
 /*	Section
 /*-----------------------------------------------------------------------------------*/
 
-.section{
+.section {
 	margin: 0;
 	padding: 0;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
 	background-size: cover;
-	&.section-parallax{
+
+	&.section-parallax {
 		background-attachment: fixed;
 	}
 }

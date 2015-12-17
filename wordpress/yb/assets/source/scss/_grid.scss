@@ -5,18 +5,18 @@
 	margin: 0 auto;
 	/* width: $mainWidth; */
 	width: 100%;
-	@include breakpoint(multiColumn) {
-		width: $multiWidth;
+	@include breakpoint(wide) {
+		width: $wide-width;
 	}
 	@include breakpoint(max) {
-		width: $maxWidth;
+		width: $max-width;
 	}
-	@include breakpoint(narrowColumn) {
-		width: $narrowWidth;
+	@include breakpoint(narrow) {
+		width: $narrow-width;
 		margin: 0 auto;
 	}
 	@include breakpoint(mobile) {
-		width: $mobileWidth;
+		width: $mobile-width;
 	}
 	/* Self Clearing Goodness */
 	&:after {
@@ -33,17 +33,16 @@
 .full-width #page-wrap .container,
 .full-width #title .container,
 .full-width #site-masthead .container,
-.full-width #footer .container,
-{ width:100%; }
+.full-width #footer .container { width: 100%; }
 
 .sidebar-left #content { float:right; }
 .sidebar-right #content { float:left; }
 
 .column, .columns {
 	float: left;
-	margin-left: $gutter * 0.5;
-	margin-right: $gutter * 0.5;
-	@include breakpoint(narrowColumn) {
+	margin-left: $gutter * .5;
+	margin-right: $gutter * .5;
+	@include breakpoint(narrow) {
 		width: 100%;
 		margin: 0;
 	}
@@ -51,59 +50,60 @@
 
 /* Base Grid */
 
-@mixin columnWidth($numCols) {
-	width: ($columnWidth * $numCols) + ($gutter * ($numCols - 1));
-	@include breakpoint(narrowColumn) {
+@mixin column-width($num-cols) {
+	width: ($column-width * $num-cols) + ($gutter * ($num-cols - 1));
+
+	@include breakpoint(narrow) {
 		width: 100%;
 	}
 }
 
 .container .one.column,
-.container .one.columns { @include columnWidth(1); }
-.container .two.columns { @include columnWidth(2); }
-.container .three.columns { @include columnWidth(3); }
-.container .four.columns { @include columnWidth(4); }
-.container .five.columns { @include columnWidth(5); }
-.container .six.columns { @include columnWidth(6); }
-.container .seven.columns { @include columnWidth(7); }
-.container .eight.columns { @include columnWidth(8);  }
-.container .nine.columns { @include columnWidth(9); }
-.container .ten.columns { @include columnWidth(10); }
-.container .eleven.columns { @include columnWidth(11); }
-.container .twelve.columns { @include columnWidth(12); }
-.container .thirteen.columns { @include columnWidth(13); }
-.container .fourteen.columns { @include columnWidth(14);  }
-.container .fifteen.columns { @include columnWidth(15); }
-.container .sixteen.columns, .sixteen.columns { @include columnWidth(16); }
+.container .one.columns { @include column-width(1); }
+.container .two.columns { @include column-width(2); }
+.container .three.columns { @include column-width(3); }
+.container .four.columns { @include column-width(4); }
+.container .five.columns { @include column-width(5); }
+.container .six.columns { @include column-width(6); }
+.container .seven.columns { @include column-width(7); }
+.container .eight.columns { @include column-width(8);  }
+.container .nine.columns { @include column-width(9); }
+.container .ten.columns { @include column-width(10); }
+.container .eleven.columns { @include column-width(11); }
+.container .twelve.columns { @include column-width(12); }
+.container .thirteen.columns { @include column-width(13); }
+.container .fourteen.columns { @include column-width(14);  }
+.container .fifteen.columns { @include column-width(15); }
+.container .sixteen.columns, .sixteen.columns { @include column-width(16); }
 
-.container .one-half.columns { width: 50% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
-.container .one-third.columns { width: 33.3334% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
-.container .two-thirds.columns { width: 66.6667% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-half.columns { width: 50% - $gutter; @include breakpoint(narrow) { width: 100%; } }
+.container .one-third.columns { width: 33.3334% - $gutter; @include breakpoint(narrow) { width: 100%; } }
+.container .two-thirds.columns { width: 66.6667% - $gutter; @include breakpoint(narrow) { width: 100%; } }
 
-.container .one-fourth.columns { width: 25% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
-.container .one-fifth.columns { width: 20% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
-.container .one-sixth.columns { width: 16.6667% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
-.container .one-seventh.columns { width: 14.285714% - $gutter; @include breakpoint(narrowColumn) { width: 100%; } }
+.container .one-fourth.columns { width: 25% - $gutter; @include breakpoint(narrow) { width: 100%; } }
+.container .one-fifth.columns { width: 20% - $gutter; @include breakpoint(narrow) { width: 100%; } }
+.container .one-sixth.columns { width: 16.6667% - $gutter; @include breakpoint(narrow) { width: 100%; } }
+.container .one-seventh.columns { width: 14.285714% - $gutter; @include breakpoint(narrow) { width: 100%; } }
 
 /* Offsets */
-@mixin columnOffset($offsetNum) {
-	margin-left: $columnWidth * $offsetNum;
+@mixin column-offset($offset-num) {
+	margin-left: $column-width * $offset-num;
 }
-.container .offset-by-one { @include columnOffset(1);  }
-.container .offset-by-two { @include columnOffset(2);  }
-.container .offset-by-three { @include columnOffset(3);  }
-.container .offset-by-four  { @include columnOffset(4);  }
-.container .offset-by-five  { @include columnOffset(5);  }
-.container .offset-by-six { @include columnOffset(6);  }
-.container .offset-by-seven  { @include columnOffset(7);  }
-.container .offset-by-eight  { @include columnOffset(8);  }
-.container .offset-by-nine { @include columnOffset(9);  }
-.container .offset-by-ten { @include columnOffset(10);  }
-.container .offset-by-eleven  { @include columnOffset(11);  }
-.container .offset-by-twelve { @include columnOffset(12);  }
-.container .offset-by-thirteen { @include columnOffset(13);  }
-.container .offset-by-fourteen { @include columnOffset(14);  }
-.container .offset-by-fifteen { @include columnOffset(15); }
+.container .offset-by-one { @include column-offset(1);  }
+.container .offset-by-two { @include column-offset(2);  }
+.container .offset-by-three { @include column-offset(3);  }
+.container .offset-by-four  { @include column-offset(4);  }
+.container .offset-by-five  { @include column-offset(5);  }
+.container .offset-by-six { @include column-offset(6);  }
+.container .offset-by-seven  { @include column-offset(7);  }
+.container .offset-by-eight  { @include column-offset(8);  }
+.container .offset-by-nine { @include column-offset(9);  }
+.container .offset-by-ten { @include column-offset(10);  }
+.container .offset-by-eleven  { @include column-offset(11);  }
+.container .offset-by-twelve { @include column-offset(12);  }
+.container .offset-by-thirteen { @include column-offset(13);  }
+.container .offset-by-fourteen { @include column-offset(14);  }
+.container .offset-by-fifteen { @include column-offset(15); }
 
 #content {
 	@extend .sixteen;

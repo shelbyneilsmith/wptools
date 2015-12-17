@@ -3,28 +3,32 @@
 /* ------------------------------------------------------------------------ */
 
 html.js body.mobile-menu .nav-btn {
-	@include breakpoint(narrowColumn) {
+	@include breakpoint(narrow) {
 		position: relative;
 		background: $mobilemenu-button-color;
 		color: $mobilemenu-button-text-color;
 		padding: 5px 10px;
 		z-index: 999;
 		text-align: center;
+
 		&:before {
 			content: '\2630';
 			font-size: 16px;
 		}
+
 		&.right {
 			position: absolute;
 			top: 3em;
 			right: 0;
 			float: right;
 		}
+
 		&.left {
 			top: 0;
 			float: left;
 			margin-bottom: 20px;
 		}
+
 		&.thumb-btn {
 			position: fixed;
 			top: auto;
@@ -34,9 +38,11 @@ html.js body.mobile-menu .nav-btn {
 			width: 100px;
 			padding: 0 10px;
 			z-index: 99999;
+
 			&.right {
 				right: 0;
 			}
+
 			&.left {
 				left: 0;
 				margin-bottom: 0;
@@ -49,9 +55,8 @@ html.js body.mobile-menu .nav-btn {
 /* Close Button */
 /* ------------------------------------------------------------------------ */
 
-html.js body.mobile-menu  {
-	@include breakpoint(narrowColumn) {
-
+.js .mobile-menu {
+	@include breakpoint(narrow) {
 		.close-btn {
 			position: absolute;
 			top: 30px;
@@ -61,6 +66,7 @@ html.js body.mobile-menu  {
 			font-size: 60px;
 			font-family: 'entypo';
 			text-decoration: none;
+
 			&:hover {
 				text-decoration: none;
 			}
@@ -73,13 +79,15 @@ html.js body.mobile-menu  {
 /* Main Website Body (Offscreen Nav) */
 /* ------------------------------------------------------------------------ */
 
-html.js body.mobile-menu.offscreen-nav {
-	@include breakpoint(narrowColumn) {
+.js .mobile-menu.offscreen-nav {
+	@include breakpoint(narrow) {
 
 		#main-nav-header {
 			display: none;
+
 			& > ul {
 				padding: 30px;
+
 				& > li {
 					float: none;
 					margin-right: 0;
@@ -106,6 +114,7 @@ html.js body.mobile-menu.offscreen-nav {
 			#wrapper {
 				overflow: hidden;
 			}
+
 			.inner-wrap {
 				width: 100%;
 				height: 100%;
@@ -119,13 +128,14 @@ html.js body.mobile-menu.offscreen-nav {
 /* Mobile Menu #main-nav-header */
 /* ------------------------------------------------------------------------ */
 
-html.js body.mobile-menu {
-	@include breakpoint(narrowColumn) {
-
+.js .mobile-menu {
+	@include breakpoint(narrow) {
 		#main-nav-header {
 			display: none;
+
 			& > ul {
 				padding: 30px;
+
 				& > li {
 					float: none;
 					margin-right: 0;
@@ -141,8 +151,8 @@ html.js body.mobile-menu {
 /* Mobile Menu #main-nav-header (Offscreen Nav) */
 /* ------------------------------------------------------------------------ */
 
-html.js body.mobile-menu.offscreen-nav {
-	@include breakpoint(narrowColumn) {
+.js .mobile-menu.offscreen-nav {
+	@include breakpoint(narrow) {
 
 		#main-nav-header {
 			position: absolute;
@@ -172,14 +182,17 @@ html.js body.mobile-menu.offscreen-nav {
 			margin-top: 10px;
 			li {
 				margin-bottom: inherit;
+
 				&:last-of-type {
 					margin-bottom: 0;
 				}
+
 				a {
 					font-size: 1em;
 				}
 			}
 		}
+
 		&:hover {
 			.sub-menu {
 				padding: 0;
@@ -194,12 +207,12 @@ html.js body.mobile-menu.offscreen-nav {
 /* Offscreen Nav Reveal Options */
 /* ------------------------------------------------------------------------ */
 
-html.js body.mobile-menu.offscreen-nav {
-	@include breakpoint(narrowColumn) {
-
+.js .mobile-menu.offscreen-nav {
+	@include breakpoint(narrow) {
 		/* Slide Over */
 		&.mobilenav-anim-slide-over {
 			width: 100%;
+
 			&.mobilenav-pos-top,
 			&.mobilenav-pos-bottom,
 			&.mobilenav-pos-left,
@@ -211,6 +224,7 @@ html.js body.mobile-menu.offscreen-nav {
 					}
 				}
 			}
+
 			&.mobilenav-pos-top { #main-nav-header { top: -100%; } }
 			&.mobilenav-pos-bottom { #main-nav-header { top: 100%; } }
 			&.mobilenav-pos-left { #main-nav-header { left: -100%; } }
@@ -229,9 +243,11 @@ html.js body.mobile-menu.offscreen-nav {
 					}
 				}
 			}
+
 			&.mobilenav-pos-top {
 				&.nav-open { .inner-wrap { top: 85%; } }
 				#main-nav-header { top: -85%; } }
+
 				&.mobilenav-pos-bottom {
 					&.nav-open {
 						#main-nav-header { top: 15%; }
@@ -256,10 +272,12 @@ html.js body.mobile-menu.offscreen-nav {
 			&.mobilenav-anim-slide-reveal {
 				#main-nav-header { z-index: 0; }
 				.inner-wrap { z-index: 9; }
+
 				&.mobilenav-pos-top, &.mobilenav-pos-bottom { #main-nav-header { height: 85%; } }
 				&.mobilenav-pos-left, &.mobilenav-pos-right { #main-nav-header { width: 85%; } }
 				&.mobilenav-pos-bottom { #main-nav-header { bottom: 0; } }
 				&.mobilenav-pos-right { #main-nav-header { right: 0; } }
+
 				&.nav-open {
 					&.mobilenav-pos-top { .inner-wrap { top: 85%; } }
 					&.mobilenav-pos-bottom { .inner-wrap { top: -85%; } }
@@ -271,6 +289,7 @@ html.js body.mobile-menu.offscreen-nav {
 			/* Slide Along */
 			&.mobilenav-anim-slide-along {
 				@extend .mobilenav-anim-slide-reveal;
+
 				&.mobilenav-pos-top {
 					#main-nav-header { top: -50%; }
 					&.nav-open { #main-nav-header { top: 0%; } }
@@ -292,6 +311,7 @@ html.js body.mobile-menu.offscreen-nav {
 			/* Fall Down */
 			&.mobilenav-anim-fall-down {
 				@extend .mobilenav-anim-slide-reveal;
+
 				#main-nav-header {
 					ul#menu-main-navigation {
 						position: relative;
@@ -299,6 +319,7 @@ html.js body.mobile-menu.offscreen-nav {
 						transition: all .25s;
 					}
 				}
+
 				&.nav-open {
 					#main-nav-header {
 						ul#menu-main-navigation {

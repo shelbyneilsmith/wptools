@@ -56,9 +56,13 @@ migrate() {
 	fi
 
 	if [[ $src_id == "l" ]]; then
-		if [ -d $SITES_DIR/$project_id/web/node_modules ]; then #check if gulp exists
-			#first, run out gulp build script - if gulp exists for this project
+		# if [ -d $SITES_DIR/$project_id/web/node_modules ]; then #check if gulp exists
+		if [ -f $SITES_DIR/$project_id/web/Gulpfile.js ]; then #check if gulp exists
+			#Run Gulp deploy scripts
 			gulp deploy
+		elif [ -f $SITES_DIR/$project_id/web/Gruntfile.js ]; then #check if grunt exists (legacy sites)
+			#Run Grunt build scripts
+			grunt build
 		fi
 
 		#export Database
