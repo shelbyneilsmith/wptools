@@ -1,6 +1,3 @@
 # ignore Mac OS X Desktop Services Store
 .DS_Store
-.submlime-project
-.sublime-workspace
-*.scssc
 wpinit.config
