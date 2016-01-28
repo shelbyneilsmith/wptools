@@ -2,23 +2,30 @@
 SERVER_TYPE='nginx'
 
 # Whether to write to local etc/hosts file.
-WRITE_HOSTS='true'
+WRITE_HOSTS='false'
 
 # Define various environment url bases
 LOCAL_URL_BASE='yb'
 PREVIEW_URL_BASE='preview.yellowberri.com'
 STAGING_URL_BASE='staging.yellowberri.com'
 
+# Define Wordpress Admin URL
+WP_ADMIN_URL='ybcms'
+
+## Text Editor Options
 # Location of sublime text projects dir
+TEXT_EDITOR="sublimetext"
 SUBLIMETEXTPROJECTS_DIR="$HOME/Sites/sublime_projects"
 
 # Production & Staging Credential
 STAGING_HOST='45.55.77.8'
 STAGING_SSH_USER='root'
 STAGING_SSH_PASS='486039rkOixdfkfkPs$2'
+STAGING_PATH="/srv/users/$project_id/apps/${project_id}xstaging/public/"
 PROD_HOST='104.236.68.55'
 PROD_SSH_USER='root'
 PROD_SSH_PASS='32jxVYkwaleqntbacb-:'
+PROD_PATH="/srv/users/$project_id/apps/$project_id/public/"
 
 # ServerPilot API Credentials
 CLIENTID='cid_GL1JgvMkgxxQ4RiB'
@@ -35,7 +42,14 @@ ADMIN_EMAIL='shelby@yellowberri.com'
 
 # Now, let's set some directory variables
 SITES_DIR="$HOME/Sites" # Main working directory for all sites
-WPINIT_DIR="$HOME/Sites/wpinit" # Location of this script on your computer
+WPINIT_DIR="$HOME/Sites/stupid_projects/wptools" # Location of this script on your computer
+APP_DIR="$SITES_DIR/$project_id/web" # Website/app directory
+
+## Default theme settings
+# Default theme directory name
+DEFAULT_THEME='yb'
+DEFAULT_THEME_COPY_DIR="$HOME/Sites/stupid_projects/wordpress_themes/yb"
+DEFAULT_THEME_ASSETS_DIR="wp-content/themes/$DEFAULT_THEME/assets/"
 
 # Location of MySQL database files
 DB_DIR="/usr/local/mysql/data"
@@ -50,14 +64,111 @@ VHOSTS_DIR="/private/etc/apache2/extra/vhosts"
 LOGS_DIR="/private/var/log/apache2"
 
 # Location of Apache bin
-APACHE_DIR="/usr/sbin"
+APACHE_DIR="/usr/sbin/apachectl"
+
+# Location of nginx bin
+NGINX_DIR="/Library/LaunchDaemons/homebrew.mxcl.nginx.plist"
 
 # Owner/Group name (To find out: <?php echo(exec('whoami')); ?>)
 OWNER='stupid'
 GROUP='staff'
 
 # Config file paths
-WPCONFIGFILE="$SITES_DIR/$project_id/web/wp-config.php"
-WPLOYCONFIGFILE="$SITES_DIR/$project_id/web/wploy.config"
-GULPFILE="$SITES_DIR/$project_id/web/Gulpfile.js"
-GULPPACKAGEFILE="$SITES_DIR/$project_id/web/package.json"
+WPCONFIGFILE="$APP_DIR/wp-config.php"
+WPLOYCONFIGFILE="$APP_DIR/wploy.config"
+GULPFILE="$APP_DIR/Gulpfile.js"
+GULPPACKAGEFILE="$APP_DIR/package.json"
+
+# Site credentials file output (place text you want in the file between the '###' markers)
+MAKE_CREDS_FILE () {
+cat <<EOF>>${SITES_DIR}/${project_id}/web/${project_id}_creds.txt
+###
+WORDPRESS LOGIN
+/$WP_ADMIN_URL/
+admin username: $wp_user
+password: $wp_pass
+
+--------------------------------------------------------------
+
+ServerPilot FTP
+
+Production
+username: $project_id
+password: $PRODSYSUSERPASS
+
+Staging
+username: $project_id
+password: $STAGINGSYSUSERPASS
+
+--------------------------------------------------------------
+
+STAGING DB CREDS
+s_db=${project_id}_db
+s_db_user=$STAGINGDBUSER
+s_db_pass=$STAGINGDBPASS
+
+PRODUCTION DB CREDS
+p_db=${project_id}_db
+p_db_user=$PRODDBUSER
+p_db_pass=$PRODDBPASS
+
+###
+EOF
+}
+
+# CUSTOM FUNCTIONS
+customfunctions_new () {
+	if [ $testinst == false ] ; then
+		# set up project live AND staging environments on serverpilot
+		PRODSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+		STAGINGSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
+	 	# first, production app & db (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
+		if [[ $prod_domain && ${prod_domain} ]] ; then
+			PROD_URL=$prod_domain
+		else
+			PROD_URL="$project_id.com"
+		fi
+		# create the system user for production
+		PRODSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$PROD_SYSID'", "name": "'$project_id'", "password": "'$PRODSYSUSERPASS'"}')
+		prod_sys_user_id=$(echo $PRODSYSUSER | jq '.data | .id' | sed s/\"//g)
+
+		NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$prod_sys_user_id'", "runtime": "php5.6", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
+		prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
+
+		curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'$PRODDBUSER'", "password": "'$PRODDBPASS'"}}'
+
+		# now, staging
+		# create the system user for staging
+		STAGINGSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$STAGING_SYSID'", "name": "'$project_id'", "password": "'$STAGINGSYSUSERPASS'"}')
+		staging_sys_user_id=$(echo $STAGINGSYSUSER | jq '.data | .id' | sed s/\"//g)
+
+	 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$staging_sys_user_id'", "runtime": "php5.6", "domains": ["'$project_id'.staging.yellowberri.com"]}')
+	 	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
+
+		curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'$STAGINGDBUSER'", "password": "'$STAGINGDBPASS'"}}'
+	fi
+}
+
+customfunctions_delete() {
+	if [ $killstaging == true ] ; then
+		echo "\n---------------------------------------------------------------------------"
+		echo "Are you sure you want to delete this app from the staging server?"
+		echo "WARNING: This will also delete the staging database! [y/N]"
+		echo "---------------------------------------------------------------------------\n"
+		read ifdeletestaging
+
+		case $ifdeletestaging in
+			[nN] | [n|N][O|o] )
+				clear
+				echo "---------------------------------------------------------------------------"
+				echo "Staging site not deleted."
+				;;
+			[yY] | [yY][Ee][Ss] )
+				ALLAPPS=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY)
+				APPID=$( echo $ALLAPPS | jq -r '.data[] | select(.name=="'$project_id'xstaging") | .id')
+				curl https://api.serverpilot.io/v1/apps/$APPID -u $CLIENTID:$APIKEY -X DELETE
+				;;
+		esac
+	fi
+}

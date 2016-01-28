@@ -15,6 +15,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     browserSync = require('browser-sync').create(),
+    cssBase64 = require('gulp-css-base64'),
     del = require('del');
 
 var paths = {
@@ -47,6 +48,9 @@ gulp.task('styles', function() {
         .pipe(minifycss({compatibility: 'ie8'}))
         .pipe(rename({suffix: '.min'}))
         .pipe(autoprefixer('last 2 version'))
+        .pipe(cssBase64({
+            extensionsAllowed: ['.gif', '.jpg', '.png']
+        }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dist))
         .pipe(notify({ message: 'Styles task complete' }))
@@ -58,7 +62,10 @@ gulp.task('styles-dist', function() {
         .pipe(minifycss())
         .pipe(rename({suffix: '.min'}))
         .pipe(autoprefixer('last 2 version'))
-        .pipe(gulp.dest(paths.css.dist))
+         .pipe(cssBase64({
+            extensionsAllowed: ['.gif', '.jpg', '.png']
+        }))
+       .pipe(gulp.dest(paths.css.dist))
         .pipe(notify({ message: 'Styles task complete' }));
 });
 

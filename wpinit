@@ -6,7 +6,7 @@
 ## SETTINGS ================================================================================== #
 
 # First, set up config for local host domain
-# Wait where are the settings?! There are in wpinit.config
+# Wait where are the settings?! They are in wpinit.config
 
 ## END SETTINGS - DON'T TOUCH ANYTHING ELSE! ====================================================== #
 
@@ -43,9 +43,14 @@ continueprompt() {
 checkprojectexists () {
 	# Check project_id value against existing directories
 	if [ -d $SITES_DIR/$project_id ]; then #check if project directory already exists
-		if [ -d $SITES_DIR/$project_id/web/wp-content ]; then #check if project exists as a wordpress install
+		if [ -d $APP_DIR ]; then #check if a web app already exists with this project name
+			sitetype_text="An app"
+
+			if [[ $(find $APP_DIR | grep /wp-content/) ]]; then #check if project exists as a wordpress install
+				sitetype_text="A Wordpress installation"
+			fi
 			echo "\n---------------------------------------------------------------------------"
-			echo "A Wordpress installation for \"$project_id\" already exists!"
+			echo "$sitetype_text for \"$project_id\" already exists!"
 			echo "---------------------------------------------------------------------------\n"
 			EMPTY_DIR=false
 		else
@@ -77,8 +82,8 @@ preinit () {
 	else
 		if [ $EMPTY_DIR == false ] ; then
 			echo "\n---------------------------------------------------------------------------"
-			echo "Do you want to delete the site files associated with this project ID and start from scratch?"
-			echo "WARNING: This will also delete any database and config files associated with this site! [y/N]"
+			echo "Do you want to delete the current app associated with this project ID and start from scratch?"
+			echo "WARNING: This will also delete any database and config files associated with this site! (so maybe do a backup real quick) [y/N]"
 			echo "---------------------------------------------------------------------------\n"
 			continueprompt
 
@@ -91,10 +96,9 @@ preinit () {
 }
 
 node_symlinks() {
-	node_modules=(browser-sync del gulp gulp-autoprefixer gulp-cache gulp-concat gulp-imagemin gulp-jshint gulp-minify-css gulp-notify gulp-rename gulp-ruby-sass gulp-sourcemaps gulp-uglify jshint)
-
-	for i in ${node_modules[@]}; do
-		ln -s $SITES_DIR/node_modules/$i $SITES_DIR/$project_id/web/node_modules/$i
+	# For each node module found in your node_modules directory, set up a symlink to it in our project
+	for D in $(find $SITES_DIR/node_modules -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*'); do
+		ln -s $D $SITES_DIR/$project_id/web/node_modules/$(basename $D)
 	done
 }
 
@@ -110,7 +114,6 @@ copyfiles () {
 
 		# get latest version of Wordpress and extract files to project directory
 		curl -L -o $SITES_DIR/$project_id/wp.temp.tar.gz http://wordpress.org/latest.tar.gz
-		# exit 1
 		tar -xzf $SITES_DIR/$project_id/wp.temp.tar.gz -C $SITES_DIR/$project_id/web
 		# delete the temporary Wordpress zip file
 		rm $SITES_DIR/$project_id/wp.temp.tar.gz
@@ -131,14 +134,16 @@ copyfiles () {
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/Gulpfile.js $SITES_DIR/$project_id/web/Gulpfile.js
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/package.json $SITES_DIR/$project_id/web/package.json
 			rsync -ah --info=progress2 $WPINIT_DIR/wordpress/wploy-excludes.txt $SITES_DIR/$project_id/web/wploy-excludes.txt
-
-			# set up the node module symlinks for Gulp
-			node_symlinks
 		fi
 
-		# delete any default themes and set up our custom yb theme
-		find $SITES_DIR/$project_id/web/wp-content/themes/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
-		rsync -ah --info=progress2 --delete $WPINIT_DIR/wordpress/yb $SITES_DIR/$project_id/web/wp-content/themes
+		# set up the node module symlinks for Gulp
+		node_symlinks
+
+		if [ -n "$DEFAULT_THEME_COPY_DIR" ] ; then
+			# delete any default themes and set up our custom default theme
+			find $SITES_DIR/$project_id/web/wp-content/themes/ -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+			rsync -ah --info=progress2 --delete $DEFAULT_THEME_COPY_DIR $SITES_DIR/$project_id/web/wp-content/themes
+		fi
 
 		# delete any default plugins and install our plugins folder
 		rm -R $SITES_DIR/$project_id/web/wp-content/plugins
@@ -146,7 +151,7 @@ copyfiles () {
 
 		echo "\nOkay. Done moving files!\n"
 	elif [ $purpose == "collab" ] ; then
-		# Clone the files from the repository
+		# Pull the site files from the staging server
 		echo "\nPulling down files from staging...\n"
 
 		if (ssh $STAGING_SSH_USER@$STAGING_HOST "[ -d apps/${project_id}xstaging ]"); then
@@ -183,7 +188,7 @@ writeconfigs () {
 
 	rm $SITES_DIR/$project_id/web/wp-config-sample.php
 
-	# now we need to install and configure our default plugins
+	# now we need to install and configure our default plugins (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
 	plugin_serials_arr=()
 
 	for plugin in $PLUGINS; do
@@ -216,7 +221,7 @@ writeconfigs () {
 		sed -i '' "s/s_db=''/s_db='${project_id}_db'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_db_user=''/s_db_user='$STAGINGDBUSER'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_db_pass=''/s_db_pass='$STAGINGDBPASS'/g" $WPLOYCONFIGFILE
-		sed -i '' "s#s_path=''#s_path='/srv/users/$project_id/apps/${project_id}xstaging/public/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s#s_path=''#s_path='$STAGING_PATH'#g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_url=''/s_url='$project_id.$STAGING_URL_BASE'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/s_owner=''/s_owner='$project_id'/g" $WPLOYCONFIGFILE
 
@@ -225,7 +230,7 @@ writeconfigs () {
 		sed -i '' "s/p_db=''/p_db='${project_id}_db'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_db_user=''/p_db_user='$PRODDBUSER'/g" $WPLOYCONFIGFILE
 		sed -i '' "s/p_db_pass=''/p_db_pass='$PRODDBPASS'/g" $WPLOYCONFIGFILE
-		sed -i '' "s#p_path=''#p_path='/srv/users/$project_id/apps/$project_id/public/'#g" $WPLOYCONFIGFILE
+		sed -i '' "s#p_path=''#p_path='$PROD_PATH'#g" $WPLOYCONFIGFILE
 		if [[ $prod_domain && ${prod_domain} ]] ; then
 			sed -i '' "s/p_url=''/p_url='$prod_domain'/g" $WPLOYCONFIGFILE
 		fi
@@ -234,7 +239,7 @@ writeconfigs () {
 		#Gulpfile.js
 		sed -i '' "s/var projectID = '';/var projectID = '$project_id';/g" $GULPFILE
 		sed -i '' "s/var localTLD = '';/var localTLD = '$LOCAL_URL_BASE';/g" $GULPFILE
-		sed -i '' "s#var assetsDir = '';#var assetsDir = 'wp-content/themes/yb/assets/';#g" $GULPFILE
+		sed -i '' "s#var assetsDir = '';#var assetsDir = '$DEFAULT_THEME_ASSETS_DIR';#g" $GULPFILE
 
 		#package.json
 		sed -i '' "s/\"name\": \"\",/\"name\": \"$project_id\",/g" $GULPPACKAGEFILE
@@ -257,11 +262,12 @@ setup_db () {
 
 	if [ $purpose == "collab" ] ; then
 		# Since we're collaborating, we need to go ahead and grab the database from the staging server and import it to our local machine
-ssh root@$STAGING_HOST /bin/bash << EOF
-mysqldump -u ${project_id:0:5}'_'$DBPREFIXHASH -p$STAGINGDBPASS ${project_id}_db > /srv/users/${project_id}/apps/${project_id}xstaging/public/${project_id}_db.sql
-sed -i "s/$project_id.$STAGING_URL_BASE/$project_id.$LOCAL_URL_BASE/g" /srv/users/${project_id}/apps/${project_id}xstaging/public/${project_id}_db.sql
-EOF
-		rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:apps/${project_id}xstaging/public/${project_id}_db.sql $SITES_DIR/$project_id/web
+		ssh root@$STAGING_HOST /bin/bash <<- EOF
+		mysqldump -u ${project_id:0:5}'_'$DBPREFIXHASH -p$STAGINGDBPASS ${project_id}_db > ${STAGING_PATH}${project_id}_db.sql
+		sed -i "s/$project_id.$STAGING_URL_BASE/$project_id.$LOCAL_URL_BASE/g" ${STAGING_PATH}${project_id}_db.sql
+		EOF
+
+		rsync -avO -e ssh $STAGING_SSH_USER@$STAGING_HOST:${STAGING_PATH}${project_id}_db.sql $SITES_DIR/$project_id/web
 		mysql -u $LOCAL_DB_USER -p$LOCAL_DB_PASS $project_id < $SITES_DIR/$project_id/web/${project_id}_db.sql; rm $SITES_DIR/$project_id/web/${project_id}_db.sql
 	fi
 }
@@ -276,7 +282,7 @@ install_wp() {
 	wp core install --url="http://$PROD_URL" --title="$project_id" --admin_user="$wp_user" --admin_password="$wp_pass" --admin_email="${ADMIN_EMAIL}"
 
 	if [ $testinst == false ] ; then
-		# now we need to install and configure our default plugins
+		# now we need to install and configure our default plugins (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
 		PLUGINS=$(cat $WPINIT_DIR/plugins.json | jq -r ".plugins[] | .name")
 		plugin_serials_arr=()
 
@@ -352,84 +358,24 @@ writesublimeproject () {
 				"path": "$SITES_DIR/$project_id/web/wp-content/plugins"
 			},
 			{
-				"name": "YB Theme Files",
-				"path": "$SITES_DIR/$project_id/web/wp-content/themes/yb"
+				"name": "Default Theme Files",
+				"path": "$SITES_DIR/$project_id/web/wp-content/themes/$DEFAULT_THEME"
 			}
 		]
 	}
 	EOF
 }
 
-setup_remotes() {
- 	# first, production app & db (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
-	if [[ $prod_domain && ${prod_domain} ]] ; then
-		PROD_URL=$prod_domain
-	else
-		PROD_URL="$project_id.com"
-	fi
-	# create the system user for production
-	PRODSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$PROD_SYSID'", "name": "'$project_id'", "password": "'$PRODSYSUSERPASS'"}')
-	prod_sys_user_id=$(echo $PRODSYSUSER | jq '.data | .id' | sed s/\"//g)
-
-	NEWPRODAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'", "sysuserid": "'$prod_sys_user_id'", "runtime": "php5.6", "domains": ["'$PROD_URL'", "www.'$PROD_URL'", "'$project_id'.preview.yellowberri.com"]}')
-	prod_app_id=$(echo $NEWPRODAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$prod_app_id'", "name": "'$project_id'_db", "user": {"name": "'$PRODDBUSER'", "password": "'$PRODDBPASS'"}}'
-
-	# now, staging
-	# create the system user for staging
-	STAGINGSYSUSER=$(curl https://api.serverpilot.io/v1/sysusers -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"serverid": "'$STAGING_SYSID'", "name": "'$project_id'", "password": "'$STAGINGSYSUSERPASS'"}')
-	staging_sys_user_id=$(echo $STAGINGSYSUSER | jq '.data | .id' | sed s/\"//g)
-
- 	NEWSTAGEAPP_OBJ=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"name": "'$project_id'xstaging", "sysuserid": "'$staging_sys_user_id'", "runtime": "php5.6", "domains": ["'$project_id'.staging.yellowberri.com"]}')
- 	stage_app_id=$(echo $NEWSTAGEAPP_OBJ | jq '.data | .id' | sed s/\"//g)
-
-	curl https://api.serverpilot.io/v1/dbs -u $CLIENTID:$APIKEY -H "Content-Type: application/json" -d '{"appid": "'$stage_app_id'", "name": "'$project_id'_db", "user": {"name": "'$STAGINGDBUSER'", "password": "'$STAGINGDBPASS'"}}'
-}
-
 restartserver () {
 	if [[ $SERVER_TYPE == "apache" ]]; then
 		echo "\nRestarting Apache!"
-		sudo $APACHE_DIR/apachectl -k restart
+		sudo $APACHE_DIR -k restart
 	elif [[ $SERVER_TYPE == "nginx" ]]; then
 		echo "\nRestarting Nginx!"
 		sudo nginx -t
-		sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
-		sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+		sudo launchctl unload $NGINX_DIR
+		sudo launchctl load $NGINX_DIR
 	fi
-}
-
-writecredsfile () {
-	cat > ${SITES_DIR}/${project_id}/web/${project_id}_creds.txt <<- EOF
-	WORDPRESS LOGIN
-	/ybcms/
-	admin username: $wp_user
-	password: $wp_pass
-
-	--------------------------------------------------------------
-
-	ServerPilot FTP
-
-	Production
-	username: $project_id
-	password: $PRODSYSUSERPASS
-
-	Staging
-	username: $project_id
-	password: $STAGINGSYSUSERPASS
-
-	--------------------------------------------------------------
-
-	STAGING DB CREDS
-	s_db=${project_id}_db
-	s_db_user=$STAGINGDBUSER
-	s_db_pass=$STAGINGDBPASS
-
-	PRODUCTION DB CREDS
-	p_db=${project_id}_db
-	p_db_user=$PRODDBUSER
-	p_db_pass=$PRODDBPASS
-	EOF
 }
 
 siteinit () {
@@ -445,6 +391,7 @@ siteinit () {
 	copyfiles
 
 	if [ $purpose == "new" ] ; then
+		# (NEED TO INSTALL JQ FOR THIS TO WORK! - homebrew install: brew install jq)
 		PLUGINS=$(cat $WPINIT_DIR/plugins.json | jq -r ".plugins[] | .name")
 
 		# create database users & passwords for use in various situations
@@ -484,12 +431,8 @@ siteinit () {
 			fi
 			install_wp
 		fi
-		if [ $testinst == false ] ; then
-			# set up project live AND staging environments on serverpilot
-			PRODSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-			STAGINGSYSUSERPASS=$(LC_ALL=C; cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-			setup_remotes
-		fi
+
+		customfunctions_new
 	fi
 
 	# Write new virtual host file for the new site
@@ -497,7 +440,9 @@ siteinit () {
 
 	if [ $testinst == false ] ; then
 		# Write the sublime text project file
-		writesublimeproject
+		if [ $TEXT_EDITOR == "sublimetext" ] ; then
+			writesublimeproject
+		fi
 	fi
 
 	#set owner permissions for the wordpress directory
@@ -507,7 +452,8 @@ siteinit () {
 	# Finally, restart apache or nginx!
 	restartserver
 
-	writecredsfile
+	# Run the make_creds_file function specified in the wpinit.config
+	MAKE_CREDS_FILE
 
 	clear
 	echo "---------------------------------------------------------------------------"
@@ -548,26 +494,7 @@ sitedelete () {
 	sudo sed -i '' "/127.0.0.1 $project_id..*/d" /private/etc/hosts
 	sed -i '' "\#alias $project_id=\"cd $SITES_DIR/$project_id/web\"#d" ~/.sites
 
-	if [ $killstaging == true ] ; then
-		echo "\n---------------------------------------------------------------------------"
-		echo "Are you sure you want to delete this app from the staging server?"
-		echo "WARNING: This will also delete the staging database! [y/N]"
-		echo "---------------------------------------------------------------------------\n"
-		read ifdeletestaging
-
-		case $ifdeletestaging in
-			[nN] | [n|N][O|o] )
-				clear
-				echo "---------------------------------------------------------------------------"
-				echo "Staging site not deleted."
-				;;
-			[yY] | [yY][Ee][Ss] )
-				ALLAPPS=$(curl https://api.serverpilot.io/v1/apps -u $CLIENTID:$APIKEY)
-				APPID=$( echo $ALLAPPS | jq -r '.data[] | select(.name=="'$project_id'xstaging") | .id')
-				curl https://api.serverpilot.io/v1/apps/$APPID -u $CLIENTID:$APIKEY -X DELETE
-				;;
-		esac
-	fi
+	customfunctions_delete
 }
 
 newvhost () {
@@ -599,7 +526,7 @@ while getopts ":h" opt; do
 		h )
 			echo "Usage:"
 			echo "	wpinit -h"
-			echo "	wpinit new <project_id> [-d <prod_domain>] [-u <wp_user>] [-p <wp_pass>] [-t <testinst>] [-v <newvhost>] [-s <node_symlinks>]"
+			echo "	wpinit new <project_id> [-d <prod_domain>] [-u <wp_user>] [-p <wp_pass>] [-t <testinst>] [-v <newvhost>]"
 			echo "	wpinit collab <project_id>"
 			echo "	wpinit delete <project_id> [-k <killstaging>]"
 			echo "        wpinit nodesl <project_id> (helper - sets up node_modules symlinks for Gulp)"
@@ -618,7 +545,9 @@ project_id=$1; shift
 
 # load config file
 # . wpinit.config
-source ${BASH_SOURCE[0]/%wpinit/wpinit.config}
+CUR_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+. $CUR_DIR/wpinit.config
+
 
 if [[ $project_id && ${project_id} ]] ; then
 	case "$purpose" in
