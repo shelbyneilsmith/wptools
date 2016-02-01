@@ -432,7 +432,9 @@ siteinit () {
 			install_wp
 		fi
 
-		customfunctions_new
+		if [ $testinst == false ] ; then
+			customfunctions_new
+		fi
 	fi
 
 	# Write new virtual host file for the new site
